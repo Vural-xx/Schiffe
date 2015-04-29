@@ -8,9 +8,10 @@ public class Feld {
 	private String inhalt;
 	private Feldstatus feldstatus;
 	
-	public Feld(){
+	public Feld(Position position){
 		inhalt = "~";
-		feldstatus = feldstatus.WASSER;
+		feldstatus = Feldstatus.WASSER;
+		this.position = position;
 	}
 	
 	public Position getPosition() {

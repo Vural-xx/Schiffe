@@ -76,7 +76,7 @@ public class Spielfeld {
 		felder = new Feld[groesse][groesse];
 		for(int i = 0; i < felder.length; i++){
 			for(int j= 0; j < felder[i].length; j++){
-				felder[i][j] = new Feld();
+				felder[i][j] = new Feld(new Position(j+1, i+1));
 			}
 		}
 	}
