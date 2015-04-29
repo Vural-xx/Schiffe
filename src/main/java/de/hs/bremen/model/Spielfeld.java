@@ -101,10 +101,10 @@ public class Spielfeld {
 		Feld[] f = new Feld[schiff.getFelder().length];
 		for (int i = 0; i < schiff.getFelder().length; i++){
 			if(horizontal){
-				felder[position.getPositionY()-1][position.getPositonX()-1+i].setInhalt("-");
+				felder[position.getPositionY()-1][position.getPositonX()-1+i].setInhalt(Spiel.ANSI_RED+"s" + Spiel.ANSI_RESET);
 				f[i] = felder[position.getPositionY()-1][position.getPositonX()-1+i];
 			}else{
-				felder[position.getPositionY()-1+1][position.getPositonX()-1].setInhalt("-");
+				felder[position.getPositionY()-1+1][position.getPositonX()-1].setInhalt(Spiel.ANSI_RED+"p" + Spiel.ANSI_RESET);
 				f[i] = felder[position.getPositionY()-1+i][position.getPositonX()-1];
 			}
 		}
@@ -147,22 +147,33 @@ public class Spielfeld {
 	 * Spielfeld wird ausgedruckt.
 	 */
 	public void printSpielfeld(){
+		for (int g = 0; g <= getSpielfeldgroesse(); g++){
+			System.out.print(g + "\t");	
+			
+		}
+		IO.println(" ");
+		int g = 0;
 		for (Feld[] f: felder) {
+			if(g <= getSpielfeldgroesse()){
+				g++;
+				System.out.print(g + "\t");
+				}
 			for (Feld ff: f) {
 				IO.print(ff.getInhalt());
 	            IO.print("\t");
 	         }
 	         IO.println("");
+	         
 	    }
-	}
-	
-	public boolean besezt(Position position){
-		boolean besetzt = false;
-		for (Feld[] f: felder) {
-			for (Feld ff: f) {
-				besetzt = ff.getPosition().equals(position);
+	}	
+		public boolean besetzt(Position position){
+			boolean feldBesetzt = false;
+			for (Feld[] f: felder) {
+				for (Feld ff: f) {
+					feldBesetzt =  ff.getPosition().equals(position);
+				}
 			}
-	    }
-		return besetzt;
-	}
+			return feldBesetzt;
+		}
+	
 }
