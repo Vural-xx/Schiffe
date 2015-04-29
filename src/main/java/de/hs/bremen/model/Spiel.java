@@ -101,15 +101,15 @@ public class Spiel {
 		Schiff schiff;
 		
 		do{
-			System.out.println("Bitte geben Sie an mit vielen Schiffen Sie pro Person spielen möchten.");
+			System.out.println("Bitte geben Sie an mit vielen Schiffen Sie pro Person spielen mï¿½chten.");
 			anzahlSchiffe = IO.readInt();
 		}while(spieler[0].getSpielfeld().getMaximumAnzahlSchiffe() < anzahlSchiffe && anzahlSchiffe != 0);
 		
 		for (int i = 0 ; i< spieler.length; i++){		
 			
 			do {				
-				System.out.println(spieler[i].getName() +",Bitte wählen Sie ein Schiff, welches Sie auf dem Spielfeld platzieren wollen.");
-				System.out.println("[1 für Zerstörer, 2 für Fregatte, 3 für Korvette, 4 für UBoot]");
+				System.out.println(spieler[i].getName() +",Bitte wï¿½hlen Sie ein Schiff, welches Sie auf dem Spielfeld platzieren wollen.");
+				System.out.println("[1 fï¿½r Zerstï¿½rer, 2 fï¿½r Fregatte, 3 fï¿½r Korvette, 4 fï¿½r UBoot]");
 				schiffAuswahl = IO.readInt();
 				schiff = schiffeAuswahl(schiffAuswahl);
 				System.out.println(spieler[i].getName() +", Bitte geben Sie an in welcher Zeile ihr Schiff platziert werden soll");
@@ -161,7 +161,7 @@ public class Spiel {
 	public boolean anzahlSchiffePassend(Spieler spieler, Schiff schiff){
 		boolean passend = spieler.getSpielfeld().getPlaetzeBelegt() + schiff.getPlaetzeBelegung() < (spieler.getSpielfeld().getSpielfeldgroesse() * spieler.getSpielfeld().getSpielfeldgroesse());
 		if(!passend){
-			System.out.println("Dieses Schiff passt leider nicht mehr auf ihr Spielfeld. Bitte wählen Sie ein anderes");
+			System.out.println("Dieses Schiff passt leider nicht mehr auf ihr Spielfeld. Bitte wï¿½hlen Sie ein anderes");
 		}
 		return passend;
 	}
@@ -172,10 +172,10 @@ public class Spiel {
 	public void init(){
 		int groesse;
 		System.out.println("Willkommen bei Schiffe versenken!");
-		System.out.println("Bitte geben Sie zunächst die Anzahl der Spieler an");
+		System.out.println("Bitte geben Sie zunï¿½chst die Anzahl der Spieler an");
 		createSpieler(IO.readInt());
-		System.out.println("Einigen Sie sich nun bitte auf eine Größe ihres quadratischen Spielfelder (Mindestens 20x20 Felder groß)");
-		System.out.println("Wie groß soll ihr Spielfeld sein?");
+		System.out.println("Einigen Sie sich nun bitte auf eine Grï¿½ï¿½e ihres quadratischen Spielfelder (Mindestens 20x20 Felder groï¿½)");
+		System.out.println("Wie groï¿½ soll ihr Spielfeld sein?");
 		groesse = IO.readInt();
 		createSpielfelder(groesse);
 		schiffePlatzieren();
@@ -183,9 +183,7 @@ public class Spiel {
 	
 	public static void main(String[] args){
 		Spiel spiel = new Spiel();
-		spiel.init();
-		spiel.spielen();
-		
+		spiel.init();	
 	}
 
 }
