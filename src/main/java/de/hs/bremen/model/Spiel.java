@@ -70,11 +70,17 @@ public class Spiel {
 	 */
 	public void createSpieler(int anzahl){
 		String name;
+		if(anzahl <= 6 && anzahl > 1){
 		spieler = new Spieler[anzahl];
 		for(int i = 1; i <= anzahl; i++){
 			System.out.println("Spieler Nummer " +i+" bitte geben Sie ihren Namen an");
 			name = IO.readString();
 			spieler[i-1] = new Spieler(name);
+		}
+		} else {
+			System.out.println("Es sind zuviele Spieler angegeben oder die Eingabe war nicht eindeutig!");
+			System.out.println("Geben Sie erneut die Spieleranzahl ein:");
+			createSpieler(IO.readInt());
 		}
 	}
 	
@@ -173,7 +179,7 @@ public class Spiel {
 	public void init(){
 		int groesse;
 		System.out.println("Willkommen bei Schiffe versenken!");
-		System.out.println("Bitte geben Sie zunächst die Anzahl der Spieler an");
+		System.out.println("Bitte geben Sie zunächst die Anzahl der Spieler an (2-6 Spieler)");
 		createSpieler(IO.readInt());
 		System.out.println("Einigen Sie sich nun bitte auf eine Größe ihres quadratischen Spielfelder (Mindestens 20x20 Felder groß)");
 		System.out.println("Wie groß soll ihr Spielfeld sein?");
