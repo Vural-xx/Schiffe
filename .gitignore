@@ -1,1 +1,7 @@
-*.class
+#ignore everything under the build folder
+bin/
+#ignore the eclipse configuration files
+.settings/
+.classpath
+.project
+.metadata/
