@@ -44,15 +44,19 @@ public abstract class Schiff {
 		if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.Fregatte")){
 			this.laenge = 4;
 			this.feuerstaerke = 2;
+			//ladezeit 2 Runden
 		}else if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.Korvette")){
 			this.laenge = 3;
 			this.feuerstaerke = 1;
+			//ladezeit 1 Runde
 		}else if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.UBoot")){
-			this.laenge = 1;
+			this.laenge = 2;
 			this.feuerstaerke =1;
+			//ladezeit 1 Runde
 		}else{
 			this.laenge = 5;
 			this.feuerstaerke = 3;
+			//ladezeit 3 Runden
 		}
 		felder = new Feld[this.laenge];
 	}
@@ -129,7 +133,7 @@ public abstract class Schiff {
 		}else if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.Korvette")){
 			return 15;
 		}else if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.UBoot")){
-			return 9;
+			return 12;
 		}else{
 			return 21;
 		}
