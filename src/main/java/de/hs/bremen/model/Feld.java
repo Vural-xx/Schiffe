@@ -9,7 +9,7 @@ public class Feld {
 	private Feldstatus feldstatus;
 	
 	public Feld(Position position){
-		inhalt = "~";
+		inhalt = Spiel.ANSI_BLUE+"~" + Spiel.ANSI_RESET;
 		feldstatus = Feldstatus.WASSER;
 		this.position = position;
 	}
