@@ -22,6 +22,10 @@ public class Spiel {
 	public static final String ANSI_CYAN = "\u001B[36m";
 	public static final String ANSI_WHITE = "\u001B[37m";
 	
+	private int maximaleSpieleranzahl= 6;
+	private int maximaleSpielfeldgroesse= 40;
+	private int minimaleSpielfeldgroesse= 20;
+	
 	/**
 	 * Spieler die an dem Spiel beteiligt sind.
 	 */
@@ -70,11 +74,17 @@ public class Spiel {
 	 */
 	public void createSpieler(int anzahl){
 		String name;
+		if(anzahl <= maximaleSpieleranzahl && anzahl >1){
 		spieler = new Spieler[anzahl];
-		for(int i = 1; i <= anzahl; i++){
-			System.out.println("Spieler Nummer " +i+" bitte geben Sie ihren Namen an");
-			name = IO.readString();
-			spieler[i-1] = new Spieler(name);
+			for(int i = 1; i <= anzahl; i++){
+				System.out.println("Spieler Nummer " +i+" bitte geben Sie ihren Namen an");
+				name = IO.readString();
+				spieler[i-1] = new Spieler(name);
+			}
+		} else {
+			System.out.println("Ihre Spieleranzahl ist zu hoch oder ihre Eingabe wurde nicht erkannt.");
+			System.out.println("Bitte geben Sie erneut die Spieleranzahl ein:");
+			createSpieler(IO.readInt());
 		}
 	}
 	
@@ -83,8 +93,14 @@ public class Spiel {
 	 * @param groesse: Größe der Spielfelder
 	 */
 	public void createSpielfelder(int groesse){
+		if(groesse >= minimaleSpielfeldgroesse && groesse <= maximaleSpielfeldgroesse){
 		for(Spieler sp : spieler){
 			sp.createSpielfeld(groesse);
+		}
+		} else {
+			System.out.println("Ihre Spielfeldgröße ist zu groß zu niedrig oder ihre Eingabe wurde nicht erkannt.");
+			System.out.println("Bitte geben Sie erneut die Spielergröße ein:");
+			createSpielfelder(IO.readInt());
 		}
 	}
 	
@@ -97,7 +113,7 @@ public class Spiel {
 		int anzahlSchiffe;
 		int anzahlSchiffeGezeugt = 0;
 		int schiffAuswahl= 0;
-		boolean horizontalausrichtung;
+		boolean horizontalausrichtung = false;
 		Schiff schiff;
 		
 		do{
@@ -173,7 +189,7 @@ public class Spiel {
 	public void init(){
 		int groesse;
 		System.out.println("Willkommen bei Schiffe versenken!");
-		System.out.println("Bitte geben Sie zunächst die Anzahl der Spieler an");
+		System.out.println("Bitte geben Sie zunächst die Anzahl der Spieler an (2-6 Spieler):");
 		createSpieler(IO.readInt());
 		System.out.println("Einigen Sie sich nun bitte auf eine Größe ihres quadratischen Spielfelder (Mindestens 20x20 Felder groß)");
 		System.out.println("Wie groß soll ihr Spielfeld sein?");
