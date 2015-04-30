@@ -12,7 +12,6 @@ public class Feld {
 		inhalt = Spiel.ANSI_BLUE+"~" + Spiel.ANSI_RESET;
 		feldstatus = Feldstatus.WASSER;
 		this.position = position;
-		this.position = position;
 	}
 	
 	public Position getPosition() {
