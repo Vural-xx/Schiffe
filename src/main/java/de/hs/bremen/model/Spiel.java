@@ -74,7 +74,7 @@ public class Spiel {
 	 */
 	public void createSpieler(int anzahl){
 		String name;
-		if(anzahl <= maximaleSpieleranzahl && anzahl >1){
+		if(anzahl <= maximaleSpieleranzahl && anzahl > 1){
 		spieler = new Spieler[anzahl];
 			for(int i = 1; i <= anzahl; i++){
 				System.out.println("Spieler Nummer " +i+" bitte geben Sie ihren Namen an");
