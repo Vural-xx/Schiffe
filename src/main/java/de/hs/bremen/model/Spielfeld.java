@@ -140,7 +140,7 @@ public class Spielfeld {
 	 * @return
 	 */
 	public int getMaximumAnzahlSchiffe(){
-		return (getSpielfeldgroesse() * getSpielfeldgroesse()) / 9;
+		return (getSpielfeldgroesse() * getSpielfeldgroesse()) / 12;
 	}
 	
 	/**
