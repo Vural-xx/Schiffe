@@ -86,7 +86,6 @@ public abstract class Schiff {
 	
 	public Schiff(Feld[] felder){
 		this.felder = felder;
-		this.felder = felder;
 	}
 	
 	/**
