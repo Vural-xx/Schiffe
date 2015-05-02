@@ -20,6 +20,11 @@ public class Spieler {
 	private Spielfeld spielfeld;
 	
 	/**
+	 * Öffentliches Spielfeld jedes Spielers
+	 */
+	private Spielfeld spielfeldPublic;
+	
+	/**
 	 * Indikator ob der Benutzer noch im Spiel ist.
 	 */
 	private boolean ausgeschieden;
@@ -86,6 +91,7 @@ public class Spieler {
 	 */
 	public void createSpielfeld(int groesse){
 		spielfeld = new Spielfeld(groesse);
+		spielfeldPublic = new Spielfeld(groesse);
 	}
 
 }

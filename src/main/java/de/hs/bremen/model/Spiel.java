@@ -183,6 +183,17 @@ public class Spiel {
 		return passend;
 	}
 	
+	public boolean innerhalbSpielfeld (){
+		if (Position.getPositonX() <0|| Position.getPositonX()> spieler.getSpielfeldgroesse() && Position.getPositionY()<0 || Position.getPositionY()> spieler.getSpielfeldgroesse()){
+			return false;
+			System.out.println("Das Schiff liegt außerhalb des Spielfeldes und darf hier nicht plaziert werden!");
+		}else {
+			return true;
+			
+		}
+		
+	}
+	
 	/**
 	 * Willkommensmenü
 	 */
