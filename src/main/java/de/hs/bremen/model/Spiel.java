@@ -25,6 +25,7 @@ public class Spiel {
 	private int maximaleSpieleranzahl= 6;
 	private int maximaleSpielfeldgroesse= 40;
 	private int minimaleSpielfeldgroesse= 20;
+	private int auswahlZahl;
 	
 	/**
 	 * Spieler die an dem Spiel beteiligt sind.
@@ -104,7 +105,7 @@ public class Spiel {
 		}
 	}
 	
-	public int auswahlZahl;
+
 	
 	public boolean schiffeAuswahlGueltig(int auswahlZahl){
 		if(auswahlZahl <=4 && auswahlZahl >1){
