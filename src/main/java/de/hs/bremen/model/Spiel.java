@@ -27,6 +27,7 @@ public class Spiel {
 	private int minimaleSpielfeldgroesse= 20;
 	private int auswahlZahl;
 	boolean vertikalHorizontal= false;
+	private int ausrichtung;
 	
 	/**
 	 * Spieler die an dem Spiel beteiligt sind.
@@ -125,16 +126,17 @@ public class Spiel {
 		this.auswahlZahl = auswahlZahl;
 	}
 
-	public boolean vertikalHorizontal(int richtungsAbfrage){
+	public int vertikalHorizontal(int richtungsAbfrage){
 		if(richtungsAbfrage== 1){
-			return true;
+			ausrichtung = 1;
 		} else if (richtungsAbfrage == 2){
-		 	return false;
+		 	ausrichtung = 2;
 		} else {
-			System.out.println("Falsche Einngabe versuchen Sie es erneut:");
+			System.out.println("Falsche Eingabe versuchen Sie es erneut:");
 			vertikalHorizontal(IO.readInt());
 		}
-		return vertikalHorizontal;
+		return ausrichtung;
+
 	}
 	
 	/**
@@ -145,7 +147,6 @@ public class Spiel {
 		int zeile;
 		int anzahlSchiffe;
 		int anzahlSchiffeGezeugt;
-		boolean ausrichtung = false;
 		Schiff schiff;
 		
 		do{
@@ -165,8 +166,9 @@ public class Spiel {
 				zeile = IO.readInt();
 				System.out.println(spieler[i].getName() +", Bitte geben Sie an in welcher Spalte ihr Schiff platziert werden soll");
 				spalte = IO.readInt();
-				System.out.println(spieler[i].getName() +", Bitte geben Sie an ob ihr Schiff 1. Vertikal oder 2. Horizontal angeorndet werden soll");
+				System.out.println(spieler[i].getName() +", Bitte geben Sie an ob ihr Schiff 1. Horizontal oder 2. Vertikal angeorndet werden soll");
 				ausrichtung = vertikalHorizontal(IO.readInt());
+				System.out.println(ausrichtung);
 				spieler[i].getSpielfeld().platziereSchiff(schiff, new Position(spalte, zeile), ausrichtung);
 				spieler[i].getSpielfeld().printSpielfeld();
 				anzahlSchiffeGezeugt++;

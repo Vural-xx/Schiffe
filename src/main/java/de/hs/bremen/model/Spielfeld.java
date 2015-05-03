@@ -97,13 +97,13 @@ public class Spielfeld {
 	 * @param position: Position auf dem das Schiff platziert werden soll.
 	 * @param horizontal: Angabe ob das Schiff horizontal platziert werden soll.
 	 */
-	public void platziereSchiff(Schiff schiff, Position position, boolean horizontal){
+	public void platziereSchiff(Schiff schiff, Position position, int horizontal){
 		Feld[] f = new Feld[schiff.getFelder().length];
 		for (int i = 0; i < schiff.getFelder().length; i++){
-			if(!horizontal){
+			if(horizontal== 1){
 				felder[position.getPositionY()-1][position.getPositonX()-1+i].setInhalt(Spiel.ANSI_RED+"s" + Spiel.ANSI_RESET);
 				f[i] = felder[position.getPositionY()-1][position.getPositonX()-1+i];
-			}else if (horizontal){
+			}else if (horizontal==2){
 				felder[position.getPositionY()-1+i][position.getPositonX()-1].setInhalt(Spiel.ANSI_RED+"p" + Spiel.ANSI_RESET);
 				f[i] = felder[position.getPositionY()-1+i][position.getPositonX()-1];
 			}
