@@ -111,7 +111,7 @@ public class Spiel {
 		int spalte;
 		int zeile;
 		int anzahlSchiffe;
-		int anzahlSchiffeGezeugt = 0;
+		int anzahlSchiffeGezeugt;
 		int schiffAuswahl= 0;
 		boolean horizontalausrichtung = false;
 		Schiff schiff;
@@ -122,7 +122,7 @@ public class Spiel {
 		}while(spieler[0].getSpielfeld().getMaximumAnzahlSchiffe() < anzahlSchiffe && anzahlSchiffe != 0);
 		
 		for (int i = 0 ; i< spieler.length; i++){		
-			
+			 anzahlSchiffeGezeugt = 0;
 			do {				
 
 				System.out.println(spieler[i].getName() +",Bitte wählen Sie ein Schiff, welches Sie auf dem Spielfeld platzieren wollen.");
