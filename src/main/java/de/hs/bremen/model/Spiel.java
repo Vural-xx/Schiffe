@@ -2,9 +2,7 @@ package de.hs.bremen.model;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
-import javax.xml.namespace.QName;
 
 import helper.IO;
 
