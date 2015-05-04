@@ -1,5 +1,8 @@
 package de.hs.bremen.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import helper.IO;
 
 /**
@@ -18,7 +21,7 @@ public class Spielfeld {
 	/**
 	 * Schiffe auf dem Spielfeld
 	 */
-	private Schiff [] schiffe;
+	private ArrayList<Schiff> schiffe;
 	
 	/**
 	 * Konstruktor, welche die Felder auf dem Spielfeld initialisiert.
@@ -26,6 +29,7 @@ public class Spielfeld {
 	 */
 	public Spielfeld(int groesse){
 		createFelder(groesse);
+		schiffe = new ArrayList<Schiff>();
 	}
 	
 	/**
@@ -52,21 +56,15 @@ public class Spielfeld {
 		return felder.length;
 	}
 	
+	
 	/**
 	 * Getter Schiffe.
 	 * @return schiffeArray
 	 */
-	public Schiff[] getSchiffe() {
-		return schiffe;
-	}
-	
-	/**
-	 * Setter schiffe
-	 * @param schiffe
-	 */
-	public void setSchiffe(Schiff[] schiffe) {
+	public void setSchiffe(ArrayList<Schiff> schiffe) {
 		this.schiffe = schiffe;
 	}
+
 	
 	/**
 	 * Felder werden initialisiert.
@@ -109,6 +107,7 @@ public class Spielfeld {
 			}
 		}
 		schiff.setFelder(f);
+		schiffe.add(schiff);
 	}
 	
 	/**
@@ -166,14 +165,34 @@ public class Spielfeld {
 	         
 	    }
 	}	
-		public boolean besetzt(Position position){
-			boolean feldBesetzt = false;
-			for (Feld[] f: felder) {
-				for (Feld ff: f) {
-					feldBesetzt =  ff.getPosition().equals(position);
-				}
+	public boolean besetzt(Position position){
+		boolean feldBesetzt = false;
+		for (Feld[] f: felder) {
+			for (Feld ff: f) {
+				feldBesetzt =  ff.getPosition().equals(position);
 			}
-			return feldBesetzt;
 		}
+		return feldBesetzt;
+	}
+		
+	/**
+	 * Schiffauswahlmenü wird gebaut.
+	 * @return String
+	 */
+	public String printSchiffeMenu(){
+		String menu = "Bitte wählen Sie";
+		int auswahl = 1;
+		List<String> bereitsDrin = new ArrayList<String>();
+				
+		for(Schiff s: schiffe){
+			if(!bereitsDrin.contains(s.getName())){
+				bereitsDrin.add(s.getName());
+				menu = menu + " "+ auswahl +" für "+ s.getName() +": || ";
+				auswahl++;
+			}
+			
+		}
+		return menu;
+	}
 	
 }

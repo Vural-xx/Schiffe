@@ -184,6 +184,15 @@ public class Spiel {
 				anzahlSchiffeGezeugt++;
 			}while(anzahlSchiffeGezeugt != schiffe.size() && anzahlSchiffePassend(spieler[i],schiffe.get(anzahlSchiffeGezeugt)));			
 		}
+		
+		rundeSpielen();
+	}
+	
+	public void rundeSpielen(){
+		for(int i = 0; i < spieler.length; i++){
+			System.out.println("Spieler " +spieler[i].getName()+". Bitte wählen Sie ein Schiff mit dem Sie feuern wollen.");
+			System.out.println(spieler[i].getSpielfeld().printSchiffeMenu());
+		}
 	}
 	
 	/**
