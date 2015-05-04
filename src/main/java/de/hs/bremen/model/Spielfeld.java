@@ -192,7 +192,8 @@ public class Spielfeld {
 			}
 			
 		}
-		return menu;
+		// Die letzten Zeichen werden vom menü entfernt. In diesem Fall 4 Stück.
+		return menu.substring(0, menu.length()-4);
 	}
 	
 }
