@@ -181,19 +181,30 @@ public class Spielfeld {
 	 */
 	public String printSchiffeMenu(){
 		String menu = "Bitte wählen Sie";
-		int auswahl = 1;
 		List<String> bereitsDrin = new ArrayList<String>();
 				
 		for(Schiff s: schiffe){
 			if(!bereitsDrin.contains(s.getName())){
 				bereitsDrin.add(s.getName());
-				menu = menu + " "+ auswahl +" für "+ s.getName() +": || ";
-				auswahl++;
+				menu = menu + " "+ getAuswahlNummerByName(s.getName()) +" für "+ s.getName() +": || ";
 			}
 			
 		}
 		// Die letzten Zeichen werden vom menü entfernt. In diesem Fall 4 Stück.
 		return menu.substring(0, menu.length()-4);
+	}
+	
+	public int getAuswahlNummerByName(String name){
+		switch (name) {
+		case "Zerstoerer":
+			return 1;
+		case "Fregatte":
+			return 2;
+		case "Korvette":
+			return 3;
+		default:
+			return 4;
+		}
 	}
 	
 }
