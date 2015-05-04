@@ -114,7 +114,6 @@ public abstract class Schiff {
 				if(!felder[i].isGetroffen() && felder[i].getPosition().equals(p)){
 					felder[i].setGetroffen(true);
 					felder[i].setFeldstatus(Feldstatus.GETROFFEN);
-					felder[i].setInhalt("x");
 					treffer = treffer +1;
 					return true;
 				}

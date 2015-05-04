@@ -100,10 +100,10 @@ public class Spielfeld {
 		Feld[] f = new Feld[schiff.getFelder().length];
 		for (int i = 0; i < schiff.getFelder().length; i++){
 			if(horizontal== 1){
-				felder[position.getPositionY()-1][position.getPositonX()-1+i].setInhalt(Spiel.ANSI_RED+"s" + Spiel.ANSI_RESET);
+				felder[position.getPositionY()-1][position.getPositonX()-1+i].setFeldstatus(Feldstatus.BESETZT);
 				f[i] = felder[position.getPositionY()-1][position.getPositonX()-1+i];
 			}else if (horizontal==2){
-				felder[position.getPositionY()-1+i][position.getPositonX()-1].setInhalt(Spiel.ANSI_RED+"s" + Spiel.ANSI_RESET);
+				felder[position.getPositionY()-1+i][position.getPositonX()-1].setFeldstatus(Feldstatus.BESETZT);
 				f[i] = felder[position.getPositionY()-1+i][position.getPositonX()-1];
 			}
 		}
