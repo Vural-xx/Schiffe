@@ -234,4 +234,20 @@ public abstract class Schiff {
 	public void feuern(Position position){
 		setWartezeit(feuerstaerke);
 	}
+	
+	/**
+	 * Name des  Schiffs
+	 * @return Name des Schiffs
+	 */
+	public String getName(){
+		if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.Fregatte")){
+			return "Fregatte";
+		}else if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.Korvette")){
+			return "Korvette";
+		}else if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.UBoot")){
+			return "UBoot";
+		}else{
+			return "Zerstoerer";
+		}
+	}
 }
