@@ -241,13 +241,13 @@ public abstract class Schiff {
 	 */
 	public String getName(){
 		if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.Fregatte")){
-			return "Fregatte";
+			return Spiel.ANSI_YELLOW + "Fregatte"+Spiel.ANSI_RESET;
 		}else if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.Korvette")){
-			return "Korvette";
+			return Spiel.ANSI_RED + "Korvette"+Spiel.ANSI_RESET;
 		}else if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.UBoot")){
-			return "UBoot";
+			return Spiel.ANSI_GREEN+ "UBoot"+Spiel.ANSI_RESET;
 		}else{
-			return "Zerstoerer";
+			return Spiel.ANSI_PURPLE +"Zerstoerer"+ Spiel.ANSI_RESET;
 		}
 	}
 	

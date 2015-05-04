@@ -157,7 +157,7 @@ public class Spiel {
 		
 		do{
 			System.out.println("Bitte geben Sie an was für eine Art von Schiff auf dem Spielfeld platziert werden soll.");
-			System.out.println("[1 für Zerstörer, 2 für Fregatte, 3 für Korvette, 4 für UBoot, 5 keine weiteren]");
+			System.out.println("[1 für "+ Spiel.ANSI_PURPLE + "Zerstörer" +Spiel.ANSI_RESET+ ", 2 für "+ Spiel.ANSI_YELLOW + "Fregatte" +Spiel.ANSI_RESET+", 3 für "+ Spiel.ANSI_RED + "Korvette" +Spiel.ANSI_RESET+  ", 4 für "+ Spiel.ANSI_GREEN + "Uboot" +Spiel.ANSI_RESET+ ", 5 keine weiteren]");
 			schiffTyp = schiffeAuswahlGueltig(IO.readInt());
 			if(schiffTyp !=5){
 				System.out.println("Wieviele Schiffe von dem Schifftyp " + schiffeAuswahl(schiffTyp).getName()+" sollen gesetzt werden");
