@@ -231,8 +231,18 @@ public abstract class Schiff {
 	 * 
 	 * @param position
 	 */
-	public void feuern(Position position){
+	public void feuern(Position position, Spielfeld spielfeld){
 		setWartezeit(feuerstaerke);
+		spielfeld.feuerPlatzieren(position);
+	}
+	
+	/**
+	 * 
+	 * @param position
+	 */
+	public void feuern(Position[] position, Spielfeld spielfeld){
+		setWartezeit(feuerstaerke);
+		spielfeld.feuerPlatzieren(position);
 	}
 	
 	/**
@@ -250,5 +260,5 @@ public abstract class Schiff {
 			return Spiel.ANSI_PURPLE +"Zerstoerer"+ Spiel.ANSI_RESET;
 		}
 	}
-	
+
 }

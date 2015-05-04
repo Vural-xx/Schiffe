@@ -3,6 +3,7 @@ package de.hs.bremen.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hs.bremen.enums.Feldstatus;
 import helper.IO;
 
 /**
@@ -204,6 +205,46 @@ public class Spielfeld {
 			return 3;
 		default:
 			return 4;
+		}
+	}
+	
+	public Schiff getZustaendigesSchiff(int auswahl){
+		for(int i=0; i < schiffe.size(); i++){
+			if(getSchifftypByNumber(auswahl).equals(schiffe.get(i).getName()) && !schiffe.get(i).rundeAussetzen()){
+				return schiffe.get(i);
+			}
+		}
+		return null;
+	}
+	
+	public String getSchifftypByNumber(int auswahl){
+		switch (auswahl) {
+		case 1:
+			return "Zerstoerer";
+		case 2:
+			return "Fregatte";
+		case 3:
+			return "Korvette";
+		default:
+			return "Uboot";
+		}
+	}	
+	
+	public void feuerPlatzieren(Position position){
+		for(int i = 0 ; i < felder.length; i++){
+			for (int j = 0 ; j < felder[i].length; j++){
+				if(felder[i][j].getPosition().equals(position) && felder[i][j].getFeldstatus() == Feldstatus.BESETZT){
+	        		felder[i][j].setFeldstatus(Feldstatus.GETROFFEN);
+				}else if(felder[i][j].getPosition().equals(position) && felder[i][j].getFeldstatus() == Feldstatus.WASSER){
+					felder[i][j].setFeldstatus(Feldstatus.VERFEHLT);
+				}
+	         }
+	     }
+	}
+	
+	public void feuerPlatzieren(Position[] position){
+		for(int i = 0; i <position.length; i++){
+			feuerPlatzieren(position[i]);
 		}
 	}
 	

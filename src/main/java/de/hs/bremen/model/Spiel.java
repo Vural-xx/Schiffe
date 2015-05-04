@@ -187,9 +187,22 @@ public class Spiel {
 	}
 	
 	public void rundeSpielen(){
+		int auswahl;
+		Schiff schiff;
+		int zeile;
+		int spalte;
 		for(int i = 0; i < spieler.length; i++){
 			System.out.println("Spieler " +spieler[i].getName()+". Bitte wählen Sie ein Schiff mit dem Sie feuern wollen.");
 			System.out.println(spieler[i].getSpielfeld().printSchiffeMenu());
+			auswahl = IO.readInt();
+			schiff = spieler[i].getSpielfeld().getZustaendigesSchiff(auswahl);
+			System.out.println(spieler[i].getName() +",Bitte geben Sie an wo Sie einen Schuß platzieren wollen");
+			System.out.println(spieler[i].getName() +", Bitte geben Sie an in welche Zeile sie schießen wollen");
+			zeile = IO.readInt();
+			System.out.println(spieler[i].getName() +", Bitte geben Sie an in welche Spalte Sie schießen wollen");
+			spalte = IO.readInt();
+			schiff.feuern(new Position(zeile, spalte), spieler[0].getSpielfeld());
+			
 		}
 	}
 	
@@ -262,5 +275,6 @@ public class Spiel {
 		Spiel spiel = new Spiel();
 		spiel.init();	
 	}
+	
 
 }
