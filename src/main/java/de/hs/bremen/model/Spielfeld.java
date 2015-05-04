@@ -104,7 +104,7 @@ public class Spielfeld {
 				felder[position.getPositionY()-1][position.getPositonX()-1+i].setInhalt(Spiel.ANSI_RED+"s" + Spiel.ANSI_RESET);
 				f[i] = felder[position.getPositionY()-1][position.getPositonX()-1+i];
 			}else if (horizontal==2){
-				felder[position.getPositionY()-1+i][position.getPositonX()-1].setInhalt(Spiel.ANSI_RED+"p" + Spiel.ANSI_RESET);
+				felder[position.getPositionY()-1+i][position.getPositonX()-1].setInhalt(Spiel.ANSI_RED+"s" + Spiel.ANSI_RESET);
 				f[i] = felder[position.getPositionY()-1+i][position.getPositonX()-1];
 			}
 		}
