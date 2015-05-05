@@ -115,39 +115,30 @@ public class Spiel {
 		int schiffAuswahl= 0;
 		boolean horizontalausrichtung = false;
 		Schiff schiff;
-		
 		do{
 			System.out.println("Bitte geben Sie an mit vielen Schiffen Sie pro Person spielen möchten.");
 			anzahlSchiffe = IO.readInt();
 		}while(spieler[0].getSpielfeld().getMaximumAnzahlSchiffe() < anzahlSchiffe && anzahlSchiffe != 0);
-		
-		for (int i = 0 ; i< spieler.length; i++){		
+			for (int i = 0 ; i< spieler.length; i++){		
 			
-			do {				
-
-				System.out.println(spieler[i].getName() +",Bitte wählen Sie ein Schiff, welches Sie auf dem Spielfeld platzieren wollen.");
-				System.out.println("[1 für Zerstörer, 2 für Fregatte, 3 für Korvette, 4 für UBoot]");
-				schiffAuswahl = IO.readInt();
-				schiff = schiffeAuswahl(schiffAuswahl);
-				System.out.println(spieler[i].getName() +", Bitte geben Sie an in welcher Zeile ihr Schiff platziert werden soll");
-				zeile = IO.readInt();
-				System.out.println(spieler[i].getName() +", Bitte geben Sie an in welcher Spalte ihr Schiff platziert werden soll");
-				spalte = IO.readInt();
-				spieler[i].getSpielfeld().platziereSchiff(schiff, new Position(spalte, zeile), true);
-				spieler[i].getSpielfeld().printSpielfeld();
-				
-				anzahlSchiffeGezeugt++;
-			}while(anzahlSchiffeGezeugt != anzahlSchiffe && anzahlSchiffePassend(spieler[i],schiff));			
-		}
+				do {				
+					System.out.println(spieler[i].getName() +",Bitte wählen Sie ein Schiff, welches Sie auf dem Spielfeld platzieren wollen.");
+					System.out.println("[1 für Zerstörer, 2 für Fregatte, 3 für Korvette, 4 für UBoot]");
+					schiffAuswahl = IO.readInt();
+					schiff = schiffeAuswahl(schiffAuswahl);
+					System.out.println(spieler[i].getName() +", Bitte geben Sie an in welcher Zeile ihr Schiff platziert werden soll");
+					zeile = IO.readInt();
+					System.out.println(spieler[i].getName() +", Bitte geben Sie an in welcher Spalte ihr Schiff platziert werden soll");
+					spalte = IO.readInt();
+						if (innerhalbSpielfeld(new Position(spalte, zeile)) == true){
+							spieler[i].getSpielfeld().platziereSchiff(schiff, new Position(spalte, zeile), true);
+							spieler[i].getSpielfeld().printSpielfeld();
+							anzahlSchiffeGezeugt++;
+						}
+				}while(anzahlSchiffeGezeugt != anzahlSchiffe && anzahlSchiffePassend(spieler[i],schiff));			
+			}
 	}
 	
-	/**
-	 * NEU Schiffe setzen je Spieler, je nach Auswahl
-	 */
-	//public void SchiffSetzen(){
-		
-		
-	//}
 	
 	/**
 	 * Gibt je nach Auswahl des Spielers, die schiffsunterklasse wieder.
@@ -183,16 +174,24 @@ public class Spiel {
 		return passend;
 	}
 	
-	public boolean innerhalbSpielfeld (){
-		if (Position.getPositonX() <0|| Position.getPositonX()> spieler.getSpielfeldgroesse() && Position.getPositionY()<0 || Position.getPositionY()> spieler.getSpielfeldgroesse()){
-			return false;
+	public boolean innerhalbSpielfeld (Position position){
+		if (position.getPositonX() <=0|| position.getPositonX()>= spieler[0].getSpielfeld().getSpielfeldgroesse() && position.getPositionY()<=0 || position.getPositionY()>= spieler[0].getSpielfeld().getSpielfeldgroesse()){
 			System.out.println("Das Schiff liegt außerhalb des Spielfeldes und darf hier nicht plaziert werden!");
+			return false;
 		}else {
 			return true;
 			
 		}
 		
 	}
+	
+	/*public boolean schiffPlazierbar(Feld feldstatus){
+		if (feldstatus.BESETZT == true){
+			
+			
+		}
+		
+	}*/
 	
 	/**
 	 * Willkommensmenü

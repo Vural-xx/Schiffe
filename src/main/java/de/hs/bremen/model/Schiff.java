@@ -75,7 +75,7 @@ public abstract class Schiff {
 			this.laenge = 3;
 			this.feuerstaerke = 1;
 		}else if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.UBoot")){
-			this.laenge = 1;
+			this.laenge = 2;
 			this.feuerstaerke =1;
 		}else{
 			this.laenge = 5;
