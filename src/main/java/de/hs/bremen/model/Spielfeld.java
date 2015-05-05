@@ -232,21 +232,17 @@ public class Spielfeld {
 	
 	public void feuerPlatzieren(Position position){
 		Schiff schiff = getSchiffByPosition(position);
-		if(schiff != null){
-			schiff.getroffen(position);
+		if(schiff != null && schiff.getroffen(position)){
 			System.out.println("Sie haben das Schiff " +schiff.getName()+ " getroffen");
 		}else{
-			
+			for(int i = 0 ; i < felder.length; i++){
+				for (int j = 0 ; j < felder[i].length; j++){
+					if(felder[i][j].getPosition().equals(position) && felder[i][j].getFeldstatus() == Feldstatus.WASSER){
+						felder[i][j].setFeldstatus(Feldstatus.VERFEHLT);
+					}
+		         }
+		     }
 		}
-		for(int i = 0 ; i < felder.length; i++){
-			for (int j = 0 ; j < felder[i].length; j++){
-				if(felder[i][j].getPosition().equals(position) && felder[i][j].getFeldstatus() == Feldstatus.BESETZT){		
-					felder[i][j].setFeldstatus(Feldstatus.GETROFFEN);
-				}else if(felder[i][j].getPosition().equals(position) && felder[i][j].getFeldstatus() == Feldstatus.WASSER){
-					felder[i][j].setFeldstatus(Feldstatus.VERFEHLT);
-				}
-	         }
-	     }
 	}
 	
 	public void feuerPlatzieren(Position[] position){
