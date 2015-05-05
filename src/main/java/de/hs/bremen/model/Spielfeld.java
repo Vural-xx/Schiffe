@@ -247,7 +247,9 @@ public class Spielfeld {
 	
 	public void feuerPlatzieren(Position[] position){
 		for(int i = 0; i <position.length; i++){
-			feuerPlatzieren(position[i]);
+			if(position[i] != null){
+				feuerPlatzieren(position[i]);
+			}
 		}
 	}
 	

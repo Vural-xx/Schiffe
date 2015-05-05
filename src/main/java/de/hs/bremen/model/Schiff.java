@@ -1,5 +1,7 @@
 package de.hs.bremen.model;
 
+import java.util.ArrayList;
+
 import de.hs.bremen.enums.Feldstatus;
 
 
@@ -231,7 +233,21 @@ public abstract class Schiff {
 	 */
 	public void feuern(Position position, Spielfeld spielfeld){
 		setWartezeit(feuerstaerke);
+		if(feuerstaerke > 1){
+			spielfeld.feuerPlatzieren(feuerPositionenBerechnen(position, spielfeld.getSpielfeldgroesse()));
+		}
 		spielfeld.feuerPlatzieren(position);
+	}
+	
+	public Position[] feuerPositionenBerechnen(Position position, int groesseSpielfeld){
+		Position[] positionen = new Position[feuerstaerke];
+		positionen[0] = position;
+		for(int i = 1; i <positionen.length; i++){
+			if(positionen[i-1].getPositonX()+1 <= groesseSpielfeld){
+				positionen[i] = new Position(positionen[i-1].getPositonX()+1, position.getPositionY());
+			}
+		}
+		return positionen;
 	}
 	
 	/**
