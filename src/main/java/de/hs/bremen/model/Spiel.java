@@ -214,7 +214,7 @@ public class Spiel {
 			auswahl = IO.readInt();
 			schiff = spieler[i].getSpielfeld().getZustaendigesSchiff(auswahl);
 			if(spieler.length > 2){
-				gegner = spielerAuswahlMenu();
+				gegner = spielerAuswahlMenu(spieler[i]);
 			}else if (i == 0){
 				gegner = spieler[1];
 			}else{
@@ -273,14 +273,18 @@ public class Spiel {
 		
 	}
 	
-	public Spieler spielerAuswahlMenu(){
+	public Spieler spielerAuswahlMenu(Spieler s){
 		System.out.println("Bitte wählen Sie den Spieler auf dessen Spielfeld Sie feuern möchten");
-		String spielerMenu ="Drücken Sie die";
+		String spielerMenu ="Drücken Sie die ";
 		int auswahl;
+		int auswahlInMenu;
 		for(int i = 0 ; i < spieler.length; i++){
-			spielerMenu = i+1 +"für Spieler " + spieler[i].getName()+", " ;
+			if(!s.getName().equals(spieler[i].getName())){
+				auswahlInMenu = i+1;
+				spielerMenu =spielerMenu+ auswahlInMenu +" für Spieler " + spieler[i].getName()+", " ;
+			}
 		}
-		System.out.println( spielerMenu.substring(0, spielerMenu.length()-2));
+		System.out.println(spielerMenu.substring(0, spielerMenu.length()-2));
 		auswahl = IO.readInt();
 		return spieler[auswahl-1];
 		
