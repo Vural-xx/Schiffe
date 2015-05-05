@@ -1,5 +1,9 @@
 package de.hs.bremen.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import de.hs.bremen.enums.Feldstatus;
 import helper.IO;
 
 /**
@@ -18,7 +22,7 @@ public class Spielfeld {
 	/**
 	 * Schiffe auf dem Spielfeld
 	 */
-	private Schiff [] schiffe;
+	private ArrayList<Schiff> schiffe;
 	
 	/**
 	 * Konstruktor, welche die Felder auf dem Spielfeld initialisiert.
@@ -26,6 +30,7 @@ public class Spielfeld {
 	 */
 	public Spielfeld(int groesse){
 		createFelder(groesse);
+		schiffe = new ArrayList<Schiff>();
 	}
 	
 	/**
@@ -52,21 +57,15 @@ public class Spielfeld {
 		return felder.length;
 	}
 	
+	
 	/**
 	 * Getter Schiffe.
 	 * @return schiffeArray
 	 */
-	public Schiff[] getSchiffe() {
-		return schiffe;
-	}
-	
-	/**
-	 * Setter schiffe
-	 * @param schiffe
-	 */
-	public void setSchiffe(Schiff[] schiffe) {
+	public void setSchiffe(ArrayList<Schiff> schiffe) {
 		this.schiffe = schiffe;
 	}
+
 	
 	/**
 	 * Felder werden initialisiert.
@@ -97,18 +96,19 @@ public class Spielfeld {
 	 * @param position: Position auf dem das Schiff platziert werden soll.
 	 * @param horizontal: Angabe ob das Schiff horizontal platziert werden soll.
 	 */
-	public void platziereSchiff(Schiff schiff, Position position, boolean horizontal){
+	public void platziereSchiff(Schiff schiff, Position position, int horizontal){
 		Feld[] f = new Feld[schiff.getFelder().length];
 		for (int i = 0; i < schiff.getFelder().length; i++){
-			if(horizontal){
-				felder[position.getPositionY()-1][position.getPositonX()-1+i].setInhalt(Spiel.ANSI_RED+"s" + Spiel.ANSI_RESET);
+			if(horizontal== 1){
+				felder[position.getPositionY()-1][position.getPositonX()-1+i].setFeldstatus(Feldstatus.BESETZT);
 				f[i] = felder[position.getPositionY()-1][position.getPositonX()-1+i];
-			}else{
-				felder[position.getPositionY()-1+1][position.getPositonX()-1].setInhalt(Spiel.ANSI_RED+"p" + Spiel.ANSI_RESET);
+			}else if (horizontal==2){
+				felder[position.getPositionY()-1+i][position.getPositonX()-1].setFeldstatus(Feldstatus.BESETZT);
 				f[i] = felder[position.getPositionY()-1+i][position.getPositonX()-1];
 			}
 		}
 		schiff.setFelder(f);
+		schiffe.add(schiff);
 	}
 	
 	/**
@@ -166,14 +166,86 @@ public class Spielfeld {
 	         
 	    }
 	}	
-		public boolean besetzt(Position position){
-			boolean feldBesetzt = false;
-			for (Feld[] f: felder) {
-				for (Feld ff: f) {
-					feldBesetzt =  ff.getPosition().equals(position);
-				}
+	public boolean besetzt(Position position){
+		boolean feldBesetzt = false;
+		for (Feld[] f: felder) {
+			for (Feld ff: f) {
+				feldBesetzt =  ff.getPosition().equals(position);
 			}
-			return feldBesetzt;
 		}
+		return feldBesetzt;
+	}
+		
+	/**
+	 * Schiffauswahlmenü wird gebaut.
+	 * @return String
+	 */
+	public String printSchiffeMenu(){
+		String menu = "Bitte wählen Sie";
+		List<String> bereitsDrin = new ArrayList<String>();
+				
+		for(Schiff s: schiffe){
+			if(!bereitsDrin.contains(s.getName())){
+				bereitsDrin.add(s.getName());
+				menu = menu + " "+ getAuswahlNummerByName(s.getName()) +" für "+ s.getName() +": || ";
+			}
+			
+		}
+		// Die letzten Zeichen werden vom menü entfernt. In diesem Fall 4 Stück.
+		return menu.substring(0, menu.length()-4);
+	}
+	
+	public int getAuswahlNummerByName(String name){
+		switch (name) {
+		case "Zerstoerer":
+			return 1;
+		case "Fregatte":
+			return 2;
+		case "Korvette":
+			return 3;
+		default:
+			return 4;
+		}
+	}
+	
+	public Schiff getZustaendigesSchiff(int auswahl){
+		for(int i=0; i < schiffe.size(); i++){
+			if(getSchifftypByNumber(auswahl).equals(schiffe.get(i).getName()) && !schiffe.get(i).rundeAussetzen()){
+				return schiffe.get(i);
+			}
+		}
+		return null;
+	}
+	
+	public String getSchifftypByNumber(int auswahl){
+		switch (auswahl) {
+		case 1:
+			return "Zerstoerer";
+		case 2:
+			return "Fregatte";
+		case 3:
+			return "Korvette";
+		default:
+			return "Uboot";
+		}
+	}	
+	
+	public void feuerPlatzieren(Position position){
+		for(int i = 0 ; i < felder.length; i++){
+			for (int j = 0 ; j < felder[i].length; j++){
+				if(felder[i][j].getPosition().equals(position) && felder[i][j].getFeldstatus() == Feldstatus.BESETZT){
+	        		felder[i][j].setFeldstatus(Feldstatus.GETROFFEN);
+				}else if(felder[i][j].getPosition().equals(position) && felder[i][j].getFeldstatus() == Feldstatus.WASSER){
+					felder[i][j].setFeldstatus(Feldstatus.VERFEHLT);
+				}
+	         }
+	     }
+	}
+	
+	public void feuerPlatzieren(Position[] position){
+		for(int i = 0; i <position.length; i++){
+			feuerPlatzieren(position[i]);
+		}
+	}
 	
 }

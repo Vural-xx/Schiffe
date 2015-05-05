@@ -5,11 +5,9 @@ import de.hs.bremen.enums.Feldstatus;
 public class Feld {
 	private Position position;
 	private boolean getroffen;
-	private String inhalt;
 	private Feldstatus feldstatus;
 	
 	public Feld(Position position){
-		inhalt = Spiel.ANSI_BLUE+"~" + Spiel.ANSI_RESET;
 		feldstatus = Feldstatus.WASSER;
 		this.position = position;
 	}
@@ -32,13 +30,16 @@ public class Feld {
 	}
 
 	public String getInhalt() {
-		return inhalt;
+		if(getFeldstatus()==Feldstatus.WASSER){
+			return Spiel.ANSI_BLUE+"~" + Spiel.ANSI_RESET;
+		} else if(getFeldstatus()== Feldstatus.GETROFFEN){
+			return Spiel.ANSI_RED+"x" + Spiel.ANSI_RESET;
+		} else if (getFeldstatus()==Feldstatus.BESETZT){
+			return Spiel.ANSI_CYAN+"s" + Spiel.ANSI_RESET;
+		} else{
+			return Spiel.ANSI_BLACK+"x" + Spiel.ANSI_RESET;
+		}
 	}
-
-	public void setInhalt(String inhalt) {
-		this.inhalt = inhalt;
-	}
-
 	public Feldstatus getFeldstatus() {
 		return feldstatus;
 	}

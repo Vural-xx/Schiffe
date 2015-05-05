@@ -114,7 +114,6 @@ public abstract class Schiff {
 				if(!felder[i].isGetroffen() && felder[i].getPosition().equals(p)){
 					felder[i].setGetroffen(true);
 					felder[i].setFeldstatus(Feldstatus.GETROFFEN);
-					felder[i].setInhalt("x");
 					treffer = treffer +1;
 					return true;
 				}
@@ -231,7 +230,34 @@ public abstract class Schiff {
 	 * 
 	 * @param position
 	 */
-	public void feuern(Position position){
+	public void feuern(Position position, Spielfeld spielfeld){
 		setWartezeit(feuerstaerke);
+		spielfeld.feuerPlatzieren(position);
 	}
+	
+	/**
+	 * 
+	 * @param position
+	 */
+	public void feuern(Position[] position, Spielfeld spielfeld){
+		setWartezeit(feuerstaerke);
+		spielfeld.feuerPlatzieren(position);
+	}
+	
+	/**
+	 * Name des  Schiffs
+	 * @return Name des Schiffs
+	 */
+	public String getName(){
+		if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.Fregatte")){
+			return "Fregatte";
+		}else if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.Korvette")){
+			return "Korvette";
+		}else if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.UBoot")){
+			return "UBoot";
+		}else{
+			return "Zerstoerer";
+		}
+	}
+
 }
