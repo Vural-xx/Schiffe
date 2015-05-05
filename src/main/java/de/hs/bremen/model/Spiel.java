@@ -113,7 +113,8 @@ public class Spiel {
 
 	
 	public int schiffeAuswahlGueltig(int auswahlZahl){
-		if(auswahlZahl <=5 && auswahlZahl >=1){				
+		if(auswahlZahl <=5 && auswahlZahl >=1){		
+			return auswahlZahl;
 		} else {
 			System.out.println("Falsche Einngabe versuchen Sie es erneut:");
 			schiffeAuswahlGueltig(IO.readInt());
@@ -128,7 +129,12 @@ public class Spiel {
 	public void setAuswahlZahl(int auswahlZahl) {
 		this.auswahlZahl = auswahlZahl;
 	}
-
+	
+	
+	/**
+	 * Funktion, ob Schiffe Horizontal oder Vertikal angeordnet werden sollen.
+	 */
+	
 	public int vertikalHorizontal(int richtungsAbfrage){
 		if(richtungsAbfrage== 1){
 			ausrichtung = 1;
