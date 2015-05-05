@@ -95,7 +95,7 @@ public abstract class Schiff {
 	public boolean getroffen(Position position){	
 		for(int i = 0; i < felder.length; i++){
 			if(felder[i].getPosition().equals(position)){
-				felder[i].setGetroffen(true);
+				felder[i].setFeldstatus(Feldstatus.GETROFFEN);
 				treffer = treffer + 1;
 				return true;
 			}
@@ -111,8 +111,7 @@ public abstract class Schiff {
 	public boolean getroffen(Position[] positionen){
 		for(int i = 0; i < felder.length; i++){
 			for(Position p : positionen){
-				if(!felder[i].isGetroffen() && felder[i].getPosition().equals(p)){
-					felder[i].setGetroffen(true);
+				if(felder[i].getFeldstatus() != Feldstatus.GETROFFEN && felder[i].getFeldstatus() != Feldstatus.VERFEHLT &&  felder[i].getPosition().equals(p)){
 					felder[i].setFeldstatus(Feldstatus.GETROFFEN);
 					treffer = treffer +1;
 					return true;

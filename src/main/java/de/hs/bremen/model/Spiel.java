@@ -192,7 +192,14 @@ public class Spiel {
 			}while(anzahlSchiffeGezeugt != schiffe.size() && anzahlSchiffePassend(spieler[i],schiffe.get(anzahlSchiffeGezeugt)));			
 		}
 		
-		rundeSpielen();
+		spielen();
+	}
+	
+	public void spielen(){
+		// ToDo: richtige Bedingung implementieren
+		while(1<10){
+			rundeSpielen();
+		}
 	}
 	
 	public void rundeSpielen(){
@@ -200,18 +207,26 @@ public class Spiel {
 		Schiff schiff;
 		int zeile;
 		int spalte;
+		Spieler gegner = null;
 		for(int i = 0; i < spieler.length; i++){
 			System.out.println("Spieler " +spieler[i].getName()+". Bitte wählen Sie ein Schiff mit dem Sie feuern wollen.");
 			System.out.println(spieler[i].getSpielfeld().printSchiffeMenu());
 			auswahl = IO.readInt();
 			schiff = spieler[i].getSpielfeld().getZustaendigesSchiff(auswahl);
+			if(spieler.length > 2){
+				gegner = spielerAuswahlMenu();
+			}else if (i == 0){
+				gegner = spieler[1];
+			}else{
+				gegner = spieler[0];
+			}
+			gegner.getSpielfeld().printSpielfeld();
 			System.out.println(spieler[i].getName() +",Bitte geben Sie an wo Sie einen Schuß platzieren wollen");
 			System.out.println(spieler[i].getName() +", Bitte geben Sie an in welche Zeile sie schießen wollen");
 			zeile = IO.readInt();
 			System.out.println(spieler[i].getName() +", Bitte geben Sie an in welche Spalte Sie schießen wollen");
 			spalte = IO.readInt();
 			schiff.feuern(new Position(zeile, spalte), spieler[0].getSpielfeld());
-			
 		}
 	}
 	
@@ -255,6 +270,19 @@ public class Spiel {
 		}else {
 			return true;
 		}
+		
+	}
+	
+	public Spieler spielerAuswahlMenu(){
+		System.out.println("Bitte wählen Sie den Spieler auf dessen Spielfeld Sie feuern möchten");
+		String spielerMenu ="Drücken Sie die";
+		int auswahl;
+		for(int i = 0 ; i < spieler.length; i++){
+			spielerMenu = i+1 +"für Spieler " + spieler[i].getName()+", " ;
+		}
+		System.out.println( spielerMenu.substring(0, spielerMenu.length()-2));
+		auswahl = IO.readInt();
+		return spieler[auswahl-1];
 		
 	}
 	

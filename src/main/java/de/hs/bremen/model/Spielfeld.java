@@ -117,7 +117,7 @@ public class Spielfeld {
 	 */
 	public void trefferPlatzieren(Position[] positionen){
 		for(Position p: positionen){
-			getFeld(p.getPositonX(), p.getPositionY()).setGetroffen(true);
+			getFeld(p.getPositonX(), p.getPositionY()).setFeldstatus(Feldstatus.GETROFFEN);
 		}
 	}
 	
@@ -185,7 +185,7 @@ public class Spielfeld {
 		List<String> bereitsDrin = new ArrayList<String>();
 				
 		for(Schiff s: schiffe){
-			if(!bereitsDrin.contains(s.getName())){
+			if(!bereitsDrin.contains(s.getName()) && !s.rundeAussetzen()){
 				bereitsDrin.add(s.getName());
 				menu = menu + " "+ getAuswahlNummerByName(s.getName()) +" für "+ s.getName() +": || ";
 			}
@@ -226,15 +226,22 @@ public class Spielfeld {
 		case 3:
 			return "Korvette";
 		default:
-			return "Uboot";
+			return "UBoot";
 		}
 	}	
 	
 	public void feuerPlatzieren(Position position){
+		Schiff schiff = getSchiffByPosition(position);
+		if(schiff != null){
+			schiff.getroffen(position);
+			System.out.println("Sie haben das Schiff " +schiff.getName()+ " getroffen");
+		}else{
+			
+		}
 		for(int i = 0 ; i < felder.length; i++){
 			for (int j = 0 ; j < felder[i].length; j++){
-				if(felder[i][j].getPosition().equals(position) && felder[i][j].getFeldstatus() == Feldstatus.BESETZT){
-	        		felder[i][j].setFeldstatus(Feldstatus.GETROFFEN);
+				if(felder[i][j].getPosition().equals(position) && felder[i][j].getFeldstatus() == Feldstatus.BESETZT){		
+					felder[i][j].setFeldstatus(Feldstatus.GETROFFEN);
 				}else if(felder[i][j].getPosition().equals(position) && felder[i][j].getFeldstatus() == Feldstatus.WASSER){
 					felder[i][j].setFeldstatus(Feldstatus.VERFEHLT);
 				}
@@ -248,4 +255,13 @@ public class Spielfeld {
 		}
 	}
 	
+	public Schiff getSchiffByPosition(Position position){
+		for(int i = 0; i<schiffe.size(); i++){
+			for(int j = 0; j<schiffe.get(i).getFelder().length; j++)
+			if(schiffe.get(i).getFelder()[j].getPosition().equals(position)){
+				return schiffe.get(i);
+			}
+		}
+		return null;
+	}
 }

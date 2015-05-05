@@ -4,7 +4,6 @@ import de.hs.bremen.enums.Feldstatus;
 
 public class Feld {
 	private Position position;
-	private boolean getroffen;
 	private Feldstatus feldstatus;
 	
 	public Feld(Position position){
@@ -18,15 +17,6 @@ public class Feld {
 
 	public void setPosition(Position position) {
 		this.position = position;
-	}
-
-	public boolean isGetroffen() {
-		return getroffen;
-		
-	}
-
-	public void setGetroffen(boolean getroffen) {
-		this.getroffen = getroffen;
 	}
 
 	public String getInhalt() {
