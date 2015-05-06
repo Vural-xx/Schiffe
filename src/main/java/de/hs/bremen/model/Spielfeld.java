@@ -166,15 +166,6 @@ public class Spielfeld {
 	         
 	    }
 	}	
-	public boolean besetzt(Position position){
-		boolean feldBesetzt = false;
-		for (Feld[] f: felder) {
-			for (Feld ff: f) {
-				feldBesetzt =  ff.getPosition().equals(position);
-			}
-		}
-		return feldBesetzt;
-	}
 		
 	/**
 	 * Schiffauswahlmenü wird gebaut.

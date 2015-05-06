@@ -4,6 +4,10 @@ package de.hs.bremen.model;
 import java.util.ArrayList;
 
 
+
+
+
+import de.hs.bremen.enums.Feldstatus;
 import helper.IO;
 
 /**
@@ -263,6 +267,11 @@ public class Spiel {
 		return passend;
 	}
 	
+	/**
+	 * Überprüft ob das Schiff innerhalb des Spielfeld plaziert wird
+	 * @param position
+	 * @return
+	 */
 	public boolean innerhalbSpielfeld (Position position){
 		if (position.getPositonX() <=0|| position.getPositonX()>= spieler[0].getSpielfeld().getSpielfeldgroesse() && position.getPositionY()<=0 || position.getPositionY()>= spieler[0].getSpielfeld().getSpielfeldgroesse()){
 			System.out.println("Das Schiff liegt außerhalb des Spielfeldes und darf hier nicht plaziert werden!");
@@ -273,6 +282,7 @@ public class Spiel {
 		
 	}
 	
+
 	public Spieler spielerAuswahlMenu(Spieler s){
 		System.out.println("Bitte wählen Sie den Spieler auf dessen Spielfeld Sie feuern möchten");
 		String spielerMenu ="Drücken Sie die ";
@@ -290,13 +300,38 @@ public class Spiel {
 		
 	}
 	
-	/*public boolean schiffPlazierbar(Feld feldstatus){
-		if (feldstatus.BESETZT == true){
-			
-			
+
+	/**
+	 * setzt die umliegenden felder auf besetzt, wo andere schiffe nicht plaziert werden dürfen
+	 * @param feldstatus
+	 * @param position
+	 */
+	public boolean schiffPlazierbar(Spieler spieler, Position position){
+		Feld [][] felder= spieler.getSpielfeld().getFelder();
+		for(int i = 0; i < felder.length; i++){
+			for(int j= 0; j < felder[i].length; j++){
+				Position[] positionen = felder[i][j].pufferZoneBerechnen();
+				for(Position p: positionen){
+					if(p.equals(position)){
+						return false;
+					}
+				}
+			}
 		}
-		
-	}*/
+		return true;
+	}
+	
+	/**
+	 * Angabe, ob positionen innerhalb der Pufferzone eines anderen Schiff liegt
+	 * @param feldstatus
+	 * @param position
+	 */
+	public boolean schiffPlazierbar(Spieler spieler, Position[] positionen){
+		for(int i = 0; i<positionen.length; i++){
+			return schiffPlazierbar(spieler, positionen[i]);
+		}
+		return false;
+	}
 	
 	/**
 	 * Willkommensmenü

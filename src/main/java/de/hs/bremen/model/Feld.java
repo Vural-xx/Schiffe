@@ -1,5 +1,7 @@
 package de.hs.bremen.model;
 
+import java.util.ArrayList;
+
 import de.hs.bremen.enums.Feldstatus;
 
 public class Feld {
@@ -17,6 +19,21 @@ public class Feld {
 
 	public void setPosition(Position position) {
 		this.position = position;
+	}
+	
+	public Position[] pufferZoneBerechnen(){
+		ArrayList<Position> nichtPlazierbar = new ArrayList<Position>();
+		nichtPlazierbar.add(position);
+		nichtPlazierbar.add(new Position(position.getPositonX()-1, position.getPositionY()-1));
+		nichtPlazierbar.add(new Position(position.getPositonX(), position.getPositionY()-1));
+		nichtPlazierbar.add(new Position(position.getPositonX()+1, position.getPositionY()-1));
+		nichtPlazierbar.add(new Position(position.getPositonX()+1, position.getPositionY()));
+		nichtPlazierbar.add(new Position(position.getPositonX()+1, position.getPositionY()+1));
+		nichtPlazierbar.add(new Position(position.getPositonX(), position.getPositionY()+1));
+		nichtPlazierbar.add(new Position(position.getPositonX()-1, position.getPositionY()+1));
+		nichtPlazierbar.add(new Position(position.getPositonX()-1, position.getPositionY()));
+		return (Position[]) nichtPlazierbar.toArray();
+		
 	}
 
 	public String getInhalt() {
