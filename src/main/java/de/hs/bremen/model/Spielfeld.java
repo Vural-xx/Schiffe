@@ -132,7 +132,7 @@ public class Spielfeld {
 				plaetzeBelegt = plaetzeBelegt + s.getPlaetzeBelegung();
 			}
 		}
-		return plaetzeBelegt;
+		return plaetzeBelegt;	
 	}
 	
 	/**

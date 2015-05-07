@@ -161,6 +161,7 @@ public class Spiel {
 		int anzahlSchiffe;
 		int anzahlSchiffeGezeugt;
 		int schiffTyp;
+		Schiff schiff;
 		ArrayList<Schiff> schiffe = new ArrayList<Schiff>();
 		
 		do{
@@ -170,9 +171,13 @@ public class Spiel {
 			if(schiffTyp !=5){
 				System.out.println("Wieviele Schiffe von dem Schifftyp " + schiffeAuswahl(schiffTyp).getName()+" sollen gesetzt werden");
 				anzahlSchiffe = IO.readInt();
-				for(int i= 0 ; i < anzahlSchiffe; i++){
-					schiffe.add(schiffeAuswahl(schiffTyp));
-				}
+				if (anzahlSchiffePassend(spieler[0],schiffeAuswahl(schiffTyp), anzahlSchiffe)){
+					for(int i= 0 ; i < anzahlSchiffe; i++){
+						schiffe.add(schiffeAuswahl(schiffTyp));
+					}
+				}else{
+					System.out.println("Soviele Schiffe von dem Schifftyp " +schiffeAuswahl(schiffTyp).getName()+ "passen nicht auf ihr Spielfeld");
+				}	
 			}
 		}while(schiffTyp != 5 && spieler[0].getSpielfeld().getMaximumAnzahlSchiffe() > schiffe.size());
 		
@@ -193,7 +198,7 @@ public class Spiel {
 					anzahlSchiffeGezeugt++;
 				}
 				
-			}while(anzahlSchiffeGezeugt != schiffe.size() && anzahlSchiffePassend(spieler[i],schiffe.get(anzahlSchiffeGezeugt)));			
+			}while(anzahlSchiffeGezeugt != schiffe.size());			
 		}
 		
 		spielen();
@@ -259,8 +264,8 @@ public class Spiel {
 	 * @param schiff: Schiff, dessen Länge überprüft werden soll
 	 * @return: Passend oder nicht
 	 */
-	public boolean anzahlSchiffePassend(Spieler spieler, Schiff schiff){
-		boolean passend = spieler.getSpielfeld().getPlaetzeBelegt() + schiff.getPlaetzeBelegung() < (spieler.getSpielfeld().getSpielfeldgroesse() * spieler.getSpielfeld().getSpielfeldgroesse());
+	public boolean anzahlSchiffePassend(Spieler spieler, Schiff schiff, int anzahlSchiffe){
+		boolean passend = spieler.getSpielfeld().getPlaetzeBelegt() + schiff.getPlaetzeBelegung()* anzahlSchiffe < (spieler.getSpielfeld().getSpielfeldgroesse() * spieler.getSpielfeld().getSpielfeldgroesse());
 		if(!passend){
 			System.out.println("Dieses Schiff passt leider nicht mehr auf ihr Spielfeld. Bitte wählen Sie ein anderes");
 		}
