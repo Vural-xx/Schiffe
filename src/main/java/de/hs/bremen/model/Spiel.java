@@ -41,6 +41,12 @@ public class Spiel {
 	private int auswahlZahl;
 	boolean vertikalHorizontal= false;
 	private int ausrichtung;
+	private int spalte;
+	private int zeile;
+	private int anzahlSchiffe;
+	private int anzahlSchiffeGezeugt;
+	private int schiffTyp;
+	private ArrayList<Schiff> schiffe = new ArrayList<Schiff>();
 	
 	/**
 	 * Spieler die an dem Spiel beteiligt sind.
@@ -162,70 +168,8 @@ public class Spiel {
 	 * Funktion, die Schiffe pro Spieler auf deren Spielfeldern platziert.
 	 */
 	public void schiffePlatzieren(){
-		int spalte;
-		int zeile;
-		int anzahlSchiffe;
-		int anzahlSchiffeGezeugt;
-		int schiffTyp;
-		Schiff schiff;
-		ArrayList<Schiff> schiffe = new ArrayList<Schiff>();
-		
-		do{
-			System.out.println("Bitte geben Sie an was für eine Art von Schiff auf dem Spielfeld platziert werden soll.");
-			System.out.println("[1 für "+ Spiel.ANSI_PURPLE + "Zerstörer" +Spiel.ANSI_RESET+ ", 2 für "+ Spiel.ANSI_YELLOW + "Fregatte" +Spiel.ANSI_RESET+", 3 für "+ Spiel.ANSI_RED + "Korvette" +Spiel.ANSI_RESET+  ", 4 für "+ Spiel.ANSI_GREEN + "Uboot" +Spiel.ANSI_RESET+ ", 5 keine weiteren]");
-			schiffTyp = schiffeAuswahlGueltig(IO.readInt());
-			if(schiffTyp !=5){
-				System.out.println("Wieviele Schiffe von dem Schifftyp " + schiffeAuswahl(schiffTyp).getName()+" sollen gesetzt werden");
-				anzahlSchiffe = IO.readInt();
-				if (anzahlSchiffePassend(spieler[0],schiffeAuswahl(schiffTyp), anzahlSchiffe)){
-					for(int i= 0 ; i < anzahlSchiffe; i++){
-						schiffe.add(schiffeAuswahl(schiffTyp));
-					}
-				}else{
-					System.out.println("Soviele Schiffe von dem Schifftyp " +schiffeAuswahl(schiffTyp).getName()+ "passen nicht auf ihr Spielfeld");
-				}	
-			}
-		}while(schiffTyp != 5 && spieler[0].getSpielfeld().getMaximumAnzahlSchiffe() > schiffe.size());
-		
-		
-		for (int i = 0 ; i< spieler.length; i++){		
-			anzahlSchiffeGezeugt = 0;		 
-			do {				
-				System.out.println(spieler[i].getName() +",Bitte geben Sie an wo Sie " +schiffe.get(anzahlSchiffeGezeugt).getName()+ " auf ihrem Spielfeld platzieren wollen.");
-				System.out.println(spieler[i].getName() +", Bitte geben Sie an in welcher Zeile ihr Schiff platziert werden soll");
-				zeile = IO.readInt();
-				System.out.println(spieler[i].getName() +", Bitte geben Sie an in welcher Spalte ihr Schiff platziert werden soll");
-				spalte = IO.readInt();
-				System.out.println(spieler[i].getName() +", Bitte geben Sie an ob ihr Schiff 1. Horizontal oder 2. Vertikal angeorndet werden soll");
-				ausrichtung = vertikalHorizontal(IO.readInt());
-				if (innerhalbSpielfeld(new Position(spalte, zeile)) && schiffPlazierbar(schiffe.get(anzahlSchiffeGezeugt), new Position(spalte, zeile), spieler[i], ausrichtung)){
-					spieler[i].getSpielfeld().platziereSchiff(schiffe.get(anzahlSchiffeGezeugt), new Position(spalte, zeile), ausrichtung);
-					spieler[i].getSpielfeld().printSpielfeld();
-					anzahlSchiffeGezeugt++;
-				}
-			}while(anzahlSchiffeGezeugt != schiffe.size());	
-			ArrayList<Schiff> tempArrayList = new ArrayList<Schiff>();
-			
-			for(int j = 0; j <schiffe.size(); j++){	
-				switch (schiffe.get(j).getName()) {
-					case "Fregatte":
-						tempArrayList.add(new Fregatte());
-						break;
-					case "Korvette":
-						tempArrayList.add(new Korvette());
-						break;
-					case "UBoot":
-						tempArrayList.add(new UBoot());
-						break;
-					default:
-						tempArrayList.add(new Zerstoerer());
-						break;
-					}
-			}
-			schiffe = tempArrayList;
-		}
-		
-		spielen();
+		menueSchiffartAuswahl();
+		schiffeAufFeldSetzen();
 	}
 	
 	public void spielen(){
@@ -337,6 +281,66 @@ public class Spiel {
 	 * @param position
 	 */
 	
+	public void menueSchiffartAuswahl(){
+		do{
+			System.out.println("Bitte geben Sie an was für eine Art von Schiff auf dem Spielfeld platziert werden soll.");
+			System.out.println("[1 für "+ Spiel.ANSI_PURPLE + "Zerstörer" +Spiel.ANSI_RESET+ ", 2 für "+ Spiel.ANSI_YELLOW + "Fregatte" +Spiel.ANSI_RESET+", 3 für "+ Spiel.ANSI_RED + "Korvette" +Spiel.ANSI_RESET+  ", 4 für "+ Spiel.ANSI_GREEN + "Uboot" +Spiel.ANSI_RESET+ ", 5 keine weiteren]");
+			schiffTyp = schiffeAuswahlGueltig(IO.readInt());
+			if(schiffTyp !=5){
+				System.out.println("Wieviele Schiffe von dem Schifftyp " + schiffeAuswahl(schiffTyp).getName()+" sollen gesetzt werden");
+				anzahlSchiffe = IO.readInt();
+				if (anzahlSchiffePassend(spieler[0],schiffeAuswahl(schiffTyp), anzahlSchiffe)){
+					for(int i= 0 ; i < anzahlSchiffe; i++){
+						schiffe.add(schiffeAuswahl(schiffTyp));
+					}
+				}else{
+					System.out.println("Soviele Schiffe von dem Schifftyp " +schiffeAuswahl(schiffTyp).getName()+ "passen nicht auf ihr Spielfeld");
+				}	
+			}
+		}while(schiffTyp != 5 && spieler[0].getSpielfeld().getMaximumAnzahlSchiffe() > schiffe.size());
+		
+	}
+	
+	
+	public void schiffeAufFeldSetzen(){
+		for (int i = 0 ; i< spieler.length; i++){		
+			anzahlSchiffeGezeugt = 0;		 
+			do {				
+				System.out.println(spieler[i].getName() +",Bitte geben Sie an wo Sie " +schiffe.get(anzahlSchiffeGezeugt).getName()+ " auf ihrem Spielfeld platzieren wollen.");
+				System.out.println(spieler[i].getName() +", Bitte geben Sie an in welcher Zeile ihr Schiff platziert werden soll");
+				zeile = IO.readInt();
+				System.out.println(spieler[i].getName() +", Bitte geben Sie an in welcher Spalte ihr Schiff platziert werden soll");
+				spalte = IO.readInt();
+				System.out.println(spieler[i].getName() +", Bitte geben Sie an ob ihr Schiff 1. Horizontal oder 2. Vertikal angeorndet werden soll");
+				ausrichtung = vertikalHorizontal(IO.readInt());
+				if (innerhalbSpielfeld(new Position(spalte, zeile)) && schiffPlazierbar(schiffe.get(anzahlSchiffeGezeugt), new Position(spalte, zeile), spieler[i], ausrichtung)){
+					spieler[i].getSpielfeld().platziereSchiff(schiffe.get(anzahlSchiffeGezeugt), new Position(spalte, zeile), ausrichtung);
+					spieler[i].getSpielfeld().printSpielfeld();
+					anzahlSchiffeGezeugt++;
+				}
+			}while(anzahlSchiffeGezeugt != schiffe.size());	
+			ArrayList<Schiff> tempArrayList = new ArrayList<Schiff>();
+			
+			for(int j = 0; j <schiffe.size(); j++){	
+				switch (schiffe.get(j).getName()) {
+					case "Fregatte":
+						tempArrayList.add(new Fregatte());
+						break;
+					case "Korvette":
+						tempArrayList.add(new Korvette());
+						break;
+					case "UBoot":
+						tempArrayList.add(new UBoot());
+						break;
+					default:
+						tempArrayList.add(new Zerstoerer());
+						break;
+					}
+			}
+			schiffe = tempArrayList;
+		}
+	}
+	
 	public boolean schiffPlazierbar(Schiff schiff, Position position, Spieler spieler, int horizontal){
 		Position[] positionen = new Position[schiff.getLaenge()];
 		positionen[0] = position;
@@ -406,6 +410,7 @@ public class Spiel {
 		groesse = IO.readInt();
 		createSpielfelder(groesse);
 		schiffePlatzieren();
+		spielen();
 	}
 	
 	public static void main(String[] args){
