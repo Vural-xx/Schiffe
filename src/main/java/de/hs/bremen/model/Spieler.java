@@ -27,6 +27,14 @@ public class Spieler {
 	 */
 	private Spielfeld spielfeldPublic;
 	
+	public Spielfeld getSpielfeldPublic() {
+		return spielfeldPublic;
+	}
+
+	public void setSpielfeldPublic(Spielfeld spielfeldPublic) {
+		this.spielfeldPublic = spielfeldPublic;
+	}
+
 	/**
 	 * Indikator ob der Benutzer noch im Spiel ist.
 	 */
