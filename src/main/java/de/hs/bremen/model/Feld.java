@@ -20,7 +20,6 @@ public class Feld {
 	public void setPosition(Position position) {
 		this.position = position;
 	}
-	
 
 	public String getInhalt() {
 		if(getFeldstatus()==Feldstatus.WASSER){

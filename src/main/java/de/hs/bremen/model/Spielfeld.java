@@ -115,11 +115,11 @@ public class Spielfeld {
 	 * Treffer wird auf dem Spielfeld vermerkt.
 	 * @param positionen: Position auf dem der Treffer vermerkt werden soll.
 	 */
-	public void trefferPlatzieren(Position[] positionen){
+	/*public void trefferPlatzieren(Position[] positionen){
 		for(Position p: positionen){
 			getFeld(p.getPositonX(), p.getPositionY()).setFeldstatus(Feldstatus.GETROFFEN);
 		}
-	}
+	}*/
 	
 	/**
 	 * Gibt Anzahl der Plätze die auf dem Spielfeld von Schiffen belegt sind wieder.

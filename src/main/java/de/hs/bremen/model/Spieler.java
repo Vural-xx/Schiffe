@@ -1,5 +1,8 @@
 package de.hs.bremen.model;
 
+import de.hs.bremen.enums.Feldstatus;
+import helper.IO;
+
 /**
  * 
  * Klasse für Spieler.
@@ -92,6 +95,18 @@ public class Spieler {
 	public void createSpielfeld(int groesse){
 		spielfeld = new Spielfeld(groesse);
 		spielfeldPublic = new Spielfeld(groesse);
+	}
+	
+	public void trefferUebertragung(){
+		for(int i = 0; i<spielfeld.getFelder().length; i++){
+			for(int j = 0; j<spielfeld.getFelder()[i].length; j++){
+				if(spielfeld.getFelder()[i][j].getFeldstatus() != Feldstatus.WASSER 
+					&& spielfeld.getFelder()[i][j].getFeldstatus() != Feldstatus.BESETZT 
+					&& spielfeld.getFelder()[i][j].getFeldstatus() != spielfeldPublic.getFelder()[i][j].getFeldstatus()){
+						spielfeld.getFelder()[i][j].setFeldstatus(spielfeldPublic.getFelder()[i][j].getFeldstatus());
+				}
+			}
+		}
 	}
 
 }
