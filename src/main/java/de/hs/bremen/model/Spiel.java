@@ -203,8 +203,26 @@ public class Spiel {
 					spieler[i].getSpielfeld().printSpielfeld();
 					anzahlSchiffeGezeugt++;
 				}
-				
-			}while(anzahlSchiffeGezeugt != schiffe.size());			
+			}while(anzahlSchiffeGezeugt != schiffe.size());	
+			ArrayList<Schiff> tempArrayList = new ArrayList<Schiff>();
+			
+			for(int j = 0; j <schiffe.size(); j++){	
+				switch (schiffe.get(j).getName()) {
+					case "Fregatte":
+						tempArrayList.add(new Fregatte());
+						break;
+					case "Korvette":
+						tempArrayList.add(new Korvette());
+						break;
+					case "UBoot":
+						tempArrayList.add(new UBoot());
+						break;
+					default:
+						tempArrayList.add(new Zerstoerer());
+						break;
+					}
+			}
+			schiffe = tempArrayList;
 		}
 		
 		spielen();
@@ -224,6 +242,7 @@ public class Spiel {
 		int spalte;
 		Spieler gegner = null;
 		for(int i = 0; i < spieler.length; i++){
+			schiff = null;
 			System.out.println("Spieler " +spieler[i].getName()+". Bitte wählen Sie ein Schiff mit dem Sie feuern wollen.");
 			System.out.println(spieler[i].getSpielfeld().printSchiffeMenu());
 			auswahl = IO.readInt();
@@ -241,7 +260,7 @@ public class Spiel {
 			zeile = IO.readInt();
 			System.out.println(spieler[i].getName() +", Bitte geben Sie an in welche Spalte Sie schießen wollen");
 			spalte = IO.readInt();
-			schiff.feuern(new Position(zeile, spalte), spieler[0].getSpielfeld());
+			schiff.feuern(new Position(zeile, spalte), spieler[i].getSpielfeld());
 		}
 	}
 	
