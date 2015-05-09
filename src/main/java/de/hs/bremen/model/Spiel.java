@@ -349,11 +349,22 @@ public class Spiel {
 				}
 				
 			}else{
-				puffer.add(new Position(position.getPositonX()-1, position.getPositionY()-1));
-				puffer.add(new Position(position.getPositonX(), position.getPositionY()-1));
-				puffer.add(new Position(position.getPositonX()+1, position.getPositionY()-1));
-				puffer.add(new Position(position.getPositonX()-1, position.getPositionY()+1));
-				puffer.add(new Position(position.getPositonX()+1, position.getPositionY()+1));
+				if(i==0){
+					puffer.add(new Position(position.getPositonX()-1, position.getPositionY()-1));
+					puffer.add(new Position(position.getPositonX(), position.getPositionY()-1));
+					puffer.add(new Position(position.getPositonX()+1, position.getPositionY()-1));
+					puffer.add(new Position(position.getPositonX()-1, position.getPositionY()));
+					puffer.add(new Position(position.getPositonX()+1, position.getPositionY()));
+				} else if (i == positionen.length-1){
+					puffer.add(new Position(position.getPositonX()-1, position.getPositionY()));
+					puffer.add(new Position(position.getPositonX()-1, position.getPositionY()+1));
+					puffer.add(new Position(position.getPositonX(), position.getPositionY()+1));
+					puffer.add(new Position(position.getPositonX()+1, position.getPositionY()+1));
+					puffer.add(new Position(position.getPositonX()+1, position.getPositionY()));
+				}else{
+					puffer.add(new Position(position.getPositonX()-1, position.getPositionY()));
+					puffer.add(new Position(position.getPositonX()+1, position.getPositionY()));
+				}
 			}
 		}
 		if(spieler.getSpielfeld().getSchiffByPosition(puffer) != null){
