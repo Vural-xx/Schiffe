@@ -253,4 +253,15 @@ public class Spielfeld {
 		}
 		return null;
 	}
+	
+	public Schiff getSchiffByPosition(ArrayList<Position>position){
+		Schiff schiff = null;
+		for(int i = 0; i<position.size(); i++){
+			schiff = getSchiffByPosition(position.get(i));
+			if(schiff != null){
+				break;
+			}
+		}
+		return schiff;
+	}
 }

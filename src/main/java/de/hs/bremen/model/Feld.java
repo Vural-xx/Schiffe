@@ -22,17 +22,17 @@ public class Feld {
 	}
 	
 	public Position[] pufferZoneBerechnen(){
-		ArrayList<Position> nichtPlazierbar = new ArrayList<Position>();
-		nichtPlazierbar.add(position);
-		nichtPlazierbar.add(new Position(position.getPositonX()-1, position.getPositionY()-1));
-		nichtPlazierbar.add(new Position(position.getPositonX(), position.getPositionY()-1));
-		nichtPlazierbar.add(new Position(position.getPositonX()+1, position.getPositionY()-1));
-		nichtPlazierbar.add(new Position(position.getPositonX()+1, position.getPositionY()));
-		nichtPlazierbar.add(new Position(position.getPositonX()+1, position.getPositionY()+1));
-		nichtPlazierbar.add(new Position(position.getPositonX(), position.getPositionY()+1));
-		nichtPlazierbar.add(new Position(position.getPositonX()-1, position.getPositionY()+1));
-		nichtPlazierbar.add(new Position(position.getPositonX()-1, position.getPositionY()));
-		return (Position[]) nichtPlazierbar.toArray();
+		Position[] nichtPlazierbar = new Position[9];
+		nichtPlazierbar[0] = position;
+		nichtPlazierbar[1] = new Position(position.getPositonX()-1, position.getPositionY()-1);
+		nichtPlazierbar[2] = new Position(position.getPositonX(), position.getPositionY()-1);
+		nichtPlazierbar[3] = new Position(position.getPositonX()+1, position.getPositionY()-1);
+		nichtPlazierbar[4] = new Position(position.getPositonX()+1, position.getPositionY());
+		nichtPlazierbar[5] = new Position(position.getPositonX()+1, position.getPositionY()+1);
+		nichtPlazierbar[6] = new Position(position.getPositonX(), position.getPositionY()+1);
+		nichtPlazierbar[7] = new Position(position.getPositonX()-1, position.getPositionY()+1);
+		nichtPlazierbar[8] = new Position(position.getPositonX()-1, position.getPositionY());
+		return nichtPlazierbar;
 		
 	}
 

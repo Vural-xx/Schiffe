@@ -1,11 +1,17 @@
 package de.hs.bremen.model;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
 
 
+
+
+
+
+import java.util.Arrays;
 
 import de.hs.bremen.enums.Feldstatus;
 import helper.IO;
@@ -192,7 +198,7 @@ public class Spiel {
 				spalte = IO.readInt();
 				System.out.println(spieler[i].getName() +", Bitte geben Sie an ob ihr Schiff 1. Horizontal oder 2. Vertikal angeorndet werden soll");
 				ausrichtung = vertikalHorizontal(IO.readInt());
-				if (innerhalbSpielfeld(new Position(spalte, zeile)) == true){
+				if (innerhalbSpielfeld(new Position(spalte, zeile)) && schiffPlazierbar(schiffe.get(anzahlSchiffeGezeugt), new Position(spalte, zeile), spieler[i], ausrichtung)){
 					spieler[i].getSpielfeld().platziereSchiff(schiffe.get(anzahlSchiffeGezeugt), new Position(spalte, zeile), ausrichtung);
 					spieler[i].getSpielfeld().printSpielfeld();
 					anzahlSchiffeGezeugt++;
@@ -311,34 +317,53 @@ public class Spiel {
 	 * @param feldstatus
 	 * @param position
 	 */
-	public boolean schiffPlazierbar(Spieler spieler, Position position){
-		Feld [][] felder= spieler.getSpielfeld().getFelder();
-		for(int i = 0; i < felder.length; i++){
-			for(int j= 0; j < felder[i].length; j++){
-				Position[] positionen = felder[i][j].pufferZoneBerechnen();
-				for(Position p: positionen){
-					if(p.equals(position)){
-						return false;
-					}
-				}
+	
+	public boolean schiffPlazierbar(Schiff schiff, Position position, Spieler spieler, int horizontal){
+		Position[] positionen = new Position[schiff.getLaenge()];
+		positionen[0] = position;
+		for(int i = 1; i< positionen.length; i++){
+			if(horizontal ==1){
+				positionen[i] = new Position(position.getPositonX()+i, position.getPositionY());
+			}else{
+				positionen[i] = new Position(position.getPositonX(), position.getPositionY()+i);
 			}
 		}
-		return true;
-	}
-	
-	/**
-	 * Angabe, ob positionen innerhalb der Pufferzone eines anderen Schiff liegt
-	 * @param feldstatus
-	 * @param position
-	 */
-	public boolean schiffPlazierbar(Spieler spieler, Position[] positionen){
-		for(int i = 0; i<positionen.length; i++){
-			return schiffPlazierbar(spieler, positionen[i]);
+		ArrayList<Position> puffer = new ArrayList<Position>();
+		for(int i = 0; i< positionen.length; i++){
+			if(horizontal == 1){
+				if(i==0){
+					puffer.add(new Position(position.getPositonX()-1, position.getPositionY()+1));
+					puffer.add(new Position(position.getPositonX()-1, position.getPositionY()));
+					puffer.add(new Position(position.getPositonX()-1, position.getPositionY()-1));
+					puffer.add(new Position(position.getPositonX(), position.getPositionY()-1));
+					puffer.add(new Position(position.getPositonX(), position.getPositionY()+1));
+				} else if (i == positionen.length-1){
+					puffer.add(new Position(position.getPositonX()-1, position.getPositionY()-1));
+					puffer.add(new Position(position.getPositonX()+1, position.getPositionY()));
+					puffer.add(new Position(position.getPositonX()+1, position.getPositionY()+1));
+					puffer.add(new Position(position.getPositonX(), position.getPositionY()-1));
+					puffer.add(new Position(position.getPositonX(), position.getPositionY()+1));
+				}else{
+					puffer.add(new Position(position.getPositonX(), position.getPositionY()-1));
+					puffer.add(new Position(position.getPositonX(), position.getPositionY()+1));
+				}
+				
+			}else{
+				puffer.add(new Position(position.getPositonX()-1, position.getPositionY()-1));
+				puffer.add(new Position(position.getPositonX(), position.getPositionY()-1));
+				puffer.add(new Position(position.getPositonX()+1, position.getPositionY()-1));
+				puffer.add(new Position(position.getPositonX()-1, position.getPositionY()+1));
+				puffer.add(new Position(position.getPositonX()+1, position.getPositionY()+1));
+			}
 		}
-		return false;
+		if(spieler.getSpielfeld().getSchiffByPosition(puffer) != null){
+			System.out.println("Das Schiff darf hier nicht plaziert werden, bitte wählen Sie einen neuen Platz aus.");
+			return false;
+		}else{
+			return true;
+		}
 	}
-	
-	/**
+		/**
 	 * Willkommensmenü
 	 */
 	public void init(){
