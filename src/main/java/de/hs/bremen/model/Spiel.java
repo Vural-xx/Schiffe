@@ -1,6 +1,7 @@
 package de.hs.bremen.model;
 
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -21,7 +22,14 @@ import helper.IO;
  * @author vural
  *
  */
-public class Spiel {
+public class Spiel implements Serializable {
+	
+	
+	/**
+	 * SerialVersionUID zum Speichern und Lesen
+	 */
+	private static final long serialVersionUID = -4596970661321389454L;
+	
 	/**
 	 * Farben um die Konsolenausgabe farblich zu gestalten.
 	 */

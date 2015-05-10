@@ -1,5 +1,6 @@
 package de.hs.bremen.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +12,14 @@ import helper.IO;
  * @author vural
  *
  */
-public class Spielfeld {
+public class Spielfeld implements Serializable{
 	
+	/**
+	 * SerialVersionUID zum Speichern und Lesen
+	 */
+	private static final long serialVersionUID = 4330665548741900491L;
+
+
 	/**
 	 * Felder des Spielfelds.
 	 */

@@ -1,12 +1,19 @@
 package de.hs.bremen.model;
 
+import java.io.Serializable;
+
 
 /**
  * Klasse für die Position der einzelnen Teile eines Schiffes
  * @author vural
  *
  */
-public class Position {
+public class Position implements Serializable{
+	
+	/**
+	 * SerialVersionUID zum Speichern und Lesen
+	 */
+	private static final long serialVersionUID = 3473569011150075985L;
 	private int positonX;
 	private int positionY;
 	

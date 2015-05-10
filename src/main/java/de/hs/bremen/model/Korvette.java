@@ -8,6 +8,11 @@ package de.hs.bremen.model;
 public class Korvette extends Schiff {
  
 	/**
+	 * SerialVersionUID zum Speichern und Lesens
+	 */
+	private static final long serialVersionUID = 2772161333091514134L;
+
+	/**
 	 * Leerer Konstruktor.
 	 */
 	public Korvette(){

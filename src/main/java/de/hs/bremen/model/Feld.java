@@ -1,10 +1,16 @@
 package de.hs.bremen.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import de.hs.bremen.enums.Feldstatus;
 
-public class Feld {
+public class Feld implements Serializable{
+	
+	/**
+	 * SerialVersionUID zum Speichern und Lesen
+	 */
+	private static final long serialVersionUID = 3500625255490168961L;
 	private Position position;
 	private Feldstatus feldstatus;
 	
