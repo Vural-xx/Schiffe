@@ -328,12 +328,12 @@ public class Spiel implements Serializable {
 		spielstand = IO.readInt();
 		
 		Spiel spiel = opm.spielstandLaden(listOfFiles[spielstand-1].getName());
-		System.out.println("Geschafft");
-		
+	
 	}
 	
 	public void speicherMenu(){
 		int spielstand;
+		String spielstandName;
 		String saveMenu = "";
 		System.out.println("Bitte geben Sie an welchen Spielstand sie überschreiben oder neu schreiben möchten");
 		ObjectPersistenceManager opm = new ObjectPersistenceManager();
@@ -352,6 +352,19 @@ public class Spiel implements Serializable {
 		System.out.println(saveMenu);
 		spielstand = IO.readInt();
 		
+		System.out.println("Bitte geben Sie den Namen des Speicherstandes an");
+		spielstandName = IO.readString();
+		if(spielstand >= listOfFiles.length){
+			opm.spielstandSpeichern(this, spielstandName);
+		}else{
+			if(listOfFiles[spielstand-1].getName().equals(spielstandName)){
+				opm.spielstandSpeichern(this, spielstandName);
+			}else{
+				listOfFiles[spielstand-1].delete();
+				opm.spielstandSpeichern(this, spielstandName);
+			}
+		}
+		System.out.println("Ihr Spielstand wurde erfolgreich gespeichert");
 	}
 
 	
