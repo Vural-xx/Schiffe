@@ -208,7 +208,7 @@ public class Spielfeld implements Serializable{
 	
 	public Schiff getZustaendigesSchiff(int auswahl){
 		for(int i=0; i < schiffe.size(); i++){
-			if(getSchifftypByNumber(auswahl).equals(schiffe.get(i).getName()) && !schiffe.get(i).rundeAussetzen()){
+			if(getSchifftypByNumber(auswahl).equals(schiffe.get(i).getName())){
 				return schiffe.get(i);
 			}
 		}
