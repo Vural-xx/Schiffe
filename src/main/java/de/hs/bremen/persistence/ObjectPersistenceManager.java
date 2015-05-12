@@ -33,9 +33,9 @@ public class ObjectPersistenceManager implements PersistenceManager {
 		
 	}
 	
-	public void spielstandSpeichern(Spiel spiel){
+	public void spielstandSpeichern(Spiel spiel,String datenquelle){
 		try {
-			openForWriting("spiel");
+			openForWriting("src/temp/"+datenquelle);
 			outputStream.writeObject(spiel);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -52,10 +52,10 @@ public class ObjectPersistenceManager implements PersistenceManager {
 		}
 	}
 	
-	public Spiel spielstandLaden(){
+	public Spiel spielstandLaden(String datenquelle){
 		Spiel spiel = null;
 		try {
-			openForReading("spiel");
+			openForReading("src/temp/"+datenquelle);
 			spiel = (Spiel)inputStream.readObject();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -89,8 +89,8 @@ public class ObjectPersistenceManager implements PersistenceManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		pm.spielstandSpeichern(spiel);
-		Spiel geladenesSpiel = pm.spielstandLaden();
+		pm.spielstandSpeichern(spiel,"spiel");
+		Spiel geladenesSpiel = pm.spielstandLaden("spiel");
 		for(Spieler s: geladenesSpiel.getSpieler()){
 			System.out.println("Name - " + s.getName() );
 		}
