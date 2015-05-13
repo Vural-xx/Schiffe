@@ -1,5 +1,6 @@
 package de.hs.bremen.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +12,14 @@ import helper.IO;
  * @author vural
  *
  */
-public class Spielfeld {
+public class Spielfeld implements Serializable{
 	
+	/**
+	 * SerialVersionUID zum Speichern und Lesen
+	 */
+	private static final long serialVersionUID = 4330665548741900491L;
+
+
 	/**
 	 * Felder des Spielfelds.
 	 */
@@ -172,13 +179,13 @@ public class Spielfeld {
 	 * @return String
 	 */
 	public String printSchiffeMenu(){
-		String menu = "Bitte wählen Sie";
+		String menu = "Wählen Sie:    ";
 		List<String> bereitsDrin = new ArrayList<String>();
 				
 		for(Schiff s: schiffe){
 			if(!bereitsDrin.contains(s.getName()) && !s.rundeAussetzen()){
 				bereitsDrin.add(s.getName());
-				menu = menu + " "+ getAuswahlNummerByName(s.getName()) +" für "+ s.getName() +": || ";
+				menu = menu + " "+ getAuswahlNummerByName(s.getName()) +" für "+ s.getName() +" || ";
 			}
 			
 		}
@@ -201,7 +208,7 @@ public class Spielfeld {
 	
 	public Schiff getZustaendigesSchiff(int auswahl){
 		for(int i=0; i < schiffe.size(); i++){
-			if(getSchifftypByNumber(auswahl).equals(schiffe.get(i).getName()) && !schiffe.get(i).rundeAussetzen()){
+			if(getSchifftypByNumber(auswahl).equals(schiffe.get(i).getName())){
 				return schiffe.get(i);
 			}
 		}
@@ -230,6 +237,7 @@ public class Spielfeld {
 				for (int j = 0 ; j < felder[i].length; j++){
 					if(felder[i][j].getPosition().equals(position) && felder[i][j].getFeldstatus() == Feldstatus.WASSER){
 						felder[i][j].setFeldstatus(Feldstatus.VERFEHLT);
+						System.out.println ("Das Ziel wurde VERFEHLT");
 					}
 		         }
 		     }

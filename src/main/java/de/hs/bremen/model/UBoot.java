@@ -8,6 +8,12 @@ package de.hs.bremen.model;
 public class UBoot extends Schiff {
 	
 	/**
+	 * SerialVersionUID zum Speichern und Lesen
+	 */
+	private static final long serialVersionUID = -6692294187953020269L;
+
+
+	/**
 	 * Leerer Konstruktor.
 	 */
 	public UBoot(){

@@ -22,10 +22,5 @@ public interface PersistenceManager {
 	 */
 	public void openForWriting(String datenquelle) throws IOException;
 	
-	/**
-	 * Gibt an ob der Stream geschlossen wurde.
-	 * @return boolean 
-	 */
-	public boolean close();
 	
 }

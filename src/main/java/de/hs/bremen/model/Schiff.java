@@ -1,5 +1,6 @@
 package de.hs.bremen.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import de.hs.bremen.enums.Feldstatus;
@@ -10,8 +11,13 @@ import de.hs.bremen.enums.Feldstatus;
  * @author vural
  *
  */
-public abstract class Schiff {
+public abstract class Schiff implements Serializable {
 	
+	/**
+	 * SerialVersionUID zum Speichern und Lesen
+	 */
+	private static final long serialVersionUID = 2764743705897860936L;
+
 	/**
 	 * Felder auf denen sich das Schiff befindet.
 	 */

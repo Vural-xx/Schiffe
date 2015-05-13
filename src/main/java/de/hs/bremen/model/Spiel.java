@@ -1,6 +1,8 @@
 package de.hs.bremen.model;
 
 
+import java.io.File;
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import de.hs.bremen.enums.Feldstatus;
+import de.hs.bremen.persistence.ObjectPersistenceManager;
 import helper.IO;
 
 /**
@@ -21,7 +24,14 @@ import helper.IO;
  * @author vural
  *
  */
-public class Spiel {
+public class Spiel implements Serializable {
+	
+	
+	/**
+	 * SerialVersionUID zum Speichern und Lesen
+	 */
+	private static final long serialVersionUID = -4596970661321389454L;
+	
 	/**
 	 * Farben um die Konsolenausgabe farblich zu gestalten.
 	 */
@@ -99,7 +109,9 @@ public class Spiel {
 		if(anzahl <= maximaleSpieleranzahl && anzahl > 1){
 		spieler = new Spieler[anzahl];
 			for(int i = 1; i <= anzahl; i++){
+				System.out.println("----------------------------------------------------");
 				System.out.println("Spieler Nummer " +i+" bitte geben Sie ihren Namen an");
+				System.out.println("----------------------------------------------------");
 				name = IO.readString();
 				spieler[i-1] = new Spieler(name);
 			}
@@ -174,8 +186,20 @@ public class Spiel {
 	
 	public void spielen(){
 		// ToDo: richtige Bedingung implementieren
+		int i=1;
 		while(1<10){
+			System.out.println("");
+			System.out.println("");
+			System.out.println("-------------------------------------------------------------");
+			System.out.println("-------------------------------------------------------------");
+			System.out.println(ANSI_RED+"		||||  RUNDE BEGINNT: " + i +   "  ||||"+ANSI_RESET);
+			System.out.println("-------------------------------------------------------------");
+			System.out.println("-------------------------------------------------------------");
+			System.out.println("");
+			System.out.println("");
+			i=i+1;
 			rundeSpielen();
+			
 		}
 	}
 	
@@ -187,8 +211,15 @@ public class Spiel {
 		Spieler gegner = null;
 		for(int i = 0; i < spieler.length; i++){
 			schiff = null;
+			System.out.println("-------------------------------");
+			System.out.println(ANSI_BLUE+ "SPIELER " +spieler[i].getName()+" IST DRAN:" + ANSI_RESET);
+			System.out.println("-------------------------------");
+			System.out.println("");
 			System.out.println("Spieler " +spieler[i].getName()+". Bitte wählen Sie ein Schiff mit dem Sie feuern wollen.");
+			System.out.println("--------------------------------------------------------------------------");
+			
 			System.out.println(spieler[i].getSpielfeld().printSchiffeMenu());
+			System.out.println("--------------------------------------------------------------------------");
 			auswahl = IO.readInt();
 			schiff = spieler[i].getSpielfeld().getZustaendigesSchiff(auswahl);
 			if(spieler.length > 2){
@@ -198,16 +229,41 @@ public class Spiel {
 			}else{
 				gegner = spieler[0];
 			}
+			System.out.println("--------------------------------------");
+			System.out.println(ANSI_PURPLE+"ÜBERSICHTS FELD VON SPIELER: " + spieler[i].getName() + " AUF SPIELER: " + spieler[i].getName()+ANSI_RESET);
+			System.out.println("--------------------------------------");
+			System.out.println("");
+			System.out.println("");
 			gegner.getSpielfeldPublic().printSpielfeld();
-			System.out.println(spieler[i].getName() +",Bitte geben Sie an wo Sie einen Schuß platzieren wollen");
-			System.out.println(spieler[i].getName() +", Bitte geben Sie an in welche Zeile sie schießen wollen");
+			System.out.println("");
+			System.out.println("--------------------------");
+			System.out.println("|| "+spieler[i].getName() +" SCHIEßEN !!! ||");
+			System.out.println("--------------------------");
+			System.out.println("");
+			System.out.println("----------------------------------------------------------------");
+			System.out.println(spieler[i].getName() +", , in welcher ZEILE soll geschossen werden?");
+			System.out.println("----------------------------------------------------------------");
 			zeile = IO.readInt();
-			System.out.println(spieler[i].getName() +", Bitte geben Sie an in welche Spalte Sie schießen wollen");
+			System.out.println("----------------------------------------------------------------");
+			System.out.println(spieler[i].getName() +", , in welcher SPALTE soll geschossen werden?");
+			System.out.println("----------------------------------------------------------------");
 			spalte = IO.readInt();
 			schiff.feuern(new Position(zeile, spalte), gegner.getSpielfeldPublic());
-			spieler[i].trefferUebertragung();	
+			spieler[i].trefferUebertragung();
+			// Wartezeit
+			for(int j=1; j<=4;j++){
+				Schiff wartezeitResetSchiff=spieler[i].getSpielfeld().getZustaendigesSchiff(j);
+				if(wartezeitResetSchiff != null){
+					if(wartezeitResetSchiff.getWartezeit()!= 0){
+						wartezeitResetSchiff.setWartezeit(wartezeitResetSchiff.getWartezeit()-1);
+					}
+				}
+				schiff.setWartezeit(schiff.getFeuerstaerke());
+			}
 		}
+			
 	}
+	
 	
 	
 	/**
@@ -284,11 +340,16 @@ public class Spiel {
 	
 	public void menueSchiffartAuswahl(){
 		do{
+			System.out.println("--------------");
+			System.out.println("|| SCHIFFE: ||");
+			System.out.println("--------------");
 			System.out.println("Bitte geben Sie an was für eine Art von Schiff auf dem Spielfeld platziert werden soll.");
 			System.out.println("[1 für "+ Spiel.ANSI_PURPLE + "Zerstörer" +Spiel.ANSI_RESET+ ", 2 für "+ Spiel.ANSI_YELLOW + "Fregatte" +Spiel.ANSI_RESET+", 3 für "+ Spiel.ANSI_RED + "Korvette" +Spiel.ANSI_RESET+  ", 4 für "+ Spiel.ANSI_GREEN + "Uboot" +Spiel.ANSI_RESET+ ", 5 keine weiteren]");
 			schiffTyp = schiffeAuswahlGueltig(IO.readInt());
 			if(schiffTyp !=5){
-				System.out.println("Wieviele Schiffe von dem Schifftyp " + schiffeAuswahl(schiffTyp).getName()+" sollen gesetzt werden");
+				System.out.println("---------------------------------------------------------------------------------------");
+				System.out.println("Wieviele Schiffe von dem Schifftyp " + schiffeAuswahl(schiffTyp).getName()+" sollen gesetzt werden?");
+				System.out.println("---------------------------------------------------------------------------------------");
 				anzahlSchiffe = IO.readInt();
 				if (anzahlSchiffePassend(spieler[0],schiffeAuswahl(schiffTyp), anzahlSchiffe)){
 					for(int i= 0 ; i < anzahlSchiffe; i++){
@@ -302,18 +363,84 @@ public class Spiel {
 		
 	}
 	
+	public void ladeMenu(){
+		int spielstand;
+		String ladeMenu = "";
+		System.out.println("Bitte geben Sie an welchen Spielstand Sie laden möchten.");
+		ObjectPersistenceManager opm = new ObjectPersistenceManager();
+		File folder = new File("src/temp");
+		File[] listOfFiles = folder.listFiles();
+		
+		for(int i = 0; i < listOfFiles.length; i++){
+			ladeMenu = ladeMenu +"Stand " +(i+1)+ ": " + listOfFiles[i].getName()+ " \t";
+		}
+		System.out.println(ladeMenu);
+		spielstand = IO.readInt();
+		
+		Spiel spiel = opm.spielstandLaden(listOfFiles[spielstand-1].getName());
+	
+	}
+	
+	public void speicherMenu(){
+		int spielstand;
+		String spielstandName;
+		String saveMenu = "";
+		System.out.println("Bitte geben Sie an welchen Spielstand sie überschreiben oder neu schreiben möchten");
+		ObjectPersistenceManager opm = new ObjectPersistenceManager();
+		File folder = new File("src/temp");
+		File[] listOfFiles = folder.listFiles();
+		
+		for(int i = 0; i < listOfFiles.length; i++){
+			saveMenu = saveMenu +"Stand " +(i+1)+ ": " + listOfFiles[i].getName()+ " \t";
+		}
+		
+		if(listOfFiles.length< 4){
+			for(int i = listOfFiles.length; i < 4; i++){
+				saveMenu = saveMenu +"Stand " +(i+1)+ ": LEER \t";
+			}
+		}
+		System.out.println(saveMenu);
+		spielstand = IO.readInt();
+		
+		System.out.println("Bitte geben Sie den Namen des Speicherstandes an");
+		spielstandName = IO.readString();
+		if(spielstand >= listOfFiles.length){
+			opm.spielstandSpeichern(this, spielstandName);
+		}else{
+			if(listOfFiles[spielstand-1].getName().equals(spielstandName)){
+				opm.spielstandSpeichern(this, spielstandName);
+			}else{
+				listOfFiles[spielstand-1].delete();
+				opm.spielstandSpeichern(this, spielstandName);
+			}
+		}
+		System.out.println("Ihr Spielstand wurde erfolgreich gespeichert");
+	}
+
 	
 	public void schiffeAufFeldSetzen(){
 		for (int i = 0 ; i< spieler.length; i++){		
 			anzahlSchiffeGezeugt = 0;		 
-			do {				
-				System.out.println(spieler[i].getName() +",Bitte geben Sie an wo Sie " +schiffe.get(anzahlSchiffeGezeugt).getName()+ " auf ihrem Spielfeld platzieren wollen.");
-				System.out.println(spieler[i].getName() +", Bitte geben Sie an in welcher Zeile ihr Schiff platziert werden soll");
+			do {
+				System.out.println("-------------------");
+				System.out.println("SCHIFFE PLATZIEREN:");
+				System.out.println("-------------------");
+				System.out.println("");
+				System.out.println("");
+				System.out.println(spieler[i].getName() +", bitte geben Sie an wo Sie " +schiffe.get(anzahlSchiffeGezeugt).getName()+ " auf ihrem Spielfeld platzieren wollen.");
+				System.out.println("--------------------------------------------------------------------------");
+				System.out.println(spieler[i].getName() +", in welcher ZEILE soll das Schiff platziert werden?");
+				System.out.println("--------------------------------------------------------------------------");
 				zeile = IO.readInt();
-				System.out.println(spieler[i].getName() +", Bitte geben Sie an in welcher Spalte ihr Schiff platziert werden soll");
+				System.out.println("--------------------------------------------------------------------------");
+				System.out.println(spieler[i].getName() +", in welcher SPALTE soll das Schiff plaziert werden?");
+				System.out.println("--------------------------------------------------------------------------");
 				spalte = IO.readInt();
 				System.out.println(spieler[i].getName() +", Bitte geben Sie an ob ihr Schiff 1. Horizontal oder 2. Vertikal angeorndet werden soll");
 				ausrichtung = vertikalHorizontal(IO.readInt());
+				System.out.println("--------------------------------------------------------------");
+				System.out.println("|||| SPIELFELD VON SPIELER: " + spieler[i].getName() + " ||||");
+				System.out.println("--------------------------------------------------------------");
 				if (innerhalbSpielfeld(new Position(spalte, zeile)) && schiffPlazierbar(schiffe.get(anzahlSchiffeGezeugt), new Position(spalte, zeile), spieler[i], ausrichtung)){
 					spieler[i].getSpielfeld().platziereSchiff(schiffe.get(anzahlSchiffeGezeugt), new Position(spalte, zeile), ausrichtung);
 					spieler[i].getSpielfeld().printSpielfeld();
@@ -403,11 +530,17 @@ public class Spiel {
 	 */
 	public void init(){
 		int groesse;
-		System.out.println("Willkommen bei Schiffe versenken!");
+		System.out.println("---------------------------------------");
+		System.out.println("|| Willkommen bei Schiffe versenken! ||");
+		System.out.println("---------------------------------------");
 		System.out.println("Bitte geben Sie zunächst die Anzahl der Spieler an (2-6 Spieler):");
 		createSpieler(IO.readInt());
+		System.out.println("-----------------");
+		System.out.println("|| SPIELFELD: ||");
+		System.out.println("-----------------");
 		System.out.println("Einigen Sie sich nun bitte auf eine Größe ihres quadratischen Spielfelder (Mindestens 20x20 Felder groß)");
 		System.out.println("Wie groß soll ihr Spielfeld sein?");
+		System.out.println("---------------------------------");
 		groesse = IO.readInt();
 		createSpielfelder(groesse);
 		schiffePlatzieren();
@@ -416,7 +549,7 @@ public class Spiel {
 	
 	public static void main(String[] args){
 		Spiel spiel = new Spiel();
-		spiel.init();	
+		spiel.init();
 	}
 	
 

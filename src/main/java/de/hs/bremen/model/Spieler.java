@@ -1,5 +1,7 @@
 package de.hs.bremen.model;
 
+import java.io.Serializable;
+
 import de.hs.bremen.enums.Feldstatus;
 import helper.IO;
 
@@ -9,7 +11,13 @@ import helper.IO;
  * @author vural
  *
  */
-public class Spieler {
+public class Spieler implements Serializable {
+
+	/**
+	 * SerialVersionUID zum Speichern und Lesen
+	 */
+	private static final long serialVersionUID = 3960254885515461884L;
+
 
 	/**
 	 * Name des Spielers.
@@ -114,6 +122,7 @@ public class Spieler {
 						spielfeld.getFelder()[i][j].setFeldstatus(spielfeldPublic.getFelder()[i][j].getFeldstatus());
 				}else if(spielfeldPublic.getFelder()[i][j].getFeldstatus() == Feldstatus.VERFEHLT && spielfeld.getFelder()[i][j].getFeldstatus() == Feldstatus.BESETZT){
 					spielfeldPublic.getFelder()[i][j].setFeldstatus(Feldstatus.GETROFFEN);
+					System.out.println("Das Ziel wurde getroffen");
 				}
 			}
 		}
