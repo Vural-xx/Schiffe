@@ -112,6 +112,8 @@ public class Spieler {
 					&& spielfeld.getFelder()[i][j].getFeldstatus() != Feldstatus.BESETZT 
 					&& spielfeld.getFelder()[i][j].getFeldstatus() != spielfeldPublic.getFelder()[i][j].getFeldstatus()){
 						spielfeld.getFelder()[i][j].setFeldstatus(spielfeldPublic.getFelder()[i][j].getFeldstatus());
+				}else if(spielfeldPublic.getFelder()[i][j].getFeldstatus() == Feldstatus.VERFEHLT && spielfeld.getFelder()[i][j].getFeldstatus() == Feldstatus.BESETZT){
+					spielfeldPublic.getFelder()[i][j].setFeldstatus(Feldstatus.GETROFFEN);
 				}
 			}
 		}

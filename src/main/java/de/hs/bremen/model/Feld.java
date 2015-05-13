@@ -25,11 +25,11 @@ public class Feld {
 		if(getFeldstatus()==Feldstatus.WASSER){
 			return Spiel.ANSI_BLUE+"~" + Spiel.ANSI_RESET;
 		} else if(getFeldstatus()== Feldstatus.GETROFFEN){
-			return Spiel.ANSI_RED+"x" + Spiel.ANSI_RESET;
+			return Spiel.ANSI_RED+"T" + Spiel.ANSI_RESET;
 		} else if (getFeldstatus()==Feldstatus.BESETZT){
-			return Spiel.ANSI_CYAN+"s" + Spiel.ANSI_RESET;
-		} else{
-			return Spiel.ANSI_BLACK+"x" + Spiel.ANSI_RESET;
+			return Spiel.ANSI_CYAN+"S" + Spiel.ANSI_RESET;
+		} else {
+			return Spiel.ANSI_BLACK+"X" + Spiel.ANSI_RESET;
 		}
 	}
 	public Feldstatus getFeldstatus() {

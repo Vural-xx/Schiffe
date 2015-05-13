@@ -198,15 +198,14 @@ public class Spiel {
 			}else{
 				gegner = spieler[0];
 			}
-			spieler[i].getSpielfeldPublic().printSpielfeld();
+			gegner.getSpielfeldPublic().printSpielfeld();
 			System.out.println(spieler[i].getName() +",Bitte geben Sie an wo Sie einen Schuß platzieren wollen");
 			System.out.println(spieler[i].getName() +", Bitte geben Sie an in welche Zeile sie schießen wollen");
 			zeile = IO.readInt();
 			System.out.println(spieler[i].getName() +", Bitte geben Sie an in welche Spalte Sie schießen wollen");
 			spalte = IO.readInt();
-			schiff.feuern(new Position(zeile, spalte), spieler[i].getSpielfeldPublic());
-			spieler[i].trefferUebertragung();
-			
+			schiff.feuern(new Position(zeile, spalte), gegner.getSpielfeldPublic());
+			spieler[i].trefferUebertragung();	
 		}
 	}
 	
