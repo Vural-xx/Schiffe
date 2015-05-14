@@ -230,7 +230,7 @@ public class Spiel implements Serializable {
 				gegner = spieler[0];
 			}
 			System.out.println("--------------------------------------");
-			System.out.println(ANSI_PURPLE+"ÜBERSICHTS FELD VON SPIELER: " + spieler[i].getName() + " AUF SPIELER: " + spieler[i].getName()+ANSI_RESET);
+			System.out.println(ANSI_PURPLE+"ÜBERSICHTS FELD VON SPIELER: " + spieler[i].getName() + " AUF SPIELER: " + gegner.getName()+ANSI_RESET);
 			System.out.println("--------------------------------------");
 			System.out.println("");
 			System.out.println("");
