@@ -104,6 +104,15 @@ public class Spieler implements Serializable {
 		this.ausgeschieden = ausgeschieden;
 	}
 	
+	public boolean schiffeOhneWartezeit(){
+		for(int i=0; i< getSpielfeld().getSchiffe().size(); i++){
+			if(getSpielfeld().getSchiffe().get(i).getWartezeit() == 0){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * Quadratisches Spielfeld, wird für diesen Spieler initiliasiert.
 	 * @param groesse: Größe, die das quadratische Spielfeld sein soll.
