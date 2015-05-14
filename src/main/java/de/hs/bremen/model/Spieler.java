@@ -130,7 +130,7 @@ public class Spieler implements Serializable {
 			getSpielfeld().getSchiffe().remove(schiff);
 			System.out.println("");
 			System.out.println(Spiel.ANSI_PURPLE +"-----------------------------------------------");
-			System.out.println("||||   Sie haben das Schiff "+ schiff.getName().toUpperCase() + " vom Spieler " + getName() + " Versenkt!!!!   ||||");
+			System.out.println("||||   Sie haben das Schiff "+ schiff.getName().toUpperCase() + " vom Spieler " + getName() + " versenkt!!!!   ||||");
 			System.out.println("-----------------------------------------------"+Spiel.ANSI_RESET);
 		}	
 	}
@@ -146,11 +146,11 @@ public class Spieler implements Serializable {
 				if(spielfeldPublic.getFelder()[i][j].getFeldstatus() == Feldstatus.VERFEHLT && spielfeld.getFelder()[i][j].getFeldstatus() == Feldstatus.BESETZT){
 					spielfeldPublic.getFelder()[i][j].setFeldstatus(Feldstatus.GETROFFEN);
 					spielfeld.getFelder()[i][j].setFeldstatus(Feldstatus.GETROFFEN);
-					System.out.println("Das Ziel wurde getroffen");
+					System.out.println(Spiel.ANSI_GREEN+"DAS ZIEL WURDE GETROFFEN!!"+Spiel.ANSI_RESET);
 					schiffVersenkt(new Position(j+1, i+1));	
 				}else if (spielfeldPublic.getFelder()[i][j].getFeldstatus() == Feldstatus.VERFEHLT && spielfeld.getFelder()[i][j].getFeldstatus() == Feldstatus.WASSER){
 					spielfeld.getFelder()[i][j].setFeldstatus(Feldstatus.VERFEHLT);
-					System.out.println ("Das Ziel wurde verfehlt");
+					System.out.println (Spiel.ANSI_RED+"DAS ZIEL WURDE VERFEHLT!!"+Spiel.ANSI_RESET);
 				}
 				
 				/*if(spielfeld.getFelder()[i][j].getFeldstatus() != Feldstatus.WASSER 

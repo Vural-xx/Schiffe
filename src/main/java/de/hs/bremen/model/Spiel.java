@@ -1,6 +1,7 @@
 package de.hs.bremen.model;
 
 
+import java.awt.Label;
 import java.io.File;
 import java.io.Serializable;
 import java.lang.reflect.Array;
@@ -228,7 +229,7 @@ public class Spiel implements Serializable {
 		for(int i = 0; i < spieler.length; i++){
 			schiff = null;
 			System.out.println("-------------------------------");
-			System.out.println(ANSI_BLUE+ "SPIELER " +spieler[i].getName()+" IST DRAN:" + ANSI_RESET);
+			System.out.println(ANSI_BLUE+ "SPIELER "+ANSI_RESET  +  spieler[i].getName()+ANSI_BLUE+" IST DRAN:" + ANSI_RESET);
 			System.out.println("-------------------------------");
 			System.out.println("");
 			if(spieler[i].schiffeOhneWartezeit()){
@@ -257,22 +258,23 @@ public class Spiel implements Serializable {
 				System.out.println("--------------------------");
 				System.out.println("");
 				System.out.println("----------------------------------------------------------------");
-				System.out.println(spieler[i].getName() +", , in welcher ZEILE soll geschossen werden?");
+				System.out.println(spieler[i].getName() +", , in welcher ZEILE soll geschossen werden? (Y-Achse)");
 				System.out.println("----------------------------------------------------------------");
 				zeile = IO.readInt();
 				System.out.println("----------------------------------------------------------------");
-				System.out.println(spieler[i].getName() +", , in welcher SPALTE soll geschossen werden?");
+				System.out.println(spieler[i].getName() +" , in welcher SPALTE soll geschossen werden? (X-Achse)");
 				System.out.println("----------------------------------------------------------------");
 				spalte = IO.readInt();
+				System.out.println("");
 				schiff.feuern(new Position(spalte, zeile), gegner.getSpielfeldPublic());
 				gegner.trefferUebertragung();
+				System.out.println("");
 						
 			} else {
 				System.out.println("");
 				System.out.println("");
 				System.out.println(ANSI_RED+"---------------------------------------------------------------"+ANSI_RESET);
 				System.out.println(ANSI_RED+"		DU HAST KEIN SCHIFF ZUR VERFÜGUNG		"+ANSI_RESET);
-				System.out.println(ANSI_RED+"			   AUSSETZEN			  "+ANSI_RESET);
 				System.out.println(ANSI_RED+"---------------------------------------------------------------"+ANSI_RESET);
 				System.out.println("");
 				System.out.println("");
@@ -450,19 +452,23 @@ public class Spiel implements Serializable {
 		for (int i = 0 ; i< spieler.length; i++){		
 			anzahlSchiffeGezeugt = 0;		 
 			do {
-				System.out.println("-------------------");
-				System.out.println("SCHIFFE PLATZIEREN:");
-				System.out.println("-------------------");
+				System.out.println("");
+				System.out.println("");
+				System.out.println(ANSI_PURPLE+"--------------------------------------");
+				System.out.println("--------------------------------------");
+				System.out.println("   SPIELER: " +ANSI_RESET+ spieler[i].getName().toUpperCase()+ANSI_PURPLE+" SCHIFFE PLATZIEREN:");
+				System.out.println("--------------------------------------");
+				System.out.println("--------------------------------------"+ANSI_RESET);
 				System.out.println("");
 				System.out.println("");
 				System.out.println(spieler[i].getName() +", bitte geben Sie an wo Sie " +schiffe.get(anzahlSchiffeGezeugt).getName()+ " auf ihrem Spielfeld platzieren wollen.");
-				System.out.println("--------------------------------------------------------------------------");
-				System.out.println(spieler[i].getName() +", in welcher ZEILE soll das Schiff platziert werden?");
-				System.out.println("--------------------------------------------------------------------------");
+				System.out.println(ANSI_GREEN+"--------------------------------------------------------------------------"+ANSI_RESET);
+				System.out.println(spieler[i].getName() +", in welcher ZEILE soll das Schiff platziert werden? (Y-Achse)");
+				System.out.println(ANSI_GREEN+"--------------------------------------------------------------------------"+ANSI_RESET);
 				zeile = IO.readInt();
-				System.out.println("--------------------------------------------------------------------------");
-				System.out.println(spieler[i].getName() +", in welcher SPALTE soll das Schiff plaziert werden?");
-				System.out.println("--------------------------------------------------------------------------");
+				System.out.println(ANSI_GREEN+"--------------------------------------------------------------------------"+ANSI_RESET);
+				System.out.println(spieler[i].getName() +", in welcher SPALTE soll das Schiff plaziert werden? (X-Achse)");
+				System.out.println(ANSI_GREEN+"--------------------------------------------------------------------------"+ANSI_RESET);
 				spalte = IO.readInt();
 				System.out.println(spieler[i].getName() +", Bitte geben Sie an ob ihr Schiff 1. Horizontal oder 2. Vertikal angeorndet werden soll");
 				ausrichtung = vertikalHorizontal(IO.readInt());
