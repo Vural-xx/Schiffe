@@ -233,17 +233,12 @@ public class Spielfeld implements Serializable{
 	}	
 	
 	public void feuerPlatzieren(Position position){
-		Schiff schiff = getSchiffByPosition(position);
-		if(schiff != null && schiff.getroffen(position)){
-			System.out.println("Sie haben das Schiff " +schiff.getName()+ " getroffen");
-		}else{
-			for(int i = 0 ; i < felder.length; i++){
-				for (int j = 0 ; j < felder[i].length; j++){
-					if(felder[i][j].getPosition().equals(position) && felder[i][j].getFeldstatus() == Feldstatus.WASSER){
+		for(int i = 0 ; i < felder.length; i++){
+			for (int j = 0 ; j < felder[i].length; j++){
+				if(felder[i][j].getPosition().equals(position) && felder[i][j].getFeldstatus() == Feldstatus.WASSER){
 						felder[i][j].setFeldstatus(Feldstatus.VERFEHLT);
-					}
-		         }
-		     }
+				}
+		    }
 		}
 	}
 	

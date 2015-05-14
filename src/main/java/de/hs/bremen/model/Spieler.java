@@ -116,16 +116,25 @@ public class Spieler implements Serializable {
 	public void trefferUebertragung(){
 		for(int i = 0; i<spielfeld.getFelder().length; i++){
 			for(int j = 0; j<spielfeld.getFelder()[i].length; j++){
-				if(spielfeld.getFelder()[i][j].getFeldstatus() != Feldstatus.WASSER 
+				if(spielfeldPublic.getFelder()[i][j].getFeldstatus() == Feldstatus.VERFEHLT && spielfeld.getFelder()[i][j].getFeldstatus() == Feldstatus.BESETZT){
+					spielfeldPublic.getFelder()[i][j].setFeldstatus(Feldstatus.GETROFFEN);
+					spielfeld.getFelder()[i][j].setFeldstatus(Feldstatus.GETROFFEN);
+					System.out.println("Das Ziel wurde getroffen");
+				}else if (spielfeldPublic.getFelder()[i][j].getFeldstatus() == Feldstatus.VERFEHLT && spielfeld.getFelder()[i][j].getFeldstatus() == Feldstatus.WASSER){
+					spielfeld.getFelder()[i][j].setFeldstatus(Feldstatus.VERFEHLT);
+					System.out.println ("Das Ziel wurde verfehlt");
+				}
+				
+				/*if(spielfeld.getFelder()[i][j].getFeldstatus() != Feldstatus.WASSER 
 					&& spielfeld.getFelder()[i][j].getFeldstatus() != Feldstatus.BESETZT 
 					&& spielfeld.getFelder()[i][j].getFeldstatus() != spielfeldPublic.getFelder()[i][j].getFeldstatus()){
 						spielfeld.getFelder()[i][j].setFeldstatus(spielfeldPublic.getFelder()[i][j].getFeldstatus());
-				}else if(spielfeldPublic.getFelder()[i][j].getFeldstatus() == Feldstatus.VERFEHLT && spielfeld.getFelder()[i][j].getFeldstatus() == Feldstatus.BESETZT){
+				}/*else if(spielfeld.getFelder()[i][j].getFeldstatus() == Feldstatus.VERFEHLT && spielfeld.getFelder()[i][j].getFeldstatus() == Feldstatus.BESETZT){
 					spielfeldPublic.getFelder()[i][j].setFeldstatus(Feldstatus.GETROFFEN);
 					System.out.println("Das Ziel wurde getroffen");
 				}else if (spielfeld.getFelder()[i][j].getFeldstatus() == Feldstatus.VERFEHLT){
 					System.out.println ("Das Ziel wurde VERFEHLT");
-				}
+				}*/
 			}
 		}
 	}

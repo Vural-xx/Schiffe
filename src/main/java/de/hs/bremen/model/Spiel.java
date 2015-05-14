@@ -249,7 +249,7 @@ public class Spiel implements Serializable {
 			System.out.println("----------------------------------------------------------------");
 			spalte = IO.readInt();
 			schiff.feuern(new Position(zeile, spalte), gegner.getSpielfeldPublic());
-			spieler[i].trefferUebertragung();
+			gegner.trefferUebertragung();
 			// Wartezeit
 			for(int j=0; j< spieler[i].getSpielfeld().getSchiffe().size();j++){
 				Schiff wartezeitResetSchiff=spieler[i].getSpielfeld().getSchiffe().get(j);
