@@ -111,7 +111,7 @@ public class Spiel implements Serializable {
 		spieler = new Spieler[anzahl];
 			for(int i = 1; i <= anzahl; i++){
 				System.out.println("----------------------------------------------------");
-				System.out.println("Spieler Nummer " +i+" bitte geben Sie ihren Namen an");
+				System.out.println("Spieler Nummer " +i+" bitte geben Sie ihren Namen an:");
 				System.out.println("----------------------------------------------------");
 				name = IO.readString();
 				spieler[i-1] = new Spieler(name);
@@ -209,6 +209,12 @@ public class Spiel implements Serializable {
 				if(!spieler[j].ausgeschieden()){
 					tempSpieler.add(spieler[j]);
 					
+				}else {
+					System.out.println(ANSI_RED+"==============================");
+					System.out.println("   "+spieler[j].getName()+" IST AUSGESCHIEDEN!!");
+					System.out.println(ANSI_RED+"=============================="+ANSI_RESET);
+					System.out.println("");
+					System.out.println("");
 				}
 			}
 			if(tempSpieler.size() != spieler.length){
@@ -217,13 +223,13 @@ public class Spiel implements Serializable {
 				
 			}
 		}
-		System.out.println(ANSI_CYAN+"-------------------------------------------------------"+ANSI_RESET);
+		System.out.println(ANSI_CYAN+"======================================================="+ANSI_RESET);
 		System.out.println(ANSI_GREEN+"|||||||||||||||||||||||||||||||||||||||||||||||||||||||"+ANSI_RESET);
-		System.out.println(ANSI_PURPLE+"-------------------------------------------------------"+ANSI_RESET);
+		System.out.println(ANSI_PURPLE+"======================================================="+ANSI_RESET);
 		System.out.println("		Spieler " + spieler[0].getName().toUpperCase() + " hat gewonnen!!!!!!");
-		System.out.println(ANSI_RED+"-------------------------------------------------------"+ANSI_RESET);
+		System.out.println(ANSI_RED+"======================================================="+ANSI_RESET);
 		System.out.println(ANSI_YELLOW+"|||||||||||||||||||||||||||||||||||||||||||||||||||||||"+ANSI_RESET);
-		System.out.println(ANSI_BLUE+"-------------------------------------------------------"+ANSI_RESET);
+		System.out.println(ANSI_BLUE+"======================================================="+ANSI_RESET);
 	}
 	
 	public void rundeSpielen(){
@@ -234,9 +240,9 @@ public class Spiel implements Serializable {
 		Spieler gegner = null;
 		for(int i = 0; i < spieler.length; i++){
 			schiff = null;
-			System.out.println("-------------------------------");
-			System.out.println(ANSI_BLUE+ "SPIELER "+ANSI_RESET  +  spieler[i].getName()+ANSI_BLUE+" IST DRAN:" + ANSI_RESET);
-			System.out.println("-------------------------------");
+			System.out.println("===============================");
+			System.out.println(ANSI_BLUE+ "|| Spieler "+ANSI_RESET  +  spieler[i].getName()+ANSI_BLUE+" ist dran: ||" + ANSI_RESET);
+			System.out.println("===============================");
 			System.out.println("");
 			if(spieler[i].schiffeOhneWartezeit()){
 				System.out.println("Spieler " +spieler[i].getName()+". Bitte wählen Sie ein Schiff mit dem Sie feuern wollen.");
@@ -260,7 +266,7 @@ public class Spiel implements Serializable {
 				gegner.getSpielfeldPublic().printSpielfeld();
 				System.out.println("");
 				System.out.println("--------------------------");
-				System.out.println("|| "+spieler[i].getName() +" SCHIEßEN !!! ||");
+				System.out.println("  || "+spieler[i].getName() +" SCHIEßEN !!! ||");
 				System.out.println("--------------------------");
 				System.out.println("");
 				System.out.println("----------------------------------------------------------------");
@@ -467,8 +473,10 @@ public class Spiel implements Serializable {
 				System.out.println("--------------------------------------"+ANSI_RESET);
 				System.out.println("");
 				System.out.println("");
-				System.out.println(schiffe.get(anzahlSchiffeGezeugt).getName().toUpperCase()+ANSI_GREEN+ " auf das Spiefeld platzieren"+ANSI_RESET);
-				System.out.println(ANSI_GREEN+"--------------------------------------------------------------------------"+ANSI_RESET);
+				System.out.println("----------------------------");
+				System.out.println("|| "+schiffe.get(anzahlSchiffeGezeugt).getName().toUpperCase()+ANSI_GREEN+ " platzieren: "+ANSI_RESET+ "||" );
+				System.out.println("----------------------------");
+				System.out.println("");
 				System.out.println(spieler[i].getName() +", in welcher ZEILE soll das Schiff platziert werden? (Y-Achse)");
 				System.out.println(ANSI_GREEN+"--------------------------------------------------------------------------"+ANSI_RESET);
 				zeile = IO.readInt();
@@ -576,6 +584,32 @@ public class Spiel implements Serializable {
 		System.out.println("---------------------------------------");
 		System.out.println("|| Willkommen bei Schiffe versenken! ||");
 		System.out.println("---------------------------------------");
+		System.out.println("Info:");
+		System.out.println("Die Schiffe haben folgende Werte:");
+		System.out.println("Zerstörer : Länge: 5 | Feuerstärke: 3");
+		System.out.println("Fregatte :  Länge: 4 | Feuerstärke: 2");
+		System.out.println("Korvette :  Länge: 3 | Feuerstärke: 1");
+		System.out.println("Uboot :     Länge: 2 | Feuerstärke: 1");
+		System.out.println("");
+		System.out.println("MERKE: Die Schiffe schießen nur HORIZONTAL");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("Gewonnen hat der Spieler der als letztes noch ein Schiff auf dem Spielfeld hat.");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("VIEL SPAß!");
+		System.out.println("------------------------------------------------------------");
+		System.out.println("------------------------------------------------------------");
+		System.out.println("");
+		System.out.println(ANSI_GREEN+"		-------------------------------------");
+		System.out.println("			   DAS SPIEL BEGINNT		");
+		System.out.println("		-------------------------------------"+ANSI_RESET);
+		System.out.println("");
+		System.out.println("");
+		System.out.println("--------------------");
+		System.out.println("|| SPIELERANZAHL: ||");
+		System.out.println("--------------------");
+		System.out.println("");
 		System.out.println("Bitte geben Sie zunächst die Anzahl der Spieler an (2-6 Spieler):");
 		createSpieler(IO.readInt());
 		System.out.println("-----------------");

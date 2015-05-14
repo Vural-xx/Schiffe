@@ -93,9 +93,7 @@ public class Spieler implements Serializable {
 	 * Getter ausgeschieden.
 	 * @return: ausgeschieden.
 	 */
-	public boolean isAusgeschieden() {
-		return ausgeschieden;
-	}
+
 	
 	/**
 	 * Setter ausgeschieden
@@ -129,9 +127,9 @@ public class Spieler implements Serializable {
 		if(schiff != null && schiff.versenkt()){
 			getSpielfeld().getSchiffe().remove(schiff);
 			System.out.println("");
-			System.out.println(Spiel.ANSI_PURPLE +"-----------------------------------------------");
+			System.out.println(Spiel.ANSI_PURPLE +"=====================================================================");
 			System.out.println("||||   Sie haben das Schiff "+ schiff.getName().toUpperCase() + " vom Spieler " + getName() + " versenkt!!!!   ||||");
-			System.out.println("-----------------------------------------------"+Spiel.ANSI_RESET);
+			System.out.println("====================================================================="+Spiel.ANSI_RESET);
 		}	
 	}
 	
