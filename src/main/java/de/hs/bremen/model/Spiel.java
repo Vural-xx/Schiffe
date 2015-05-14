@@ -215,41 +215,53 @@ public class Spiel implements Serializable {
 			System.out.println(ANSI_BLUE+ "SPIELER " +spieler[i].getName()+" IST DRAN:" + ANSI_RESET);
 			System.out.println("-------------------------------");
 			System.out.println("");
-			System.out.println("Spieler " +spieler[i].getName()+". Bitte wählen Sie ein Schiff mit dem Sie feuern wollen.");
-			System.out.println("--------------------------------------------------------------------------");
+			if(spieler[i].schiffeOhneWartezeit()){
+				System.out.println("Spieler " +spieler[i].getName()+". Bitte wählen Sie ein Schiff mit dem Sie feuern wollen.");
+				System.out.println("--------------------------------------------------------------------------");
+				System.out.println(spieler[i].getSpielfeld().printSchiffeMenu());
+				System.out.println("--------------------------------------------------------------------------");
+				auswahl = IO.readInt();
+				schiff = spieler[i].getSpielfeld().getZustaendigesSchiff(auswahl);
+				if(spieler.length > 2){
+					gegner = spielerAuswahlMenu(spieler[i]);
+				}else if (i == 0){
+					gegner = spieler[1];
+				}else{
+					gegner = spieler[0];
+				}
+				System.out.println("--------------------------------------");
+				System.out.println(ANSI_PURPLE+"ÜBERSICHTS FELD VON SPIELER: " + spieler[i].getName() + " AUF SPIELER: " + spieler[i].getName()+ANSI_RESET);
+				System.out.println("--------------------------------------");
+				System.out.println("");
+				System.out.println("");
+				gegner.getSpielfeldPublic().printSpielfeld();
+				System.out.println("");
+				System.out.println("--------------------------");
+				System.out.println("|| "+spieler[i].getName() +" SCHIEßEN !!! ||");
+				System.out.println("--------------------------");
+				System.out.println("");
+				System.out.println("----------------------------------------------------------------");
+				System.out.println(spieler[i].getName() +", , in welcher ZEILE soll geschossen werden?");
+				System.out.println("----------------------------------------------------------------");
+				zeile = IO.readInt();
+				System.out.println("----------------------------------------------------------------");
+				System.out.println(spieler[i].getName() +", , in welcher SPALTE soll geschossen werden?");
+				System.out.println("----------------------------------------------------------------");
+				spalte = IO.readInt();
+				schiff.feuern(new Position(zeile, spalte), gegner.getSpielfeldPublic());
+				spieler[i].trefferUebertragung();
+				
 			
-			System.out.println(spieler[i].getSpielfeld().printSchiffeMenu());
-			System.out.println("--------------------------------------------------------------------------");
-			auswahl = IO.readInt();
-			schiff = spieler[i].getSpielfeld().getZustaendigesSchiff(auswahl);
-			if(spieler.length > 2){
-				gegner = spielerAuswahlMenu(spieler[i]);
-			}else if (i == 0){
-				gegner = spieler[1];
-			}else{
-				gegner = spieler[0];
+			} else {
+				System.out.println("");
+				System.out.println("");
+				System.out.println(ANSI_RED+"---------------------------------------------------------------"+ANSI_RESET);
+				System.out.println(ANSI_RED+"		DU HAST KEIN SCHIFF ZUR VERFÜGUNG		"+ANSI_RESET);
+				System.out.println(ANSI_RED+"			   AUSSETZEN			  "+ANSI_RESET);
+				System.out.println(ANSI_RED+"---------------------------------------------------------------"+ANSI_RESET);
+				System.out.println("");
+				System.out.println("");
 			}
-			System.out.println("--------------------------------------");
-			System.out.println(ANSI_PURPLE+"ÜBERSICHTS FELD VON SPIELER: " + spieler[i].getName() + " AUF SPIELER: " + spieler[i].getName()+ANSI_RESET);
-			System.out.println("--------------------------------------");
-			System.out.println("");
-			System.out.println("");
-			gegner.getSpielfeldPublic().printSpielfeld();
-			System.out.println("");
-			System.out.println("--------------------------");
-			System.out.println("|| "+spieler[i].getName() +" SCHIEßEN !!! ||");
-			System.out.println("--------------------------");
-			System.out.println("");
-			System.out.println("----------------------------------------------------------------");
-			System.out.println(spieler[i].getName() +", , in welcher ZEILE soll geschossen werden?");
-			System.out.println("----------------------------------------------------------------");
-			zeile = IO.readInt();
-			System.out.println("----------------------------------------------------------------");
-			System.out.println(spieler[i].getName() +", , in welcher SPALTE soll geschossen werden?");
-			System.out.println("----------------------------------------------------------------");
-			spalte = IO.readInt();
-			schiff.feuern(new Position(zeile, spalte), gegner.getSpielfeldPublic());
-			spieler[i].trefferUebertragung();
 			// Wartezeit
 			for(int j=0; j< spieler[i].getSpielfeld().getSchiffe().size();j++){
 				Schiff wartezeitResetSchiff=spieler[i].getSpielfeld().getSchiffe().get(j);
@@ -258,11 +270,11 @@ public class Spiel implements Serializable {
 						wartezeitResetSchiff.setWartezeit(wartezeitResetSchiff.getWartezeit()-1);
 					}
 				}
-			
 			}
-			schiff.setWartezeit(schiff.getFeuerstaerke());
+			if(schiff != null){
+				schiff.setWartezeit(schiff.getFeuerstaerke());
+			}	
 		}
-			
 	}
 	
 	
