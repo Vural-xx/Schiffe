@@ -74,6 +74,10 @@ public class Spielfeld implements Serializable{
 	}
 
 	
+	public ArrayList<Schiff> getSchiffe() {
+		return schiffe;
+	}
+
 	/**
 	 * Felder werden initialisiert.
 	 * @param groesse: Anzahl der Felder auf dem quadratischen Spielfelds.
