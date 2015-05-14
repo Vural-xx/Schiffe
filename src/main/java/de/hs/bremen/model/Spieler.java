@@ -146,11 +146,15 @@ public class Spieler implements Serializable {
 				if(spielfeldPublic.getFelder()[i][j].getFeldstatus() == Feldstatus.VERFEHLT && spielfeld.getFelder()[i][j].getFeldstatus() == Feldstatus.BESETZT){
 					spielfeldPublic.getFelder()[i][j].setFeldstatus(Feldstatus.GETROFFEN);
 					spielfeld.getFelder()[i][j].setFeldstatus(Feldstatus.GETROFFEN);
-					System.out.println(Spiel.ANSI_GREEN+"DAS ZIEL WURDE GETROFFEN!!"+Spiel.ANSI_RESET);
+					System.out.println(Spiel.ANSI_GREEN+"--------------------------");
+					System.out.println("DAS ZIEL WURDE GETROFFEN!!");
+					System.out.println("--------------------------"+Spiel.ANSI_RESET);
 					schiffVersenkt(new Position(j+1, i+1));	
 				}else if (spielfeldPublic.getFelder()[i][j].getFeldstatus() == Feldstatus.VERFEHLT && spielfeld.getFelder()[i][j].getFeldstatus() == Feldstatus.WASSER){
 					spielfeld.getFelder()[i][j].setFeldstatus(Feldstatus.VERFEHLT);
+					System.out.println(Spiel.ANSI_RED+"--------------------------"+Spiel.ANSI_RESET);
 					System.out.println (Spiel.ANSI_RED+"DAS ZIEL WURDE VERFEHLT!!"+Spiel.ANSI_RESET);
+					System.out.println(Spiel.ANSI_RED+"--------------------------"+Spiel.ANSI_RESET);
 				}
 				
 				/*if(spielfeld.getFelder()[i][j].getFeldstatus() != Feldstatus.WASSER 

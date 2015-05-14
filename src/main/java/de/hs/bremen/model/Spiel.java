@@ -217,7 +217,13 @@ public class Spiel implements Serializable {
 				
 			}
 		}
-		System.out.println("Spieler " + spieler[0].getName() + " HAT GEWONNEN!!!!!!");
+		System.out.println(ANSI_CYAN+"-------------------------------------------------------"+ANSI_RESET);
+		System.out.println(ANSI_GREEN+"|||||||||||||||||||||||||||||||||||||||||||||||||||||||"+ANSI_RESET);
+		System.out.println(ANSI_PURPLE+"-------------------------------------------------------"+ANSI_RESET);
+		System.out.println("		Spieler " + spieler[0].getName().toUpperCase() + " hat gewonnen!!!!!!");
+		System.out.println(ANSI_RED+"-------------------------------------------------------"+ANSI_RESET);
+		System.out.println(ANSI_YELLOW+"|||||||||||||||||||||||||||||||||||||||||||||||||||||||"+ANSI_RESET);
+		System.out.println(ANSI_BLUE+"-------------------------------------------------------"+ANSI_RESET);
 	}
 	
 	public void rundeSpielen(){
@@ -461,7 +467,7 @@ public class Spiel implements Serializable {
 				System.out.println("--------------------------------------"+ANSI_RESET);
 				System.out.println("");
 				System.out.println("");
-				System.out.println(spieler[i].getName() +", bitte geben Sie an wo Sie " +schiffe.get(anzahlSchiffeGezeugt).getName()+ " auf ihrem Spielfeld platzieren wollen.");
+				System.out.println(schiffe.get(anzahlSchiffeGezeugt).getName().toUpperCase()+ANSI_GREEN+ " auf das Spiefeld platzieren"+ANSI_RESET);
 				System.out.println(ANSI_GREEN+"--------------------------------------------------------------------------"+ANSI_RESET);
 				System.out.println(spieler[i].getName() +", in welcher ZEILE soll das Schiff platziert werden? (Y-Achse)");
 				System.out.println(ANSI_GREEN+"--------------------------------------------------------------------------"+ANSI_RESET);
@@ -470,7 +476,7 @@ public class Spiel implements Serializable {
 				System.out.println(spieler[i].getName() +", in welcher SPALTE soll das Schiff plaziert werden? (X-Achse)");
 				System.out.println(ANSI_GREEN+"--------------------------------------------------------------------------"+ANSI_RESET);
 				spalte = IO.readInt();
-				System.out.println(spieler[i].getName() +", Bitte geben Sie an ob ihr Schiff 1. Horizontal oder 2. Vertikal angeorndet werden soll");
+				System.out.println(spieler[i].getName() +", bitte geben Sie an ob ihr Schiff 1. Horizontal oder 2. Vertikal angeorndet werden soll");
 				ausrichtung = vertikalHorizontal(IO.readInt());
 				System.out.println("--------------------------------------------------------------");
 				System.out.println("|||| SPIELFELD VON SPIELER: " + spieler[i].getName() + " ||||");
