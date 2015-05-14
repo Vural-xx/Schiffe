@@ -1,6 +1,7 @@
 package de.hs.bremen.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import de.hs.bremen.enums.Feldstatus;
 import helper.IO;
@@ -122,6 +123,23 @@ public class Spieler implements Serializable {
 		spielfeldPublic = new Spielfeld(groesse);
 	}
 	
+	
+	public void schiffVersenkt(Position position){
+		Schiff schiff= getSpielfeld().getSchiffByPosition(position);
+		if(schiff != null && schiff.versenkt()){
+			getSpielfeld().getSchiffe().remove(schiff);
+			System.out.println("");
+			System.out.println(Spiel.ANSI_PURPLE +"-----------------------------------------------");
+			System.out.println("||||   Sie haben das Schiff "+ schiff.getName().toUpperCase() + " vom Spieler " + getName() + " Versenkt!!!!   ||||");
+			System.out.println("-----------------------------------------------"+Spiel.ANSI_RESET);
+		}	
+	}
+	
+	public boolean ausgeschieden(){
+		return spielfeld.getSchiffe().size()==0;
+	}
+	
+	
 	public void trefferUebertragung(){
 		for(int i = 0; i<spielfeld.getFelder().length; i++){
 			for(int j = 0; j<spielfeld.getFelder()[i].length; j++){
@@ -129,6 +147,7 @@ public class Spieler implements Serializable {
 					spielfeldPublic.getFelder()[i][j].setFeldstatus(Feldstatus.GETROFFEN);
 					spielfeld.getFelder()[i][j].setFeldstatus(Feldstatus.GETROFFEN);
 					System.out.println("Das Ziel wurde getroffen");
+					schiffVersenkt(new Position(j+1, i+1));	
 				}else if (spielfeldPublic.getFelder()[i][j].getFeldstatus() == Feldstatus.VERFEHLT && spielfeld.getFelder()[i][j].getFeldstatus() == Feldstatus.WASSER){
 					spielfeld.getFelder()[i][j].setFeldstatus(Feldstatus.VERFEHLT);
 					System.out.println ("Das Ziel wurde verfehlt");

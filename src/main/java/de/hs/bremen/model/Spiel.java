@@ -187,7 +187,10 @@ public class Spiel implements Serializable {
 	public void spielen(){
 		// ToDo: richtige Bedingung implementieren
 		int i=1;
-		while(1<10){
+		ArrayList<Spieler> tempSpieler;
+		while(spieler.length>1){
+			tempSpieler=null;
+			tempSpieler = new ArrayList<Spieler>();
 			System.out.println("");
 			System.out.println("");
 			System.out.println("-------------------------------------------------------------");
@@ -200,7 +203,20 @@ public class Spiel implements Serializable {
 			i=i+1;
 			rundeSpielen();
 			
+			for(int j=0; j< spieler.length; j++){
+				
+				if(!spieler[j].ausgeschieden()){
+					tempSpieler.add(spieler[j]);
+					
+				}
+			}
+			if(tempSpieler.size() != spieler.length){
+				spieler=new Spieler[tempSpieler.size()];
+				spieler=tempSpieler.toArray(spieler);
+				
+			}
 		}
+		System.out.println("Spieler " + spieler[0].getName() + " HAT GEWONNEN!!!!!!");
 	}
 	
 	public void rundeSpielen(){
@@ -230,7 +246,7 @@ public class Spiel implements Serializable {
 					gegner = spieler[0];
 				}
 				System.out.println("--------------------------------------");
-				System.out.println(ANSI_PURPLE+"ÜBERSICHTS FELD VON SPIELER: " + spieler[i].getName() + " AUF SPIELER: " + spieler[i].getName()+ANSI_RESET);
+				System.out.println(ANSI_PURPLE+"ÜBERSICHTS FELD VON SPIELER: " + spieler[i].getName() + " AUF SPIELER: " + gegner.getName()+ANSI_RESET);
 				System.out.println("--------------------------------------");
 				System.out.println("");
 				System.out.println("");
@@ -248,10 +264,9 @@ public class Spiel implements Serializable {
 				System.out.println(spieler[i].getName() +", , in welcher SPALTE soll geschossen werden?");
 				System.out.println("----------------------------------------------------------------");
 				spalte = IO.readInt();
-				schiff.feuern(new Position(zeile, spalte), gegner.getSpielfeldPublic());
+				schiff.feuern(new Position(spalte, zeile), gegner.getSpielfeldPublic());
 				gegner.trefferUebertragung();
-				
-			
+						
 			} else {
 				System.out.println("");
 				System.out.println("");
@@ -496,40 +511,43 @@ public class Spiel implements Serializable {
 		for(int i = 0; i< positionen.length; i++){
 			if(horizontal == 1){
 				if(i==0){
-					puffer.add(new Position(position.getPositonX()-1, position.getPositionY()+1));
-					puffer.add(new Position(position.getPositonX()-1, position.getPositionY()));
-					puffer.add(new Position(position.getPositonX()-1, position.getPositionY()-1));
-					puffer.add(new Position(position.getPositonX(), position.getPositionY()-1));
-					puffer.add(new Position(position.getPositonX(), position.getPositionY()+1));
+					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()+1));
+					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()));
+					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()-1));
+					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()-1));
+					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()+1));
 				} else if (i == positionen.length-1){
-					puffer.add(new Position(position.getPositonX()-1, position.getPositionY()-1));
-					puffer.add(new Position(position.getPositonX()+1, position.getPositionY()));
-					puffer.add(new Position(position.getPositonX()+1, position.getPositionY()+1));
-					puffer.add(new Position(position.getPositonX(), position.getPositionY()-1));
-					puffer.add(new Position(position.getPositonX(), position.getPositionY()+1));
+					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()-1));
+					puffer.add(new Position(positionen[i].getPositonX()+1, positionen[i].getPositionY()));
+					puffer.add(new Position(positionen[i].getPositonX()+1, positionen[i].getPositionY()+1));
+					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()-1));
+					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()+1));
 				}else{
-					puffer.add(new Position(position.getPositonX(), position.getPositionY()-1));
-					puffer.add(new Position(position.getPositonX(), position.getPositionY()+1));
+					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()-1));
+					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()+1));
 				}
+					
 				
 			}else{
 				if(i==0){
-					puffer.add(new Position(position.getPositonX()-1, position.getPositionY()-1));
-					puffer.add(new Position(position.getPositonX(), position.getPositionY()-1));
-					puffer.add(new Position(position.getPositonX()+1, position.getPositionY()-1));
-					puffer.add(new Position(position.getPositonX()-1, position.getPositionY()));
+					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()-1));
+					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()-1));
+					puffer.add(new Position(positionen[i].getPositonX()+1, positionen[i].getPositionY()-1));
+					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()));
 					puffer.add(new Position(position.getPositonX()+1, position.getPositionY()));
 				} else if (i == positionen.length-1){
-					puffer.add(new Position(position.getPositonX()-1, position.getPositionY()));
-					puffer.add(new Position(position.getPositonX()-1, position.getPositionY()+1));
-					puffer.add(new Position(position.getPositonX(), position.getPositionY()+1));
-					puffer.add(new Position(position.getPositonX()+1, position.getPositionY()+1));
-					puffer.add(new Position(position.getPositonX()+1, position.getPositionY()));
+					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()));
+					puffer.add(new Position(position.getPositonX()-1, positionen[i].getPositionY()+1));
+					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()+1));
+					puffer.add(new Position(positionen[i].getPositonX()+1, position.getPositionY()+1));
+					puffer.add(new Position(positionen[i].getPositonX()+1, positionen[i].getPositionY()));
 				}else{
-					puffer.add(new Position(position.getPositonX()-1, position.getPositionY()));
-					puffer.add(new Position(position.getPositonX()+1, position.getPositionY()));
+					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()));
+					puffer.add(new Position(positionen[i].getPositonX()+1, positionen[i].getPositionY()));
 				}
+				
 			}
+			puffer.add(positionen[i]);
 		}
 		if(spieler.getSpielfeld().getSchiffByPosition(puffer) != null){
 			System.out.println("Das Schiff darf hier nicht plaziert werden, bitte wählen Sie einen neuen Platz aus.");

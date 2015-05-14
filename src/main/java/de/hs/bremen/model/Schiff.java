@@ -96,39 +96,7 @@ public abstract class Schiff implements Serializable {
 		this.felder = felder;
 	}
 	
-	/**
-	 * @param position
-	 * @return
-	 */
-	public boolean getroffen(Position position){	
-		for(int i = 0; i < felder.length; i++){
-			if(felder[i].getPosition().equals(position)){
-				felder[i].setFeldstatus(Feldstatus.GETROFFEN);
-				treffer = treffer + 1;
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	/**
-	 * Methode, die wiedergibt ob, das Schiff getroffen wurde, und die jeweiligen Felder auf getroffen setzt.
-	 * @param positionen: Positionen der Felder, die auf Treffer überprüft werden sollen. 
-	 * @return: Boolean ob das Schiff getroffen wurde.
-	 */
-	public boolean getroffen(Position[] positionen){
-		for(int i = 0; i < felder.length; i++){
-			for(Position p : positionen){
-				if(felder[i].getFeldstatus() != Feldstatus.GETROFFEN && felder[i].getFeldstatus() != Feldstatus.VERFEHLT &&  felder[i].getPosition().equals(p)){
-					felder[i].setFeldstatus(Feldstatus.GETROFFEN);
-					treffer = treffer +1;
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
+
 	/**
 	 * Methode, die wiedergibt, wieviele Felder von dieser Schiffunterklasse belegt werden,
 	 * @return: platzbelegung
@@ -150,7 +118,13 @@ public abstract class Schiff implements Serializable {
 	 * @return: Schiff versenkt
 	 */
 	public boolean versenkt(){
-		return treffer == felder.length;
+		int counter=0;
+		for(int i=0; i< felder.length; i++){
+			if(felder[i].getFeldstatus()== Feldstatus.GETROFFEN){
+				counter++;
+			}
+		}
+		return counter == felder.length;
 	}
 	
 	/**
