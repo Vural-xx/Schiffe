@@ -241,7 +241,6 @@ public class Spielfeld implements Serializable{
 				for (int j = 0 ; j < felder[i].length; j++){
 					if(felder[i][j].getPosition().equals(position) && felder[i][j].getFeldstatus() == Feldstatus.WASSER){
 						felder[i][j].setFeldstatus(Feldstatus.VERFEHLT);
-						System.out.println ("Das Ziel wurde VERFEHLT");
 					}
 		         }
 		     }

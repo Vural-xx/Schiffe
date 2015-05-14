@@ -132,6 +132,8 @@ public class Spieler implements Serializable {
 				}else if(spielfeldPublic.getFelder()[i][j].getFeldstatus() == Feldstatus.VERFEHLT && spielfeld.getFelder()[i][j].getFeldstatus() == Feldstatus.BESETZT){
 					spielfeldPublic.getFelder()[i][j].setFeldstatus(Feldstatus.GETROFFEN);
 					System.out.println("Das Ziel wurde getroffen");
+				}else if (spielfeld.getFelder()[i][j].getFeldstatus() == Feldstatus.VERFEHLT){
+					System.out.println ("Das Ziel wurde VERFEHLT");
 				}
 			}
 		}
