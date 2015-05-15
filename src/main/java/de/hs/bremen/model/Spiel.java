@@ -340,22 +340,6 @@ public class Spiel implements Serializable {
 		return passend;
 	}
 	
-	/**
-	 * Überprüft ob das Schiff innerhalb des Spielfeld plaziert wird
-	 * @param position
-	 * @return
-	 */
-	public boolean innerhalbSpielfeld (Position position){
-		if (position.getPositonX() <=0|| position.getPositonX()>= spieler[0].getSpielfeld().getSpielfeldgroesse() && position.getPositionY()<=0 || position.getPositionY()>= spieler[0].getSpielfeld().getSpielfeldgroesse()){
-			System.out.println("Das Schiff liegt außerhalb des Spielfeldes und darf hier nicht plaziert werden!");
-			return false;
-		}else {
-			return true;
-		}
-		
-	}
-	
-
 	public Spieler spielerAuswahlMenu(Spieler s){
 		System.out.println("Bitte wählen Sie den Spieler auf dessen Spielfeld Sie feuern möchten");
 		String spielerMenu ="Drücken Sie die ";
@@ -489,10 +473,12 @@ public class Spiel implements Serializable {
 				System.out.println("--------------------------------------------------------------");
 				System.out.println("|||| SPIELFELD VON SPIELER: " + spieler[i].getName() + " ||||");
 				System.out.println("--------------------------------------------------------------");
-				if (innerhalbSpielfeld(new Position(spalte, zeile)) && schiffPlazierbar(schiffe.get(anzahlSchiffeGezeugt), new Position(spalte, zeile), spieler[i], ausrichtung)){
+				if (schiffPlazierbar(schiffe.get(anzahlSchiffeGezeugt), new Position(spalte, zeile), spieler[i], ausrichtung)){
 					spieler[i].getSpielfeld().platziereSchiff(schiffe.get(anzahlSchiffeGezeugt), new Position(spalte, zeile), ausrichtung);
 					spieler[i].getSpielfeld().printSpielfeld();
 					anzahlSchiffeGezeugt++;
+				}else{
+					System.out.println("Das Schiff darf hier nicht plaziert werden, bitte wählen Sie einen neuen Platz aus.");
 				}
 			}while(anzahlSchiffeGezeugt != schiffe.size());	
 			ArrayList<Schiff> tempArrayList = new ArrayList<Schiff>();
@@ -517,7 +503,14 @@ public class Spiel implements Serializable {
 		}
 	}
 	
-	public boolean schiffPlazierbar(Schiff schiff, Position position, Spieler spieler, int horizontal){
+	public boolean schiffPlazierbar(Schiff schiff, Position position, Spieler spieler, int horizontal){		
+		// Schiff würde außerhalb Spielfeld liegen
+		if((position.getPositionY() <=0 || position.getPositonX() <=0)
+			|| (horizontal == 1 && (position.getPositonX() + schiff.getLaenge()-1 >= spieler.getSpielfeld().getSpielfeldgroesse()))
+			|| (horizontal == 0 && (position.getPositionY() + schiff.getLaenge()-1 >= spieler.getSpielfeld().getSpielfeldgroesse()))){
+				return false;
+		}
+		
 		Position[] positionen = new Position[schiff.getLaenge()];
 		positionen[0] = position;
 		for(int i = 1; i< positionen.length; i++){
@@ -570,7 +563,6 @@ public class Spiel implements Serializable {
 			puffer.add(positionen[i]);
 		}
 		if(spieler.getSpielfeld().getSchiffByPosition(puffer) != null){
-			System.out.println("Das Schiff darf hier nicht plaziert werden, bitte wählen Sie einen neuen Platz aus.");
 			return false;
 		}else{
 			return true;
