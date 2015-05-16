@@ -45,7 +45,8 @@ public class IO {
 			return string_to_int.intValue();
 		}
 		catch (Exception e) {
-		  return 0;
+		  println("Falsche Eingabe. Bitte versuchen Sie es erneut");
+		  return readInt();
 		}
 	}
 
