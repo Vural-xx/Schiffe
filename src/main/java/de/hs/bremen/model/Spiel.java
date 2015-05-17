@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.jws.Oneway;
+
 import de.hs.bremen.persistence.ObjectPersistenceManager;
 import helper.ConsoleColor;
 import helper.IO;
@@ -462,7 +464,9 @@ public class Spiel implements Serializable {
 					spieler[i].getSpielfeld().printSpielfeld();
 					anzahlSchiffeGezeugt++;
 				}else{
-					System.out.println("Das Schiff darf hier nicht plaziert werden, bitte wählen Sie einen neuen Platz aus.");
+					System.out.println(ConsoleColor.ANSI_RED+"==================================================================================="+ConsoleColor.ANSI_RESET);
+					System.out.println(ConsoleColor.ANSI_RED+"Das Schiff darf hier nicht plaziert werden, bitte wählen Sie einen neuen Platz aus."+ConsoleColor.ANSI_RESET);
+					System.out.println(ConsoleColor.ANSI_RED+"==================================================================================="+ConsoleColor.ANSI_RESET);
 				}
 			}while(anzahlSchiffeGezeugt != schiffe.size());	
 			ArrayList<Schiff> tempArrayList = new ArrayList<Schiff>();
