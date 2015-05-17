@@ -57,7 +57,7 @@ public class IO {
 			Integer string_to_int = new Integer(eingabe);
 			return string_to_int.intValue();
 		}catch (Exception e) {
-			println(errorMessage);
+			println(ConsoleColor.ANSI_RED+errorMessage+ConsoleColor.ANSI_RESET);
 			return readInt(errorMessage);
 		}
 	}

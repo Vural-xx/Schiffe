@@ -2,6 +2,7 @@ package de.hs.bremen.model;
 
 
 
+import java.awt.Color;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class Spiel implements Serializable {
 	private final int maximaleSpieleranzahl= 6;
 	private final int maximaleSpielfeldgroesse= 40;
 	private final int minimaleSpielfeldgroesse= 20;
+	private int schiffAuswahlUebergabe;
 	
 	/**
 	 * Spieler die an dem Spiel beteiligt sind.
@@ -84,7 +86,9 @@ public class Spiel implements Serializable {
 				spieler[i-1] = new Spieler(name);
 			}
 		} else {
-			System.out.println("Ihre Spieleranzahl ist zu hoch oder ihre Eingabe wurde nicht erkannt.");
+			System.out.println(ConsoleColor.ANSI_RED+"============================================================================="+ConsoleColor.ANSI_RESET);
+			System.out.println(ConsoleColor.ANSI_RED+"Ihre Spieleranzahl ist nicht erlaubt oder ihre Eingabe wurde nicht erkannt."+ConsoleColor.ANSI_RESET);
+			System.out.println(ConsoleColor.ANSI_RED+"============================================================================="+ConsoleColor.ANSI_RESET);
 			System.out.println("Bitte geben Sie erneut die Spieleranzahl ein:");
 			createSpieler(IO.readInt());
 		}
@@ -100,7 +104,9 @@ public class Spiel implements Serializable {
 			sp.createSpielfeld(groesse);
 		}
 		} else {
-			System.out.println("Ihre Spielfeldgröße ist zu groß zu niedrig oder ihre Eingabe wurde nicht erkannt.");
+			System.out.println(ConsoleColor.ANSI_RED+"================================================================================="+ConsoleColor.ANSI_RESET);
+			System.out.println(ConsoleColor.ANSI_RED+"Ihre Spielfeldgröße ist zu groß zu niedrig oder ihre Eingabe wurde nicht erkannt."+ConsoleColor.ANSI_RESET);
+			System.out.println(ConsoleColor.ANSI_RED+"================================================================================="+ConsoleColor.ANSI_RESET);
 			System.out.println("Bitte geben Sie erneut die Spielergröße ein:");
 			createSpielfelder(IO.readInt());
 		}
@@ -108,14 +114,24 @@ public class Spiel implements Serializable {
 	
 
 	
-	public int schiffeAuswahlGueltig(int auswahlZahl){
+	public void schiffeAuswahlGueltig(int auswahlZahl){
 		if(auswahlZahl >=1 && auswahlZahl <=5){		
-			return auswahlZahl;
+			schiffAuswahlUebergabe = auswahlZahl;
 		} else {
-			System.out.println("Falsche Einngabe versuchen Sie es erneut:");
+			System.out.println(ConsoleColor.ANSI_RED+"========================================"+ConsoleColor.ANSI_RESET);
+			System.out.println(ConsoleColor.ANSI_RED+"Falsche Eingabe versuchen Sie es erneut:"+ConsoleColor.ANSI_RESET);
+			System.out.println(ConsoleColor.ANSI_RED+"========================================"+ConsoleColor.ANSI_RESET);
 			schiffeAuswahlGueltig(IO.readInt());
 		}
-		return auswahlZahl;
+	}
+	
+	
+	public void schiffAuswahlUebergabe(){
+		System.out.println(ConsoleColor.ANSI_RED+"========================================"+ConsoleColor.ANSI_RESET);
+		System.out.println(ConsoleColor.ANSI_RED+"Falsche Eingabe versuchen Sie es erneut:"+ConsoleColor.ANSI_RESET);
+		System.out.println(ConsoleColor.ANSI_RED+"========================================"+ConsoleColor.ANSI_RESET);
+		schiffeAuswahlGueltig(IO.readInt());
+		
 	}
 	
 	
@@ -293,7 +309,7 @@ public class Spiel implements Serializable {
 	public boolean anzahlSchiffePassend(Spieler spieler, Schiff schiff, int anzahlSchiffe){
 		boolean passend = spieler.getSpielfeld().getPlaetzeBelegt() + schiff.getPlaetzeBelegung()* anzahlSchiffe < (spieler.getSpielfeld().getSpielfeldgroesse() * spieler.getSpielfeld().getSpielfeldgroesse());
 		if(!passend){
-			System.out.println("Dieses Schiff passt leider nicht mehr auf ihr Spielfeld. Bitte wählen Sie ein anderes");
+			System.out.println("");
 		}
 		return passend;
 	}
@@ -331,7 +347,8 @@ public class Spiel implements Serializable {
 			System.out.println("--------------");
 			System.out.println("Bitte geben Sie an was für eine Art von Schiff auf dem Spielfeld platziert werden soll.");
 			System.out.println("[1 für "+ ConsoleColor.ANSI_PURPLE + "Zerstörer" +ConsoleColor.ANSI_RESET+ ", 2 für "+ ConsoleColor.ANSI_YELLOW + "Fregatte" +ConsoleColor.ANSI_RESET+", 3 für "+ ConsoleColor.ANSI_RED + "Korvette" +ConsoleColor.ANSI_RESET+  ", 4 für "+ ConsoleColor.ANSI_GREEN + "Uboot" +ConsoleColor.ANSI_RESET+ ", 5 keine weiteren]");
-			schiffTyp = schiffeAuswahlGueltig(IO.readInt());
+			schiffeAuswahlGueltig(IO.readInt());
+			schiffTyp = schiffAuswahlUebergabe;
 			if(schiffTyp !=5){
 				System.out.println("---------------------------------------------------------------------------------------");
 				System.out.println("Wieviele Schiffe von dem Schifftyp " + schiffeAuswahl(schiffTyp).getName()+" sollen gesetzt werden?");
@@ -342,7 +359,10 @@ public class Spiel implements Serializable {
 						schiffe.add(schiffeAuswahl(schiffTyp));
 					}
 				}else{
-					System.out.println("Soviele Schiffe von dem Schifftyp " +schiffeAuswahl(schiffTyp).getName()+ "passen nicht auf ihr Spielfeld");
+					System.out.println(ConsoleColor.ANSI_RED+"============================================================================="+ConsoleColor.ANSI_RESET);
+					System.out.println(ConsoleColor.ANSI_RED+"Soviele Schiffe vom Schifftyp " +schiffeAuswahl(schiffTyp).getName()+ " passen nicht auf ihr Spielfeld!!!!!!"+ConsoleColor.ANSI_RESET);
+					System.out.println(ConsoleColor.ANSI_RED+"============================================================================="+ConsoleColor.ANSI_RESET);
+					System.out.println("");
 				}	
 			}
 		}while(schiffTyp != 5 && spieler[0].getSpielfeld().getMaximumAnzahlSchiffe() > schiffe.size());
