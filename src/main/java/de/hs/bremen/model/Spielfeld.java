@@ -265,7 +265,7 @@ public class Spielfeld implements Serializable{
 		// Schiff würde außerhalb Spielfeld liegen
 		if((position.getPositionY() <=0 || position.getPositonX() <=0)
 			|| (horizontal == 1 && (position.getPositonX() + schiff.getLaenge()-1 >= getSpielfeldgroesse()))
-			|| (horizontal == 0 && (position.getPositionY() + schiff.getLaenge()-1 >= getSpielfeldgroesse()))){
+			|| (horizontal == 2 && (position.getPositionY() + schiff.getLaenge()-1 >= getSpielfeldgroesse()))){
 				return false;
 		}
 		
