@@ -123,16 +123,6 @@ public class Spielfeld implements Serializable{
 	}
 	
 	/**
-	 * Treffer wird auf dem Spielfeld vermerkt.
-	 * @param positionen: Position auf dem der Treffer vermerkt werden soll.
-	 */
-	/*public void trefferPlatzieren(Position[] positionen){
-		for(Position p: positionen){
-			getFeld(p.getPositonX(), p.getPositionY()).setFeldstatus(Feldstatus.GETROFFEN);
-		}
-	}*/
-	
-	/**
 	 * Gibt Anzahl der Plätze die auf dem Spielfeld von Schiffen belegt sind wieder.
 	 * @return: Belegte Plätze auf dem Spielfeld
 	 */
@@ -269,5 +259,71 @@ public class Spielfeld implements Serializable{
 			}
 		}
 		return schiff;
+	}
+	
+	public boolean schiffPlazierbar(Schiff schiff, Position position, int horizontal){		
+		// Schiff würde außerhalb Spielfeld liegen
+		if((position.getPositionY() <=0 || position.getPositonX() <=0)
+			|| (horizontal == 1 && (position.getPositonX() + schiff.getLaenge()-1 >= getSpielfeldgroesse()))
+			|| (horizontal == 0 && (position.getPositionY() + schiff.getLaenge()-1 >= getSpielfeldgroesse()))){
+				return false;
+		}
+		
+		Position[] positionen = new Position[schiff.getLaenge()];
+		positionen[0] = position;
+		for(int i = 1; i< positionen.length; i++){
+			if(horizontal ==1){
+				positionen[i] = new Position(position.getPositonX()+i, position.getPositionY());
+			}else{
+				positionen[i] = new Position(position.getPositonX(), position.getPositionY()+i);
+			}
+		}
+		ArrayList<Position> puffer = new ArrayList<Position>();
+		for(int i = 0; i< positionen.length; i++){
+			if(horizontal == 1){
+				if(i==0){
+					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()+1));
+					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()));
+					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()-1));
+					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()-1));
+					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()+1));
+				} else if (i == positionen.length-1){
+					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()-1));
+					puffer.add(new Position(positionen[i].getPositonX()+1, positionen[i].getPositionY()));
+					puffer.add(new Position(positionen[i].getPositonX()+1, positionen[i].getPositionY()+1));
+					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()-1));
+					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()+1));
+				}else{
+					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()-1));
+					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()+1));
+				}
+					
+				
+			}else{
+				if(i==0){
+					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()-1));
+					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()-1));
+					puffer.add(new Position(positionen[i].getPositonX()+1, positionen[i].getPositionY()-1));
+					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()));
+					puffer.add(new Position(position.getPositonX()+1, position.getPositionY()));
+				} else if (i == positionen.length-1){
+					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()));
+					puffer.add(new Position(position.getPositonX()-1, positionen[i].getPositionY()+1));
+					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()+1));
+					puffer.add(new Position(positionen[i].getPositonX()+1, position.getPositionY()+1));
+					puffer.add(new Position(positionen[i].getPositonX()+1, positionen[i].getPositionY()));
+				}else{
+					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()));
+					puffer.add(new Position(positionen[i].getPositonX()+1, positionen[i].getPositionY()));
+				}
+				
+			}
+			puffer.add(positionen[i]);
+		}
+		if(getSchiffByPosition(puffer) != null){
+			return false;
+		}else{
+			return true;
+		}
 	}
 }

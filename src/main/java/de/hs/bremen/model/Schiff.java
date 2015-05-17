@@ -38,11 +38,6 @@ public abstract class Schiff implements Serializable {
 	 */
 	private int feuerstaerke;
 	
-	/**
-	 * Wie oft das Schiff getroffen wurde.
-	 */
-	private int treffer;
-	
 	
 	/**
 	 * Leerer Konstruktor.

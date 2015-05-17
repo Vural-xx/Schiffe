@@ -1,23 +1,13 @@
 package de.hs.bremen.model;
 
 
-import java.awt.Label;
+
 import java.io.File;
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-
-
-
-
-
-
-
-import java.util.Arrays;
-
-import de.hs.bremen.enums.Feldstatus;
 import de.hs.bremen.persistence.ObjectPersistenceManager;
+import helper.ConsoleColor;
 import helper.IO;
 
 /**
@@ -31,33 +21,10 @@ public class Spiel implements Serializable {
 	/**
 	 * SerialVersionUID zum Speichern und Lesen
 	 */
-	private static final long serialVersionUID = -4596970661321389454L;
-	
-	/**
-	 * Farben um die Konsolenausgabe farblich zu gestalten.
-	 */
-	public static final String ANSI_RESET = "\u001B[0m";
-	public static final String ANSI_BLACK = "\u001B[30m";
-	public static final String ANSI_RED = "\u001B[31m";
-	public static final String ANSI_GREEN = "\u001B[32m";
-	public static final String ANSI_YELLOW = "\u001B[33m";
-	public static final String ANSI_BLUE = "\u001B[34m";
-	public static final String ANSI_PURPLE = "\u001B[35m";
-	public static final String ANSI_CYAN = "\u001B[36m";
-	public static final String ANSI_WHITE = "\u001B[37m";
-	
-	private int maximaleSpieleranzahl= 6;
-	private int maximaleSpielfeldgroesse= 40;
-	private int minimaleSpielfeldgroesse= 20;
-	private int auswahlZahl;
-	boolean vertikalHorizontal= false;
-	private int ausrichtung;
-	private int spalte;
-	private int zeile;
-	private int anzahlSchiffe;
-	private int anzahlSchiffeGezeugt;
-	private int schiffTyp;
-	private ArrayList<Schiff> schiffe = new ArrayList<Schiff>();
+	private static final long serialVersionUID = -4596970661321389454L;	
+	private final int maximaleSpieleranzahl= 6;
+	private final int maximaleSpielfeldgroesse= 40;
+	private final int minimaleSpielfeldgroesse= 20;
 	
 	/**
 	 * Spieler die an dem Spiel beteiligt sind.
@@ -142,7 +109,7 @@ public class Spiel implements Serializable {
 
 	
 	public int schiffeAuswahlGueltig(int auswahlZahl){
-		if(auswahlZahl <=5 && auswahlZahl >=1){		
+		if(auswahlZahl >=1 && auswahlZahl <=5){		
 			return auswahlZahl;
 		} else {
 			System.out.println("Falsche Einngabe versuchen Sie es erneut:");
@@ -151,20 +118,12 @@ public class Spiel implements Serializable {
 		return auswahlZahl;
 	}
 	
-	public int getAuswahlZahl() {
-		return auswahlZahl;
-	}
-
-	public void setAuswahlZahl(int auswahlZahl) {
-		this.auswahlZahl = auswahlZahl;
-	}
-	
 	
 	/**
 	 * Funktion, ob Schiffe Horizontal oder Vertikal angeordnet werden sollen.
 	 */
-	
 	public int vertikalHorizontal(int richtungsAbfrage){
+		int ausrichtung = 0;
 		if(richtungsAbfrage== 1){
 			ausrichtung = 1;
 		} else if (richtungsAbfrage == 2){
@@ -174,20 +133,19 @@ public class Spiel implements Serializable {
 			vertikalHorizontal(IO.readInt());
 		}
 		return ausrichtung;
-
 	}
 	
 	/**
 	 * Funktion, die Schiffe pro Spieler auf deren Spielfeldern platziert.
 	 */
 	public void schiffePlatzieren(){
-		menueSchiffartAuswahl();
-		schiffeAufFeldSetzen();
+		ArrayList<Schiff> schiffe = new ArrayList<Schiff>();
+		menueSchiffartAuswahl(schiffe);
+		schiffeAufFeldSetzen(schiffe);
 	}
 	
 	public void spielen(){
-		// ToDo: richtige Bedingung implementieren
-		int i=1;
+		runde=1;
 		ArrayList<Spieler> tempSpieler;
 		while(spieler.length>1){
 			tempSpieler=null;
@@ -196,12 +154,12 @@ public class Spiel implements Serializable {
 			System.out.println("");
 			System.out.println("-------------------------------------------------------------");
 			System.out.println("-------------------------------------------------------------");
-			System.out.println(ANSI_RED+"		||||  RUNDE BEGINNT: " + i +   "  ||||"+ANSI_RESET);
+			System.out.println(ConsoleColor.ANSI_RED+"		||||  RUNDE BEGINNT: " + runde +   "  ||||"+ConsoleColor.ANSI_RESET);
 			System.out.println("-------------------------------------------------------------");
 			System.out.println("-------------------------------------------------------------");
 			System.out.println("");
 			System.out.println("");
-			i=i+1;
+			runde=runde+1;
 			rundeSpielen();
 			
 			for(int j=0; j< spieler.length; j++){
@@ -210,9 +168,9 @@ public class Spiel implements Serializable {
 					tempSpieler.add(spieler[j]);
 					
 				}else {
-					System.out.println(ANSI_RED+"==============================");
+					System.out.println(ConsoleColor.ANSI_RED+"==============================");
 					System.out.println("   "+spieler[j].getName()+" IST AUSGESCHIEDEN!!");
-					System.out.println(ANSI_RED+"=============================="+ANSI_RESET);
+					System.out.println(ConsoleColor.ANSI_RED+"=============================="+ConsoleColor.ANSI_RESET);
 					System.out.println("");
 					System.out.println("");
 				}
@@ -223,13 +181,13 @@ public class Spiel implements Serializable {
 				
 			}
 		}
-		System.out.println(ANSI_CYAN+"======================================================="+ANSI_RESET);
-		System.out.println(ANSI_GREEN+"|||||||||||||||||||||||||||||||||||||||||||||||||||||||"+ANSI_RESET);
-		System.out.println(ANSI_PURPLE+"======================================================="+ANSI_RESET);
+		System.out.println(ConsoleColor.ANSI_CYAN+"======================================================="+ConsoleColor.ANSI_RESET);
+		System.out.println(ConsoleColor.ANSI_GREEN+"|||||||||||||||||||||||||||||||||||||||||||||||||||||||"+ConsoleColor.ANSI_RESET);
+		System.out.println(ConsoleColor.ANSI_PURPLE+"======================================================="+ConsoleColor.ANSI_RESET);
 		System.out.println("		Spieler " + spieler[0].getName().toUpperCase() + " hat gewonnen!!!!!!");
-		System.out.println(ANSI_RED+"======================================================="+ANSI_RESET);
-		System.out.println(ANSI_YELLOW+"|||||||||||||||||||||||||||||||||||||||||||||||||||||||"+ANSI_RESET);
-		System.out.println(ANSI_BLUE+"======================================================="+ANSI_RESET);
+		System.out.println(ConsoleColor.ANSI_RED+"======================================================="+ConsoleColor.ANSI_RESET);
+		System.out.println(ConsoleColor.ANSI_YELLOW+"|||||||||||||||||||||||||||||||||||||||||||||||||||||||"+ConsoleColor.ANSI_RESET);
+		System.out.println(ConsoleColor.ANSI_BLUE+"======================================================="+ConsoleColor.ANSI_RESET);
 	}
 	
 	public void rundeSpielen(){
@@ -241,7 +199,7 @@ public class Spiel implements Serializable {
 		for(int i = 0; i < spieler.length; i++){
 			schiff = null;
 			System.out.println("===============================");
-			System.out.println(ANSI_BLUE+ "|| Spieler "+ANSI_RESET  +  spieler[i].getName()+ANSI_BLUE+" ist dran: ||" + ANSI_RESET);
+			System.out.println(ConsoleColor.ANSI_BLUE+ "|| Spieler "+ConsoleColor.ANSI_RESET  +  spieler[i].getName()+ConsoleColor.ANSI_BLUE+" ist dran: ||" + ConsoleColor.ANSI_RESET);
 			System.out.println("===============================");
 			System.out.println("");
 			if(spieler[i].schiffeOhneWartezeit()){
@@ -259,7 +217,7 @@ public class Spiel implements Serializable {
 					gegner = spieler[0];
 				}
 				System.out.println("--------------------------------------");
-				System.out.println(ANSI_PURPLE+"ÜBERSICHTS FELD VON SPIELER: " + spieler[i].getName() + " AUF SPIELER: " + gegner.getName()+ANSI_RESET);
+				System.out.println(ConsoleColor.ANSI_PURPLE+"ÜBERSICHTS FELD VON SPIELER: " + spieler[i].getName() + " AUF SPIELER: " + gegner.getName()+ConsoleColor.ANSI_RESET);
 				System.out.println("--------------------------------------");
 				System.out.println("");
 				System.out.println("");
@@ -285,9 +243,9 @@ public class Spiel implements Serializable {
 			} else {
 				System.out.println("");
 				System.out.println("");
-				System.out.println(ANSI_RED+"---------------------------------------------------------------"+ANSI_RESET);
-				System.out.println(ANSI_RED+"		DU HAST KEIN SCHIFF ZUR VERFÜGUNG		"+ANSI_RESET);
-				System.out.println(ANSI_RED+"---------------------------------------------------------------"+ANSI_RESET);
+				System.out.println(ConsoleColor.ANSI_RED+"---------------------------------------------------------------"+ConsoleColor.ANSI_RESET);
+				System.out.println(ConsoleColor.ANSI_RED+"		DU HAST KEIN SCHIFF ZUR VERFÜGUNG		"+ConsoleColor.ANSI_RESET);
+				System.out.println(ConsoleColor.ANSI_RED+"---------------------------------------------------------------"+ConsoleColor.ANSI_RESET);
 				System.out.println("");
 				System.out.println("");
 			}
@@ -364,13 +322,15 @@ public class Spiel implements Serializable {
 	 * @param position
 	 */
 	
-	public void menueSchiffartAuswahl(){
+	public void menueSchiffartAuswahl(ArrayList<Schiff> schiffe){
+		int anzahlSchiffe;
+		int schiffTyp;
 		do{
 			System.out.println("--------------");
 			System.out.println("|| SCHIFFE: ||");
 			System.out.println("--------------");
 			System.out.println("Bitte geben Sie an was für eine Art von Schiff auf dem Spielfeld platziert werden soll.");
-			System.out.println("[1 für "+ Spiel.ANSI_PURPLE + "Zerstörer" +Spiel.ANSI_RESET+ ", 2 für "+ Spiel.ANSI_YELLOW + "Fregatte" +Spiel.ANSI_RESET+", 3 für "+ Spiel.ANSI_RED + "Korvette" +Spiel.ANSI_RESET+  ", 4 für "+ Spiel.ANSI_GREEN + "Uboot" +Spiel.ANSI_RESET+ ", 5 keine weiteren]");
+			System.out.println("[1 für "+ ConsoleColor.ANSI_PURPLE + "Zerstörer" +ConsoleColor.ANSI_RESET+ ", 2 für "+ ConsoleColor.ANSI_YELLOW + "Fregatte" +ConsoleColor.ANSI_RESET+", 3 für "+ ConsoleColor.ANSI_RED + "Korvette" +ConsoleColor.ANSI_RESET+  ", 4 für "+ ConsoleColor.ANSI_GREEN + "Uboot" +ConsoleColor.ANSI_RESET+ ", 5 keine weiteren]");
 			schiffTyp = schiffeAuswahlGueltig(IO.readInt());
 			if(schiffTyp !=5){
 				System.out.println("---------------------------------------------------------------------------------------");
@@ -444,36 +404,40 @@ public class Spiel implements Serializable {
 	}
 
 	
-	public void schiffeAufFeldSetzen(){
+	public void schiffeAufFeldSetzen(ArrayList<Schiff> schiffe){
+		int ausrichtung;
+		int zeile;
+		int spalte;
+		int anzahlSchiffeGezeugt;
 		for (int i = 0 ; i< spieler.length; i++){		
 			anzahlSchiffeGezeugt = 0;		 
 			do {
 				System.out.println("");
 				System.out.println("");
-				System.out.println(ANSI_PURPLE+"--------------------------------------");
+				System.out.println(ConsoleColor.ANSI_PURPLE+"--------------------------------------");
 				System.out.println("--------------------------------------");
-				System.out.println("   SPIELER: " +ANSI_RESET+ spieler[i].getName().toUpperCase()+ANSI_PURPLE+" SCHIFFE PLATZIEREN:");
+				System.out.println("   SPIELER: " +ConsoleColor.ANSI_RESET+ spieler[i].getName().toUpperCase()+ConsoleColor.ANSI_PURPLE+" SCHIFFE PLATZIEREN:");
 				System.out.println("--------------------------------------");
-				System.out.println("--------------------------------------"+ANSI_RESET);
+				System.out.println("--------------------------------------"+ConsoleColor.ANSI_RESET);
 				System.out.println("");
 				System.out.println("");
 				System.out.println("----------------------------");
-				System.out.println("|| "+schiffe.get(anzahlSchiffeGezeugt).getName().toUpperCase()+ANSI_GREEN+ " platzieren: "+ANSI_RESET+ "||" );
+				System.out.println("|| "+schiffe.get(anzahlSchiffeGezeugt).getName().toUpperCase()+ConsoleColor.ANSI_GREEN+ " platzieren: "+ConsoleColor.ANSI_RESET+ "||" );
 				System.out.println("----------------------------");
 				System.out.println("");
 				System.out.println(spieler[i].getName() +", in welcher ZEILE soll das Schiff platziert werden? (Y-Achse)");
-				System.out.println(ANSI_GREEN+"--------------------------------------------------------------------------"+ANSI_RESET);
+				System.out.println(ConsoleColor.ANSI_GREEN+"--------------------------------------------------------------------------"+ConsoleColor.ANSI_RESET);
 				zeile = IO.readInt();
-				System.out.println(ANSI_GREEN+"--------------------------------------------------------------------------"+ANSI_RESET);
+				System.out.println(ConsoleColor.ANSI_GREEN+"--------------------------------------------------------------------------"+ConsoleColor.ANSI_RESET);
 				System.out.println(spieler[i].getName() +", in welcher SPALTE soll das Schiff plaziert werden? (X-Achse)");
-				System.out.println(ANSI_GREEN+"--------------------------------------------------------------------------"+ANSI_RESET);
+				System.out.println(ConsoleColor.ANSI_GREEN+"--------------------------------------------------------------------------"+ConsoleColor.ANSI_RESET);
 				spalte = IO.readInt();
 				System.out.println(spieler[i].getName() +", bitte geben Sie an ob ihr Schiff 1. Horizontal oder 2. Vertikal angeorndet werden soll");
 				ausrichtung = vertikalHorizontal(IO.readInt());
 				System.out.println("--------------------------------------------------------------");
 				System.out.println("|||| SPIELFELD VON SPIELER: " + spieler[i].getName() + " ||||");
 				System.out.println("--------------------------------------------------------------");
-				if (schiffPlazierbar(schiffe.get(anzahlSchiffeGezeugt), new Position(spalte, zeile), spieler[i], ausrichtung)){
+				if (spieler[i].getSpielfeld().schiffPlazierbar(schiffe.get(anzahlSchiffeGezeugt), new Position(spalte, zeile), ausrichtung)){
 					spieler[i].getSpielfeld().platziereSchiff(schiffe.get(anzahlSchiffeGezeugt), new Position(spalte, zeile), ausrichtung);
 					spieler[i].getSpielfeld().printSpielfeld();
 					anzahlSchiffeGezeugt++;
@@ -503,72 +467,7 @@ public class Spiel implements Serializable {
 		}
 	}
 	
-	public boolean schiffPlazierbar(Schiff schiff, Position position, Spieler spieler, int horizontal){		
-		// Schiff würde außerhalb Spielfeld liegen
-		if((position.getPositionY() <=0 || position.getPositonX() <=0)
-			|| (horizontal == 1 && (position.getPositonX() + schiff.getLaenge()-1 >= spieler.getSpielfeld().getSpielfeldgroesse()))
-			|| (horizontal == 0 && (position.getPositionY() + schiff.getLaenge()-1 >= spieler.getSpielfeld().getSpielfeldgroesse()))){
-				return false;
-		}
-		
-		Position[] positionen = new Position[schiff.getLaenge()];
-		positionen[0] = position;
-		for(int i = 1; i< positionen.length; i++){
-			if(horizontal ==1){
-				positionen[i] = new Position(position.getPositonX()+i, position.getPositionY());
-			}else{
-				positionen[i] = new Position(position.getPositonX(), position.getPositionY()+i);
-			}
-		}
-		ArrayList<Position> puffer = new ArrayList<Position>();
-		for(int i = 0; i< positionen.length; i++){
-			if(horizontal == 1){
-				if(i==0){
-					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()+1));
-					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()));
-					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()-1));
-					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()-1));
-					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()+1));
-				} else if (i == positionen.length-1){
-					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()-1));
-					puffer.add(new Position(positionen[i].getPositonX()+1, positionen[i].getPositionY()));
-					puffer.add(new Position(positionen[i].getPositonX()+1, positionen[i].getPositionY()+1));
-					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()-1));
-					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()+1));
-				}else{
-					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()-1));
-					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()+1));
-				}
-					
-				
-			}else{
-				if(i==0){
-					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()-1));
-					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()-1));
-					puffer.add(new Position(positionen[i].getPositonX()+1, positionen[i].getPositionY()-1));
-					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()));
-					puffer.add(new Position(position.getPositonX()+1, position.getPositionY()));
-				} else if (i == positionen.length-1){
-					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()));
-					puffer.add(new Position(position.getPositonX()-1, positionen[i].getPositionY()+1));
-					puffer.add(new Position(positionen[i].getPositonX(), positionen[i].getPositionY()+1));
-					puffer.add(new Position(positionen[i].getPositonX()+1, position.getPositionY()+1));
-					puffer.add(new Position(positionen[i].getPositonX()+1, positionen[i].getPositionY()));
-				}else{
-					puffer.add(new Position(positionen[i].getPositonX()-1, positionen[i].getPositionY()));
-					puffer.add(new Position(positionen[i].getPositonX()+1, positionen[i].getPositionY()));
-				}
-				
-			}
-			puffer.add(positionen[i]);
-		}
-		if(spieler.getSpielfeld().getSchiffByPosition(puffer) != null){
-			return false;
-		}else{
-			return true;
-		}
-	}
-		/**
+	/**
 	 * Willkommensmenü
 	 */
 	public void init(){
@@ -593,9 +492,9 @@ public class Spiel implements Serializable {
 		System.out.println("------------------------------------------------------------");
 		System.out.println("------------------------------------------------------------");
 		System.out.println("");
-		System.out.println(ANSI_GREEN+"		-------------------------------------");
+		System.out.println(ConsoleColor.ANSI_GREEN+"		-------------------------------------");
 		System.out.println("			   DAS SPIEL BEGINNT		");
-		System.out.println("		-------------------------------------"+ANSI_RESET);
+		System.out.println("		-------------------------------------"+ConsoleColor.ANSI_RESET);
 		System.out.println("");
 		System.out.println("");
 		System.out.println("--------------------");
