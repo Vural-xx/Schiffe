@@ -51,14 +51,14 @@ public class IO {
 	}
 	
 	// Einlesen eines int
-	public static int readInt(String errrorMassage) {
+	public static int readInt(String errorMessage) {
 		try {
 			eingabe = input.readLine();
 			Integer string_to_int = new Integer(eingabe);
 			return string_to_int.intValue();
 		}catch (Exception e) {
-			println(errrorMassage);
-			return readInt(errrorMassage);
+			println(errorMessage);
+			return readInt(errorMessage);
 		}
 	}
 
