@@ -225,6 +225,11 @@ public class Spiel implements Serializable {
 				System.out.println(spieler[i].getSpielfeld().printSchiffeMenu());
 				System.out.println("--------------------------------------------------------------------------");
 				auswahl = IO.readInt();
+				if(auswahl == 5){
+					SpielstandManager spielstandManager = new SpielstandManager();
+					spielstandManager.speicherMenu(this);
+					System.exit(0);
+				}
 				schiff = spieler[i].getSpielfeld().getZustaendigesSchiff(auswahl);
 				if(spieler.length > 2){
 					gegner = spielerAuswahlMenu(spieler[i]);
@@ -501,7 +506,7 @@ public class Spiel implements Serializable {
 			Spiel sp = spm.ladeMenu();
 			this.runde = sp.getRunde();
 			setSpieler(sp.getSpieler());
-			rundeSpielen();
+			spielen();
 		}
 		
 	}
