@@ -80,6 +80,12 @@ public class Spiel implements Serializable {
 				System.out.println("Spieler Nummer " +i+" bitte geben Sie ihren Namen an:");
 				System.out.println("----------------------------------------------------");
 				name = IO.readString();
+				while(spielerNameVergeben(name)){
+					System.out.println(ConsoleColor.ANSI_RED+"=============================================="+ConsoleColor.ANSI_RESET);
+					System.out.println(ConsoleColor.ANSI_RED+"Der Spielername ist bereits vergeben. Bitte wählen Sie einen anderen"+ConsoleColor.ANSI_RESET);
+					System.out.println(ConsoleColor.ANSI_RED+"=============================================="+ConsoleColor.ANSI_RESET);
+					name = IO.readString();
+				}
 				spieler[i-1] = new Spieler(name);
 			}
 		} else {
@@ -498,6 +504,15 @@ public class Spiel implements Serializable {
 			rundeSpielen();
 		}
 		
+	}
+	
+	public boolean spielerNameVergeben(String name){
+		for(int i =0; i< spieler.length; i++){
+			if(spieler[i] != null && spieler[i].getName().equals(name)){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public static void main(String[] args){
