@@ -5,6 +5,7 @@ package de.hs.bremen.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import de.hs.bremen.persistence.SpielstandManager;
 import helper.ConsoleColor;
 import helper.IO;
 
@@ -434,6 +435,8 @@ public class Spiel implements Serializable {
 	 */
 	public void init(){
 		int groesse;
+		int menuAuswahl = 2;
+		SpielstandManager spm = new SpielstandManager();
 		System.out.println("---------------------------------------");
 		System.out.println("|| Willkommen bei Schiffe versenken! ||");
 		System.out.println("---------------------------------------");
@@ -454,27 +457,47 @@ public class Spiel implements Serializable {
 		System.out.println("------------------------------------------------------------");
 		System.out.println("------------------------------------------------------------");
 		System.out.println("");
-		System.out.println(ConsoleColor.ANSI_GREEN+"		-------------------------------------");
-		System.out.println("			   DAS SPIEL BEGINNT		");
-		System.out.println("		-------------------------------------"+ConsoleColor.ANSI_RESET);
-		System.out.println("");
-		System.out.println("");
-		System.out.println("--------------------");
-		System.out.println("|| SPIELERANZAHL: ||");
-		System.out.println("--------------------");
-		System.out.println("");
-		System.out.println("Bitte geben Sie zunächst die Anzahl der Spieler an (2-6 Spieler):");
-		createSpieler(IO.readInt());
-		System.out.println("-----------------");
-		System.out.println("|| SPIELFELD: ||");
-		System.out.println("-----------------");
-		System.out.println("Einigen Sie sich nun bitte auf eine Größe ihres quadratischen Spielfelder (Mindestens 20x20 Felder groß)");
-		System.out.println("Wie groß soll ihr Spielfeld sein?");
-		System.out.println("---------------------------------");
-		groesse = IO.readInt();
-		createSpielfelder(groesse);
-		schiffePlatzieren();
-		spielen();
+		if(spm.spielstaendeVorhanden()){
+			System.out.println("Wollen Sie eine neues Spiel starten oder einen vorhandenen Spielstand laden");
+			System.out.println("Wählen Sie: 1 für Neues Spiel || 2 für Spielstand laden");
+			menuAuswahl = IO.readInt();
+			while(menuAuswahl < 1 && menuAuswahl >2){
+				System.out.println(ConsoleColor.ANSI_RED+"=============================================="+ConsoleColor.ANSI_RESET);
+				System.out.println(ConsoleColor.ANSI_RED+"Falsche Eingabe. Bitte versuchen Sie es erneut"+ConsoleColor.ANSI_RESET);
+				System.out.println(ConsoleColor.ANSI_RED+"=============================================="+ConsoleColor.ANSI_RESET);
+				System.out.println("Wählen Sie: 1 für Neues Spiel || 2 für Spielstand laden");
+				menuAuswahl = IO.readInt();
+			}
+		}
+		if(!spm.spielstaendeVorhanden() || menuAuswahl != 2){
+			System.out.println(ConsoleColor.ANSI_GREEN+"		-------------------------------------");
+			System.out.println("			   DAS SPIEL BEGINNT		");
+			System.out.println("		-------------------------------------"+ConsoleColor.ANSI_RESET);
+			System.out.println("");
+			System.out.println("");
+			System.out.println("--------------------");
+			System.out.println("|| SPIELERANZAHL: ||");
+			System.out.println("--------------------");
+			System.out.println("");
+			System.out.println("Bitte geben Sie zunächst die Anzahl der Spieler an (2-6 Spieler):");
+			createSpieler(IO.readInt());
+			System.out.println("-----------------");
+			System.out.println("|| SPIELFELD: ||");
+			System.out.println("-----------------");
+			System.out.println("Einigen Sie sich nun bitte auf eine Größe ihres quadratischen Spielfelder (Mindestens 20x20 Felder groß)");
+			System.out.println("Wie groß soll ihr Spielfeld sein?");
+			System.out.println("---------------------------------");
+			groesse = IO.readInt();
+			createSpielfelder(groesse);
+			schiffePlatzieren();
+			spielen();
+		}else{
+			Spiel sp = spm.ladeMenu();
+			this.runde = sp.getRunde();
+			setSpieler(sp.getSpieler());
+			rundeSpielen();
+		}
+		
 	}
 	
 	public static void main(String[] args){
