@@ -141,16 +141,12 @@ public class Spiel implements Serializable {
 	 * Funktion, ob Schiffe Horizontal oder Vertikal angeordnet werden sollen.
 	 */
 	public int vertikalHorizontal(int richtungsAbfrage){
-		int ausrichtung = 0;
-		if(richtungsAbfrage== 1){
-			ausrichtung = 1;
-		} else if (richtungsAbfrage == 2){
-		 	ausrichtung = 2;
+		if(richtungsAbfrage== 1 || richtungsAbfrage == 2){
+			return richtungsAbfrage;
 		} else {
 			System.out.println("Falsche Eingabe versuchen Sie es erneut:");
-			vertikalHorizontal(IO.readInt());
+			return vertikalHorizontal(IO.readInt());
 		}
-		return ausrichtung;
 	}
 	
 	/**
