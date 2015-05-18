@@ -45,7 +45,9 @@ public class IO {
 			return string_to_int.intValue();
 		}
 		catch (Exception e) {
-		  println("Falsche Eingabe. Bitte versuchen Sie es erneut");
+			println(ConsoleColor.ANSI_RED+"=============================================="+ConsoleColor.ANSI_RESET);
+			println(ConsoleColor.ANSI_RED+"Falsche Eingabe. Bitte versuchen Sie es erneut"+ConsoleColor.ANSI_RESET);
+			println(ConsoleColor.ANSI_RED+"=============================================="+ConsoleColor.ANSI_RESET);
 		  return readInt();
 		}
 	}

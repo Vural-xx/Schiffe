@@ -28,7 +28,6 @@ public class Spiel implements Serializable {
 	private final int maximaleSpieleranzahl= 6;
 	private final int maximaleSpielfeldgroesse= 40;
 	private final int minimaleSpielfeldgroesse= 20;
-	private int schiffAuswahlUebergabe;
 	
 	/**
 	 * Spieler die an dem Spiel beteiligt sind.
@@ -116,14 +115,14 @@ public class Spiel implements Serializable {
 	
 
 	
-	public void schiffeAuswahlGueltig(int auswahlZahl){
+	public int schiffeAuswahlGueltig(int auswahlZahl){
 		if(auswahlZahl >=1 && auswahlZahl <=5){		
-			schiffAuswahlUebergabe = auswahlZahl;
+			return auswahlZahl;
 		} else {
 			System.out.println(ConsoleColor.ANSI_RED+"========================================"+ConsoleColor.ANSI_RESET);
 			System.out.println(ConsoleColor.ANSI_RED+"Falsche Eingabe versuchen Sie es erneut:"+ConsoleColor.ANSI_RESET);
 			System.out.println(ConsoleColor.ANSI_RED+"========================================"+ConsoleColor.ANSI_RESET);
-			schiffeAuswahlGueltig(IO.readInt());
+			return schiffeAuswahlGueltig(IO.readInt());
 		}
 	}
 	
@@ -144,7 +143,9 @@ public class Spiel implements Serializable {
 		if(richtungsAbfrage== 1 || richtungsAbfrage == 2){
 			return richtungsAbfrage;
 		} else {
-			System.out.println("Falsche Eingabe versuchen Sie es erneut:");
+			System.out.println(ConsoleColor.ANSI_RED+"========================================"+ConsoleColor.ANSI_RESET);
+			System.out.println(ConsoleColor.ANSI_RED+"Falsche Eingabe versuchen Sie es erneut:"+ConsoleColor.ANSI_RESET);
+			System.out.println(ConsoleColor.ANSI_RED+"========================================"+ConsoleColor.ANSI_RESET);
 			return vertikalHorizontal(IO.readInt());
 		}
 	}
@@ -313,17 +314,19 @@ public class Spiel implements Serializable {
 	}
 	
 	public Spieler spielerAuswahlMenu(Spieler s){
-		System.out.println("Bitte wählen Sie den Spieler auf dessen Spielfeld Sie feuern möchten");
-		String spielerMenu ="Drücken Sie die ";
+		System.out.println("=====================================================================");
+		System.out.println("Bitte wählen Sie den Spieler auf dessen Spielfeld Sie feuern möchten.");
+		System.out.println("=====================================================================");
+		String spielerMenu =ConsoleColor.ANSI_PURPLE+"Drücken Sie: "+ConsoleColor.ANSI_RESET;
 		int auswahl;
 		int auswahlInMenu;
 		for(int i = 0 ; i < spieler.length; i++){
 			if(!s.getName().equals(spieler[i].getName())){
 				auswahlInMenu = i+1;
-				spielerMenu =spielerMenu+ auswahlInMenu +" für Spieler " + spieler[i].getName()+", " ;
+				spielerMenu =spielerMenu+ auswahlInMenu +ConsoleColor.ANSI_GREEN+" für Spieler "+ConsoleColor.ANSI_RESET + spieler[i].getName()+" || " ;
 			}
 		}
-		System.out.println(spielerMenu.substring(0, spielerMenu.length()-2));
+		System.out.println(spielerMenu.substring(0, spielerMenu.length()-3));
 		auswahl = IO.readInt();
 		return spieler[auswahl-1];
 		
@@ -345,8 +348,7 @@ public class Spiel implements Serializable {
 			System.out.println("--------------");
 			System.out.println("Bitte geben Sie an was für eine Art von Schiff auf dem Spielfeld platziert werden soll.");
 			System.out.println("[1 für "+ ConsoleColor.ANSI_PURPLE + "Zerstörer" +ConsoleColor.ANSI_RESET+ ", 2 für "+ ConsoleColor.ANSI_YELLOW + "Fregatte" +ConsoleColor.ANSI_RESET+", 3 für "+ ConsoleColor.ANSI_RED + "Korvette" +ConsoleColor.ANSI_RESET+  ", 4 für "+ ConsoleColor.ANSI_GREEN + "Uboot" +ConsoleColor.ANSI_RESET+ ", 5 keine weiteren]");
-			schiffeAuswahlGueltig(IO.readInt());
-			schiffTyp = schiffAuswahlUebergabe;
+			schiffTyp = schiffeAuswahlGueltig(IO.readInt());
 			if(schiffTyp !=5){
 				System.out.println("---------------------------------------------------------------------------------------");
 				System.out.println("Wieviele Schiffe von dem Schifftyp " + schiffeAuswahl(schiffTyp).getName()+" sollen gesetzt werden?");
