@@ -23,7 +23,7 @@ public class Spiel implements Serializable {
 	private static final long serialVersionUID = -4596970661321389454L;	
 	private final int maximaleSpieleranzahl= 6;
 	private final int maximaleSpielfeldgroesse= 40;
-	private final int minimaleSpielfeldgroesse= 20;
+	private final int minimaleSpielfeldgroesse= 10;
 	
 	/**
 	 * Spieler die an dem Spiel beteiligt sind.
@@ -126,15 +126,6 @@ public class Spiel implements Serializable {
 			System.out.println(ConsoleColor.ANSI_RED+"========================================"+ConsoleColor.ANSI_RESET);
 			return schiffeAuswahlGueltig(IO.readInt());
 		}
-	}
-	
-	
-	public void schiffAuswahlUebergabe(){
-		System.out.println(ConsoleColor.ANSI_RED+"========================================"+ConsoleColor.ANSI_RESET);
-		System.out.println(ConsoleColor.ANSI_RED+"Falsche Eingabe versuchen Sie es erneut:"+ConsoleColor.ANSI_RESET);
-		System.out.println(ConsoleColor.ANSI_RED+"========================================"+ConsoleColor.ANSI_RESET);
-		schiffeAuswahlGueltig(IO.readInt());
-		
 	}
 	
 	
@@ -506,7 +497,7 @@ public class Spiel implements Serializable {
 			spielen();
 		}else{
 			Spiel sp = spm.ladeMenu();
-			this.runde = sp.getRunde();
+			this.runde = sp.getRunde()-1;
 			setSpieler(sp.getSpieler());
 			spielen();
 		}

@@ -264,12 +264,17 @@ public class Spielfeld implements Serializable{
 	
 	public boolean schiffPlazierbar(Schiff schiff, Position position, int horizontal){		
 		// Schiff würde außerhalb Spielfeld liegen
-		if((position.getPositionY() <=0 || position.getPositonX() <=0)
+		if((position.getPositionY() == 1 || position.getPositonX() == 1)
+				|| (horizontal == 1 && (schiff.getLaenge()-1 >= getSpielfeldgroesse()))
+				|| (horizontal == 2 && (schiff.getLaenge()-1 >= getSpielfeldgroesse()))){
+				return true;
+		}
+				else if((position.getPositionY() <=0 || position.getPositonX() <=0)
 			|| (horizontal == 1 && (position.getPositonX() + schiff.getLaenge()-1 >= getSpielfeldgroesse()))
 			|| (horizontal == 2 && (position.getPositionY() + schiff.getLaenge()-1 >= getSpielfeldgroesse()))){
 				return false;
 		}
-		
+
 		Position[] positionen = new Position[schiff.getLaenge()];
 		positionen[0] = position;
 		for(int i = 1; i< positionen.length; i++){
