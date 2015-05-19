@@ -251,10 +251,20 @@ public class Spiel implements Serializable {
 				System.out.println(spieler[i].getName() +", , in welcher ZEILE soll geschossen werden? (Y-Achse)");
 				System.out.println("----------------------------------------------------------------");
 				zeile = IO.readInt();
+				while (zeile <= 0 || zeile > spieler[i].getSpielfeld().getSpielfeldgroesse()){
+					System.out.println(ConsoleColor.ANSI_RED+"Falsche Eingabe. Die Schussposition muss sich innerhalb des Spielfeldes befinden."+ConsoleColor.ANSI_RESET);
+					System.out.println("Versuchen Sie es erneut");
+					zeile = IO.readInt();
+				}
 				System.out.println("----------------------------------------------------------------");
 				System.out.println(spieler[i].getName() +" , in welcher SPALTE soll geschossen werden? (X-Achse)");
 				System.out.println("----------------------------------------------------------------");
 				spalte = IO.readInt();
+				while (spalte <=0 || spalte > spieler[i].getSpielfeld().getSpielfeldgroesse()){
+					System.out.println(ConsoleColor.ANSI_RED+"Falsche Eingabe. Die Schussposition muss sich innerhalb des Spielfeldes befinden."+ConsoleColor.ANSI_RESET);
+					System.out.println("Versuchen Sie es erneut");
+					zeile = IO.readInt();
+				}
 				System.out.println("");
 				schiff.feuern(new Position(spalte, zeile), gegner.getSpielfeldPublic());
 				gegner.trefferUebertragung();
