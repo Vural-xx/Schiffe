@@ -1,11 +1,10 @@
 package de.hs.bremen.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import de.hs.bremen.enums.Feldstatus;
 import helper.ConsoleColor;
-import helper.IO;
+
 
 /**
  * 
@@ -46,10 +45,6 @@ public class Spieler implements Serializable {
 		this.spielfeldPublic = spielfeldPublic;
 	}
 
-	/**
-	 * Indikator ob der Benutzer noch im Spiel ist.
-	 */
-	private boolean ausgeschieden;
 	
 	/**
 	 * Konstruktor
@@ -98,21 +93,7 @@ public class Spieler implements Serializable {
 	public void setSpielfeld(Spielfeld spielfeld) {
 		this.spielfeld = spielfeld;
 	}
-	
-	/**
-	 * Getter ausgeschieden.
-	 * @return: ausgeschieden.
-	 */
-
-	
-	/**
-	 * Setter ausgeschieden
-	 * @param ausgeschieden: ausgeschieden.
-	 */
-	public void setAusgeschieden(boolean ausgeschieden) {
-		this.ausgeschieden = ausgeschieden;
-	}
-	
+		
 	public boolean schiffeOhneWartezeit(){
 		for(int i=0; i< getSpielfeld().getSchiffe().size(); i++){
 			if(getSpielfeld().getSchiffe().get(i).getWartezeit() == 0){

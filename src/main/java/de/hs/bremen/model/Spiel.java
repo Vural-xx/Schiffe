@@ -5,8 +5,6 @@ package de.hs.bremen.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction;
-
 import de.hs.bremen.persistence.SpielstandManager;
 import helper.ConsoleColor;
 import helper.IO;

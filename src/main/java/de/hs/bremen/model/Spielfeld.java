@@ -188,6 +188,11 @@ public class Spielfeld implements Serializable{
 		return menu.substring(0, menu.length()-4);
 	}
 	
+	/**
+	 * Gint zudtändige Auswahlnummer zu dem jeweiligen Schiffsnamen.
+	 * @param name: Name dessen Auswahlnummern wiedergegeben werden soll
+	 * @return: Auswahlnummer zum dazugehörigen Schiffstyp.
+	 */
 	public int getAuswahlNummerByName(String name){
 		switch (name) {
 		case "Zerstoerer":
@@ -201,6 +206,11 @@ public class Spielfeld implements Serializable{
 		}
 	}
 	
+	/**
+	 * Gibt das erste zuständige Schiff, welches dem richtigen Schifftyp entspricht
+	 * @param auswahl: Auswahlnummer des Schifftyps
+	 * @return: Zuständiges Schiff aus Array der Schiffe.
+	 */
 	public Schiff getZustaendigesSchiff(int auswahl){
 		for(int i=0; i < schiffe.size(); i++){
 			if(getSchifftypByNumber(auswahl).equals(schiffe.get(i).getName())){
@@ -210,6 +220,11 @@ public class Spielfeld implements Serializable{
 		return null;
 	}
 	
+	/**
+	 * Gibt den Schifftypnamen zu der dazugehörigen Nummer im Auswahlmenü.
+	 * @param auswahl: Auswahl die eingegeben wurde.
+	 * @return: Schifftypnamen.
+	 */
 	public String getSchifftypByNumber(int auswahl){
 		switch (auswahl) {
 		case 1:
@@ -223,6 +238,10 @@ public class Spielfeld implements Serializable{
 		}
 	}	
 	
+	/**
+	 * Platziert Feuer auf Feld, die der Position angehört.
+	 * @param position: Position auf dessen Feld gefeuert werden soll.
+	 */
 	public void feuerPlatzieren(Position position){
 		for(int i = 0 ; i < felder.length; i++){
 			for (int j = 0 ; j < felder[i].length; j++){
@@ -233,6 +252,10 @@ public class Spielfeld implements Serializable{
 		}
 	}
 	
+	/**
+	 * Platziert Feuer auf Feldern, die den Positionen angehören.
+	 * @param position: Position auf dessen Feld gefeuert werden soll.
+	 */
 	public void feuerPlatzieren(Position[] position){
 		for(int i = 0; i <position.length; i++){
 			if(position[i] != null){
@@ -241,6 +264,11 @@ public class Spielfeld implements Serializable{
 		}
 	}
 	
+	/**
+	 * Gibt Schiff anhand einer Position wieder
+	 * @param position: Position die auf ein Schiff überprüft werden soll.
+	 * @return: Schiff welches sich an der Position befindet, oder null wenn kein Schiff vorhanden.
+	 */
 	public Schiff getSchiffByPosition(Position position){
 		for(int i = 0; i<schiffe.size(); i++){
 			for(int j = 0; j<schiffe.get(i).getFelder().length; j++)
@@ -251,6 +279,11 @@ public class Spielfeld implements Serializable{
 		return null;
 	}
 	
+	/**
+	 * Gibt Schiff anhand mehrerer Positionen wieder
+	 * @param position: Positionen die auf ein Schiff überprüft werden sollen.
+	 * @return: Schiff welches sich an den Positionen befindet, oder null wenn kein Schiff vorhanden.
+	 */
 	public Schiff getSchiffByPosition(ArrayList<Position>position){
 		Schiff schiff = null;
 		for(int i = 0; i<position.size(); i++){
@@ -262,6 +295,13 @@ public class Spielfeld implements Serializable{
 		return schiff;
 	}
 	
+	/**
+	 * Gibt an ob ein schiff an einer Position auf dem Spielfeld platziert werden kann.
+	 * @param schiff: Schiff welches platziert soll.
+	 * @param position: Position auf dem das Schiff platziert werden soll.
+	 * @param horizontal: Angabe ob das Schiff horizontal oder vertikal platziert werden soll.
+	 * @return: Angabe ob Schiff platziert werden darf.
+	 */
 	public boolean schiffPlazierbar(Schiff schiff, Position position, int horizontal){		
 		// Schiff würde außerhalb Spielfeld liegen
 		if((position.getPositionY() == 1 || position.getPositonX() == 1)
