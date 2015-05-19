@@ -222,7 +222,9 @@ public class Spiel implements Serializable {
 				auswahl = IO.readInt();
 				if(auswahl == 5){
 					SpielstandManager spielstandManager = new SpielstandManager();
-					spieler[i].setIstDran(true);
+					if(i !=0){
+						spieler[i].setIstDran(true);
+					}
 					spielstandManager.speicherMenu(this);
 					System.exit(0);
 				}
@@ -517,22 +519,14 @@ public class Spiel implements Serializable {
 		return false;
 	}
 	
-	public void resetActiveSpieler(){
-		for(int i =0; i< spieler.length; i++){
-			if(spieler[i].isIstDran()){
-				spieler[i].setIstDran(false);
-			}
-		}
-	}
-	
 	public int getActiveSpielerIndex(){
 		int index = 0;
 		for(int i=0; i < getSpieler().length; i++){
 			if(spieler[i].isIstDran()){
+				spieler[i].setIstDran(false);
 				index = i;
 			}
 		}
-		resetActiveSpieler();
 		return index;
 	}
 	
