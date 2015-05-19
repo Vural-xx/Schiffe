@@ -1,5 +1,6 @@
 package de.hs.bremen.persistence;
 
+import helper.ConsoleColor;
 import helper.IO;
 
 import java.io.File;
@@ -12,6 +13,17 @@ public class SpielstandManager {
 		File folder = new File("src/temp");
 		File[] listOfFiles = folder.listFiles();
 		return listOfFiles!= null;
+	}
+	
+	public boolean spielstandVorhanden(String name, int index){
+		File folder = new File("src/temp");
+		File[] listOfFiles = folder.listFiles();
+		for(int i = 0 ; i <listOfFiles.length; i++){
+			if(listOfFiles[i].getName().equals(name) && i !=index){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public Spiel ladeMenu(){
@@ -56,8 +68,18 @@ public class SpielstandManager {
 		System.out.println("Bitte geben Sie den Namen des Speicherstandes an");
 		spielstandName = IO.readString();
 		if(spielstand >= listOfFiles.length){
+			while (spielstandVorhanden(spielstandName, listOfFiles.length)){
+				System.out.println(ConsoleColor.ANSI_RED+"Es gibt bereits einen Spielstand mit diesem Namen."+ConsoleColor.ANSI_RESET);
+				System.out.println("Geben Sie einen anderen Namen an");
+				spielstandName = IO.readString();
+			}
 			opm.spielstandSpeichern(spiel, spielstandName);
 		}else{
+			while (spielstandVorhanden(spielstandName, spielstand-1)){
+				System.out.println(ConsoleColor.ANSI_RED+"Es gibt bereits einen Spielstand mit diesem Namen."+ConsoleColor.ANSI_RESET);
+				System.out.println("Geben Sie einen anderen Namen an");
+				spielstandName = IO.readString();
+			}
 			if(listOfFiles[spielstand-1].getName().equals(spielstandName)){
 				opm.spielstandSpeichern(spiel, spielstandName);
 			}else{
