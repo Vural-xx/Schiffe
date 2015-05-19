@@ -504,7 +504,6 @@ public class Spiel implements Serializable {
 			Spiel sp = spm.ladeMenu();
 			this.runde = sp.getRunde()-1;
 			setSpieler(sp.getSpieler());
-			resetActiveSpieler();
 			spielen();
 		}
 		
