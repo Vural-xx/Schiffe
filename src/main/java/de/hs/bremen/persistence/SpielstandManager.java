@@ -7,14 +7,30 @@ import java.io.File;
 
 import de.hs.bremen.model.Spiel;
 
+/**
+ * Klasse die Methoden zum Speichern und Laden beinhaltet.
+ * @author vural
+ *
+ */
 public class SpielstandManager {
 
+	/**
+	 * Zeigt an, ob es schon Spielstände gibt.
+	 * @return
+	 */
 	public boolean spielstaendeVorhanden(){
 		File folder = new File("src/temp");
 		File[] listOfFiles = folder.listFiles();
 		return listOfFiles!= null;
 	}
 	
+	/**
+	 * Zeigt an ob ein bestimmter Spielstandname schon vergeben wurde.
+	 * Nicht beachtet wird der Name des Spielstandes der den index vom Übergabeparameter index hat.
+	 * @param name: Name des Spielstandes der überprüft werden soll.
+	 * @param index: Index des Spielstandes dessen Name außer Acht gelassen werden soll.
+	 * @return: Ob Spielstandname bereits vergeben ist
+	 */
 	public boolean spielstandVorhanden(String name, int index){
 		File folder = new File("src/temp");
 		File[] listOfFiles = folder.listFiles();
@@ -26,6 +42,10 @@ public class SpielstandManager {
 		return false;
 	}
 	
+	/**
+	 * Das Lademenü zum Laden von bereits vorhandenen Spielständen.
+	 * @return: Spiel das geladen wurde
+	 */
 	public Spiel ladeMenu(){
 		int spielstand;
 		String ladeMenu = "";
@@ -44,6 +64,10 @@ public class SpielstandManager {
 	
 	}
 	
+	/**
+	 * Das Menü zum Speichern des jetzigen Spielzustandes.
+	 * @param spiel: Spielobjekt welches gespeichert werden soll.
+	 */
 	public void speicherMenu(Spiel spiel){
 		int spielstand;
 		String spielstandName;
