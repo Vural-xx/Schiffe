@@ -5,6 +5,8 @@ package de.hs.bremen.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction;
+
 import de.hs.bremen.persistence.SpielstandManager;
 import helper.ConsoleColor;
 import helper.IO;
@@ -206,7 +208,7 @@ public class Spiel implements Serializable {
 		int zeile;
 		int spalte;
 		Spieler gegner = null;
-		for(int i = 0; i < spieler.length; i++){
+		for(int i = getActiveSpielerIndex(); i < spieler.length; i++){
 			schiff = null;
 			System.out.println("===============================");
 			System.out.println(ConsoleColor.ANSI_BLUE+ "|| Spieler "+ConsoleColor.ANSI_RESET  +  spieler[i].getName()+ConsoleColor.ANSI_BLUE+" ist dran: ||" + ConsoleColor.ANSI_RESET);
@@ -220,6 +222,7 @@ public class Spiel implements Serializable {
 				auswahl = IO.readInt();
 				if(auswahl == 5){
 					SpielstandManager spielstandManager = new SpielstandManager();
+					spieler[i].setIstDran(true);
 					spielstandManager.speicherMenu(this);
 					System.exit(0);
 				}
@@ -499,6 +502,7 @@ public class Spiel implements Serializable {
 			Spiel sp = spm.ladeMenu();
 			this.runde = sp.getRunde()-1;
 			setSpieler(sp.getSpieler());
+			resetActiveSpieler();
 			spielen();
 		}
 		
@@ -511,6 +515,25 @@ public class Spiel implements Serializable {
 			}
 		}
 		return false;
+	}
+	
+	public void resetActiveSpieler(){
+		for(int i =0; i< spieler.length; i++){
+			if(spieler[i].isIstDran()){
+				spieler[i].setIstDran(false);
+			}
+		}
+	}
+	
+	public int getActiveSpielerIndex(){
+		int index = 0;
+		for(int i=0; i < getSpieler().length; i++){
+			if(spieler[i].isIstDran()){
+				index = i;
+			}
+		}
+		resetActiveSpieler();
+		return index;
 	}
 	
 	public static void main(String[] args){

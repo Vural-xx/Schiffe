@@ -26,6 +26,7 @@ public class Spieler implements Serializable {
 	 */
 	private String name;
 	
+	private boolean istDran;
 	
 	/**
 	 * Jeder Spieler hat ein Spielfeld.
@@ -64,6 +65,14 @@ public class Spieler implements Serializable {
 	 */
 	public String getName() {
 		return name;
+	}
+	
+	public boolean isIstDran() {
+		return istDran;
+	}
+
+	public void setIstDran(boolean istDran) {
+		this.istDran = istDran;
 	}
 	
 	/**
@@ -158,5 +167,4 @@ public class Spieler implements Serializable {
 			}
 		}
 	}
-
 }
