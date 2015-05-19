@@ -162,7 +162,9 @@ public class Spiel implements Serializable {
 	}
 	
 	public void spielen(){
-		runde=1;
+		if (runde == 0){
+			runde=1;
+		}
 		ArrayList<Spieler> tempSpieler;
 		while(spieler.length>1){
 			tempSpieler=null;
