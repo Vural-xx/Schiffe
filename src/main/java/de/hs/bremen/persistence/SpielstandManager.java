@@ -59,6 +59,12 @@ public class SpielstandManager {
 		}
 		System.out.println(ladeMenu);
 		spielstand = IO.readInt();
+		while(spielstand <1 || spielstand >listOfFiles.length){
+			System.out.println(ConsoleColor.ANSI_RED+"========================================"+ConsoleColor.ANSI_RESET);
+			System.out.println(ConsoleColor.ANSI_RED+"Falsche Eingabe versuchen Sie es erneut:"+ConsoleColor.ANSI_RESET);
+			System.out.println(ConsoleColor.ANSI_RED+"========================================"+ConsoleColor.ANSI_RESET);
+			spielstand = IO.readInt();
+		}
 		
 		return opm.spielstandLaden(listOfFiles[spielstand-1].getName());
 	
@@ -88,6 +94,12 @@ public class SpielstandManager {
 		}
 		System.out.println(saveMenu);
 		spielstand = IO.readInt();
+		while(spielstand <1 || spielstand >4){
+			System.out.println(ConsoleColor.ANSI_RED+"========================================"+ConsoleColor.ANSI_RESET);
+			System.out.println(ConsoleColor.ANSI_RED+"Falsche Eingabe versuchen Sie es erneut:"+ConsoleColor.ANSI_RESET);
+			System.out.println(ConsoleColor.ANSI_RED+"========================================"+ConsoleColor.ANSI_RESET);
+			spielstand = IO.readInt();
+		}
 		
 		System.out.println("Bitte geben Sie den Namen des Speicherstandes an");
 		spielstandName = IO.readString();
