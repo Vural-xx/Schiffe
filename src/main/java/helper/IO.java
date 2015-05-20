@@ -14,29 +14,6 @@ public class IO {
           = new BufferedReader(new InputStreamReader(System.in));
 	public static String eingabe = "";
 
-	// Einlesen eines char
-	public static char readChar() {
-		try {
-			eingabe = input.readLine();
-			return eingabe.charAt(0);
-		}
-		catch(Exception e) {
-			return '\0';
-		}
-	}
-
-	// Einlesen eines short
-	public static short readShort() {
-		try {
-			eingabe = input.readLine();
-			Integer string_to_short = new Integer(eingabe);
-			return (short)string_to_short.intValue();
-		}
-		catch (Exception e) {
-			return 0;
-		}
-	}	
-
 	// Einlesen eines int
 	public static int readInt() {
 		try {
@@ -45,9 +22,9 @@ public class IO {
 			return string_to_int.intValue();
 		}
 		catch (Exception e) {
-			println(ConsoleColor.ANSI_RED+"=============================================="+ConsoleColor.ANSI_RESET);
-			println(ConsoleColor.ANSI_RED+"Falsche Eingabe. Bitte versuchen Sie es erneut"+ConsoleColor.ANSI_RESET);
-			println(ConsoleColor.ANSI_RED+"=============================================="+ConsoleColor.ANSI_RESET);
+			System.out.println(ConsoleColor.ANSI_RED+"=============================================="+ConsoleColor.ANSI_RESET);
+			System.out.println(ConsoleColor.ANSI_RED+"Falsche Eingabe. Bitte versuchen Sie es erneut"+ConsoleColor.ANSI_RESET);
+			System.out.println(ConsoleColor.ANSI_RED+"=============================================="+ConsoleColor.ANSI_RESET);
 		  return readInt();
 		}
 	}
@@ -59,44 +36,8 @@ public class IO {
 			Integer string_to_int = new Integer(eingabe);
 			return string_to_int.intValue();
 		}catch (Exception e) {
-			println(ConsoleColor.ANSI_RED+errorMessage+ConsoleColor.ANSI_RESET);
+			System.out.println(ConsoleColor.ANSI_RED+errorMessage+ConsoleColor.ANSI_RESET);
 			return readInt(errorMessage);
-		}
-	}
-
-	// Einlesen eines long
-	public static long readLong() {
-		try {
-			eingabe = input.readLine();
-			Long string_to_long = new Long(eingabe);
-			return string_to_long.longValue();
-		}
-		catch (Exception e) {
-			return 0L;
-		}
-	}
-
-	// Einlesen eines float
-	public static float readFloat() {
-		try {
-			eingabe = input.readLine();
-			Float string_to_float = new Float(eingabe);
-			return string_to_float.floatValue();
-		}
-		catch (Exception e) {
-			return 0.0F;
-		}
-	}
-
-	// Einlesen eines double
-	public static double readDouble() {
-		try {
-			eingabe = input.readLine();
-			Double string_to_double = new Double(eingabe);
-			return string_to_double.doubleValue();
-		}
-		catch (Exception e) {
-			return 0.0;
 		}
 	}
 
@@ -110,22 +51,6 @@ public class IO {
 		}
 	}
 	
-	// Ausgabe
-	public static void println(String s){
-		System.out.println(s);
-	}
-	
-	public static void print(String s){
-		System.out.print(s);
-	}
-	
-	public static void println(char s){
-		System.out.println(s);
-	}
-	
-	public static void print(char s){
-		System.out.print(s);
-	}
 }
 
 

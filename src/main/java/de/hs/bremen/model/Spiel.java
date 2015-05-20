@@ -5,6 +5,8 @@ package de.hs.bremen.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction;
+
 import de.hs.bremen.persistence.SpielstandManager;
 import helper.ConsoleColor;
 import helper.IO;
@@ -206,18 +208,27 @@ public class Spiel implements Serializable {
 		int zeile;
 		int spalte;
 		Spieler gegner = null;
+		ArrayList<Integer> moeglicheAuswahl;
 		for(int i = getActiveSpielerIndex(); i < spieler.length; i++){
 			schiff = null;
+			moeglicheAuswahl = null;
 			System.out.println("===============================");
 			System.out.println(ConsoleColor.ANSI_BLUE+ "|| Spieler "+ConsoleColor.ANSI_RESET  +  spieler[i].getName()+ConsoleColor.ANSI_BLUE+" ist dran: ||" + ConsoleColor.ANSI_RESET);
 			System.out.println("===============================");
 			System.out.println("");
 			if(spieler[i].schiffeOhneWartezeit()){
+				moeglicheAuswahl = spieler[i].getSpielfeld().getMoeglicheAuswahlSchiffMenu();
 				System.out.println("Spieler " +spieler[i].getName()+". Bitte wählen Sie ein Schiff mit dem Sie feuern wollen.");
 				System.out.println("--------------------------------------------------------------------------");
-				System.out.println(spieler[i].getSpielfeld().printSchiffeMenu());
+				System.out.println(spieler[i].getSpielfeld().getSchiffeMenuAsString(moeglicheAuswahl));
 				System.out.println("--------------------------------------------------------------------------");
 				auswahl = IO.readInt();
+				while(!moeglicheAuswahl.contains(auswahl)){
+					System.out.println(ConsoleColor.ANSI_RED+"=============================================="+ConsoleColor.ANSI_RESET);
+					System.out.println(ConsoleColor.ANSI_RED+"Falsche Eingabe. Bitte versuchen Sie es erneut"+ConsoleColor.ANSI_RESET);
+					System.out.println(ConsoleColor.ANSI_RED+"=============================================="+ConsoleColor.ANSI_RESET);
+					auswahl = IO.readInt();
+				}
 				if(auswahl == 5){
 					SpielstandManager spielstandManager = new SpielstandManager();
 					if(i !=0){
@@ -540,6 +551,15 @@ public class Spiel implements Serializable {
 	public static void main(String[] args){
 		Spiel spiel = new Spiel();
 		spiel.init();
+	}
+
+	public boolean korrekteAuswahl(int[] moeglichkeiten, int auswahl){
+		for(int m: moeglichkeiten){
+			if(m == auswahl){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 

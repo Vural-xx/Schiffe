@@ -2,10 +2,9 @@ package de.hs.bremen.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 import de.hs.bremen.enums.Feldstatus;
-import helper.IO;
+
 
 /**
  * Klasse für Spielfelder des Spielers auf dem die Schiffe platziert werden.
@@ -152,7 +151,7 @@ public class Spielfeld implements Serializable{
 			System.out.print(g + "\t");	
 			
 		}
-		IO.println(" ");
+		System.out.println(" ");
 		int g = 0;
 		for (Feld[] f: felder) {
 			if(g <= getSpielfeldgroesse()){
@@ -160,10 +159,10 @@ public class Spielfeld implements Serializable{
 				System.out.print(g + "\t");
 				}
 			for (Feld ff: f) {
-				IO.print(ff.getInhalt());
-	            IO.print("\t");
+				System.out.print(ff.getInhalt());
+	            System.out.print("\t");
 	         }
-	         IO.println("");
+	         System.out.println("");
 	         
 	    }
 	}	
@@ -172,20 +171,28 @@ public class Spielfeld implements Serializable{
 	 * Schiffauswahlmenü wird gebaut.
 	 * @return String
 	 */
-	public String printSchiffeMenu(){
-		String menu = "Wählen Sie:    ";
-		List<String> bereitsDrin = new ArrayList<String>();
-				
-		for(Schiff s: schiffe){
-			if(!bereitsDrin.contains(s.getName()) && !s.rundeAussetzen()){
-				bereitsDrin.add(s.getName());
-				menu = menu + " "+ getAuswahlNummerByName(s.getName()) +" für "+ s.getName() +" || ";
+	public String getSchiffeMenuAsString(ArrayList<Integer> moeglicheAuswahl){
+		String menu = "Wählen Sie:    ";				
+		for(Integer i: moeglicheAuswahl){
+			if(i != 5){
+				menu  = menu + " "+ i +" für "+ getSchifftypNameByNumber(i) +" || ";
 			}
-			
+		
 		}
 		menu = menu + "5 um das Spiel abzuspeichern || ";
 		// Die letzten Zeichen werden vom menü entfernt. In diesem Fall 4 Stück.
 		return menu.substring(0, menu.length()-4);
+	}
+	
+	public ArrayList<Integer> getMoeglicheAuswahlSchiffMenu(){
+		ArrayList<Integer> moeglicheAuswahl = new ArrayList<Integer>();		
+		for(Schiff s: schiffe){
+			if(!moeglicheAuswahl.contains(getAuswahlNummerByName(s.getName())) && !s.rundeAussetzen()){
+				moeglicheAuswahl.add(getAuswahlNummerByName(s.getName()));
+			}
+		}
+		moeglicheAuswahl.add(5);
+		return moeglicheAuswahl;
 	}
 	
 	/**
@@ -213,7 +220,7 @@ public class Spielfeld implements Serializable{
 	 */
 	public Schiff getZustaendigesSchiff(int auswahl){
 		for(int i=0; i < schiffe.size(); i++){
-			if(getSchifftypByNumber(auswahl).equals(schiffe.get(i).getName())){
+			if(getSchifftypNameByNumber(auswahl).equals(schiffe.get(i).getName())){
 				return schiffe.get(i);
 			}
 		}
@@ -225,7 +232,7 @@ public class Spielfeld implements Serializable{
 	 * @param auswahl: Auswahl die eingegeben wurde.
 	 * @return: Schifftypnamen.
 	 */
-	public String getSchifftypByNumber(int auswahl){
+	public String getSchifftypNameByNumber(int auswahl){
 		switch (auswahl) {
 		case 1:
 			return "Zerstoerer";
