@@ -330,11 +330,7 @@ public class Spiel implements Serializable {
 	 * @return: Passend oder nicht
 	 */
 	public boolean anzahlSchiffePassend(Spieler spieler, Schiff schiff, int anzahlSchiffe){
-		boolean passend = spieler.getSpielfeld().getPlaetzeBelegt() + schiff.getPlaetzeBelegung()* anzahlSchiffe < (spieler.getSpielfeld().getSpielfeldgroesse() * spieler.getSpielfeld().getSpielfeldgroesse());
-		if(!passend){
-			System.out.println("");
-		}
-		return passend;
+		return (spieler.getSpielfeld().getPlaetzeBelegt() + schiff.getPlaetzeBelegung()*anzahlSchiffe) < (spieler.getSpielfeld().getSpielfeldgroesse() * spieler.getSpielfeld().getSpielfeldgroesse());
 	}
 	
 	public Spieler spielerAuswahlMenu(Spieler s){

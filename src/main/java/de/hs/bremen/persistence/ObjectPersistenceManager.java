@@ -38,14 +38,12 @@ public class ObjectPersistenceManager implements PersistenceManager {
 			openForWriting("src/temp/"+datenquelle);
 			outputStream.writeObject(spiel);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			if(outputStream !=null){
 				try {
 					outputStream.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -58,17 +56,14 @@ public class ObjectPersistenceManager implements PersistenceManager {
 			openForReading("src/temp/"+datenquelle);
 			spiel = (Spiel)inputStream.readObject();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			if(outputStream !=null){
 				try {
 					outputStream.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -76,24 +71,4 @@ public class ObjectPersistenceManager implements PersistenceManager {
 		return spiel;
 	}
 	
-	public static void main(String[] args) {
-		Spiel spiel = new Spiel();
-		Spieler spieler[] = new Spieler[2];
-		spieler[0] = new Spieler("Horst");
-		spieler[1] = new Spieler("Hartmut");
-		spiel.setSpieler(spieler);
-		ObjectPersistenceManager pm = new ObjectPersistenceManager();
-		try {
-			pm.openForWriting("spiel");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		pm.spielstandSpeichern(spiel,"spiel");
-		Spiel geladenesSpiel = pm.spielstandLaden("spiel");
-		for(Spieler s: geladenesSpiel.getSpieler()){
-			System.out.println("Name - " + s.getName() );
-		}
-		
-	}
 }
