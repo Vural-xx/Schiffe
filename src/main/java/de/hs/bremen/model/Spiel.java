@@ -374,15 +374,23 @@ public class Spiel implements Serializable {
 				System.out.println("Wieviele Schiffe von dem Schifftyp " + schiffeAuswahl(schiffTyp).getName()+" sollen gesetzt werden?");
 				System.out.println("---------------------------------------------------------------------------------------");
 				anzahlSchiffe = IO.readInt();
-				if (anzahlSchiffePassend(spieler[0],schiffeAuswahl(schiffTyp), anzahlSchiffe)){
+				if (anzahlSchiffePassend(spieler[0],schiffeAuswahl(schiffTyp), anzahlSchiffe)&& anzahlSchiffe!=0){
 					for(int i= 0 ; i < anzahlSchiffe; i++){
 						schiffe.add(schiffeAuswahl(schiffTyp));
 					}
 				}else{
-					System.out.println(ConsoleColor.ANSI_RED+"============================================================================="+ConsoleColor.ANSI_RESET);
-					System.out.println(ConsoleColor.ANSI_RED+"Soviele Schiffe vom Schifftyp " +schiffeAuswahl(schiffTyp).getName()+ " passen nicht auf ihr Spielfeld!!!!!!"+ConsoleColor.ANSI_RESET);
-					System.out.println(ConsoleColor.ANSI_RED+"============================================================================="+ConsoleColor.ANSI_RESET);
-					System.out.println("");
+					if(anzahlSchiffe ==0){
+						System.out.println(ConsoleColor.ANSI_RED+"============================================================================="+ConsoleColor.ANSI_RESET);
+						System.out.println(ConsoleColor.ANSI_RED+"Die Anzahl vom Schifftyp " +schiffeAuswahl(schiffTyp).getName()+ " darf nicht gewählt werden!!!!!!"+ConsoleColor.ANSI_RESET);
+						System.out.println(ConsoleColor.ANSI_RED+"============================================================================="+ConsoleColor.ANSI_RESET);
+						System.out.println("");
+						
+					}else{
+						System.out.println(ConsoleColor.ANSI_RED+"============================================================================="+ConsoleColor.ANSI_RESET);
+						System.out.println(ConsoleColor.ANSI_RED+"Soviele Schiffe vom Schifftyp " +schiffeAuswahl(schiffTyp).getName()+ " passen nicht auf ihr Spielfeld!!!!!!"+ConsoleColor.ANSI_RESET);
+						System.out.println(ConsoleColor.ANSI_RED+"============================================================================="+ConsoleColor.ANSI_RESET);
+						System.out.println("");
+					}
 				}	
 			}
 		}while(schiffTyp != 5 && spieler[0].getSpielfeld().getMaximumAnzahlSchiffe() > schiffe.size());
