@@ -1,10 +1,9 @@
 package de.hs.bremen.persistence;
 
-import helper.ConsoleColor;
-import helper.IO;
-
 import java.io.File;
 
+import de.hs.bremen.helper.ConsoleColor;
+import de.hs.bremen.helper.IO;
 import de.hs.bremen.model.Spiel;
 
 /**

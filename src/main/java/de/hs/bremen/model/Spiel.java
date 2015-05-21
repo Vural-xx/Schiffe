@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 import javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction;
 
+import de.hs.bremen.helper.ConsoleColor;
+import de.hs.bremen.helper.IO;
 import de.hs.bremen.persistence.SpielstandManager;
-import helper.ConsoleColor;
-import helper.IO;
 
 /**
  * Klasse für Spiellogik.

@@ -1,11 +1,10 @@
 package de.hs.bremen.model;
 
-import helper.ConsoleColor;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
 import de.hs.bremen.enums.Feldstatus;
+import de.hs.bremen.helper.ConsoleColor;
 
 /**
  * Feldklasse.

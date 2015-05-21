@@ -1,4 +1,4 @@
-package helper;
+package de.hs.bremen.helper;
 
 /** 
  * macht das Einlesen von Einfachen Daten einfacher 
