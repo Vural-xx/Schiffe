@@ -508,7 +508,7 @@ public class Spiel implements Serializable {
 			System.out.println("-----------------");
 			System.out.println("|| SPIELFELD: ||");
 			System.out.println("-----------------");
-			System.out.println("Einigen Sie sich nun bitte auf eine Größe ihres quadratischen Spielfelder (Mindestens 20x20 Felder groß)");
+			System.out.println("Einigen Sie sich nun bitte auf eine Größe ihres quadratischen Spielfelder (Min. 10x10 Felder, max. 40x40 Felder)");
 			System.out.println("Wie groß soll ihr Spielfeld sein?");
 			System.out.println("---------------------------------");
 			groesse = IO.readInt();
