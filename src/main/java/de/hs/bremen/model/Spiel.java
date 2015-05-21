@@ -23,9 +23,9 @@ public class Spiel implements Serializable {
 	 * SerialVersionUID zum Speichern und Lesen
 	 */
 	private static final long serialVersionUID = -4596970661321389454L;	
-	private final int maximaleSpieleranzahl= 6;
-	private final int maximaleSpielfeldgroesse= 40;
-	private final int minimaleSpielfeldgroesse= 10;
+	private transient final int maximaleSpieleranzahl= 6;
+	private transient final int maximaleSpielfeldgroesse= 40;
+	private transient final int minimaleSpielfeldgroesse= 10;
 	
 	/**
 	 * Spieler die an dem Spiel beteiligt sind.
