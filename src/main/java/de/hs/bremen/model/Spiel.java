@@ -548,15 +548,6 @@ public class Spiel implements Serializable {
 		Spiel spiel = new Spiel();
 		spiel.init();
 	}
-
-	public boolean korrekteAuswahl(int[] moeglichkeiten, int auswahl){
-		for(int m: moeglichkeiten){
-			if(m == auswahl){
-				return true;
-			}
-		}
-		return false;
-	}
 	
 
 }
