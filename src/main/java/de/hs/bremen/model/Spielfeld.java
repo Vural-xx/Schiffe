@@ -23,8 +23,10 @@ public class Spielfeld implements Serializable{
 	 * Felder des Spielfelds.
 	 */
 	private Feld [][] felder;
-	
-	
+
+
+
+
 	/**
 	 * Schiffe auf dem Spielfeld
 	 */
@@ -34,6 +36,10 @@ public class Spielfeld implements Serializable{
 	 * Konstruktor, welche die Felder auf dem Spielfeld initialisiert.
 	 * @param groesse: Größe des Spielfelds
 	 */
+	
+	public Spielfeld(){
+		
+	}
 	public Spielfeld(int groesse){
 		createFelder(groesse);
 		schiffe = new ArrayList<Schiff>();

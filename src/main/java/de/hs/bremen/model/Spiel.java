@@ -26,6 +26,7 @@ public class Spiel implements Serializable {
 	private transient final int maximaleSpieleranzahl= 6;
 	private transient final int maximaleSpielfeldgroesse= 40;
 	private transient final int minimaleSpielfeldgroesse= 10;
+	private ComputerGegner testGegener= new ComputerGegner();
 	
 	/**
 	 * Spieler die an dem Spiel beteiligt sind.
@@ -462,6 +463,11 @@ public class Spiel implements Serializable {
 		}
 	}
 	
+
+	
+	
+
+	
 	/**
 	 * Willkommensmenü
 	 */
@@ -521,6 +527,9 @@ public class Spiel implements Serializable {
 			System.out.println("---------------------------------");
 			groesse = IO.readInt();
 			createSpielfelder(groesse);
+			// KI Spiefeldgrößen übergabe
+			testGegener.setSpielfeldGroesse(groesse);
+			// Ende
 			schiffePlatzieren();
 			spielen();
 		}else{
