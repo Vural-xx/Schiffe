@@ -20,10 +20,11 @@ public class Spielerfeld extends JPanel implements java.awt.event.MouseListener{
 	private static final long serialVersionUID = -9206943112708931485L;
 	private List<Feld> squares = new ArrayList<Feld>();
 	private int spielfeldGroesse;
-	
+	private int feldgroesse;
 
 	public Spielerfeld(int spielfeldGroesse, int feldgroesse) {
 		this.spielfeldGroesse = spielfeldGroesse;
+		this.feldgroesse = feldgroesse;
 		addMouseListener(this);
 		for(int i = 0; i <spielfeldGroesse/feldgroesse; i++){
 			addSquare(0, i*feldgroesse, feldgroesse, feldgroesse);
@@ -35,6 +36,22 @@ public class Spielerfeld extends JPanel implements java.awt.event.MouseListener{
 			}
 		}
 		setVisible(true);
+	}
+
+	public int getSpielfeldGroesse() {
+		return spielfeldGroesse;
+	}
+
+	public void setSpielfeldGroesse(int spielfeldGroesse) {
+		this.spielfeldGroesse = spielfeldGroesse;
+	}
+
+	public int getFeldgroesse() {
+		return feldgroesse;
+	}
+
+	public void setFeldgroesse(int feldgroesse) {
+		this.feldgroesse = feldgroesse;
 	}
 
 	public void addSquare(int x, int y, int width, int height) {
@@ -65,12 +82,12 @@ public class Spielerfeld extends JPanel implements java.awt.event.MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent ev) {
 		// TODO Auto-generated method stub
-		int xPosition =ev.getX()/30;
-		int yPosition  = ev.getY()/30;
+		int xPosition =ev.getX()/getFeldgroesse();
+		int yPosition  = ev.getY()/getFeldgroesse();
 		System.out.println("X-Position " + xPosition);
 		System.out.println("Y-Position " + yPosition);
 		System.out.println("Bin drin");
-		fillSquare(xPosition*30,(yPosition-1)*30,30,30,Color.RED);
+		fillSquare(xPosition*getFeldgroesse(),(yPosition)*getFeldgroesse(),getFeldgroesse(),getFeldgroesse(),Color.RED);
 		repaint();
 
 	}
