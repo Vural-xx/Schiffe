@@ -6,10 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class SpielerAuswahlGUI extends JPanel implements ActionListener {
+	private mainFrame parent;
 	
 	spielerNameGUI test = new spielerNameGUI();
 	private JButton spieler1;
@@ -32,7 +34,8 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	FlowLayout flowlayout= new FlowLayout();
 	
 	
-	public SpielerAuswahlGUI(){
+	public SpielerAuswahlGUI(mainFrame parent){
+		this.parent = parent;
 		
 		initComponents();
 		
@@ -101,7 +104,7 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		if(e.getSource() == spieler5)System.out.println("Spieler5");
 		if(e.getSource() == spieler6)System.out.println("Spieler6");
 		if(e.getSource() == weiter)this.test();
-		
+		parent.changeToSpielerNameGui();
 		
 	}
 	
