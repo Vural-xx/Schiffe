@@ -4,15 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.TextArea;
 import java.awt.Toolkit;
-
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 
@@ -161,13 +157,7 @@ public class SpielEinstellungen extends javax.swing.JFrame {
 		this.getContentPane().add(this.container2);
 		this.getContentPane().add(this.container3);
 		
-
-		
-		
-		
-		
-
-		
+	
 		
 		
 	}
