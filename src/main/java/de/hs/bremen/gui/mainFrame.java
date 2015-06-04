@@ -1,7 +1,10 @@
 package de.hs.bremen.gui;
 
+import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,8 +14,6 @@ import javax.swing.JFrame;
 public class mainFrame extends javax.swing.JFrame{
 	
 	
-	SpielerAuswahlGUI spielerauswahl;
-	spielerNameGUI spielername;
 	
 	private Toolkit t;
 	private int x=0,y=0,width=1280, height=768;
@@ -23,7 +24,6 @@ public class mainFrame extends javax.swing.JFrame{
 		
 		setTitle("Spieleinstellungen");
 		t=Toolkit.getDefaultToolkit();
-		
 		Dimension d= t.getScreenSize();
 		
 		x = (int)((d.getWidth() - width)/2);
@@ -35,7 +35,6 @@ public class mainFrame extends javax.swing.JFrame{
 		// Fixed JFrame
         setResizable(false);
         
-		
 		initComponents();
 		
 		
@@ -44,16 +43,13 @@ public class mainFrame extends javax.swing.JFrame{
 	
 	public void initComponents(){
 		getContentPane().setLayout(new GridBagLayout());
-		spielerauswahl = new SpielerAuswahlGUI(this);
-		getContentPane().add(spielerauswahl);
+
+		add(new HilfsGUI());
+
 		
 	}
 	
-	public void changeToSpielerNameGui(){
-		getContentPane().remove(spielerauswahl);
-		spielername = new spielerNameGUI();
-		getContentPane().add(spielername);
-	}
+
 	
 	
 	

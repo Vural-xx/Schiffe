@@ -4,14 +4,18 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.Color;
+
+import java.awt.event.*;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.OverlayLayout;
 
 public class SpielerAuswahlGUI extends JPanel implements ActionListener {
-	private mainFrame parent;
 	
 	spielerNameGUI test = new spielerNameGUI();
 	private JButton spieler1;
@@ -21,7 +25,6 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	private JButton spieler5;
 	private JButton spieler6;
 	
-	public JButton weiter;
 	// JPanel Public gesetzt. Kp bei Private zeigt er das die variablen nicht genutzt werden
 	
 	
@@ -34,13 +37,10 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	FlowLayout flowlayout= new FlowLayout();
 	
 	
-	public SpielerAuswahlGUI(mainFrame parent){
-		this.parent = parent;
+	public SpielerAuswahlGUI(){
 		
 		initComponents();
-		
-		
-		
+
 		setVisible(true);
 		
 }
@@ -69,9 +69,7 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		spieler5.addActionListener(this);
 		spieler6.addActionListener(this);
 		
-		weiter = new JButton("fortsetzen");
-		
-		weiter.addActionListener(this);
+
 		
 		spielerAnzahltext= new JLabel("Bitte wählen Sie die Spieleranzahl aus:");
 		container1_inhalt1.add(spielerAnzahltext);
@@ -84,7 +82,6 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		container1_inhalt2.add(spieler5);
 		container1_inhalt2.add(spieler6);
 		
-		container1_inhalt3.add(weiter);
 
 		
 		this.add(container1_inhalt1);
@@ -103,18 +100,10 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		if(e.getSource() == spieler4)System.out.println("Spieler4");
 		if(e.getSource() == spieler5)System.out.println("Spieler5");
 		if(e.getSource() == spieler6)System.out.println("Spieler6");
-		if(e.getSource() == weiter)this.test();
-		parent.changeToSpielerNameGui();
 		
 	}
 	
-	
-	public void test(){
-		
-		this.setVisible(false);
-		test.test1(true);
-		
-	}
+
 	
 
 	

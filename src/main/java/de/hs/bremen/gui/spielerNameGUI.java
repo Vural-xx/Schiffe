@@ -16,7 +16,8 @@ public class spielerNameGUI extends JPanel {
 	public spielerNameGUI(){
 		
 		initComponents();
-		setVisible(true);
+	
+		setVisible(false);
 		
 	}
 	
@@ -38,7 +39,6 @@ public class spielerNameGUI extends JPanel {
 
 	public void test1(boolean visible){
 		this.setVisible(visible);
-		initComponents();
 	}
 	
 	
