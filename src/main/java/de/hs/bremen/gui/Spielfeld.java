@@ -38,6 +38,7 @@ public class Spielfeld extends JFrame {
 	
 	private JTextArea textArea;
 	
+	private Spielerfeld spielerfeld;
 	
 	
 	public Spielfeld(){
@@ -86,10 +87,10 @@ public class Spielfeld extends JFrame {
 		menuBar.add(fileMenu);
 		setJMenuBar(menuBar);
 		
-		textArea = new JTextArea();
-		textArea.setBounds(100, 100, 200,300);
-		textArea.setBorder(new LineBorder(Color.BLACK));
-		getContentPane().add(textArea, BorderLayout.CENTER);
+		spielerfeld = new Spielerfeld(300, 30);
+		spielerfeld.setBorder(new LineBorder(Color.BLACK));
+
+		getContentPane().add(spielerfeld, BorderLayout.CENTER);
 	}
 	
 	public static void main(String[] args){
