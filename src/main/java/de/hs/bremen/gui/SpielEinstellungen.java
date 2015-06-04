@@ -69,93 +69,93 @@ public class SpielEinstellungen extends javax.swing.JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		this.initComponents();
+		initComponents();
 		setVisible(true);
 
 		
 	}
 	
 	private void initComponents(){
-		this.getContentPane().setLayout(new GridLayout(0,1,0,0));
+		getContentPane().setLayout(new GridLayout(0,1,0,0));
 		
 		FlowLayout flowlayout = new FlowLayout();
 		
-		this.container1=  new JPanel();
-		this.container2= new JPanel();
-		this.container3= new JPanel();
-		this.container1_inhalt1 = new JPanel();
-		this.container1_inhalt2=  new JPanel();
-		this.container2_inhalt1= new JPanel();
-		this.container2_inhalt2= new JPanel();
-		this.container3_inhalt1= new JPanel();
-		this.container3_inhalt2= new JPanel();
+		container1=  new JPanel();
+		container2= new JPanel();
+		container3= new JPanel();
+		container1_inhalt1 = new JPanel();
+		container1_inhalt2=  new JPanel();
+		container2_inhalt1= new JPanel();
+		container2_inhalt2= new JPanel();
+		container3_inhalt1= new JPanel();
+		container3_inhalt2= new JPanel();
 
 		
-		this.container1_inhalt2.setLayout(flowlayout);
+		container1_inhalt2.setLayout(flowlayout);
 		
-		this.spielerAnzahltext= new JLabel("Bitte wählen Sie die Spieleranzahl aus:");
-		this.container1_inhalt1.add(this.spielerAnzahltext);
+		spielerAnzahltext= new JLabel("Bitte wählen Sie die Spieleranzahl aus:");
+		container1_inhalt1.add(spielerAnzahltext);
 
 		
 		
-		this.spieler1 = new JButton("1");
-		this.spieler2 = new JButton("2");
-		this.spieler3 = new JButton("3");
-		this.spieler4 = new JButton("4");
-		this.spieler5 = new JButton("5");
-		this.spieler6 = new JButton("6");
+		spieler1 = new JButton("1");
+		spieler2 = new JButton("2");
+		spieler3 = new JButton("3");
+		spieler4 = new JButton("4");
+		spieler5 = new JButton("5");
+		spieler6 = new JButton("6");
 		
 		
-		this.container1_inhalt2.add(this.spieler1);
-		this.container1_inhalt2.add(this.spieler2);
-		this.container1_inhalt2.add(this.spieler3);
-		this.container1_inhalt2.add(this.spieler4);
-		this.container1_inhalt2.add(this.spieler5);
-		this.container1_inhalt2.add(this.spieler6);
+		container1_inhalt2.add(spieler1);
+		container1_inhalt2.add(spieler2);
+		container1_inhalt2.add(spieler3);
+		container1_inhalt2.add(spieler4);
+		container1_inhalt2.add(spieler5);
+		container1_inhalt2.add(spieler6);
 		
-		this.container1.add(this.container1_inhalt1, BorderLayout.CENTER);
-		this.container1.add(this.container1_inhalt2, BorderLayout.PAGE_END);
-		
-		
-		this.container2_inhalt2.setLayout(flowlayout);
+		container1.add(container1_inhalt1, BorderLayout.CENTER);
+		container1.add(container1_inhalt2, BorderLayout.PAGE_END);
 		
 		
-		this.zerstoererButton = new JButton("Zerstörer");
-		this.fregatteButton = new JButton("Fregatte");
-		this.korvetteButton = new JButton("Korvette");
-		this.ubootButton= new JButton("Uboot");
+		container2_inhalt2.setLayout(flowlayout);
+		
+		
+		zerstoererButton = new JButton("Zerstörer");
+		fregatteButton = new JButton("Fregatte");
+		korvetteButton = new JButton("Korvette");
+		ubootButton= new JButton("Uboot");
 				
-		this.schiffAuswahltext= new JLabel("Bitte wählen Sie ein Schiff aus:");
-		this.container2_inhalt1.add(this.schiffAuswahltext);
+		schiffAuswahltext= new JLabel("Bitte wählen Sie ein Schiff aus:");
+		container2_inhalt1.add(schiffAuswahltext);
 		
-		this.container2_inhalt2.add(this.zerstoererButton);
-		this.container2_inhalt2.add(this.fregatteButton);
-		this.container2_inhalt2.add(this.korvetteButton);
-		this.container2_inhalt2.add(this.ubootButton);
-		
-		
-		
-		
-		this.container2.add(this.container2_inhalt1, BorderLayout.PAGE_START);
-		this.container2.add(this.container2_inhalt2, BorderLayout.CENTER);
-		
-		
-		this.schiffAnzahltext= new JLabel("Bitte geben Sie die Anzahl an Schiffen ihres Schifftyps ein:");
-		this.container3_inhalt1.add(this.schiffAnzahltext);
-		
-		this.schiffAnzahleingabe= new JTextField("           ");
-		this.container3_inhalt2.add(schiffAnzahleingabe);
-		
-		this.container3.setLayout(new BorderLayout());
-		
-		this.container3.add(this.container3_inhalt1, BorderLayout.PAGE_START);
-		this.container3.add(this.container3_inhalt2, BorderLayout.CENTER);
+		container2_inhalt2.add(zerstoererButton);
+		container2_inhalt2.add(fregatteButton);
+		container2_inhalt2.add(korvetteButton);
+		container2_inhalt2.add(ubootButton);
 		
 		
 		
-		this.getContentPane().add(this.container1);
-		this.getContentPane().add(this.container2);
-		this.getContentPane().add(this.container3);
+		
+		container2.add(container2_inhalt1, BorderLayout.PAGE_START);
+		container2.add(container2_inhalt2, BorderLayout.CENTER);
+		
+		
+		schiffAnzahltext= new JLabel("Bitte geben Sie die Anzahl an Schiffen ihres Schifftyps ein:");
+		container3_inhalt1.add(schiffAnzahltext);
+		
+		schiffAnzahleingabe= new JTextField("           ");
+		container3_inhalt2.add(schiffAnzahleingabe);
+		
+		container3.setLayout(new BorderLayout());
+		
+		container3.add(container3_inhalt1, BorderLayout.PAGE_START);
+		container3.add(container3_inhalt2, BorderLayout.CENTER);
+		
+		
+		
+		getContentPane().add(container1);
+		getContentPane().add(container2);
+		getContentPane().add(container3);
 		
 	
 		
