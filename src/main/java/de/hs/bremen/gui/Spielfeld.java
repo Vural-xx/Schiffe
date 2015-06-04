@@ -68,11 +68,11 @@ public class Spielfeld extends JFrame {
 		BoxLayout box = new BoxLayout(container, BoxLayout.Y_AXIS);
 		
 	
-		getContentPane().setLayout(new BorderLayout(5,5));
+		/*getContentPane().setLayout(new BorderLayout(5,5));
 		container.add(button1);
 		container.add(button2);
 		container.add(button3);
-		getContentPane().add(container, BorderLayout.LINE_END);
+		getContentPane().add(container, BorderLayout.LINE_END);*/
 		
 		// Menu bauen
 		menuBar = new JMenuBar();
@@ -86,10 +86,10 @@ public class Spielfeld extends JFrame {
 		menuBar.add(fileMenu);
 		setJMenuBar(menuBar);
 		
-		textArea = new JTextArea();
+	/*	textArea = new JTextArea();
 		textArea.setBounds(100, 100, 200,300);
 		textArea.setBorder(new LineBorder(Color.BLACK));
-		getContentPane().add(textArea, BorderLayout.CENTER);
+		getContentPane().add(textArea, BorderLayout.CENTER);*/
 	}
 	
 	public static void main(String[] args){
