@@ -144,6 +144,15 @@ public class Spielfeld implements Serializable{
 	}
 	
 	/**
+	 * Anzahl der maximalen Schiffe, die auf dem Spielfeld für das im Parameter übergebene
+	 * Schiff platziert werden können.
+	 * @return
+	 */
+	public int getMaximumAnzahlSchiffeForSchiff(Schiff schiff){
+		return (getSpielfeldgroesse() * getSpielfeldgroesse()) / schiff.getPlaetzeBelegung();
+	}
+	
+	/**
 	 * Spielfeld wird ausgedruckt.
 	 */
 	public void printSpielfeld(){
