@@ -88,20 +88,22 @@ public class Spielfeld extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		/*//Design Schiffe setzen
+		//Design Schiffe setzen
 		textLabel3 = new JLabel("Herzlich Willkommen bei Schiffe versenken!");
 		textLabel4 = new JLabel("Spieler 1 ist dran. Bitte setze deine Schiffe");
-		button1 = new JButton("Fertig");
+		button1 = new JButton("Fertig");//doppelt
+		textField = new JTextField();	//doppelt
+		textField.setColumns(2);
 		
 		container5 = new JPanel();
-		container5.setLayout(new BoxLayout(container1, BoxLayout.PAGE_AXIS));
+		container5.setLayout(new BoxLayout(container5, BoxLayout.PAGE_AXIS));
 		container5.add(textField);
 		container5.add(Box.createRigidArea(new Dimension(0, 0)));
 		container5.add(Box.createVerticalGlue());
 		container5.add(button1);
 		
 		container6 = new JPanel();
-		container6.setLayout(new BoxLayout(container2, BoxLayout.PAGE_AXIS));
+		container6.setLayout(new BoxLayout(container6, BoxLayout.PAGE_AXIS));
 		container6.add(textLabel4);
 		container6.add(spiel.squares);
 		
@@ -110,13 +112,13 @@ public class Spielfeld extends JFrame {
 		getContentPane().setLayout(new BorderLayout(5,5));
 		this.add(textLabel3, BorderLayout.NORTH);
 		this.add(container6, BorderLayout.CENTER);
-		this.add(container5, BorderLayout.EAST);*/
+		this.add(container5, BorderLayout.EAST);
 		
 		
 		
 
 		
-		textLabel1 = new JLabel("Wähle das Schiff zum feuern");
+		/*textLabel1 = new JLabel("Wähle das Schiff zum feuern");
 		textLabel2 = new JLabel("Spieler 1");
 		
 		button1 = new JButton("Fertig");
@@ -161,7 +163,7 @@ public class Spielfeld extends JFrame {
 		this.add(container,BorderLayout.PAGE_START);
 		this.add(container1, BorderLayout.WEST);
 		this.add(container2, BorderLayout.CENTER);
-		this.add(tab, BorderLayout.EAST);
+		this.add(tab, BorderLayout.EAST);*/
 		
 
 		
