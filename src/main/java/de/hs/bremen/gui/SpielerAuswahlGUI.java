@@ -25,9 +25,17 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	private JButton spieler5;
 	private JButton spieler6;
 	
+	private int a;
+	
 	// JPanel Public gesetzt. Kp bei Private zeigt er das die variablen nicht genutzt werden
 	
 	
+	public int getA() {
+		return a;
+	}
+	public void setA(int a) {
+		this.a = a;
+	}
 	public JPanel container1_inhalt1;
 	public JPanel container1_inhalt2;
 	public JPanel container1_inhalt3;
@@ -94,16 +102,19 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// Warum ich hier keine Klammern setzen muss kp.. geht auch so. vll ja mit klammer besser
-		if(e.getSource() == spieler1)System.out.println("Spieler1");
-		if(e.getSource() == spieler2)System.out.println("Spieler2");
-		if(e.getSource() == spieler3)System.out.println("Spieler3");
-		if(e.getSource() == spieler4)System.out.println("Spieler4");
-		if(e.getSource() == spieler5)System.out.println("Spieler5");
-		if(e.getSource() == spieler6)System.out.println("Spieler6");
+		if(e.getSource() == spieler1)auswahlZahlSpieler(1);
+		if(e.getSource() == spieler2)auswahlZahlSpieler(2);
+		if(e.getSource() == spieler3)auswahlZahlSpieler(3);
+		if(e.getSource() == spieler4)auswahlZahlSpieler(4);
+		if(e.getSource() == spieler5)auswahlZahlSpieler(5);
+		if(e.getSource() == spieler6)auswahlZahlSpieler(6);
 		
 	}
 	
-
+	public int auswahlZahlSpieler(int i){
+		a=i;
+		return i;
+	}
 	
 
 	

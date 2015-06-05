@@ -17,7 +17,11 @@ public class spielerNameGUI extends JPanel {
 	
 	public JPanel container1;
 	public JTextField spielerEingabe;
-	public int spieleranzahl=6;
+
+	
+
+
+
 	public JLabel spielernameAnfangsText;
 	
 	FlowLayout flowLayout;
@@ -41,7 +45,6 @@ public class spielerNameGUI extends JPanel {
 		spielernameAnfangsText= new JLabel("Bitte geben Sie ihren Spielernamen ein:");
 		container1.setLayout(new GridLayout(0,1));
 	
-		createFenster();
 		
 
 		
@@ -57,7 +60,7 @@ public class spielerNameGUI extends JPanel {
 		this.setVisible(visible);
 	}
 	
-	public void createFenster(){
+	public void createNameFenster(int spieleranzahl){
 		for(int i= 1; i <=spieleranzahl; i++){
 			
 			spielerEingabe= new JTextField();
@@ -73,7 +76,9 @@ public class spielerNameGUI extends JPanel {
 		}
 		
 	}
-	
+
+
+
 	
 
 }

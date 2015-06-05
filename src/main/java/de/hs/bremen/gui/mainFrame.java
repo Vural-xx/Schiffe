@@ -75,6 +75,8 @@ public class mainFrame extends javax.swing.JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+			int zahlSpieler = spielerAuswahlGUI.getA();
+			spielerNameGUI.createNameFenster(zahlSpieler);
 			spielerAuswahlGUI.setVisible(false);
 			spielerNameGUI.setVisible(true);
 				
