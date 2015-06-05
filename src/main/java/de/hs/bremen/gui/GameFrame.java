@@ -21,7 +21,7 @@ public class GameFrame extends JFrame implements java.awt.event.MouseListener {
 	      squares = new Squares();
 	      getContentPane().add(squares);
 	      addMouseListener(this);
-	      for(int i = 0; i <=10; i++){
+	      for(int i = 0; i <10; i++){
 	    	  squares.addSquare(0, i*30, 30, 30);
 	    	  squares.addSquare(i*30, 0, 30, 30);
 	    	  if(i != 0){
