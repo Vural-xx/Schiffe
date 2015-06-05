@@ -15,9 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
 
-public class SpielerAuswahlGUI extends JPanel implements ActionListener {
+public class SpielerAuswahlGUI extends JPanel{
 	
-	spielerNameGUI test = new spielerNameGUI();
 	private JButton spieler1;
 	private JButton spieler2;
 	private JButton spieler3;
@@ -51,7 +50,7 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 
 		setVisible(true);
 		
-}
+	}
 	public void initComponents(){
 		
 		this.setLayout(new GridLayout(0,1,0,0));
@@ -69,16 +68,7 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		spieler4 = new JButton("4");
 		spieler5 = new JButton("5");
 		spieler6 = new JButton("6");
-		
-		spieler1.addActionListener(this);
-		spieler2.addActionListener(this);
-		spieler3.addActionListener(this);
-		spieler4.addActionListener(this);
-		spieler5.addActionListener(this);
-		spieler6.addActionListener(this);
-		
-
-		
+				
 		spielerAnzahltext= new JLabel("Bitte wählen Sie die Spieleranzahl aus:");
 		container1_inhalt1.add(spielerAnzahltext);
 		
@@ -99,17 +89,19 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		
 		
 	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// Warum ich hier keine Klammern setzen muss kp.. geht auch so. vll ja mit klammer besser
-		if(e.getSource() == spieler1)auswahlZahlSpieler(1);
-		if(e.getSource() == spieler2)auswahlZahlSpieler(2);
-		if(e.getSource() == spieler3)auswahlZahlSpieler(3);
-		if(e.getSource() == spieler4)auswahlZahlSpieler(4);
-		if(e.getSource() == spieler5)auswahlZahlSpieler(5);
-		if(e.getSource() == spieler6)auswahlZahlSpieler(6);
-		
-	}
+	
+	/**
+     * Funktionen bereitstellen, mit denen man später aus
+     * dem Controller die nötigen Listener hinzufügen kann
+     */
+    public void setActionListener(ActionListener l){
+    	spieler1.addActionListener(l);
+		spieler2.addActionListener(l);
+		spieler3.addActionListener(l);
+		spieler4.addActionListener(l);
+		spieler5.addActionListener(l);
+		spieler6.addActionListener(l);
+    }
 	
 	public int auswahlZahlSpieler(int i){
 		a=i;
@@ -117,7 +109,7 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	}
 	
 
-	
+
 	
 	
 	
