@@ -44,7 +44,7 @@ public class mainFrame extends javax.swing.JFrame{
 	public void initComponents(){
 		getContentPane().setLayout(new GridBagLayout());
 
-		add(new spielerNameGUI());
+		add(new schiffeAuswahlGUI());
 
 		
 	}

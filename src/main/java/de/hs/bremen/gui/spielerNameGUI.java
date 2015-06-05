@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -16,6 +17,9 @@ public class spielerNameGUI extends JPanel {
 	
 	public JPanel container1;
 	public JTextField spielerEingabe;
+	public JButton weiter;
+	public int spieleranzahl=6;
+	public JLabel spielernameAnfangsText;
 	
 	FlowLayout flowLayout;
 	
@@ -23,7 +27,7 @@ public class spielerNameGUI extends JPanel {
 	public spielerNameGUI(){
 		
 		initComponents();
-		createFenster();
+		
 		setVisible(true);
 		
 	}
@@ -32,14 +36,19 @@ public class spielerNameGUI extends JPanel {
 	
 	public void initComponents(){
 		
-		this.setLayout(new BorderLayout());
+		this.setLayout(new BorderLayout(0, 100));
 		flowLayout = new FlowLayout();
 		container1 = new JPanel();
+		spielernameAnfangsText= new JLabel("Bitte geben Sie ihren Spielernamen ein:");
 		container1.setLayout(new GridLayout(0,1));
 	
-	
+		createFenster();
 		
+		weiter= new JButton("weiter");
+		
+		this.add(spielernameAnfangsText, BorderLayout.PAGE_START);
 		this.add(container1);
+		this.add(weiter, BorderLayout.PAGE_END);
 		
 		
 	}
@@ -50,7 +59,7 @@ public class spielerNameGUI extends JPanel {
 	}
 	
 	public void createFenster(){
-		for(int i= 1; i <6; i++){
+		for(int i= 1; i <=spieleranzahl; i++){
 			
 			spielerEingabe= new JTextField();
 			spielerEingabe.setPreferredSize( new Dimension( 150, 24 ) );
