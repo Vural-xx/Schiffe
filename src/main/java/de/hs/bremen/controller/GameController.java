@@ -32,7 +32,7 @@ public class GameController{
 	
 	public void startGame(){
 		testFrame.add(new TestGui());
-		testFrame.repaint();
+		testFrame.revalidate();
 	}
 	
 	class spielerAuswahlListener implements ActionListener{
