@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 public class HilfsGUI extends JPanel implements ActionListener {
 	
-	spielerNameGUI spielerNameGUI = new spielerNameGUI();
+	SpielerNameGUI spielerNameGUI = new SpielerNameGUI();
 	SpielerAuswahlGUI spielerAuswahlGUI = new SpielerAuswahlGUI();
 	public JButton weiter;
 	JPanel container1;

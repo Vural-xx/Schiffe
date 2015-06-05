@@ -4,19 +4,21 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class spielerNameGUI extends JPanel {
+public class SpielerNameGUI extends JPanel {
 	
 	public JLabel spielerNametext;
 	
 	
 	public JPanel container1;
 	public JTextField spielerEingabe;
+	private JButton jButton;
 
 	
 
@@ -27,7 +29,7 @@ public class spielerNameGUI extends JPanel {
 	FlowLayout flowLayout;
 	
 	
-	public spielerNameGUI(){
+	public SpielerNameGUI(){
 		
 		initComponents();
 		
@@ -51,6 +53,7 @@ public class spielerNameGUI extends JPanel {
 		this.add(spielernameAnfangsText, BorderLayout.PAGE_START);
 		this.add(container1);
 
+		jButton = new JButton("Fertig");
 		
 		
 	}
@@ -75,6 +78,10 @@ public class spielerNameGUI extends JPanel {
 			
 		}
 		
+	}
+	
+	public void setActionListener(ActionListener l){
+		jButton.addActionListener(l);
 	}
 
 

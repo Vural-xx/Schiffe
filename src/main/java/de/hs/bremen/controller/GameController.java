@@ -3,11 +3,10 @@ package de.hs.bremen.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction;
+import javax.swing.JComponent;
 
 import de.hs.bremen.gui.SpielerAuswahlGUI;
-import de.hs.bremen.gui.TestFrame;
-import de.hs.bremen.gui.TestGui;
+import de.hs.bremen.gui.SpielerNameGUI;
 import de.hs.bremen.gui.mainFrame;
 import de.hs.bremen.model.Spieler;
 
@@ -23,27 +22,38 @@ public class GameController{
 	 */
 	private int runde;
 	private mainFrame mainFrame;
-	private TestFrame testFrame;
+	private JComponent currentComponent; 
 	
 	public GameController(){
-		testFrame = new TestFrame();
+		mainFrame = new mainFrame();
 		startGame();
 	}
 	
 	public void startGame(){
-		testFrame.add(new TestGui());
-		testFrame.revalidate();
+		currentComponent = new SpielerAuswahlGUI();
+		((SpielerAuswahlGUI) currentComponent).setActionListener(new SpielerAuswahlListener());
+		mainFrame.add(currentComponent);
+		mainFrame.revalidate();
 	}
 	
-	class spielerAuswahlListener implements ActionListener{
+	public void showSpielernamen(){
+		mainFrame.remove(currentComponent);
+		currentComponent = null;
+		currentComponent = new SpielerNameGUI();
+		((SpielerNameGUI)currentComponent).setActionListener(new SpielerNameListener());
+		mainFrame.add(currentComponent);
+		mainFrame.revalidate();
+	}
+	
+	class SpielerAuswahlListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
-        	/*
-        	if(e.getSource() == spieler1)auswahlZahlSpieler(1);
-    		if(e.getSource() == spieler2)auswahlZahlSpieler(2);
-    		if(e.getSource() == spieler3)auswahlZahlSpieler(3);
-    		if(e.getSource() == spieler4)auswahlZahlSpieler(4);
-    		if(e.getSource() == spieler5)auswahlZahlSpieler(5);
-    		if(e.getSource() == spieler6)auswahlZahlSpieler(6);*/
+        	System.out.println("Hallo");
+        	showSpielernamen();
+        }
+    }
+	
+	class SpielerNameListener implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
         	System.out.println("Hallo");
         }
     }
