@@ -66,16 +66,14 @@ public class schiffeAuswahlGUI extends JPanel {
 		
 		
 		zerstoererEingabe= new JTextField();
-		zerstoererEingabe.setPreferredSize(new Dimension(150, 24));
+		// muss man nur 1 mal definieren. alle anderen passen sich an
+		zerstoererEingabe.setPreferredSize(new Dimension(50, 24));
 		
 		fregatteEingabe= new JTextField();
-		fregatteEingabe.setPreferredSize(new Dimension(150, 24));
 		
 		korvetteEingabe= new JTextField();
-		korvetteEingabe.setPreferredSize(new Dimension(150, 24));
 		
 		ubootEingabe= new JTextField();
-		ubootEingabe.setPreferredSize(new Dimension(150, 24));
 		
 		container1_inhalt2.add(zerstoererEingabe);
 		container1_inhalt2.add(fregatteEingabe);
