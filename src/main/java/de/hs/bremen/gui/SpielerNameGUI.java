@@ -54,6 +54,7 @@ public class SpielerNameGUI extends JPanel {
 		this.add(container1);
 
 		jButton = new JButton("Fertig");
+		this.add(jButton);
 		
 		
 	}
