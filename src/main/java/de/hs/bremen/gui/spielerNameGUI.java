@@ -17,7 +17,6 @@ public class spielerNameGUI extends JPanel {
 	
 	public JPanel container1;
 	public JTextField spielerEingabe;
-	public JButton weiter;
 	public int spieleranzahl=6;
 	public JLabel spielernameAnfangsText;
 	
@@ -44,11 +43,11 @@ public class spielerNameGUI extends JPanel {
 	
 		createFenster();
 		
-		weiter= new JButton("weiter");
+
 		
 		this.add(spielernameAnfangsText, BorderLayout.PAGE_START);
 		this.add(container1);
-		this.add(weiter, BorderLayout.PAGE_END);
+
 		
 		
 	}

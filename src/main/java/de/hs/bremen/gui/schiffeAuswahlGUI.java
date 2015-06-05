@@ -26,8 +26,7 @@ public class schiffeAuswahlGUI extends JPanel {
 	public JTextField korvetteEingabe;
 	public JTextField ubootEingabe;
 	
-	public JButton weiter;
-	
+
 	
 	
 	public schiffeAuswahlGUI(){
@@ -43,7 +42,6 @@ public class schiffeAuswahlGUI extends JPanel {
 		container1= new JPanel();
 		container1_inhalt1= new JPanel();
 		container1_inhalt2= new JPanel();
-		weiter= new JButton("weiter");
 		container1.setLayout(new GridLayout(1,1,0,50));
 		container1_inhalt1.setLayout(new GridLayout(0,1,0,50));
 		container1_inhalt2.setLayout(new GridLayout(0,1,0,50));
@@ -83,7 +81,6 @@ public class schiffeAuswahlGUI extends JPanel {
 		container1.add(container1_inhalt2);
 		
 		this.add(schiffeAnzahlText, BorderLayout.PAGE_START);
-		this.add(weiter, BorderLayout.PAGE_END);
 		
 		this.add(container1);
 
