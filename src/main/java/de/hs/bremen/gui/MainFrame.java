@@ -23,7 +23,7 @@ public class MainFrame extends javax.swing.JFrame{
 	
 	
 	private Toolkit t;
-	private int x=0,y=0,width=1280, height=500;
+	private int x=0,y=0,width=1072, height=600;
 	private JMenuBar menuBar;
 	private JMenu fileMenu;
 	private JMenu hilfe;
