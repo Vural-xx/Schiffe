@@ -33,6 +33,7 @@ public class SchiffSetzenGui extends JPanel{
 	private JLabel bildLabel2;
 	private JLabel bildLabel3;
 	private JButton button1;
+	private JButton button2;
 	private JTextField textField;
 	//GameFrame spiel = new GameFrame();
 	
@@ -46,7 +47,8 @@ public class SchiffSetzenGui extends JPanel{
 	public void initComponents(){
 		textLabel3 = new JLabel("Herzlich Willkommen bei Schiffe versenken!");
 		textLabel4 = new JLabel("Spieler 1 ist dran. Bitte setze deine Schiffe");
-		button1 = new JButton("Fertig");
+		button1 = new JButton("Nächster Spieler");
+		button2 = new JButton("Spiel beginnen");
 		textField = new JTextField();	
 		textField.setColumns(2);
 		
@@ -68,6 +70,7 @@ public class SchiffSetzenGui extends JPanel{
 		container5.add(Box.createRigidArea(new Dimension(0, 0)));
 		container5.add(Box.createVerticalGlue());
 		container5.add(button1);
+		container5.add(button2);
 		
 		container6 = new JPanel();
 		container6.setLayout(new BoxLayout(container6, BoxLayout.PAGE_AXIS));
@@ -85,8 +88,9 @@ public class SchiffSetzenGui extends JPanel{
 		
 	}
 	
-	public void setActionListener(ActionListener l){
+	public void setActionListener(ActionListener l, ActionListener p){
 		button1.addActionListener(l);
+		button2.addActionListener(p);
 		
 	}
 	
