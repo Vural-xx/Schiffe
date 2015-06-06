@@ -6,6 +6,7 @@ import de.hs.bremen.abstracts.AbstractController;
 import de.hs.bremen.gui.MainFrame;
 
 public class MainController extends AbstractController {
+	private MainController mainController;
 	private EinstellungController einstellungController;
 	private RundenController rundenController;
 	private SchiffeSetzenController schiffeSetzenController;
