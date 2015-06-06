@@ -12,5 +12,8 @@ public class MainController extends AbstractController {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public void startGame(){
+		
+	}
 
 }
