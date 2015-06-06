@@ -10,7 +10,7 @@ public class RundenController {
 private RundenGui rundenGui;
 	
 	public RundenController(MainController mainController){
-		rundenGui = new RundenGui();
+		rundenGui = new RundenGui(mainController);
 		rundenGui.setActionListener(new SpielerWechselListener());
 		mainController.getMainFrame().add(rundenGui);
 		mainController.getMainFrame().revalidate();
