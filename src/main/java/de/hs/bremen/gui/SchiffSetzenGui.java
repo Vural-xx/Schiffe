@@ -34,7 +34,7 @@ public class SchiffSetzenGui extends JPanel{
 	private JLabel bildLabel3;
 	private JButton button1;
 	private JTextField textField;
-	GameFrame spiel = new GameFrame();
+	//GameFrame spiel = new GameFrame();
 	
 	public SchiffSetzenGui(){
 		
@@ -72,7 +72,7 @@ public class SchiffSetzenGui extends JPanel{
 		container6 = new JPanel();
 		container6.setLayout(new BoxLayout(container6, BoxLayout.PAGE_AXIS));
 		container6.add(textLabel4);
-		container6.add(spiel.squares);
+		//container6.add(spiel.squares);
 		
 
 		
