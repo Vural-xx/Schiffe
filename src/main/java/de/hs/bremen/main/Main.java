@@ -7,5 +7,6 @@ public class Main {
 	static MainController mainController;
 	public static void main(String[] args){
 		mainController = new MainController();
+		
 	}
 }
