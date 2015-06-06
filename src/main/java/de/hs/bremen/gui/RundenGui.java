@@ -16,6 +16,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import de.hs.bremen.controller.MainController;
+
 
 
 public class RundenGui extends JPanel {
@@ -24,6 +26,7 @@ public class RundenGui extends JPanel {
 	private JPanel container;
 	private JPanel container1;
 	private JPanel container2;
+	private JPanel[] tablist;
 	
 	private JButton button1;
 	
@@ -32,13 +35,14 @@ public class RundenGui extends JPanel {
 	private JTextField textField;
 	private JLabel textLabel1;
 	private JTabbedPane tab;
-	//GameFrame spiel = new GameFrame();
-	
+	GameFrame spiel = new GameFrame();
+	private MainController mainController;
 
 	
 	
 	
-	public RundenGui(){
+	public RundenGui(MainController mainController){
+		this.mainController = mainController;
 		initComponents();
 		setVisible(true);
 	}
@@ -57,11 +61,21 @@ public class RundenGui extends JPanel {
 		textField.setColumns(2);
 		
 		tab = new JTabbedPane();
-
+		
+		
+		for(int i = 0; i<mainController.getSpieler().length; i++){
+			if(!mainController.getSpieler()[i].isIstDran()){
+				tablist[i] = new JPanel();
+				tab.addTab("Spieler " + i, tablist[i]);
+				
+			}
+			
+		}
+		
 		JPanel container4 = new JPanel();
 		tab.addTab("Spieler 2", container4);
 		
-		//container4.add(spiel.squares);
+		container4.add(spiel.squares);
 		JPanel panel2 = new JPanel();
 		tab.add("Spieler 3", panel2);
 		
@@ -83,7 +97,7 @@ public class RundenGui extends JPanel {
 		container2.setLayout(new BoxLayout(container2, BoxLayout.PAGE_AXIS));
 		container2.add(tab);
 		container2.add(textLabel2);
-		container2.add(textArea);
+		container2.add(spiel.squares);
 		
 		this.setLayout(new BorderLayout(5,5));
 		this.add(container,BorderLayout.PAGE_START);

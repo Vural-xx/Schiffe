@@ -81,6 +81,7 @@ public class GameFrame extends JFrame implements java.awt.event.MouseListener {
 
 	   public static void main(String[] args) {
 	      new GameFrame();
+	      new GameFrame();
 	   }
 
 	}
