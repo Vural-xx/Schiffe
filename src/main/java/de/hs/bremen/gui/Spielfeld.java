@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -46,6 +47,7 @@ public class Spielfeld extends JFrame {
 	private JMenuItem saveItem;
 	private JMenuItem info;
 	private JMenuItem version;
+	
 	private JPanel container;
 	private JPanel container1;
 	private JPanel container2;
@@ -64,6 +66,10 @@ public class Spielfeld extends JFrame {
 	private JLabel textLabel4;
 	private JPanel container5;
 	private JPanel container6;
+	private JLabel bildLabel;
+	private JLabel bildLabel1;
+	private JLabel bildLabel2;
+	private JLabel bildLabel3;
 	
 	
 	
@@ -88,16 +94,28 @@ public class Spielfeld extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//Design Schiffe setzen
+		/*//Design Schiffe setzen
 		textLabel3 = new JLabel("Herzlich Willkommen bei Schiffe versenken!");
 		textLabel4 = new JLabel("Spieler 1 ist dran. Bitte setze deine Schiffe");
 		button1 = new JButton("Fertig");//doppelt
 		textField = new JTextField();	//doppelt
 		textField.setColumns(2);
 		
+		bildLabel = new JLabel();
+		bildLabel.setIcon(new ImageIcon("C:\\Users\\Christin\\Desktop\\Battelship\\src\\sprites\\submarine_0.gif"));
+		bildLabel1 = new JLabel();
+		bildLabel1.setIcon(new ImageIcon("C:\\Users\\Christin\\Desktop\\Battelship\\src\\sprites\\destroyer_0.gif"));
+		bildLabel2 = new JLabel();
+		bildLabel2.setIcon(new ImageIcon("C:\\Users\\Christin\\Desktop\\Battelship\\src\\sprites\\battleship_0.gif"));
+		bildLabel3 = new JLabel();
+		bildLabel3.setIcon(new ImageIcon("C:\\Users\\Christin\\Desktop\\Battelship\\src\\sprites\\carrier_0.gif"));
+		
 		container5 = new JPanel();
 		container5.setLayout(new BoxLayout(container5, BoxLayout.PAGE_AXIS));
-		container5.add(textField);
+		container5.add(bildLabel);
+		container5.add(bildLabel1);
+		container5.add(bildLabel2);
+		container5.add(bildLabel3);
 		container5.add(Box.createRigidArea(new Dimension(0, 0)));
 		container5.add(Box.createVerticalGlue());
 		container5.add(button1);
@@ -114,11 +132,13 @@ public class Spielfeld extends JFrame {
 		this.add(container6, BorderLayout.CENTER);
 		this.add(container5, BorderLayout.EAST);
 		
+		//this.add(bildLabel, BorderLayout.SOUTH);*/
+		
 		
 		
 
 		
-		/*textLabel1 = new JLabel("Wähle das Schiff zum feuern");
+		textLabel1 = new JLabel("Wähle das Schiff zum feuern");
 		textLabel2 = new JLabel("Spieler 1");
 		
 		button1 = new JButton("Fertig");
@@ -163,7 +183,7 @@ public class Spielfeld extends JFrame {
 		this.add(container,BorderLayout.PAGE_START);
 		this.add(container1, BorderLayout.WEST);
 		this.add(container2, BorderLayout.CENTER);
-		this.add(tab, BorderLayout.EAST);*/
+		this.add(tab, BorderLayout.EAST);
 		
 
 		

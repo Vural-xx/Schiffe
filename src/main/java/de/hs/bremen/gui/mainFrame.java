@@ -12,6 +12,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class mainFrame extends javax.swing.JFrame{
@@ -19,7 +23,15 @@ public class mainFrame extends javax.swing.JFrame{
 	
 	
 	private Toolkit t;
-	private int x=0,y=0,width=1280, height=768;
+	private int x=0,y=0,width=1280, height=500;
+	private JMenuBar menuBar;
+	private JMenu fileMenu;
+	private JMenu hilfe;
+	private JMenuItem newGameItem;
+	private JMenuItem loadGameItem;
+	private JMenuItem saveItem;
+	private JMenuItem info;
+	private JMenuItem version;
 	public JButton weiterSpielerName;
 	public JButton weiterSchiffAuswahl;
 	public JPanel cards;
@@ -27,6 +39,7 @@ public class mainFrame extends javax.swing.JFrame{
 	public SpielerAuswahlGUI spielerAuswahlGUI;
 	public spielerNameGUI spielerNameGUI;
 	public schiffeAuswahlGUI schiffeAuswahlGUI;
+	public SchiffSetzenGui schiffSetzenGui;
 	
 	
 	public mainFrame(){
@@ -47,19 +60,20 @@ public class mainFrame extends javax.swing.JFrame{
         setResizable(false);
         
 		initComponents();
-		
+		initListeners();
 		
 		setVisible(true);
 	}
 	
 	public void initComponents(){
 		
+		schiffSetzenGui = new SchiffSetzenGui();
 		spielerAuswahlGUI= new SpielerAuswahlGUI();
 		spielerNameGUI= new spielerNameGUI();
 		schiffeAuswahlGUI= new schiffeAuswahlGUI();
 		
 		
-		getContentPane().setLayout(new GridBagLayout());
+		getContentPane().setLayout(new BorderLayout(200,200));
 		JPanel container= new JPanel();
 		cards= new JPanel();
 		container.setLayout(new CardLayout());
@@ -94,11 +108,66 @@ public class mainFrame extends javax.swing.JFrame{
 			});
 			
 
-		add(weiterSpielerName);
-		add(weiterSchiffAuswahl);
-		add(container);
+		add(weiterSpielerName, BorderLayout.PAGE_END);
+		add(weiterSchiffAuswahl, BorderLayout.SOUTH);
+		add(container );
+		
+		
+		// Menu bauen
+				menuBar = new JMenuBar();
+				fileMenu = new JMenu("Menü");
+				hilfe = new JMenu("Hilfe");
+				saveItem = new JMenuItem("Speichern");
+				newGameItem = new JMenuItem("Neues Spiel");
+				loadGameItem = new JMenuItem("Spiel laden");
+				info = new JMenuItem("Anleitung");
+				version = new JMenuItem("Version");
+				
+				
+				fileMenu.add(newGameItem);
+				fileMenu.add(loadGameItem);
+				fileMenu.add(saveItem);
+				hilfe.add(info);
+				hilfe.add(version);
+				
+				menuBar.add(fileMenu);
+				menuBar.add(hilfe);
+				setJMenuBar(menuBar);
 
 		
+	}
+	
+	private void initListeners(){
+		//Erstellt eine Aktion für Neues Spiel (action Dialog)
+		this.newGameItem.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JOptionPane.showMessageDialog(null, "Test");
+			}
+			
+		});
+		
+		this.info.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JOptionPane.showMessageDialog(null, "<html><body>So geht das Spiel:<br>Die Schiffe haben folgende Werte:<br>Zerstörer: Länge: 5 & Feuerstärke: 3<br>Fregatte: __Länge: 4 & Feuerstärke: 2<br>Korvette:   Länge: 3 & Feuerstärke: 1<br>Uboot: Länge: 2 & Feuerstärke: 1<br>Die Schiffe schießen nur HORIZONTAL!<br>Gewonnen hat der Spieler der noch ein Schiff hat.<br>VIEL SPAß!</body></html>");
+			}
+			
+		});
+		
+		this.version.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JOptionPane.showMessageDialog(null, "<html><body>VFC Developers<br>Schiffe Versenken Version: 1.0<br>Build Id: 123456789</body></html>");
+			}
+			
+		});
 	}
 	
 
