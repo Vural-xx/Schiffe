@@ -1,16 +1,16 @@
 package de.hs.bremen.abstracts;
 
-import de.hs.bremen.gui.mainFrame;
+import de.hs.bremen.gui.MainFrame;
 
 public class AbstractController {
-	private mainFrame mainFrame;
+	private MainFrame mainFrame;
 	public AbstractController(){
-		mainFrame = new mainFrame();
+		mainFrame = new MainFrame();
 	}
-	public mainFrame getMainFrame() {
+	public MainFrame getMainFrame() {
 		return mainFrame;
 	}
-	public void setMainFrame(mainFrame mainFrame) {
+	public void setMainFrame(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
 	}
 }

@@ -1,6 +1,9 @@
 package de.hs.bremen.controller;
 
+import javax.swing.JFrame;
+
 import de.hs.bremen.abstracts.AbstractController;
+import de.hs.bremen.gui.MainFrame;
 
 public class MainController extends AbstractController {
 	private EinstellungController einstellungController;
@@ -10,6 +13,12 @@ public class MainController extends AbstractController {
 	public MainController() {
 		super();
 		// TODO Auto-generated constructor stub
+		startSchiffeSetzen();
+	}
+	
+	public void startSchiffeSetzen(){
+		schiffeSetzenController = new SchiffeSetzenController(this);
+		
 	}
 	
 	public void startGame(){

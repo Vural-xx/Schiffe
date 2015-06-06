@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class SchiffSetzenGui extends JPanel implements ActionListener{
+public class SchiffSetzenGui extends JPanel{
 
 	private JLabel textLabel3;
 	private JLabel textLabel4;
@@ -84,9 +84,9 @@ public class SchiffSetzenGui extends JPanel implements ActionListener{
 		//this.add(bildLabel, BorderLayout.SOUTH);
 		
 	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
+	
+	public void setActionListener(ActionListener l){
+		button1.addActionListener(l);
 		
 	}
 	

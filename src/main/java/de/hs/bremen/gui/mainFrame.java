@@ -18,7 +18,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class mainFrame extends javax.swing.JFrame{
+public class MainFrame extends javax.swing.JFrame{
 	
 	
 	
@@ -42,11 +42,11 @@ public class mainFrame extends javax.swing.JFrame{
 	public SchiffSetzenGui schiffSetzenGui;
 	
 	
-	public mainFrame(){
+	public MainFrame(){
 		
 		
 		
-		setTitle("Spieleinstellungen");
+		setTitle("Schiffe versenken");
 		t=Toolkit.getDefaultToolkit();
 		Dimension d= t.getScreenSize();
 		
@@ -59,8 +59,8 @@ public class mainFrame extends javax.swing.JFrame{
 		// Fixed JFrame
         setResizable(false);
         
-		initComponents();
-		initListeners();
+        initMenu();
+		//initComponents();
 		
 		setVisible(true);
 	}
@@ -73,7 +73,7 @@ public class mainFrame extends javax.swing.JFrame{
 		schiffeAuswahlGUI= new schiffeAuswahlGUI();
 		
 		
-		getContentPane().setLayout(new BorderLayout(200,200));
+		getContentPane().setLayout(new GridBagLayout());
 		JPanel container= new JPanel();
 		cards= new JPanel();
 		container.setLayout(new CardLayout());
@@ -108,8 +108,8 @@ public class mainFrame extends javax.swing.JFrame{
 			});
 			
 
-		add(weiterSpielerName, BorderLayout.PAGE_END);
-		add(weiterSchiffAuswahl, BorderLayout.SOUTH);
+		add(weiterSpielerName);
+		add(weiterSchiffAuswahl);
 		add(container );
 		
 		
@@ -134,6 +134,31 @@ public class mainFrame extends javax.swing.JFrame{
 				menuBar.add(hilfe);
 				setJMenuBar(menuBar);
 
+		
+	}
+	
+	private void initMenu(){
+		// Menu bauen
+		menuBar = new JMenuBar();
+		fileMenu = new JMenu("Menü");
+		hilfe = new JMenu("Hilfe");
+		saveItem = new JMenuItem("Speichern");
+		newGameItem = new JMenuItem("Neues Spiel");
+		loadGameItem = new JMenuItem("Spiel laden");
+		info = new JMenuItem("Anleitung");
+		version = new JMenuItem("Version");
+		
+		
+		fileMenu.add(newGameItem);
+		fileMenu.add(loadGameItem);
+		fileMenu.add(saveItem);
+		hilfe.add(info);
+		hilfe.add(version);
+		
+		menuBar.add(fileMenu);
+		menuBar.add(hilfe);
+		setJMenuBar(menuBar);
+		initListeners();
 		
 	}
 	
@@ -175,7 +200,7 @@ public class mainFrame extends javax.swing.JFrame{
 	
 	
 	public static void main(String[] args){
-		new mainFrame();
+		new MainFrame();
 	}
 	
 
