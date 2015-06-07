@@ -1,4 +1,4 @@
-package de.hs.bremen.gui;
+package de.hs.bremen.gui.shapes;
 
 import java.awt.Color;
 import java.awt.Rectangle;

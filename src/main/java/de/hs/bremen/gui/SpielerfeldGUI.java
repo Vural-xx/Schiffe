@@ -10,9 +10,10 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import de.hs.bremen.gui.shapes.Feld;
 import de.hs.bremen.gui.shapes.Squares;
 
-public class Spielerfeld extends JPanel implements java.awt.event.MouseListener{
+public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListener{
 
 	/**
 	 * 
@@ -22,7 +23,7 @@ public class Spielerfeld extends JPanel implements java.awt.event.MouseListener{
 	private int spielfeldGroesse;
 	private int feldgroesse;
 
-	public Spielerfeld(int spielfeldGroesse, int feldgroesse) {
+	public SpielerfeldGUI(int spielfeldGroesse, int feldgroesse) {
 		this.spielfeldGroesse = spielfeldGroesse;
 		this.feldgroesse = feldgroesse;
 		addMouseListener(this);
@@ -114,5 +115,11 @@ public class Spielerfeld extends JPanel implements java.awt.event.MouseListener{
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public static void main(String [] args){
+		MainFrame mainFrame = new MainFrame();
+		mainFrame.add(new SpielerfeldGUI(300, 30));
+		mainFrame.revalidate();
 	}
 }

@@ -9,8 +9,6 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import de.hs.bremen.gui.Feld;
-
 public class Squares extends JPanel {
 	/**
 	 * 
