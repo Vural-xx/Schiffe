@@ -17,7 +17,6 @@ import javax.swing.OverlayLayout;
 
 public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	
-	SpielerNameGUI test = new SpielerNameGUI();
 	private JButton spieler1;
 	private JButton spieler2;
 	private JButton spieler3;
@@ -25,6 +24,7 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	private JButton spieler5;
 	private JButton spieler6;
 	
+	private JButton weiter;
 	private int a;
 	
 	// JPanel Public gesetzt. Kp bei Private zeigt er das die variablen nicht genutzt werden
@@ -70,6 +70,10 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		spieler5 = new JButton("5");
 		spieler6 = new JButton("6");
 		
+		weiter = new JButton("weiter");
+		
+		
+		
 		spieler1.addActionListener(this);
 		spieler2.addActionListener(this);
 		spieler3.addActionListener(this);
@@ -90,7 +94,7 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		container1_inhalt2.add(spieler5);
 		container1_inhalt2.add(spieler6);
 		
-
+		container1_inhalt3.add(weiter);
 		
 		this.add(container1_inhalt1);
 		this.add(container1_inhalt2);
@@ -117,6 +121,10 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	}
 	
 
+	public void setActionListener(ActionListener l){
+		weiter.addActionListener(l);
+		
+	}
 	
 	
 	

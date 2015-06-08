@@ -10,14 +10,16 @@ import de.hs.bremen.gui.MainFrame;
 
 public class MainController extends AbstractController {
 	private EinstellungController einstellungController;
+	private SpielernameController spielernameController;
 	private RundenController rundenController;
 	private SchiffeSetzenController schiffeSetzenController;
 	
 	public MainController() {
 		super();
 		// TODO Auto-generated constructor stub
-		startSchiffeSetzen();
+		//startSchiffeSetzen();
 		//startRunden();
+		startEinstellungController();
 	}
 	
 	public void startSchiffeSetzen(){
@@ -31,6 +33,12 @@ public class MainController extends AbstractController {
 	public void startGame(){
 		
 	}
+	
+	public void startEinstellungController(){
+		einstellungController= new EinstellungController(this);
+	}
+	
+	
 	
 	public ActionListener getZuRundeWechselnListener(){
 		return new ZuRundeWechseln();
