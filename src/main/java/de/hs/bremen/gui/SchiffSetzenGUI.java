@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class SchiffSetzenGui extends JPanel{
+public class SchiffSetzenGUI extends JPanel{
 
 	private JLabel textLabel3;
 	private JLabel textLabel4;
@@ -34,7 +34,7 @@ public class SchiffSetzenGui extends JPanel{
 	private JTextField textField;
 	private SpielerfeldGUI spielerfeld;
 	
-	public SchiffSetzenGui(){
+	public SchiffSetzenGUI(){
 		
 		initComponents();
 

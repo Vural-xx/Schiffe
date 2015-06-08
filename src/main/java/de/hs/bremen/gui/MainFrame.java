@@ -37,9 +37,9 @@ public class MainFrame extends javax.swing.JFrame{
 	public JPanel cards;
 
 	public SpielerAuswahlGUI spielerAuswahlGUI;
-	public spielerNameGUI spielerNameGUI;
-	public schiffeAuswahlGUI schiffeAuswahlGUI;
-	public SchiffSetzenGui schiffSetzenGui;
+	public SpielerNameGUI spielerNameGUI;
+	public SchiffeAuswahlGUI schiffeAuswahlGUI;
+	public SchiffSetzenGUI schiffSetzenGui;
 	
 	
 	public MainFrame(){
@@ -67,10 +67,10 @@ public class MainFrame extends javax.swing.JFrame{
 	
 	public void initComponents(){
 		
-		schiffSetzenGui = new SchiffSetzenGui();
+		schiffSetzenGui = new SchiffSetzenGUI();
 		spielerAuswahlGUI= new SpielerAuswahlGUI();
-		spielerNameGUI= new spielerNameGUI();
-		schiffeAuswahlGUI= new schiffeAuswahlGUI();
+		spielerNameGUI= new SpielerNameGUI();
+		schiffeAuswahlGUI= new SchiffeAuswahlGUI();
 		
 		
 		getContentPane().setLayout(new GridBagLayout());

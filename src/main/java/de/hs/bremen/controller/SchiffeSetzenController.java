@@ -4,15 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import de.hs.bremen.gui.MainFrame;
-import de.hs.bremen.gui.SchiffSetzenGui;
+import de.hs.bremen.gui.SchiffSetzenGUI;
 
 public class SchiffeSetzenController {
-	private SchiffSetzenGui schiffSetzenGui;
+	private SchiffSetzenGUI schiffSetzenGui;
 	private MainController mainController;
 	
 	public SchiffeSetzenController(MainController mainController){
 		this.mainController = mainController;
-		schiffSetzenGui = new SchiffSetzenGui();
+		schiffSetzenGui = new SchiffSetzenGUI();
 		schiffSetzenGui.setActionListener(new SpielerWechselListener(), new FinishListener());
 		this.mainController.getMainFrame().add(schiffSetzenGui);
 		this.mainController.getMainFrame().revalidate();

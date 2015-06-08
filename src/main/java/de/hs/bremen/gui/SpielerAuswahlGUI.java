@@ -17,7 +17,7 @@ import javax.swing.OverlayLayout;
 
 public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	
-	spielerNameGUI test = new spielerNameGUI();
+	SpielerNameGUI test = new SpielerNameGUI();
 	private JButton spieler1;
 	private JButton spieler2;
 	private JButton spieler3;

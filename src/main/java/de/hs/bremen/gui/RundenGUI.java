@@ -16,7 +16,7 @@ import javax.swing.JTabbedPane;
 
 import de.hs.bremen.controller.MainController;
 
-public class RundenGui extends JPanel {
+public class RundenGUI extends JPanel {
 
 	private JPanel container;
 	private JPanel container1;
@@ -31,7 +31,7 @@ public class RundenGui extends JPanel {
 	private SpielerfeldGUI spielerfeld;
 	private MainController mainController;
 	
-	public RundenGui(MainController mainController){
+	public RundenGUI(MainController mainController){
 		this.mainController = mainController;
 		initComponents();
 		setVisible(true);

@@ -5,15 +5,15 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import de.hs.bremen.gui.RundenGui;
+import de.hs.bremen.gui.RundenGUI;
 
 
 public class RundenController {
-	private RundenGui rundenGui;
+	private RundenGUI rundenGui;
 	private MainController mainController;
 	
 	public RundenController(MainController mainController){
-		rundenGui = new RundenGui(mainController);
+		rundenGui = new RundenGUI(mainController);
 		rundenGui.setActionListener(new SpielerWechselListener());
 		mainController.getMainFrame().add(rundenGui);
 		mainController.getMainFrame().revalidate();

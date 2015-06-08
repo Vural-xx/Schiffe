@@ -117,9 +117,4 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 
 	}
 	
-	public static void main(String [] args){
-		MainFrame mainFrame = new MainFrame();
-		mainFrame.add(new SpielerfeldGUI(300, 30));
-		mainFrame.revalidate();
-	}
 }

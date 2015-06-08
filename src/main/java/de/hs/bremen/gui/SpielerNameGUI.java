@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class spielerNameGUI extends JPanel {
+public class SpielerNameGUI extends JPanel {
 	
 	public JLabel spielerNametext;
 	
@@ -31,7 +31,7 @@ public class spielerNameGUI extends JPanel {
 	FlowLayout flowLayout;
 	
 	
-	public spielerNameGUI(){
+	public SpielerNameGUI(){
 		
 		initComponents();
 		

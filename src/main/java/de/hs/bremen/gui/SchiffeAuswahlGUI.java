@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class schiffeAuswahlGUI extends JPanel {
+public class SchiffeAuswahlGUI extends JPanel {
 	
 	public JLabel schiffeAnzahlText;
 	public JLabel zerstoererText;
@@ -29,7 +29,7 @@ public class schiffeAuswahlGUI extends JPanel {
 
 	
 	
-	public schiffeAuswahlGUI(){
+	public SchiffeAuswahlGUI(){
 		
 	initComponents();	
 	setVisible(true);	
