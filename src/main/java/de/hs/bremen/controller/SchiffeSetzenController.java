@@ -22,7 +22,8 @@ public class SchiffeSetzenController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			System.out.println("Hallooo");
+			mainController.getMainFrame().remove(schiffSetzenGui);
+			mainController.startSchiffeSetzen();
 		}
 		
 	}
@@ -36,14 +37,6 @@ public class SchiffeSetzenController {
 		
 	}
 	
-	/*public class ZuRundeWechseln implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			System.out.println("Test 4566");
-		}
-		
-	}*/
 	
 	
 }

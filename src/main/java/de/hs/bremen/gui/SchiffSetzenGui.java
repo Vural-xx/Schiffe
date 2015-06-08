@@ -29,13 +29,10 @@ public class SchiffSetzenGui extends JPanel{
 	private JPanel container5;
 	private JPanel container6;
 	private JLabel bildLabel;
-	private JLabel bildLabel1;
-	private JLabel bildLabel2;
-	private JLabel bildLabel3;
 	private JButton button1;
 	private JButton button2;
 	private JTextField textField;
-	//GameFrame spiel = new GameFrame();
+	private SpielerfeldGUI spielerfeld;
 	
 	public SchiffSetzenGui(){
 		
@@ -54,28 +51,47 @@ public class SchiffSetzenGui extends JPanel{
 		
 		bildLabel = new JLabel();
 		bildLabel.setIcon(new ImageIcon("C:\\Users\\Christin\\Desktop\\Battelship\\src\\sprites\\submarine_0.gif"));
-		bildLabel1 = new JLabel();
-		bildLabel1.setIcon(new ImageIcon("C:\\Users\\Christin\\Desktop\\Battelship\\src\\sprites\\destroyer_0.gif"));
-		bildLabel2 = new JLabel();
-		bildLabel2.setIcon(new ImageIcon("C:\\Users\\Christin\\Desktop\\Battelship\\src\\sprites\\battleship_0.gif"));
-		bildLabel3 = new JLabel();
-		bildLabel3.setIcon(new ImageIcon("C:\\Users\\Christin\\Desktop\\Battelship\\src\\sprites\\carrier_0.gif"));
 		
+		spielerfeld = new SpielerfeldGUI(500, 20);
+		
+		//Schiffe zum hinzufügen
 		container5 = new JPanel();
 		container5.setLayout(new BoxLayout(container5, BoxLayout.PAGE_AXIS));
-		container5.add(bildLabel);
-		container5.add(bildLabel1);
-		container5.add(bildLabel2);
-		container5.add(bildLabel3);
+		JButton zerstoerer[] = new JButton[2/*schiffeAuswahl().zerstoererEingabe.getText()*/];
+		for(int i = 0; i!=2 /*schiffeAuswahl().zerstoererEingabe.getText()*/; i++){
+			zerstoerer[i] = new JButton("Zerstörer ");
+			zerstoerer[i].setBackground(Color.red);
+			container5.add(zerstoerer[i]);
+		}
+		JButton fregatte[] = new JButton[1/*schiffeAuswahl().fregatteEingabe.getText()*/];
+		for(int i = 0; i!=1 /*schiffeAuswahl().fregatteEingabe.getText()*/; i++){
+			fregatte[i] = new JButton("Fregatte ");
+			fregatte[i].setBackground(Color.green);
+			container5.add(fregatte[i]);
+		}
+		JButton korvette[] = new JButton[1/*schiffeAuswahl().korvetteEingabe.getText()*/];
+		for(int i = 0; i!=1 /*schiffeAuswahl().korvetteEingabe.getText()*/; i++){
+			korvette[i] = new JButton("Korvette");
+			korvette[i].setBackground(Color.blue);
+			container5.add(korvette[i]);
+		}
+		JButton uboot[] = new JButton[1/*schiffeAuswahl().ubootEingabe.getText()*/];
+		for(int i = 0; i!=1 /*schiffeAuswahl().ubootEingabe.getText()*/; i++){
+			uboot[i] = new JButton("UBoot");
+			uboot[i].setBackground(Color.yellow);
+			container5.add(uboot[i]);
+		}
+		//container5.add(bildLabel);
 		container5.add(Box.createRigidArea(new Dimension(0, 0)));
 		container5.add(Box.createVerticalGlue());
 		container5.add(button1);
 		container5.add(button2);
 		
+		//Spielfeld
 		container6 = new JPanel();
 		container6.setLayout(new BoxLayout(container6, BoxLayout.PAGE_AXIS));
 		container6.add(textLabel4);
-		//container6.add(spiel.squares);
+		container6.add(spielerfeld);
 		
 
 		

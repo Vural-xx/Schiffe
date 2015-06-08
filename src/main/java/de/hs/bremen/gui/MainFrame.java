@@ -111,28 +111,6 @@ public class MainFrame extends javax.swing.JFrame{
 		add(weiterSpielerName);
 		add(weiterSchiffAuswahl);
 		add(container );
-		
-		
-		// Menu bauen
-				menuBar = new JMenuBar();
-				fileMenu = new JMenu("Menü");
-				hilfe = new JMenu("Hilfe");
-				saveItem = new JMenuItem("Speichern");
-				newGameItem = new JMenuItem("Neues Spiel");
-				loadGameItem = new JMenuItem("Spiel laden");
-				info = new JMenuItem("Anleitung");
-				version = new JMenuItem("Version");
-				
-				
-				fileMenu.add(newGameItem);
-				fileMenu.add(loadGameItem);
-				fileMenu.add(saveItem);
-				hilfe.add(info);
-				hilfe.add(version);
-				
-				menuBar.add(fileMenu);
-				menuBar.add(hilfe);
-				setJMenuBar(menuBar);
 
 		
 	}
