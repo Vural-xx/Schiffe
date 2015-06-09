@@ -46,7 +46,7 @@ public class SpielerNameGUI extends JPanel {
 		this.setLayout(new GridBagLayout());
 		gbc.gridx=0;
 		gbc.gridx=1;
-		gbc.insets=new Insets(20, 0, 0, 0);
+		gbc.insets=new Insets(10, 0, 0, 0);
 		
 		weiter= new JButton("weiter");
 
