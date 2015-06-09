@@ -8,7 +8,7 @@ import de.hs.bremen.gui.SchiffSetzenGUI;
 
 public class SchiffeSetzenController {
 	private SchiffSetzenGUI schiffSetzenGui;
-	private MainController mainController;
+	public MainController mainController;
 	
 	public SchiffeSetzenController(MainController mainController){
 		this.mainController = mainController;

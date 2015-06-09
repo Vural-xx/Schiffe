@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 public class SpielfeldGroeßeGUI extends JPanel {
 
 	private GridBagConstraints gbc= new GridBagConstraints();
-	private JTextField spielfeldEingabe;
+	public JTextField spielfeldEingabe;
 	private JButton weiter;
 	private JLabel spielfeldText;
 	

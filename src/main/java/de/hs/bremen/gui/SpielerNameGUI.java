@@ -19,16 +19,15 @@ public class SpielerNameGUI extends JPanel {
 	public JLabel spielerNametext;
 	
 	
-	public JPanel container1;
-	public JTextField[] spielerEingabe;;
-	public JButton weiter;
-	public GridBagConstraints gbc= new GridBagConstraints();
-
+	private JPanel container1;
+	public JTextField[] spielerEingabe;
+	private JButton weiter;
+	private GridBagConstraints gbc= new GridBagConstraints();
 	
 
 
 
-	public JLabel spielernameAnfangsText;
+	private JLabel spielernameAnfangsText;
 	
 	FlowLayout flowLayout;
 	
@@ -36,7 +35,6 @@ public class SpielerNameGUI extends JPanel {
 	public SpielerNameGUI(){
 		
 		initComponents();
-		createNameFenster();
 		setVisible(true);
 		
 	}
@@ -57,8 +55,7 @@ public class SpielerNameGUI extends JPanel {
 	}
 	
 	
-	public void createNameFenster(){
-		int spieleranzahl=3;
+	public void createNameFenster(int spieleranzahl){
 		spielerEingabe = new JTextField[spieleranzahl];
 		for(int i= 0; i <spieleranzahl; i++){
 			spielerEingabe[i]= new JTextField();

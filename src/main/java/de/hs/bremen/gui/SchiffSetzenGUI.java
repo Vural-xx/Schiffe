@@ -22,6 +22,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import de.hs.bremen.controller.MainController;
+
 public class SchiffSetzenGUI extends JPanel{
 
 	private JLabel textLabel3;
@@ -33,6 +35,7 @@ public class SchiffSetzenGUI extends JPanel{
 	private JButton button2;
 	private JTextField textField;
 	private SpielerfeldGUI spielerfeld;
+	public MainController mainController;
 	
 	public SchiffSetzenGUI(){
 		
@@ -43,7 +46,7 @@ public class SchiffSetzenGUI extends JPanel{
 }
 	public void initComponents(){
 		textLabel3 = new JLabel("Herzlich Willkommen bei Schiffe versenken!");
-		textLabel4 = new JLabel("Spieler 1 ist dran. Bitte setze deine Schiffe");
+		textLabel4 = new JLabel(mainController.getSpieler()[0].getName() +" ist dran. Bitte setze deine Schiffe");
 		button1 = new JButton("Nächster Spieler");
 		button2 = new JButton("Spiel beginnen");
 		textField = new JTextField();	

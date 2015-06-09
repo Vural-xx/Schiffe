@@ -4,39 +4,47 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
-import java.awt.Color;
 
+import javax.swing.*;
+
+import java.awt.Color;
 import java.awt.event.*;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 import javax.swing.OverlayLayout;
+import javax.swing.plaf.basic.BasicBorders.ToggleButtonBorder;
 
 public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	
-	private JButton spieler1;
-	private JButton spieler2;
-	private JButton spieler3;
-	private JButton spieler4;
-	private JButton spieler5;
-	private JButton spieler6;
+	private JToggleButton spieler1;
+	private JToggleButton spieler2;
+	private JToggleButton spieler3;
+	private JToggleButton spieler4;
+	private JToggleButton spieler5;
+	private JToggleButton spieler6;
 	
 	private JButton weiter;
-	private int a;
+	private int spielerAnzahl;
 	
 	// JPanel Public gesetzt. Kp bei Private zeigt er das die variablen nicht genutzt werden
 	
 	
-	public int getA() {
-		return a;
-	}
-	public void setA(int a) {
-		this.a = a;
-	}
+	
 	public JPanel container1_inhalt1;
+	
+	
+	public int getSpielerAnzahl() {
+		return spielerAnzahl;
+	}
+	public void setSpielerAnzahl(int spielerAnzahl) {
+		this.spielerAnzahl = spielerAnzahl;
+	}
+
+
 	public JPanel container1_inhalt2;
 	public JPanel container1_inhalt3;
 	
@@ -63,12 +71,12 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		
 	
 		
-		spieler1 = new JButton("1");
-		spieler2 = new JButton("2");
-		spieler3 = new JButton("3");
-		spieler4 = new JButton("4");
-		spieler5 = new JButton("5");
-		spieler6 = new JButton("6");
+		spieler1 = new JToggleButton("1");
+		spieler2 = new JToggleButton("2");
+		spieler3 = new JToggleButton("3");
+		spieler4 = new JToggleButton("4");
+		spieler5 = new JToggleButton("5");
+		spieler6 = new JToggleButton("6");
 		
 		weiter = new JButton("weiter");
 		
@@ -116,7 +124,7 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	}
 	
 	public int auswahlZahlSpieler(int i){
-		a=i;
+		spielerAnzahl=i;
 		return i;
 	}
 	

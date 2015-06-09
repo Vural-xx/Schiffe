@@ -3,16 +3,19 @@ package de.hs.bremen.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import de.hs.bremen.gui.SchiffSetzenGUI;
 import de.hs.bremen.gui.SpielerAuswahlGUI;
 import de.hs.bremen.gui.SpielerNameGUI;
 import de.hs.bremen.gui.SpielfeldGroeßeGUI;
+import de.hs.bremen.model.Spieler;
 
 public class EinstellungController {
-	private MainController mainController;
+	public MainController mainController;
 	private SpielerAuswahlGUI spielerAuswahlGUI;
 	private SpielerNameGUI spielerNameGUI;
 	private SpielfeldGroeßeGUI spielfeldGroeßeGUI;
-
+	private Spieler[] spieler;
+	private int spielfeldGroesse;
 	
 	public EinstellungController(MainController mainController){
 		this.mainController= mainController;
@@ -31,8 +34,8 @@ public class EinstellungController {
 	class SpielerAnzahlListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
+
+			spielerNameGUI.createNameFenster(spielerAuswahlGUI.getSpielerAnzahl());
 			mainController.getMainFrame().remove(spielerAuswahlGUI);
 			spielerNameGUI.setActionListener(new SpielerNameListener());
 			mainController.getMainFrame().add(spielerNameGUI);
@@ -45,11 +48,17 @@ public class EinstellungController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			System.out.println(spielerNameGUI.spielerEingabe[0].getText());
+			tempSpieler();
+			mainController.setSpieler(spieler);
+			//Probe 
+			for (int j=0; j< spieler.length;j++){
+				System.out.println(mainController.getSpieler()[j].getName());
+			}
 			mainController.getMainFrame().remove(spielerNameGUI);
 			spielfeldGroeßeGUI.setActionListener(new SpielfeldGroeßeListener());
 			mainController.getMainFrame().add(spielfeldGroeßeGUI);
 			mainController.getMainFrame().revalidate();
+			
 		}
 		
 	}
@@ -58,12 +67,31 @@ public class EinstellungController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			//tempSpielfeldgroesse();
+			//System.out.println(spielfeldGroesse);
+			System.out.println(mainController.getSpieler()[0].getName());
 			mainController.getMainFrame().remove(spielfeldGroeßeGUI);
 			mainController.startSchiffeSetzen();
 			mainController.getMainFrame().revalidate();
 		}
 		
 	}
+	
+	private Spieler[] tempSpieler(){
+		spieler = new Spieler[spielerAuswahlGUI.getSpielerAnzahl()];
+		for (int i=0; i< spieler.length; i++){	
+			spieler[i]= new Spieler(spielerNameGUI.spielerEingabe[i].getText());
+		}
+		
+		return spieler;
+		
+	}
+	
+	public int tempSpielfeldgroesse(){
+		spielfeldGroesse=Integer.parseInt(spielfeldGroeßeGUI.spielfeldEingabe.getText());
+		return spielfeldGroesse;
+	}
+	
 }
 
 
