@@ -39,16 +39,16 @@ public class RundenGUI extends JPanel {
 
 	private void initComponents(){
 		textLabel1 = new JLabel("Wähle das Schiff zum feuern");
-		textLabel2 = new JLabel("Spieler 1");
+		textLabel2 = new JLabel(mainController.getSpieler()[0].getName());
 		button1 = new JButton("Fertig");
 		spielerfeld = new SpielerfeldGUI(375, 15);//bei 20iger spielfeld (375/15 wieso)??
 		
 		tab = new JTabbedPane();
-		SpielerfeldGUI spielerfeld2[] = new SpielerfeldGUI[3/*mainController.getSpieler().length*/];
-		for(int i = 0; i<2/*mainController.getSpieler().length*/; i++){
+		SpielerfeldGUI spielerfeld2[] = new SpielerfeldGUI[mainController.getSpieler().length];
+		for(int i = 0; i< mainController.getSpieler().length-1; i++){
 			//if(!mainController.getSpieler()[i].isIstDran()){
 				spielerfeld2[i] = new SpielerfeldGUI(375, 15);
-				tab.addTab("Spieler "+(i+1), spielerfeld2[i]);//getName wie einfügen?
+				tab.addTab(mainController.getSpieler()[i+1].getName(), spielerfeld2[i]);//getName wie einfügen?
 				
 			//}
 		}

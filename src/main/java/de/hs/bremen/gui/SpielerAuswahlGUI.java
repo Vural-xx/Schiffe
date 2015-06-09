@@ -14,21 +14,22 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JToggleButton;
+import javax.swing.JButton;
 import javax.swing.OverlayLayout;
 import javax.swing.plaf.basic.BasicBorders.ToggleButtonBorder;
 
 public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	
-	private JToggleButton spieler1;
-	private JToggleButton spieler2;
-	private JToggleButton spieler3;
-	private JToggleButton spieler4;
-	private JToggleButton spieler5;
-	private JToggleButton spieler6;
+	private JButton spieler1;
+	private JButton spieler2;
+	private JButton spieler3;
+	private JButton spieler4;
+	private JButton spieler5;
+	private JButton spieler6;
 	
 	private JButton weiter;
 	private int spielerAnzahl;
+	private JPanel container1_inhalt4 = new JPanel();
 	
 	// JPanel Public gesetzt. Kp bei Private zeigt er das die variablen nicht genutzt werden
 	
@@ -47,6 +48,7 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 
 	public JPanel container1_inhalt2;
 	public JPanel container1_inhalt3;
+	private JLabel ausgewaehlteSpielerText;
 	
 	private JLabel spielerAnzahltext;
 	
@@ -71,12 +73,12 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		
 	
 		
-		spieler1 = new JToggleButton("1");
-		spieler2 = new JToggleButton("2");
-		spieler3 = new JToggleButton("3");
-		spieler4 = new JToggleButton("4");
-		spieler5 = new JToggleButton("5");
-		spieler6 = new JToggleButton("6");
+		spieler1 = new JButton("1");
+		spieler2 = new JButton("2");
+		spieler3 = new JButton("3");
+		spieler4 = new JButton("4");
+		spieler5 = new JButton("5");
+		spieler6 = new JButton("6");
 		
 		weiter = new JButton("weiter");
 		
@@ -89,7 +91,6 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		spieler5.addActionListener(this);
 		spieler6.addActionListener(this);
 		
-
 		
 		spielerAnzahltext= new JLabel("Bitte wählen Sie die Spieleranzahl aus:");
 		container1_inhalt1.add(spielerAnzahltext);
@@ -114,12 +115,60 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// Warum ich hier keine Klammern setzen muss kp.. geht auch so. vll ja mit klammer besser
-		if(e.getSource() == spieler1)auswahlZahlSpieler(1);
-		if(e.getSource() == spieler2)auswahlZahlSpieler(2);
-		if(e.getSource() == spieler3)auswahlZahlSpieler(3);
-		if(e.getSource() == spieler4)auswahlZahlSpieler(4);
-		if(e.getSource() == spieler5)auswahlZahlSpieler(5);
-		if(e.getSource() == spieler6)auswahlZahlSpieler(6);
+		if(e.getSource() == spieler1){
+			auswahlZahlSpieler(1);
+			ausgewaehlteSpielerText = new JLabel("Es wurde 1 Spieler ausgewählt");
+			ausgewaehlteSpielerText.setForeground(Color.red);
+			container1_inhalt4.removeAll();
+			container1_inhalt4.add(ausgewaehlteSpielerText);
+			this.add(container1_inhalt4);
+			this.revalidate();
+		}
+		if(e.getSource() == spieler2){
+			auswahlZahlSpieler(2);
+			ausgewaehlteSpielerText = new JLabel("Es wurde 2 Spieler ausgewählt");
+			ausgewaehlteSpielerText.setForeground(Color.red);
+			container1_inhalt4.removeAll();
+			container1_inhalt4.add(ausgewaehlteSpielerText);
+			this.add(container1_inhalt4);
+			this.revalidate();
+		}
+		if(e.getSource() == spieler3){
+			auswahlZahlSpieler(3);
+			ausgewaehlteSpielerText = new JLabel("Es wurde 3 Spieler ausgewählt");
+			ausgewaehlteSpielerText.setForeground(Color.red);
+			container1_inhalt4.removeAll();
+			container1_inhalt4.add(ausgewaehlteSpielerText);
+			this.add(container1_inhalt4);
+			this.revalidate();
+		}
+		if(e.getSource() == spieler4){
+			auswahlZahlSpieler(4);
+			ausgewaehlteSpielerText = new JLabel("Es wurde 4 Spieler ausgewählt");
+			ausgewaehlteSpielerText.setForeground(Color.red);
+			container1_inhalt4.removeAll();
+			container1_inhalt4.add(ausgewaehlteSpielerText);
+			this.add(container1_inhalt4);
+			this.revalidate();
+		}
+		if(e.getSource() == spieler5){
+			auswahlZahlSpieler(5);
+			ausgewaehlteSpielerText = new JLabel("Es wurde 5 Spieler ausgewählt");
+			ausgewaehlteSpielerText.setForeground(Color.red);
+			container1_inhalt4.removeAll();
+			container1_inhalt4.add(ausgewaehlteSpielerText);
+			this.add(container1_inhalt4);
+			this.revalidate();
+		}
+		if(e.getSource() == spieler6){
+			auswahlZahlSpieler(6);
+			ausgewaehlteSpielerText = new JLabel("Es wurde 6 Spieler ausgewählt");
+			ausgewaehlteSpielerText.setForeground(Color.red);
+			container1_inhalt4.removeAll();
+			container1_inhalt4.add(ausgewaehlteSpielerText);
+			this.add(container1_inhalt4);
+			this.revalidate();
+		}
 		
 	}
 	
