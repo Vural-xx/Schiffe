@@ -60,8 +60,8 @@ public class SpielerNameGUI extends JPanel {
 	public void createNameFenster(){
 		int spieleranzahl=3;
 		for(int i= 1; i <=spieleranzahl; i++){
-			
 			spielerEingabe= new JTextField();
+			spielerEingabe.setName("spieler"+i);
 			spielerEingabe.setPreferredSize( new Dimension( 150, 24 ) );
 			
 			spielerNametext= new JLabel("Spielername " + i+": ");

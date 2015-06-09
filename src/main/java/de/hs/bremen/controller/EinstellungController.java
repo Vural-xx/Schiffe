@@ -32,6 +32,7 @@ public class EinstellungController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			
 			mainController.getMainFrame().remove(spielerAuswahlGUI);
 			spielerNameGUI.setActionListener(new SpielerNameListener());
 			mainController.getMainFrame().add(spielerNameGUI);
@@ -44,6 +45,7 @@ public class EinstellungController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			System.out.println(spielerNameGUI.spielerEingabe.getText());
 			mainController.getMainFrame().remove(spielerNameGUI);
 			spielfeldGroeßeGUI.setActionListener(new SpielfeldGroeßeListener());
 			mainController.getMainFrame().add(spielfeldGroeßeGUI);
