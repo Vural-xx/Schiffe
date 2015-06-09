@@ -37,14 +37,15 @@ public class SchiffSetzenGUI extends JPanel{
 	private SpielerfeldGUI spielerfeld;
 	public MainController mainController;
 	
-	public SchiffSetzenGUI(){
-		
+	public SchiffSetzenGUI(MainController mainController){
+		this.mainController = mainController;
 		initComponents();
 
 		setVisible(true);
 		
 }
 	public void initComponents(){
+		
 		textLabel3 = new JLabel("Herzlich Willkommen bei Schiffe versenken!");
 		textLabel4 = new JLabel(mainController.getSpieler()[0].getName() +" ist dran. Bitte setze deine Schiffe");
 		button1 = new JButton("Nächster Spieler");

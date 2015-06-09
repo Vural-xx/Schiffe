@@ -12,7 +12,7 @@ public class SchiffeSetzenController {
 	
 	public SchiffeSetzenController(MainController mainController){
 		this.mainController = mainController;
-		schiffSetzenGui = new SchiffSetzenGUI();
+		schiffSetzenGui = new SchiffSetzenGUI(mainController);
 		schiffSetzenGui.setActionListener(new SpielerWechselListener(), new FinishListener());
 		this.mainController.getMainFrame().add(schiffSetzenGui);
 		this.mainController.getMainFrame().revalidate();
