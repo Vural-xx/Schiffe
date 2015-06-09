@@ -36,8 +36,7 @@ public class MainFrame extends javax.swing.JFrame{
 	public JButton weiterSchiffAuswahl;
 	public JPanel cards;
 
-	public SpielerAuswahlGUI spielerAuswahlGUI;
-	public SpielerNameGUI spielerNameGUI;
+
 	public SchiffeAuswahlGUI schiffeAuswahlGUI;
 	public SchiffSetzenGUI schiffSetzenGui;
 	
@@ -65,54 +64,10 @@ public class MainFrame extends javax.swing.JFrame{
 		setVisible(true);
 	}
 	
-	public void initComponents(){
+	
 		
-		schiffSetzenGui = new SchiffSetzenGUI();
-		spielerAuswahlGUI= new SpielerAuswahlGUI();
-		spielerNameGUI= new SpielerNameGUI();
-		schiffeAuswahlGUI= new SchiffeAuswahlGUI();
-		
-		
-		getContentPane().setLayout(new GridBagLayout());
-		JPanel container= new JPanel();
-		cards= new JPanel();
-		container.setLayout(new CardLayout());
-		
-		weiterSpielerName= new JButton("weiter 1!");
-		weiterSchiffAuswahl= new JButton("weiter 2!");
-
-		container.add(spielerAuswahlGUI, "1");
-		container.add(spielerNameGUI, "2");
-		container.add(schiffeAuswahlGUI, "3");
-		
-		weiterSpielerName.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			int zahlSpieler = spielerAuswahlGUI.getA();
-			spielerAuswahlGUI.setVisible(false);
-			spielerNameGUI.setVisible(true);
-				
-			}
-		});
-		
-		weiterSchiffAuswahl.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-				spielerNameGUI.setVisible(false);
-				schiffeAuswahlGUI.setVisible(true);
-					
-				}
-			});
-			
-
-		add(weiterSpielerName);
-		add(weiterSchiffAuswahl);
-		add(container );
 
 		
-	}
 	
 	private void initMenu(){
 		// Menu bauen
