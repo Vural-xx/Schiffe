@@ -10,7 +10,6 @@ import de.hs.bremen.gui.MainFrame;
 
 public class MainController extends AbstractController {
 	private EinstellungController einstellungController;
-	private SpielernameController spielernameController;
 	private RundenController rundenController;
 	private SchiffeSetzenController schiffeSetzenController;
 	
