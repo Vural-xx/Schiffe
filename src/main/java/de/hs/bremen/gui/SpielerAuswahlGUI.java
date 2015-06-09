@@ -21,6 +21,7 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	private JButton weiter;
 	private int spielerAnzahl;
 	
+	private JPanel fuellcontainer1;
 	private JPanel container1_inhalt1;
 	private JPanel container1_inhalt2;
 	private JPanel container1_inhalt3;
@@ -60,6 +61,7 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		container1_inhalt2 = new JPanel();
 		container1_inhalt3 = new JPanel();
 		container1_inhalt4= new JPanel();
+		fuellcontainer1= new JPanel();
 		
 	
 		
@@ -98,6 +100,7 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		
 		container1_inhalt4.add(weiter);
 		
+		this.add(fuellcontainer1);
 		this.add(container1_inhalt1);
 		this.add(container1_inhalt2);
 		this.add(container1_inhalt3);

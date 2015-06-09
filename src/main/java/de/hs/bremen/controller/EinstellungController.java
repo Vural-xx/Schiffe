@@ -3,6 +3,7 @@ package de.hs.bremen.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import de.hs.bremen.gui.KiAuswahlGUI;
 import de.hs.bremen.gui.SchiffSetzenGUI;
 import de.hs.bremen.gui.SpielerAuswahlGUI;
 import de.hs.bremen.gui.SpielerNameGUI;
@@ -14,6 +15,7 @@ public class EinstellungController {
 	private SpielerAuswahlGUI spielerAuswahlGUI;
 	private SpielerNameGUI spielerNameGUI;
 	private SpielfeldGroeßeGUI spielfeldGroeßeGUI;
+	private KiAuswahlGUI kiAuswahlGUI;
 	private Spieler[] spieler;
 	private int spielfeldGroesse;
 	
@@ -22,6 +24,7 @@ public class EinstellungController {
 		spielerAuswahlGUI= new SpielerAuswahlGUI();
 		spielerNameGUI= new SpielerNameGUI();
 		spielfeldGroeßeGUI= new SpielfeldGroeßeGUI();
+		kiAuswahlGUI = new KiAuswahlGUI();
 		spielerAuswahlGUI.setActionListener(new SpielerAnzahlListener());
 		this.mainController.getMainFrame().add(spielerAuswahlGUI);
 		this.mainController.getMainFrame().revalidate();
@@ -37,6 +40,17 @@ public class EinstellungController {
 
 			spielerNameGUI.createNameFenster(spielerAuswahlGUI.getSpielerAnzahl());
 			mainController.getMainFrame().remove(spielerAuswahlGUI);
+			kiAuswahlGUI.setActionListener(new KiAnzahlListener());
+			mainController.getMainFrame().add(kiAuswahlGUI);
+			mainController.getMainFrame().revalidate();
+		}
+		
+	}
+	
+	class KiAnzahlListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			mainController.getMainFrame().remove(kiAuswahlGUI);
 			spielerNameGUI.setActionListener(new SpielerNameListener());
 			mainController.getMainFrame().add(spielerNameGUI);
 			mainController.getMainFrame().revalidate();
