@@ -2,6 +2,7 @@ package de.hs.bremen.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import de.hs.bremen.gui.KiAuswahlGUI;
 import de.hs.bremen.gui.SchiffSetzenGUI;
@@ -9,6 +10,7 @@ import de.hs.bremen.gui.SchiffeAuswahlGUI;
 import de.hs.bremen.gui.SpielerAuswahlGUI;
 import de.hs.bremen.gui.SpielerNameGUI;
 import de.hs.bremen.gui.SpielfeldGroeßeGUI;
+import de.hs.bremen.model.Schiff;
 import de.hs.bremen.model.Spieler;
 
 public class EinstellungController {
@@ -20,6 +22,7 @@ public class EinstellungController {
 	private KiAuswahlGUI kiAuswahlGUI;
 	private Spieler[] spieler;
 	private int spielfeldGroesse;
+	private ArrayList<String> schiffe;
 	
 	public EinstellungController(MainController mainController){
 		this.mainController= mainController;
@@ -66,11 +69,13 @@ public class EinstellungController {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			tempSpieler();
+			
 			mainController.setSpieler(spieler);
 			//Probe 
 			for (int j=0; j< spieler.length;j++){
 				System.out.println(mainController.getSpieler()[j].getName());
 			}
+				
 			mainController.getMainFrame().remove(spielerNameGUI);
 			schiffeAuswahlGUI.setActionListener(new SchiffAnzahlListener());
 			mainController.getMainFrame().add(schiffeAuswahlGUI);
@@ -85,6 +90,8 @@ public class EinstellungController {
 			// TODO Auto-generated method stub
 			//tempSpielfeldgroesse();
 			//System.out.println(spielfeldGroesse);
+			tempArraySchiff();
+			System.out.println(schiffe);
 			mainController.getMainFrame().remove(schiffeAuswahlGUI);
 			spielfeldGroeßeGUI.setActionListener(new SpielfeldGroeßeListener());
 			mainController.getMainFrame().add(spielfeldGroeßeGUI);
@@ -119,6 +126,30 @@ public class EinstellungController {
 	public int tempSpielfeldgroesse(){
 		spielfeldGroesse=Integer.parseInt(spielfeldGroeßeGUI.spielfeldEingabe.getText());
 		return spielfeldGroesse;
+	}
+	
+	public void tempArraySchiff(){
+			int anzahlZerstoerer= Integer.parseInt(schiffeAuswahlGUI.zerstoererEingabe.getText());
+			int anzahlFregatte= Integer.parseInt(schiffeAuswahlGUI.fregatteEingabe.getText());
+			int anzahlKorvette= Integer.parseInt(schiffeAuswahlGUI.korvetteEingabe.getText());
+			int anzahlUboot= Integer.parseInt(schiffeAuswahlGUI.ubootEingabe.getText());
+			schiffe = new ArrayList<String>();
+			
+			
+			for(int i=0;i<anzahlZerstoerer;i++){
+				schiffe.add("Zerstörer");
+			}
+			for(int i=0;i<anzahlFregatte;i++){
+				schiffe.add("Fregatte");
+			}
+			for(int i=0;i<anzahlKorvette;i++){
+				schiffe.add("Korvette");
+			}
+			for(int i=0;i<anzahlUboot;i++){
+				schiffe.add("UBoot");
+			}
+			
+		
 	}
 	
 }

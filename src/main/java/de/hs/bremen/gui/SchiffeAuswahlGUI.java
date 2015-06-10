@@ -26,10 +26,10 @@ public class SchiffeAuswahlGUI extends JPanel {
 	private JPanel fuellcontainer;
 
 	
-	private JTextField zerstoererEingabe;
-	private JTextField fregatteEingabe;
-	private JTextField korvetteEingabe;
-	private JTextField ubootEingabe;
+	public JTextField zerstoererEingabe;
+	public JTextField fregatteEingabe;
+	public JTextField korvetteEingabe;
+	public JTextField ubootEingabe;
 	
 	private JButton weiter;
 	private GridBagConstraints gbc;
