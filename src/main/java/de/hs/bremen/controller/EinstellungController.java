@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import de.hs.bremen.gui.KiAuswahlGUI;
 import de.hs.bremen.gui.SchiffSetzenGUI;
+import de.hs.bremen.gui.SchiffeAuswahlGUI;
 import de.hs.bremen.gui.SpielerAuswahlGUI;
 import de.hs.bremen.gui.SpielerNameGUI;
 import de.hs.bremen.gui.SpielfeldGroeßeGUI;
@@ -15,6 +16,7 @@ public class EinstellungController {
 	private SpielerAuswahlGUI spielerAuswahlGUI;
 	private SpielerNameGUI spielerNameGUI;
 	private SpielfeldGroeßeGUI spielfeldGroeßeGUI;
+	private SchiffeAuswahlGUI schiffeAuswahlGUI;
 	private KiAuswahlGUI kiAuswahlGUI;
 	private Spieler[] spieler;
 	private int spielfeldGroesse;
@@ -24,6 +26,7 @@ public class EinstellungController {
 		spielerAuswahlGUI= new SpielerAuswahlGUI();
 		spielerNameGUI= new SpielerNameGUI();
 		spielfeldGroeßeGUI= new SpielfeldGroeßeGUI();
+		schiffeAuswahlGUI= new SchiffeAuswahlGUI();
 		kiAuswahlGUI = new KiAuswahlGUI();
 		spielerAuswahlGUI.setActionListener(new SpielerAnzahlListener());
 		this.mainController.getMainFrame().add(spielerAuswahlGUI);
@@ -69,10 +72,23 @@ public class EinstellungController {
 				System.out.println(mainController.getSpieler()[j].getName());
 			}
 			mainController.getMainFrame().remove(spielerNameGUI);
+			schiffeAuswahlGUI.setActionListener(new SchiffAnzahlListener());
+			mainController.getMainFrame().add(schiffeAuswahlGUI);
+			mainController.getMainFrame().revalidate();
+			
+		}
+		
+	}
+	class SchiffAnzahlListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			//tempSpielfeldgroesse();
+			//System.out.println(spielfeldGroesse);
+			mainController.getMainFrame().remove(schiffeAuswahlGUI);
 			spielfeldGroeßeGUI.setActionListener(new SpielfeldGroeßeListener());
 			mainController.getMainFrame().add(spielfeldGroeßeGUI);
 			mainController.getMainFrame().revalidate();
-			
 		}
 		
 	}
@@ -83,7 +99,6 @@ public class EinstellungController {
 			// TODO Auto-generated method stub
 			//tempSpielfeldgroesse();
 			//System.out.println(spielfeldGroesse);
-			System.out.println(mainController.getSpieler()[0].getName());
 			mainController.getMainFrame().remove(spielfeldGroeßeGUI);
 			mainController.startSchiffeSetzen();
 			mainController.getMainFrame().revalidate();
