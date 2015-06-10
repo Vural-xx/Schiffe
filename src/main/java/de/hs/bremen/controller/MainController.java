@@ -44,6 +44,20 @@ public class MainController extends AbstractController {
 		
 	}
 	
+	public void nextSpieler(){
+		int nextSpieler = 0;
+		for (int i = 0 ; i< getSpieler().length;i++){
+			if (getSpieler()[i].isIstDran() ){
+				if(i+1 == getSpieler().length){
+					nextSpieler = 0;
+				}else{
+					nextSpieler = i+1;
+				}
+				getSpieler()[i].setIstDran(false);
+			}
+		}
+		getSpieler()[nextSpieler].setIstDran(true);
+	}
 	
 	public class ZuRundeWechseln implements ActionListener{
 		@Override

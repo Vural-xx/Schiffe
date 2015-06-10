@@ -23,6 +23,7 @@ public class SchiffeSetzenController {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			mainController.getMainFrame().remove(schiffSetzenGui);
+			mainController.nextSpieler();
 			mainController.startSchiffeSetzen();
 		}
 		
