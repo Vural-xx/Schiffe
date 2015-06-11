@@ -28,7 +28,16 @@ public class SchiffeSetzenController {
 		}
 		
 	}
-	public class FinishListener implements ActionListener{
+	
+	class SchiffgewähltListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+		
+		}
+		
+	}
+	class FinishListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
