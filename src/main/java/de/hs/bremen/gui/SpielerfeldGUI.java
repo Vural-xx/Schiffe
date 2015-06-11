@@ -85,9 +85,9 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 
 	public boolean innerhalbSpielfeld(int x ,int y){
 		if(horizontal){
-			return x +laenge  <=spielfeldGroesse/getFeldgroesse()  && y <= spielfeldGroesse/getFeldgroesse();
+			return x +laenge  <=spielfeldGroesse/getFeldgroesse()  && y < spielfeldGroesse/getFeldgroesse();
 		}else{
-			return x <= spielfeldGroesse/getFeldgroesse() && y+laenge <= spielfeldGroesse/getFeldgroesse();
+			return x < spielfeldGroesse/getFeldgroesse() && y+laenge <= spielfeldGroesse/getFeldgroesse();
 		}	
 	}
 	
