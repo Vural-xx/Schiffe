@@ -30,7 +30,6 @@ public class SchiffSetzenGUI extends JPanel{
 	private JLabel textLabel4;
 	private JPanel container5;
 	private JPanel container6;
-	private JLabel bildLabel;
 	private JButton button1;
 	private JButton button2;
 	private JTextField textField;
@@ -56,11 +55,6 @@ public class SchiffSetzenGUI extends JPanel{
 		button2 = new JButton("Spiel beginnen");
 		textField = new JTextField();	
 		textField.setColumns(2);
-		
-		bildLabel = new JLabel();
-		bildLabel.setIcon(new ImageIcon("C:\\Users\\Christin\\Desktop\\Battelship\\src\\sprites\\submarine_0.gif"));
-		
-		
 		
 		//Schiffe zum hinzufügen
 		container5 = new JPanel();
