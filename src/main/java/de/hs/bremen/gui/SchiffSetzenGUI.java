@@ -66,22 +66,18 @@ public class SchiffSetzenGUI extends JPanel{
 		container5 = new JPanel();
 		container5.setLayout(new BoxLayout(container5, BoxLayout.PAGE_AXIS));
 		zerstoerer = new JButton("Zerstörer ");
-		zerstoerer.setBackground(Color.red);
 		zerstoerer.setName("Zerstörer");
 		container5.add(zerstoerer);
 		
 		fregatte = new JButton("Fregatte ");
-		fregatte.setBackground(Color.green);
 		fregatte.setName("Fregatte");
 		container5.add(fregatte);
 		
 		korvette = new JButton("Korvette");
-		korvette.setBackground(Color.blue);
 		korvette.setName("Korvette");
 		container5.add(korvette);
 		
 		uboot = new JButton("UBoot");
-		uboot.setBackground(Color.yellow);
 		uboot.setName("Uboot");
 		container5.add(uboot);
 	
