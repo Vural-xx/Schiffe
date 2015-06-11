@@ -86,7 +86,7 @@ public class KiAuswahlGUI extends JPanel implements ActionListener {
 		container1_inhalt1.add(spielerAnzahltext);
 		
 		ausgewaehlteGegnerText= new JLabel();
-		ausgewaehlteGegnerText.setForeground(Color.red);
+		ausgewaehlteGegnerText.setForeground(Color.blue);
 		
 		container1_inhalt3.add(ausgewaehlteGegnerText);
 		
@@ -118,32 +118,32 @@ public class KiAuswahlGUI extends JPanel implements ActionListener {
 		if(e.getSource() == computer1){
 			auswahlZahlSpieler(0);
 			ausgewaehlteGegnerText.setText("Es wurde 0 KI-Gegner ausgewählt");
-			this.revalidate();
+			ausgewaehlteGegnerText.revalidate();
 		}
 		if(e.getSource() == computer2){
 			auswahlZahlSpieler(1);
 			ausgewaehlteGegnerText.setText("Es wurde 1 KI-Gegner ausgewählt");
-			this.revalidate();
+			ausgewaehlteGegnerText.revalidate();
 		}
 		if(e.getSource() == computer3){
 			auswahlZahlSpieler(2);
 			ausgewaehlteGegnerText.setText("Es wurde 2 KI-Gegner ausgewählt");
-			this.revalidate();
+			ausgewaehlteGegnerText.revalidate();
 		}
 		if(e.getSource() == computer4){
 			auswahlZahlSpieler(3);
 			ausgewaehlteGegnerText.setText("Es wurde 3 KI-Gegner ausgewählt");
-			this.revalidate();
+			ausgewaehlteGegnerText.revalidate();
 		}
 		if(e.getSource() == computer5){
 			auswahlZahlSpieler(4);
 			ausgewaehlteGegnerText.setText("Es wurde 4 KI-Gegner ausgewählt");
-			this.revalidate();
+			ausgewaehlteGegnerText.revalidate();
 		}
 		if(e.getSource() == computer6){
 			auswahlZahlSpieler(5);
 			ausgewaehlteGegnerText.setText("Es wurde 5 KI-Gegner ausgewählt");
-			this.revalidate();
+			ausgewaehlteGegnerText.revalidate();
 		}
 		
 	}

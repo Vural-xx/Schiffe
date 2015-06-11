@@ -82,7 +82,7 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		spieler6.addActionListener(this);
 		
 		ausgewaehlteSpielerText= new JLabel();
-		ausgewaehlteSpielerText.setForeground(Color.red);
+		ausgewaehlteSpielerText.setForeground(Color.blue);
 		
 		container1_inhalt3.add(ausgewaehlteSpielerText);
 		
@@ -115,32 +115,32 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		if(e.getSource() == spieler1){
 			auswahlZahlSpieler(1);
 			ausgewaehlteSpielerText.setText("Es wurde 1 Spieler ausgewählt");
-			this.revalidate();
+			ausgewaehlteSpielerText.revalidate();
 		}
 		if(e.getSource() == spieler2){
 			auswahlZahlSpieler(2);
 			ausgewaehlteSpielerText.setText("Es wurde 2 Spieler ausgewählt");
-			this.revalidate();
+			ausgewaehlteSpielerText.revalidate();
 		}
 		if(e.getSource() == spieler3){
 			auswahlZahlSpieler(3);
 			ausgewaehlteSpielerText.setText("Es wurde 3 Spieler ausgewählt");
-			this.revalidate();
+			ausgewaehlteSpielerText.revalidate();
 		}
 		if(e.getSource() == spieler4){
 			auswahlZahlSpieler(4);
 			ausgewaehlteSpielerText.setText("Es wurde 4 Spieler ausgewählt");
-			this.revalidate();
+			ausgewaehlteSpielerText.revalidate();
 		}
 		if(e.getSource() == spieler5){
 			auswahlZahlSpieler(5);
 			ausgewaehlteSpielerText.setText("Es wurde 5 Spieler ausgewählt");
-			this.revalidate();
+			ausgewaehlteSpielerText.revalidate();
 		}
 		if(e.getSource() == spieler6){
 			auswahlZahlSpieler(6);
 			ausgewaehlteSpielerText.setText("Es wurde 6 Spieler ausgewählt");
-			this.revalidate();
+			ausgewaehlteSpielerText.revalidate();
 		}
 		
 	}

@@ -38,8 +38,8 @@ public class SchiffeSetzenController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			mainController.nextSpieler();
 			JOptionPane.showMessageDialog(null, "Alle Spieler waren an der Reihe. Nun gehts los." + mainController.getCurrentSpieler().getName() + " ist nun mit dem Schießen dran!");
+			mainController.nextSpieler();
 			mainController.getMainFrame().remove(schiffSetzenGui);
 			mainController.startRunden();
 		}

@@ -63,7 +63,7 @@ public class SchiffeAuswahlGUI extends JPanel {
 		
 		zerstoererText= new JLabel("Zerstörer:");
 		fregatteText= new JLabel("Fregatte:");
-		korvetteText= new JLabel("korvette");
+		korvetteText= new JLabel("Korvette:");
 		ubootText= new JLabel("Uboot:");
 		
 		
