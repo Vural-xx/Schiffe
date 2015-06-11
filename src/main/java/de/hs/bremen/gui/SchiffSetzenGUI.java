@@ -93,23 +93,14 @@ public class SchiffSetzenGUI extends JPanel{
 		}
 		container5.add(button2);
 		
-		//Spielfeld
+		//spielfeld für einzelnen spieler erzeugen
 		container6 = new JPanel();
 		container6.setLayout(new BoxLayout(container6, BoxLayout.PAGE_AXIS));
-		//container6.add(textLabel4);
-		//spielerfeld[0] = new SpielerfeldGUI(375, 15);
-		//container6.add(spielerfeld[0]);
-
-		//spielfeld für einzelnen spieler erzeugen
 		spielerfeld = new SpielerfeldGUI[mainController.getSpieler().length];
 		textLabel4 = new JLabel(mainController.getCurrentSpieler().getName() +" ist dran. Bitte setze deine Schiffe");
 		spielerfeld[mainController.getCurrentSpielerIndex()] = new SpielerfeldGUI(375, 15);
 		container6.add(textLabel4);
 		container6.add(spielerfeld[mainController.getCurrentSpielerIndex()]);
-
-		
-		//container6.add(textLabel4);
-		//container6.add(spielerfeld);
 			
 		this.setLayout(new BorderLayout(5,5));
 		this.add(textLabel3, BorderLayout.NORTH);
