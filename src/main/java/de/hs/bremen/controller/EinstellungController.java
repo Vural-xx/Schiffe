@@ -10,8 +10,12 @@ import de.hs.bremen.gui.SchiffeAuswahlGUI;
 import de.hs.bremen.gui.SpielerAuswahlGUI;
 import de.hs.bremen.gui.SpielerNameGUI;
 import de.hs.bremen.gui.SpielfeldGroeßeGUI;
+import de.hs.bremen.model.Fregatte;
+import de.hs.bremen.model.Korvette;
 import de.hs.bremen.model.Schiff;
 import de.hs.bremen.model.Spieler;
+import de.hs.bremen.model.UBoot;
+import de.hs.bremen.model.Zerstoerer;
 
 public class EinstellungController {
 	public MainController mainController;
@@ -135,19 +139,26 @@ public class EinstellungController {
 			int anzahlUboot= Integer.parseInt(schiffeAuswahlGUI.ubootEingabe.getText());
 			schiffe = new ArrayList<String>();
 			
+			ArrayList<Schiff> tempSchiffe = new ArrayList<Schiff>();
+			for (int j = 0; j < mainController.getSpieler().length; j++){
+				for(int i=0;i<anzahlZerstoerer;i++){
+					tempSchiffe.add(new Zerstoerer());
+				}
+				for(int i=0;i<anzahlFregatte;i++){
+					tempSchiffe.add(new Fregatte());
+				}
+				for(int i=0;i<anzahlKorvette;i++){
+					tempSchiffe.add(new Korvette());
+				}
+				for(int i=0;i<anzahlUboot;i++){
+					tempSchiffe.add(new UBoot());
+				}
+				mainController.getSpieler()[j].getSpielfeld().setSchiffe(tempSchiffe);
+				tempSchiffe = null;
+			}
 			
-			for(int i=0;i<anzahlZerstoerer;i++){
-				schiffe.add("Zerstörer");
-			}
-			for(int i=0;i<anzahlFregatte;i++){
-				schiffe.add("Fregatte");
-			}
-			for(int i=0;i<anzahlKorvette;i++){
-				schiffe.add("Korvette");
-			}
-			for(int i=0;i<anzahlUboot;i++){
-				schiffe.add("UBoot");
-			}
+			
+			
 			
 		
 	}
