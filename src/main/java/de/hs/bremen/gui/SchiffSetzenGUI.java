@@ -34,7 +34,7 @@ public class SchiffSetzenGUI extends JPanel{
 	private JButton button1;
 	private JButton button2;
 	private JTextField textField;
-	private SpielerfeldGUI spielerfeld;
+	private SpielerfeldGUI[] spielerfeld;
 	public MainController mainController;
 	
 	public SchiffSetzenGUI(MainController mainController){
@@ -56,7 +56,7 @@ public class SchiffSetzenGUI extends JPanel{
 		bildLabel = new JLabel();
 		bildLabel.setIcon(new ImageIcon("C:\\Users\\Christin\\Desktop\\Battelship\\src\\sprites\\submarine_0.gif"));
 		
-		spielerfeld = new SpielerfeldGUI(500, 20);
+		
 		
 		//Schiffe zum hinzufügen
 		container5 = new JPanel();
@@ -94,8 +94,23 @@ public class SchiffSetzenGUI extends JPanel{
 		//Spielfeld
 		container6 = new JPanel();
 		container6.setLayout(new BoxLayout(container6, BoxLayout.PAGE_AXIS));
-		container6.add(textLabel4);
-		container6.add(spielerfeld);
+		//container6.add(textLabel4);
+		//spielerfeld[0] = new SpielerfeldGUI(375, 15);
+		//container6.add(spielerfeld[0]);
+
+		//spielfeld für einzelnen spieler erzeugen
+		
+		spielerfeld = new SpielerfeldGUI[mainController.getSpieler().length];
+		for(int i = 0; i< mainController.getSpieler().length; i++){
+			if(mainController.getSpieler()[i].isIstDran()){
+				textLabel4 = new JLabel(mainController.getSpieler()[i].getName() +" ist dran. Bitte setze deine Schiffe");
+				spielerfeld[i] = new SpielerfeldGUI(375, 15);
+				container6.add(textLabel4);
+				container6.add(spielerfeld[i]);
+				
+				
+			}
+		}
 		
 
 		
@@ -103,8 +118,6 @@ public class SchiffSetzenGUI extends JPanel{
 		this.add(textLabel3, BorderLayout.NORTH);
 		this.add(container6, BorderLayout.CENTER);
 		this.add(container5, BorderLayout.EAST);
-		
-		//this.add(bildLabel, BorderLayout.SOUTH);
 		
 	}
 	
