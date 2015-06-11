@@ -81,7 +81,16 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 			}
 		}
 	}
+	
 
+	public boolean innerhalbSpielfeld(int x ,int y){
+		if(horizontal){
+			return x +laenge  <=spielfeldGroesse/getFeldgroesse()  && y <= spielfeldGroesse/getFeldgroesse();
+		}else{
+			return x <= spielfeldGroesse/getFeldgroesse() && y+laenge <= spielfeldGroesse/getFeldgroesse();
+		}	
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent ev) {
 		// TODO Auto-generated method stub
@@ -90,7 +99,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		System.out.println("X-Position " + xPosition);
 		System.out.println("Y-Position " + yPosition);
 		System.out.println("Bin drin");
-		if(ev.getButton() == 1){
+		if(ev.getButton() == 1 && innerhalbSpielfeld(xPosition,yPosition)){
 			for (int i = 0; i < laenge; i++){
 				if(horizontal){
 					fillSquare((i+xPosition)*getFeldgroesse(),yPosition*getFeldgroesse(),getFeldgroesse(),getFeldgroesse(),Color.RED);
