@@ -118,7 +118,7 @@ public class EinstellungController {
 		for (int i=0; i< spieler.length; i++){	
 			spieler[i]= new Spieler(spielerNameGUI.spielerEingabe[i].getText());
 		}
-		
+		spieler[0].setIstDran(true);
 		return spieler;
 		
 	}

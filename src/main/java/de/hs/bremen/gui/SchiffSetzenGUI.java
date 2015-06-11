@@ -43,11 +43,11 @@ public class SchiffSetzenGUI extends JPanel{
 
 		setVisible(true);
 		
-}
+	}
 	public void initComponents(){
 		
 		textLabel3 = new JLabel("Herzlich Willkommen bei Schiffe versenken!");
-		textLabel4 = new JLabel(mainController.getSpieler()[0].getName() +" ist dran. Bitte setze deine Schiffe");
+		textLabel4 = new JLabel(mainController.getCurrentSpieler().getName() +" ist dran. Bitte setze deine Schiffe");
 		button1 = new JButton("Nächster Spieler");
 		button2 = new JButton("Spiel beginnen");
 		textField = new JTextField();	
@@ -106,6 +106,8 @@ public class SchiffSetzenGUI extends JPanel{
 		
 		//this.add(bildLabel, BorderLayout.SOUTH);
 		
+		this.setPreferredSize(this.getPreferredSize());
+		this.revalidate();
 	}
 	
 	public void setActionListener(ActionListener l, ActionListener p){

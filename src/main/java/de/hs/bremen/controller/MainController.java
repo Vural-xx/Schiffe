@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 
 import de.hs.bremen.abstracts.AbstractController;
 import de.hs.bremen.gui.MainFrame;
+import de.hs.bremen.model.Spieler;
 
 public class MainController extends AbstractController {
 	private EinstellungController einstellungController;
@@ -57,6 +58,16 @@ public class MainController extends AbstractController {
 			}
 		}
 		getSpieler()[nextSpieler].setIstDran(true);
+	}
+	
+	public Spieler getCurrentSpieler(){
+		Spieler spieler = null;
+		for(int i = 0 ; i < getSpieler().length; i++){
+			if(getSpieler()[i].isIstDran()){
+				spieler = getSpieler()[i];
+			}
+		}
+		return spieler;
 	}
 	
 	public class ZuRundeWechseln implements ActionListener{
