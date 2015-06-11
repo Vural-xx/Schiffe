@@ -27,8 +27,8 @@ public class SchiffeSetzenController {
 			// TODO Auto-generated method stub
 			mainController.getMainFrame().remove(schiffSetzenGui);
 			if(!mainController.lastRundenSpieler()){
-				JOptionPane.showMessageDialog(null, "Der nächste Spieler ist an der Reihe");
 				mainController.nextSpieler();
+				JOptionPane.showMessageDialog(null, mainController.getCurrentSpieler().getName() + " ist an der Reihe");
 				mainController.startSchiffeSetzen();
 			}
 		}

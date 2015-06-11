@@ -81,7 +81,10 @@ public class SchiffSetzenGUI extends JPanel{
 		if(!mainController.lastRundenSpieler()){
 			container5.add(button1);	
 		}
-		container5.add(button2);
+		if(mainController.lastRundenSpieler()){
+			container5.add(button2);	
+		}
+		//container5.add(button2);
 		
 		//spielfeld für einzelnen spieler erzeugen
 		container6 = new JPanel();
