@@ -60,28 +60,24 @@ public class RundenGUI extends JPanel {
 		container1 = new JPanel();
 		container1.setLayout(new BoxLayout(container1, BoxLayout.PAGE_AXIS));
 		container1.add(textLabel1);
-		JButton zerstoerer[] = new JButton[2/*schiffeAuswahl().zerstoererEingabe.getText()*/];
-		for(int i = 0; i!=2 /*schiffeAuswahl().zerstoererEingabe.getText()*/; i++){
+		JButton zerstoerer[] = new JButton[1/*schiffeAuswahl().zerstoererEingabe.getText()*/];
+		for(int i = 0; i!=1 /*schiffeAuswahl().zerstoererEingabe.getText()*/; i++){
 			zerstoerer[i] = new JButton("Zerstörer");
-			zerstoerer[i].setBackground(Color.red);
 			container1.add(zerstoerer[i]);
 		}
 		JButton fregatte[] = new JButton[1/*schiffeAuswahl().fregatteEingabe.getText()*/];
 		for(int i = 0; i!=1 /*schiffeAuswahl().fregatteEingabe.getText()*/; i++){
 			fregatte[i] = new JButton("Fregatte ");
-			fregatte[i].setBackground(Color.green);
 			container1.add(fregatte[i]);
 		}
 		JButton korvette[] = new JButton[1/*schiffeAuswahl().korvetteEingabe.getText()*/];
 		for(int i = 0; i!=1 /*schiffeAuswahl().korvetteEingabe.getText()*/; i++){
 			korvette[i] = new JButton("Korvette");
-			korvette[i].setBackground(Color.blue);
 			container1.add(korvette[i]);
 		}
 		JButton uboot[] = new JButton[1/*schiffeAuswahl().ubootEingabe.getText()*/];
 		for(int i = 0; i!=1 /*schiffeAuswahl().ubootEingabe.getText()*/; i++){
 			uboot[i] = new JButton("UBoot");
-			uboot[i].setBackground(Color.yellow);
 			container1.add(uboot[i]);
 		}
 		container1.add(Box.createRigidArea(new Dimension(0, 0)));
