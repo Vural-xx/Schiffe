@@ -2,7 +2,12 @@ package de.hs.bremen.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.beans.FeatureDescriptor;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -11,20 +16,23 @@ import javax.swing.JTextField;
 
 public class SchiffeAuswahlGUI extends JPanel {
 	
-	public JLabel schiffeAnzahlText;
-	public JLabel zerstoererText;
-	public JLabel fregatteText;
-	public JLabel korvetteText;
-	public JLabel ubootText;
+	private JLabel schiffeAnzahlText;
+	private JLabel zerstoererText;
+	private JLabel fregatteText;
+	private JLabel korvetteText;
+	private JLabel ubootText;
 	
-	public JPanel container1;
-	public JPanel container1_inhalt1;
-	public JPanel container1_inhalt2;
+	private JPanel container1;
+	private JPanel fuellcontainer;
+
 	
 	public JTextField zerstoererEingabe;
 	public JTextField fregatteEingabe;
 	public JTextField korvetteEingabe;
 	public JTextField ubootEingabe;
+	
+	private JButton weiter;
+	private GridBagConstraints gbc;
 	
 
 	
@@ -38,14 +46,17 @@ public class SchiffeAuswahlGUI extends JPanel {
 	
 	
 	public void initComponents(){
-		this.setLayout(new BorderLayout(0,100));
-		container1= new JPanel();
-		container1_inhalt1= new JPanel();
-		container1_inhalt2= new JPanel();
-		container1.setLayout(new GridLayout(1,1,0,50));
-		container1_inhalt1.setLayout(new GridLayout(0,1,0,50));
-		container1_inhalt2.setLayout(new GridLayout(0,1,0,50));
+		gbc= new GridBagConstraints();
+		this.setLayout(new GridBagLayout());
+		gbc.gridx=1;
+		gbc.insets=new Insets(60, 0, 0, 0);
 		
+		container1= new  JPanel();
+		container1.setLayout(new GridLayout(0,2,10,10));
+		
+		fuellcontainer= new JPanel();
+
+		weiter = new JButton("weiter");
 		
 		schiffeAnzahlText= new JLabel("Bitte geben Sie Anzahl der Schiffe ein:");
 		
@@ -55,36 +66,38 @@ public class SchiffeAuswahlGUI extends JPanel {
 		korvetteText= new JLabel("korvette");
 		ubootText= new JLabel("Uboot:");
 		
-		container1_inhalt1.add(zerstoererText);
-		container1_inhalt1.add(fregatteText);
-		container1_inhalt1.add(korvetteText);
-		container1_inhalt1.add(ubootText);
-		
-		container1.add(container1_inhalt1);
-		
 		
 		zerstoererEingabe= new JTextField();
-		// muss man nur 1 mal definieren. alle anderen passen sich an
-		zerstoererEingabe.setPreferredSize(new Dimension(50, 24));
-		
 		fregatteEingabe= new JTextField();
-		
 		korvetteEingabe= new JTextField();
-		
 		ubootEingabe= new JTextField();
 		
-		container1_inhalt2.add(zerstoererEingabe);
-		container1_inhalt2.add(fregatteEingabe);
-		container1_inhalt2.add(korvetteEingabe);
-		container1_inhalt2.add(ubootEingabe);
 		
-		container1.add(container1_inhalt2);
+		zerstoererEingabe.setPreferredSize(new Dimension(50, 24));
+		fregatteEingabe.setPreferredSize(new Dimension(50, 24));
+		korvetteEingabe.setPreferredSize(new Dimension(50, 24));
+		ubootEingabe.setPreferredSize(new Dimension(50, 24));
 		
-		this.add(schiffeAnzahlText, BorderLayout.PAGE_START);
+		container1.add(zerstoererText);
+		container1.add(zerstoererEingabe);
+		container1.add(fregatteText);
+		container1.add(fregatteEingabe);
+		container1.add(korvetteText);
+		container1.add(korvetteEingabe);
+		container1.add(ubootText);
+		container1.add(ubootEingabe);
 		
-		this.add(container1);
+		this.add(schiffeAnzahlText,gbc);
+		this.add(container1,gbc);
+		this.add(weiter,gbc);
+		this.add(fuellcontainer,gbc);
+		
 
 		
 	}
 
+	public void setActionListener(ActionListener l){
+		weiter.addActionListener(l);
+		
+	}
 }

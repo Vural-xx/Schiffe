@@ -44,7 +44,6 @@ public class SpielerNameGUI extends JPanel {
 	public void initComponents(){
 		
 		this.setLayout(new GridBagLayout());
-		gbc.gridx=0;
 		gbc.gridx=1;
 		gbc.insets=new Insets(10, 0, 0, 0);
 		

@@ -2,6 +2,9 @@ package de.hs.bremen.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.acl.LastOwnerException;
+
+import javax.swing.JOptionPane;
 
 import de.hs.bremen.gui.MainFrame;
 import de.hs.bremen.gui.SchiffSetzenGUI;
@@ -23,8 +26,11 @@ public class SchiffeSetzenController {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			mainController.getMainFrame().remove(schiffSetzenGui);
-			mainController.nextSpieler();
-			mainController.startSchiffeSetzen();
+			if(!mainController.lastRundenSpieler()){
+				JOptionPane.showMessageDialog(null, "Der nächste Spieler ist an der Reihe");
+				mainController.nextSpieler();
+				mainController.startSchiffeSetzen();
+			}
 		}
 		
 	}
@@ -32,6 +38,8 @@ public class SchiffeSetzenController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			mainController.nextSpieler();
+			JOptionPane.showMessageDialog(null, "Alle Spieler waren an der Reihe. Nun gehts los." + mainController.getCurrentSpieler().getName() + " ist nun mit dem Schießen dran!");
 			mainController.getMainFrame().remove(schiffSetzenGui);
 			mainController.startRunden();
 		}

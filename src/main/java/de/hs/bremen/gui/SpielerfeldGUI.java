@@ -22,6 +22,8 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	private List<Feld> squares = new ArrayList<Feld>();
 	private int spielfeldGroesse;
 	private int feldgroesse;
+	private boolean horizontal = true;
+	private int laenge = 3;
 
 	public SpielerfeldGUI(int spielfeldGroesse, int feldgroesse) {
 		this.spielfeldGroesse = spielfeldGroesse;
@@ -88,13 +90,24 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		System.out.println("X-Position " + xPosition);
 		System.out.println("Y-Position " + yPosition);
 		System.out.println("Bin drin");
-		fillSquare(xPosition*getFeldgroesse(),(yPosition)*getFeldgroesse(),getFeldgroesse(),getFeldgroesse(),Color.RED);
-		repaint();
-
+		if(ev.getButton() == 1){
+			for (int i = 0; i < laenge; i++){
+				if(horizontal){
+					fillSquare((i+xPosition)*getFeldgroesse(),yPosition*getFeldgroesse(),getFeldgroesse(),getFeldgroesse(),Color.RED);
+				}else{
+					fillSquare(xPosition*getFeldgroesse(),(i+yPosition)*getFeldgroesse(),getFeldgroesse(),getFeldgroesse(),Color.RED);
+				}
+			}
+			repaint();	
+		}
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
+	public void mousePressed(MouseEvent ev) {
+		if(ev.getButton() == 3){
+			System.out.println("Test");
+			horizontal = !horizontal;
+		}
 		// TODO Auto-generated method stub
 
 	}
