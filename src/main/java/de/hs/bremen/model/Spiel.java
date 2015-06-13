@@ -399,6 +399,7 @@ public class Spiel implements Serializable {
 	
 	public void schiffeAufFeldSetzen(ArrayList<Schiff> schiffe){
 		int ausrichtung;
+		boolean horizontal = false;
 		int zeile;
 		int spalte;
 		int anzahlSchiffeGezeugt;
@@ -427,11 +428,14 @@ public class Spiel implements Serializable {
 				spalte = IO.readInt();
 				System.out.println(spieler[i].getName() +", bitte geben Sie an ob ihr Schiff 1. Horizontal oder 2. Vertikal angeorndet werden soll");
 				ausrichtung = vertikalHorizontal(IO.readInt());
+				if(ausrichtung == 1){
+					horizontal = true;
+				}
 				System.out.println("--------------------------------------------------------------");
 				System.out.println("|||| SPIELFELD VON SPIELER: " + spieler[i].getName() + " ||||");
 				System.out.println("--------------------------------------------------------------");
 				if (spieler[i].getSpielfeld().schiffPlazierbar(schiffe.get(anzahlSchiffeGezeugt), new Position(spalte, zeile), ausrichtung)){
-					spieler[i].getSpielfeld().platziereSchiff(schiffe.get(anzahlSchiffeGezeugt), new Position(spalte, zeile), ausrichtung);
+					spieler[i].getSpielfeld().platziereSchiff(schiffe.get(anzahlSchiffeGezeugt), new Position(spalte, zeile), horizontal);
 					spieler[i].getSpielfeld().printSpielfeld();
 					anzahlSchiffeGezeugt++;
 				}else{

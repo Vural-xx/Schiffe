@@ -106,13 +106,13 @@ public class Spielfeld implements Serializable{
 	 * @param position: Position auf dem das Schiff platziert werden soll.
 	 * @param horizontal: Angabe ob das Schiff horizontal platziert werden soll.
 	 */
-	public void platziereSchiff(Schiff schiff, Position position, int horizontal){
+	public void platziereSchiff(Schiff schiff, Position position, boolean horizontal){
 		Feld[] f = new Feld[schiff.getFelder().length];
 		for (int i = 0; i < schiff.getFelder().length; i++){
-			if(horizontal== 1){
+			if(horizontal){
 				felder[position.getPositionY()-1][position.getPositonX()-1+i].setFeldstatus(Feldstatus.BESETZT);
 				f[i] = felder[position.getPositionY()-1][position.getPositonX()-1+i];
-			}else if (horizontal==2){
+			}else{
 				felder[position.getPositionY()-1+i][position.getPositonX()-1].setFeldstatus(Feldstatus.BESETZT);
 				f[i] = felder[position.getPositionY()-1+i][position.getPositonX()-1];
 			}

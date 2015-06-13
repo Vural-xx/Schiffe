@@ -38,6 +38,8 @@ public abstract class Schiff implements Serializable {
 	 */
 	private int feuerstaerke;
 	
+	private boolean platziert;
+	
 	
 	/**
 	 * Leerer Konstruktor.
@@ -248,6 +250,16 @@ public abstract class Schiff implements Serializable {
 		}else{
 			return "Zerstoerer";
 		}
+	}
+
+
+	public boolean isPlatziert() {
+		return platziert;
+	}
+
+
+	public void setPlatziert(boolean platziert) {
+		this.platziert = platziert;
 	}
 
 }

@@ -10,8 +10,12 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import de.hs.bremen.gui.shapes.Feld;
+import de.hs.bremen.controller.MainController;
+import de.hs.bremen.gui.shapes.FeldShape;
 import de.hs.bremen.gui.shapes.Squares;
+import de.hs.bremen.model.Feld;
+import de.hs.bremen.model.Position;
+import de.hs.bremen.model.Schiff;
 
 public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListener{
 
@@ -19,7 +23,8 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	 * 
 	 */
 	private static final long serialVersionUID = -9206943112708931485L;
-	private List<Feld> squares = new ArrayList<Feld>();
+	private MainController mainController;
+	private List<FeldShape> squares = new ArrayList<FeldShape>();
 	private int spielfeldGroesse;
 	private int feldgroesse;
 	private boolean horizontal = true;
@@ -28,6 +33,23 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	public SpielerfeldGUI(int spielfeldGroesse, int feldgroesse) {
 		this.spielfeldGroesse = spielfeldGroesse;
 		this.feldgroesse = feldgroesse;
+		addMouseListener(this);
+		for(int i = 0; i <spielfeldGroesse/feldgroesse; i++){
+			addSquare(0, i*feldgroesse, feldgroesse, feldgroesse);
+			addSquare(i*feldgroesse, 0, feldgroesse, feldgroesse);
+			if(i != 0){
+				for (int j = 1; j < spielfeldGroesse/feldgroesse; j++){
+					addSquare(j*feldgroesse, i*feldgroesse,feldgroesse,feldgroesse);
+				}
+			}
+		}
+		setVisible(true);
+	}
+	
+	public SpielerfeldGUI(int spielfeldGroesse, int feldgroesse, MainController mainController) {
+		this.spielfeldGroesse = spielfeldGroesse;
+		this.feldgroesse = feldgroesse;
+		this.mainController = mainController;
 		addMouseListener(this);
 		for(int i = 0; i <spielfeldGroesse/feldgroesse; i++){
 			addSquare(0, i*feldgroesse, feldgroesse, feldgroesse);
@@ -58,12 +80,12 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	}
 
 	public void addSquare(int x, int y, int width, int height) {
-		Feld rect = new Feld(x, y, width, height);
+		FeldShape rect = new FeldShape(x, y, width, height);
 		squares.add(rect);
 	}
 
 	public void fillSquare(int x, int y, int width, int height, Color c) {
-		Feld rect = new Feld(x, y, width, height, c);
+		FeldShape rect = new FeldShape(x, y, width, height, c);
 		squares.add(rect);
 	}
 
@@ -72,7 +94,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		for (Feld rect : squares) {
+		for (FeldShape rect : squares) {
 			if(rect.getColor() != null){
 				g2.setColor(rect.getColor());
 				g2.fillRect((int)rect.getX(), (int)rect.getY(), (int)rect.getHeight(), (int)rect.getWidth());
@@ -91,6 +113,15 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		}	
 	}
 	
+	public void drawSpielfeld(){
+		for(Schiff s: mainController.getCurrentSpieler().getSpielfeld().getSchiffe()){
+			for(Feld f: s.getFelder()){
+				fillSquare(f.getPosition().getPositonX()*getFeldgroesse(), f.getPosition().getPositionY()*getFeldgroesse(), getFeldgroesse(), getFeldgroesse(), Color.RED);
+			}
+		}
+		repaint();
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent ev) {
 		// TODO Auto-generated method stub
@@ -99,9 +130,12 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		System.out.println("X-Position " + xPosition);
 		System.out.println("Y-Position " + yPosition);
 		System.out.println("Bin drin");
+		
 		if(ev.getButton() == 1 && innerhalbSpielfeld(xPosition,yPosition)){
+			this.laenge = mainController.getAusgewähltesSchiff().getLaenge();
 			for (int i = 0; i < laenge; i++){
 				if(horizontal){
+					mainController.getCurrentSpieler().getSpielfeld().platziereSchiff(mainController.getAusgewähltesSchiff(), new Position(xPosition+1, yPosition+1), horizontal);
 					fillSquare((i+xPosition)*getFeldgroesse(),yPosition*getFeldgroesse(),getFeldgroesse(),getFeldgroesse(),Color.RED);
 				}else{
 					fillSquare(xPosition*getFeldgroesse(),(i+yPosition)*getFeldgroesse(),getFeldgroesse(),getFeldgroesse(),Color.RED);

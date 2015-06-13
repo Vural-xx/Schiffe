@@ -3,7 +3,7 @@ package de.hs.bremen.gui.shapes;
 import java.awt.Color;
 import java.awt.Rectangle;
 
-public class Feld extends Rectangle{
+public class FeldShape extends Rectangle{
 
 	Color color;
 	/**
@@ -11,16 +11,16 @@ public class Feld extends Rectangle{
 	 */
 	private static final long serialVersionUID = 8363210663687042404L;
 	
-	public Feld(Color c){
+	public FeldShape(Color c){
 		color = c;
 		
 	}
 	
-	public Feld(int x, int y, int width, int height){
+	public FeldShape(int x, int y, int width, int height){
 		super(x, y, width, height);
 	}
 	
-	public Feld(int x, int y, int width, int height, Color c){
+	public FeldShape(int x, int y, int width, int height, Color c){
 		super(x, y, width, height);
 		color = c;
 	}

@@ -137,10 +137,21 @@ public class EinstellungController {
 			int anzahlFregatte= Integer.parseInt(schiffeAuswahlGUI.fregatteEingabe.getText());
 			int anzahlKorvette= Integer.parseInt(schiffeAuswahlGUI.korvetteEingabe.getText());
 			int anzahlUboot= Integer.parseInt(schiffeAuswahlGUI.ubootEingabe.getText());
+			
+			System.out.println("Zerstörer = " + anzahlZerstoerer);
+			System.out.println("Fregatte = " + anzahlFregatte);
+			System.out.println("Korvete = " + anzahlKorvette);
+			System.out.println("UBoot = " + anzahlUboot);
+			
+			for(int i =0; i<mainController.getSpieler().length;i++){
+				mainController.getSpieler()[i].createSpielfeld(40);
+			}
+			
 			schiffe = new ArrayList<String>();
 			
-			ArrayList<Schiff> tempSchiffe = new ArrayList<Schiff>();
+			ArrayList<Schiff> tempSchiffe;
 			for (int j = 0; j < mainController.getSpieler().length; j++){
+				tempSchiffe = new ArrayList<Schiff>();
 				for(int i=0;i<anzahlZerstoerer;i++){
 					tempSchiffe.add(new Zerstoerer());
 				}
@@ -156,11 +167,6 @@ public class EinstellungController {
 				mainController.getSpieler()[j].getSpielfeld().setSchiffe(tempSchiffe);
 				tempSchiffe = null;
 			}
-			
-			
-			
-			
-		
 	}
 	
 }

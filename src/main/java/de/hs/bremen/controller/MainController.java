@@ -2,17 +2,20 @@ package de.hs.bremen.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
 import de.hs.bremen.abstracts.AbstractController;
 import de.hs.bremen.gui.MainFrame;
+import de.hs.bremen.model.Schiff;
 import de.hs.bremen.model.Spieler;
 
 public class MainController extends AbstractController {
 	private EinstellungController einstellungController;
 	private RundenController rundenController;
 	private SchiffeSetzenController schiffeSetzenController;
+	private Schiff ausgewähltesSchiff;
 	
 	public MainController() {
 		super();
@@ -80,11 +83,23 @@ public class MainController extends AbstractController {
 		return spieler;
 	}
 	
+	public ArrayList<Schiff> getCurrentSpielerSchiffe(){
+		return getCurrentSpieler().getSpielfeld().getSchiffe();
+	}
+	
 	public boolean lastRundenSpieler(){
 		return getCurrentSpielerIndex() +1== getSpieler().length;
 		
 	}
 	
+	public Schiff getAusgewähltesSchiff() {
+		return ausgewähltesSchiff;
+	}
+
+	public void setAusgewähltesSchiff(Schiff ausgewähltesSchiff) {
+		this.ausgewähltesSchiff = ausgewähltesSchiff;
+	}
+
 	public class ZuRundeWechseln implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {

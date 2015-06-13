@@ -16,15 +16,15 @@ public class Squares extends JPanel {
 	private static final long serialVersionUID = 3518123363196992970L;
 	private static final int PREF_W = 300;
 	private static final int PREF_H = PREF_W;
-	private List<Feld> squares = new ArrayList<Feld>();
+	private List<FeldShape> squares = new ArrayList<FeldShape>();
 
 	public void addSquare(int x, int y, int width, int height) {
-		Feld rect = new Feld(x, y, width, height);
+		FeldShape rect = new FeldShape(x, y, width, height);
 		squares.add(rect);
 	}
 
 	public void fillSquare(int x, int y, int width, int height, Color c) {
-		Feld rect = new Feld(x, y, width, height, c);
+		FeldShape rect = new FeldShape(x, y, width, height, c);
 		squares.add(rect);
 	}
 
@@ -37,7 +37,7 @@ public class Squares extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		for (Feld rect : squares) {
+		for (FeldShape rect : squares) {
 			if(rect.getColor() != null){
 				g2.setColor(rect.getColor());
 				g2.fillRect((int)rect.getX(), (int)rect.getY(), (int)rect.getHeight(), (int)rect.getWidth());

@@ -60,7 +60,7 @@ public class SchiffSetzenGUI extends JPanel{
 		container5 = new JPanel();
 		container5.setLayout(new BoxLayout(container5, BoxLayout.PAGE_AXIS));
 		zerstoerer = new JButton("Zerstörer ");
-		zerstoerer.setName("Zerstörer");
+		zerstoerer.setName("Zerstoerer");
 		container5.add(zerstoerer);
 		
 		fregatte = new JButton("Fregatte ");
@@ -72,7 +72,7 @@ public class SchiffSetzenGUI extends JPanel{
 		container5.add(korvette);
 		
 		uboot = new JButton("UBoot");
-		uboot.setName("Uboot");
+		uboot.setName("UBoot");
 		container5.add(uboot);
 	
 		//container5.add(bildLabel);
@@ -91,7 +91,7 @@ public class SchiffSetzenGUI extends JPanel{
 		container6.setLayout(new BoxLayout(container6, BoxLayout.PAGE_AXIS));
 		spielerfeld = new SpielerfeldGUI[mainController.getSpieler().length];
 		textLabel4 = new JLabel(mainController.getCurrentSpieler().getName() +" ist dran. Bitte setze deine Schiffe");
-		spielerfeld[mainController.getCurrentSpielerIndex()] = new SpielerfeldGUI(375, 15);
+		spielerfeld[mainController.getCurrentSpielerIndex()] = new SpielerfeldGUI(375, 15,mainController);
 		container6.add(textLabel4);
 		container6.add(spielerfeld[mainController.getCurrentSpielerIndex()]);
 			
@@ -102,10 +102,13 @@ public class SchiffSetzenGUI extends JPanel{
 		
 	}
 	
-	public void setActionListener(ActionListener l, ActionListener p){
-		button1.addActionListener(l);
-		button2.addActionListener(p);
-		
+	public void setActionListener(ActionListener spielerWechselListener, ActionListener finishListener, ActionListener schiffButtonListener){
+		button1.addActionListener(spielerWechselListener);
+		button2.addActionListener(finishListener);
+		zerstoerer.addActionListener(schiffButtonListener);
+		korvette.addActionListener(schiffButtonListener);
+		fregatte.addActionListener(schiffButtonListener);
+		uboot.addActionListener(schiffButtonListener);
 	}
 	
 	
