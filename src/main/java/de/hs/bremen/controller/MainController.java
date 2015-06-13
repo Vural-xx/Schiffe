@@ -99,6 +99,15 @@ public class MainController extends AbstractController {
 	public void setAusgewähltesSchiff(Schiff ausgewähltesSchiff) {
 		this.ausgewähltesSchiff = ausgewähltesSchiff;
 	}
+	
+	public SchiffeSetzenController getSchiffeSetzenController() {
+		return schiffeSetzenController;
+	}
+
+	public void setSchiffeSetzenController(
+			SchiffeSetzenController schiffeSetzenController) {
+		this.schiffeSetzenController = schiffeSetzenController;
+	}
 
 	public class ZuRundeWechseln implements ActionListener{
 		@Override

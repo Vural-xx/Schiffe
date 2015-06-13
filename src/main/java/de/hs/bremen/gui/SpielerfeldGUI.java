@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import de.hs.bremen.controller.MainController;
@@ -130,19 +131,28 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		System.out.println("X-Position " + xPosition);
 		System.out.println("Y-Position " + yPosition);
 		System.out.println("Bin drin");
-		
-		if(ev.getButton() == 1 && innerhalbSpielfeld(xPosition,yPosition)){
-			this.laenge = mainController.getAusgewähltesSchiff().getLaenge();
-			for (int i = 0; i < laenge; i++){
-				if(horizontal){
+		if(mainController.getAusgewähltesSchiff() == null){
+			JOptionPane.showMessageDialog(null, "Bitte wählen Sie ein Schiff welches Sie setzen wollen.");
+		}else if(mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe(mainController.getAusgewähltesSchiff().getClass().getCanonicalName()) == 0){
+			JOptionPane.showMessageDialog(null, "Bitte wählen Sie ein anderes Schiff.");
+		}else{
+			if(ev.getButton() == 1 && innerhalbSpielfeld(xPosition,yPosition)){
+				this.laenge = mainController.getAusgewähltesSchiff().getLaenge();
+				for (int i = 0; i < laenge; i++){
 					mainController.getCurrentSpieler().getSpielfeld().platziereSchiff(mainController.getAusgewähltesSchiff(), new Position(xPosition+1, yPosition+1), horizontal);
-					fillSquare((i+xPosition)*getFeldgroesse(),yPosition*getFeldgroesse(),getFeldgroesse(),getFeldgroesse(),Color.RED);
-				}else{
-					fillSquare(xPosition*getFeldgroesse(),(i+yPosition)*getFeldgroesse(),getFeldgroesse(),getFeldgroesse(),Color.RED);
+					if(horizontal){
+						fillSquare((i+xPosition)*getFeldgroesse(),yPosition*getFeldgroesse(),getFeldgroesse(),getFeldgroesse(),Color.RED);
+					}else{
+						fillSquare(xPosition*getFeldgroesse(),(i+yPosition)*getFeldgroesse(),getFeldgroesse(),getFeldgroesse(),Color.RED);
+					}
 				}
+				mainController.getSchiffeSetzenController().getSchiffSetzenGui().schiffGesetzt();
+				repaint();	
 			}
-			repaint();	
 		}
+		
+		
+		
 	}
 
 	@Override

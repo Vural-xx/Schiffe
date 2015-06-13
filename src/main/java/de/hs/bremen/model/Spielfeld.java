@@ -118,6 +118,7 @@ public class Spielfeld implements Serializable{
 			}
 		}
 		schiff.setFelder(f);
+		schiff.setPlatziert(true);
 		schiffe.add(schiff);
 	}
 	
@@ -382,5 +383,15 @@ public class Spielfeld implements Serializable{
 		}else{
 			return true;
 		}
+	}
+	
+	public int getAnzahlUngesetzteSchiffe(String name){
+		int counter = 0;
+		for(Schiff s: getSchiffe()){
+			if(s.getClass().getCanonicalName().equals(name) && !s.isPlatziert() ){
+				counter++;
+			}
+		}
+		return counter;
 	}
 }

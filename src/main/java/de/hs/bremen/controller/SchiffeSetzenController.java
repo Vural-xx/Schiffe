@@ -13,9 +13,8 @@ import de.hs.bremen.model.Schiff;
 
 public class SchiffeSetzenController {
 	private SchiffSetzenGUI schiffSetzenGui;
-	public MainController mainController;
+	private MainController mainController;
 	 
-	
 	public SchiffeSetzenController(MainController mainController){
 		this.mainController = mainController;
 		schiffSetzenGui = new SchiffSetzenGUI(mainController);
@@ -44,6 +43,14 @@ public class SchiffeSetzenController {
 		return schiff;
 	}
 
+	public SchiffSetzenGUI getSchiffSetzenGui() {
+		return schiffSetzenGui;
+	}
+
+	public void setSchiffSetzenGui(SchiffSetzenGUI schiffSetzenGui) {
+		this.schiffSetzenGui = schiffSetzenGui;
+	}
+	
 	class SpielerWechselListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -51,6 +58,7 @@ public class SchiffeSetzenController {
 			mainController.getMainFrame().remove(schiffSetzenGui);
 			if(!mainController.lastRundenSpieler()){
 				mainController.nextSpieler();
+				mainController.setAusgewähltesSchiff(null);
 				JOptionPane.showMessageDialog(null, mainController.getCurrentSpieler().getName() + " ist an der Reihe");
 				mainController.startSchiffeSetzen();
 			}

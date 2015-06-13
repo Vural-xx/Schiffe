@@ -35,6 +35,10 @@ public class SchiffSetzenGUI extends JPanel{
 	private JTextField textField;
 	private SpielerfeldGUI[] spielerfeld;
 	public MainController mainController;
+	private JLabel zerstoerAnzahl;
+	private JLabel fregatteAnzahl;
+	private JLabel korvetteAnzahl;
+	private JLabel ubootAnzahl;
 	private JButton zerstoerer;
 	private JButton fregatte;
 	private JButton korvette;
@@ -52,7 +56,9 @@ public class SchiffSetzenGUI extends JPanel{
 		textLabel3 = new JLabel("Herzlich Willkommen bei Schiffe versenken!");
 		textLabel4 = new JLabel(mainController.getCurrentSpieler().getName() +" ist dran. Bitte setze deine Schiffe");
 		button1 = new JButton("Nächster Spieler");
+		button1.setEnabled(false);
 		button2 = new JButton("Spiel beginnen");
+		button2.setEnabled(false);
 		textField = new JTextField();	
 		textField.setColumns(2);
 		
@@ -61,18 +67,26 @@ public class SchiffSetzenGUI extends JPanel{
 		container5.setLayout(new BoxLayout(container5, BoxLayout.PAGE_AXIS));
 		zerstoerer = new JButton("Zerstörer ");
 		zerstoerer.setName("Zerstoerer");
+		zerstoerAnzahl = new JLabel(mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe("de.hs.bremen.model.Zerstoerer")+"X");
+		container5.add(zerstoerAnzahl);
 		container5.add(zerstoerer);
 		
 		fregatte = new JButton("Fregatte ");
 		fregatte.setName("Fregatte");
+		fregatteAnzahl = new JLabel(mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe("de.hs.bremen.model.Fregatte")+"X");
+		container5.add(fregatteAnzahl);
 		container5.add(fregatte);
 		
 		korvette = new JButton("Korvette");
 		korvette.setName("Korvette");
+		korvetteAnzahl = new JLabel(mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe("de.hs.bremen.model.Korvette")+"X");
+		container5.add(korvetteAnzahl);
 		container5.add(korvette);
 		
 		uboot = new JButton("UBoot");
 		uboot.setName("UBoot");
+		ubootAnzahl = new JLabel(mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe("de.hs.bremen.UBoot")+"X");
+		container5.add(ubootAnzahl);
 		container5.add(uboot);
 	
 		//container5.add(bildLabel);
@@ -100,6 +114,42 @@ public class SchiffSetzenGUI extends JPanel{
 		this.add(container6, BorderLayout.CENTER);
 		this.add(container5, BorderLayout.EAST);
 		
+	}
+	
+	public void schiffGesetzt(){
+		int zerstoererZahl = mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe("de.hs.bremen.model.Zerstoerer");
+		int fregatteZahl = mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe("de.hs.bremen.model.Fregatte");
+		int korvetteZahl = mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe("de.hs.bremen.model.Korvette");
+		int ubootZahl =  mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe("de.hs.bremen.model.UBoot");
+		if(zerstoererZahl == 0){
+			zerstoerAnzahl.setEnabled(false);
+			zerstoerer.setEnabled(false);
+		}
+		if(fregatteZahl == 0){
+			fregatteAnzahl.setEnabled(false);
+			fregatte.setEnabled(false);
+		}
+		if(korvetteZahl == 0){
+			korvetteAnzahl.setEnabled(false);
+			korvette.setEnabled(false);
+		}
+		if(ubootZahl == 0){
+			ubootAnzahl.setEnabled(false);
+			uboot.setEnabled(false);
+		}
+		if(zerstoererZahl == 0 && fregatteZahl == 0 && korvetteZahl == 0 && ubootZahl == 0){
+			if(!mainController.lastRundenSpieler()){
+				button1.setEnabled(true);
+			}else{
+				button2.setEnabled(true);
+			}
+			
+		}
+		zerstoerAnzahl.setText(zerstoererZahl+"X");
+		fregatteAnzahl.setText(fregatteZahl+"X");
+		korvetteAnzahl.setText(korvetteZahl+"X");
+		ubootAnzahl.setText(ubootZahl+"X");
+		revalidate();
 	}
 	
 	public void setActionListener(ActionListener spielerWechselListener, ActionListener finishListener, ActionListener schiffButtonListener){
