@@ -1,5 +1,6 @@
 package de.hs.bremen.model;
 
+import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -66,6 +67,22 @@ public class Feld implements Serializable{
 			return ConsoleColor.ANSI_CYAN+"S" + ConsoleColor.ANSI_RESET;
 		} else {
 			return ConsoleColor.ANSI_BLACK+"X" + ConsoleColor.ANSI_RESET;
+		}
+	}
+	
+	/**
+	 * Inhalt welches aus dem Spielfeld angezeigt werden soll, wird anhand des Feldstatus "berechnet"
+	 * @return: Inhalt des Feldes
+	 */
+	public Color getGuiInhalt() {
+		if(getFeldstatus()==Feldstatus.WASSER){
+			return Color.BLUE;
+		} else if(getFeldstatus()== Feldstatus.GETROFFEN){
+			return Color.RED;
+		} else if (getFeldstatus()==Feldstatus.BESETZT){
+			return Color.CYAN;
+		} else {
+			return Color.BLACK;
 		}
 	}
 	

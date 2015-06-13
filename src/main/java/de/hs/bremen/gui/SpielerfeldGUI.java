@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import de.hs.bremen.controller.MainController;
+import de.hs.bremen.enums.Feldstatus;
 import de.hs.bremen.gui.shapes.FeldShape;
 import de.hs.bremen.gui.shapes.Squares;
 import de.hs.bremen.model.Feld;
@@ -119,6 +120,18 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 			for(Feld f: s.getFelder()){
 				fillSquare(f.getPosition().getPositonX()*getFeldgroesse(), f.getPosition().getPositionY()*getFeldgroesse(), getFeldgroesse(), getFeldgroesse(), Color.RED);
 			}
+		}
+		repaint();
+	}
+	
+	public void drawGegnerSpielfeld(){
+		Feld[][] felder = mainController.getCurrentSpieler().getSpielfeldPublic().getFelder();
+		for(int i = 0 ; i < felder.length; i++){
+			for (int j = 0 ; j < felder[i].length; j++){
+				if(felder[i][j].getFeldstatus() != Feldstatus.WASSER){
+					fillSquare(felder[i][j].getPosition().getPositonX()*getFeldgroesse(), felder[i][j].getPosition().getPositionY()*getFeldgroesse(), getFeldgroesse(), getFeldgroesse(), felder[i][j].getGuiInhalt());
+				}	
+		    }
 		}
 		repaint();
 	}
