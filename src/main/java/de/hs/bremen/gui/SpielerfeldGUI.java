@@ -118,7 +118,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	public void drawSpielfeld(){
 		for(Schiff s: mainController.getCurrentSpieler().getSpielfeld().getSchiffe()){
 			for(Feld f: s.getFelder()){
-				fillSquare(f.getPosition().getPositonX()*getFeldgroesse(), f.getPosition().getPositionY()*getFeldgroesse(), getFeldgroesse(), getFeldgroesse(), s.getFarbe());
+				fillSquare((f.getPosition().getPositonX()*getFeldgroesse())+1, (f.getPosition().getPositionY()*getFeldgroesse())+1, getFeldgroesse()-2, getFeldgroesse()-2, s.getFarbe());
 			}
 		}
 		repaint();
@@ -129,7 +129,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		for(int i = 0 ; i < felder.length; i++){
 			for (int j = 0 ; j < felder[i].length; j++){
 				if(felder[i][j].getFeldstatus() != Feldstatus.WASSER){
-					fillSquare(felder[i][j].getPosition().getPositonX()*getFeldgroesse(), felder[i][j].getPosition().getPositionY()*getFeldgroesse(), getFeldgroesse(), getFeldgroesse(), felder[i][j].getGuiInhalt());
+					fillSquare((felder[i][j].getPosition().getPositonX()*getFeldgroesse())+1, (felder[i][j].getPosition().getPositionY()*getFeldgroesse())+1, getFeldgroesse()-2, getFeldgroesse()-2, felder[i][j].getGuiInhalt());
 				}	
 		    }
 		}
@@ -154,9 +154,9 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 				for (int i = 0; i < laenge; i++){
 					mainController.getCurrentSpieler().getSpielfeld().platziereSchiff(mainController.getAusgewähltesSchiff(), new Position(xPosition+1, yPosition+1), horizontal);
 					if(horizontal){
-						fillSquare((i+xPosition)*getFeldgroesse(),yPosition*getFeldgroesse(),getFeldgroesse(),getFeldgroesse(),mainController.getAusgewähltesSchiff().getFarbe());
+						fillSquare(((i+xPosition)*getFeldgroesse())+1,(yPosition*getFeldgroesse())+1,getFeldgroesse()-2,getFeldgroesse()-2,mainController.getAusgewähltesSchiff().getFarbe());
 					}else{
-						fillSquare(xPosition*getFeldgroesse(),(i+yPosition)*getFeldgroesse(),getFeldgroesse(),getFeldgroesse(),mainController.getAusgewähltesSchiff().getFarbe());
+						fillSquare((xPosition*getFeldgroesse())+1,((i+yPosition)*getFeldgroesse())+1,getFeldgroesse()-2,getFeldgroesse()-2,mainController.getAusgewähltesSchiff().getFarbe());
 					}
 				}
 				mainController.getSchiffeSetzenController().getSchiffSetzenGui().schiffGesetzt();
