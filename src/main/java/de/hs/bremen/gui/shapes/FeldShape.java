@@ -22,7 +22,7 @@ public class FeldShape extends Rectangle{
 	
 	public FeldShape(int x, int y, int width, int height, Color c){
 		super(x, y, width, height);
-		color = c;
+		setColor(c);
 	}
 
 	public Color getColor() {

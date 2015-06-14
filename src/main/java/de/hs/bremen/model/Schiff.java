@@ -1,5 +1,6 @@
 package de.hs.bremen.model;
 
+import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -260,6 +261,18 @@ public abstract class Schiff implements Serializable {
 
 	public void setPlatziert(boolean platziert) {
 		this.platziert = platziert;
+	}
+	
+	public Color getFarbe(){
+		if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.Fregatte")){
+			return Color.GREEN;
+		}else if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.Korvette")){
+			return Color.YELLOW;
+		}else if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.UBoot")){
+			return Color.ORANGE;
+		}else{
+			return Color.RED;
+		}
 	}
 
 }
