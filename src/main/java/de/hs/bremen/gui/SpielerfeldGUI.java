@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import de.hs.bremen.controller.MainController;
 import de.hs.bremen.enums.Feldstatus;
+import de.hs.bremen.enums.Spielfeldmodus;
 import de.hs.bremen.gui.shapes.FeldShape;
 import de.hs.bremen.gui.shapes.Squares;
 import de.hs.bremen.model.Feld;
@@ -26,6 +27,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	 */
 	private static final long serialVersionUID = -9206943112708931485L;
 	private MainController mainController;
+	private Spielfeldmodus spielfeldmodus;
 	private List<FeldShape> squares = new ArrayList<FeldShape>();
 	private int spielfeldGroesse;
 	private int feldgroesse;
