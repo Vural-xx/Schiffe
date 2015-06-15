@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -11,11 +12,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class SpielfeldGroeßeGUI extends JPanel {
+public class SpielfeldGroeßeGUI extends JPanel implements ActionListener {
 
 	private GridBagConstraints gbc= new GridBagConstraints();
 	public JTextField spielfeldEingabe;
 	private JButton weiter;
+	private JButton pruefen;
 	private JLabel spielfeldText;
 	
 	
@@ -39,14 +41,28 @@ public class SpielfeldGroeßeGUI extends JPanel {
 		spielfeldEingabe.setPreferredSize( new Dimension( 50, 24 ) );
 		
 		weiter= new JButton("weiter");
+		weiter.setEnabled(false);
+		pruefen= new JButton("Eingabe prüfen!");
+		pruefen.addActionListener(this);
 		
 		this.add(spielfeldText,gbc);
 		this.add(spielfeldEingabe,gbc);
+		this.add(pruefen, gbc);
 		this.add(weiter,gbc);
 
 		
 		
 	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if(spielfeldEingabe.getText().equals("")){
+			weiter.setEnabled(false);
+		} else {
+			weiter.setEnabled(true);
+		}
+	}
+	
+	
 	
 	public void setActionListener(ActionListener l){
 		weiter.addActionListener(l);

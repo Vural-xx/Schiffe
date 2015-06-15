@@ -174,7 +174,13 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	@Override
 	public void mousePressed(MouseEvent ev) {
 		if(ev.getButton() == 3){
-			System.out.println("Test");
+			if(mainController.getSchiffeSetzenController().getSchiffSetzenGui().ausrichtungText.getText().equals("Ihr Schiff ist horizontal ausgerichtet.")){
+				mainController.getSchiffeSetzenController().getSchiffSetzenGui().ausrichtungText.setText("Ihr Schiff ist vertikal ausgerichtet.");
+				mainController.getSchiffeSetzenController().getSchiffSetzenGui().ausrichtungText.revalidate();
+			} else {
+				mainController.getSchiffeSetzenController().getSchiffSetzenGui().ausrichtungText.setText("Ihr Schiff ist horizontal ausgerichtet.");
+				mainController.getSchiffeSetzenController().getSchiffSetzenGui().ausrichtungText.revalidate();
+			}
 			horizontal = !horizontal;
 		}
 		// TODO Auto-generated method stub

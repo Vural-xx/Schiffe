@@ -74,6 +74,7 @@ public class KiAuswahlGUI extends JPanel implements ActionListener {
 		computer6 = new JButton("5");
 		
 		weiter = new JButton("weiter");
+		weiter.setEnabled(false);
 		
 		computer1.addActionListener(this);
 		computer2.addActionListener(this);
@@ -119,31 +120,43 @@ public class KiAuswahlGUI extends JPanel implements ActionListener {
 			auswahlZahlSpieler(0);
 			ausgewaehlteGegnerText.setText("Es wurde 0 KI-Gegner ausgewählt");
 			ausgewaehlteGegnerText.revalidate();
+			weiter.setEnabled(true);
+			weiter.revalidate();
 		}
 		if(e.getSource() == computer2){
 			auswahlZahlSpieler(1);
 			ausgewaehlteGegnerText.setText("Es wurde 1 KI-Gegner ausgewählt");
 			ausgewaehlteGegnerText.revalidate();
+			weiter.setEnabled(true);
+			weiter.revalidate();
 		}
 		if(e.getSource() == computer3){
 			auswahlZahlSpieler(2);
 			ausgewaehlteGegnerText.setText("Es wurde 2 KI-Gegner ausgewählt");
 			ausgewaehlteGegnerText.revalidate();
+			weiter.setEnabled(true);
+			weiter.revalidate();
 		}
 		if(e.getSource() == computer4){
 			auswahlZahlSpieler(3);
 			ausgewaehlteGegnerText.setText("Es wurde 3 KI-Gegner ausgewählt");
 			ausgewaehlteGegnerText.revalidate();
+			weiter.setEnabled(true);
+			weiter.revalidate();
 		}
 		if(e.getSource() == computer5){
 			auswahlZahlSpieler(4);
 			ausgewaehlteGegnerText.setText("Es wurde 4 KI-Gegner ausgewählt");
 			ausgewaehlteGegnerText.revalidate();
+			weiter.setEnabled(true);
+			weiter.revalidate();
 		}
 		if(e.getSource() == computer6){
 			auswahlZahlSpieler(5);
 			ausgewaehlteGegnerText.setText("Es wurde 5 KI-Gegner ausgewählt");
 			ausgewaehlteGegnerText.revalidate();
+			weiter.setEnabled(true);
+			weiter.revalidate();
 		}
 		
 	}

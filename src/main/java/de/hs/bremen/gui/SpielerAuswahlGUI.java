@@ -73,6 +73,7 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		spieler6 = new JButton("6");
 		
 		weiter = new JButton("weiter");
+		weiter.setEnabled(false);
 		
 		spieler1.addActionListener(this);
 		spieler2.addActionListener(this);
@@ -116,31 +117,43 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 			auswahlZahlSpieler(1);
 			ausgewaehlteSpielerText.setText("Es wurde 1 Spieler ausgewählt");
 			ausgewaehlteSpielerText.revalidate();
+			weiter.setEnabled(true);
+			weiter.revalidate();
 		}
 		if(e.getSource() == spieler2){
 			auswahlZahlSpieler(2);
 			ausgewaehlteSpielerText.setText("Es wurde 2 Spieler ausgewählt");
 			ausgewaehlteSpielerText.revalidate();
+			weiter.setEnabled(true);
+			weiter.revalidate();
 		}
 		if(e.getSource() == spieler3){
 			auswahlZahlSpieler(3);
 			ausgewaehlteSpielerText.setText("Es wurde 3 Spieler ausgewählt");
 			ausgewaehlteSpielerText.revalidate();
+			weiter.setEnabled(true);
+			weiter.revalidate();
 		}
 		if(e.getSource() == spieler4){
 			auswahlZahlSpieler(4);
 			ausgewaehlteSpielerText.setText("Es wurde 4 Spieler ausgewählt");
 			ausgewaehlteSpielerText.revalidate();
+			weiter.setEnabled(true);
+			weiter.revalidate();
 		}
 		if(e.getSource() == spieler5){
 			auswahlZahlSpieler(5);
 			ausgewaehlteSpielerText.setText("Es wurde 5 Spieler ausgewählt");
 			ausgewaehlteSpielerText.revalidate();
+			weiter.setEnabled(true);
+			weiter.revalidate();
 		}
 		if(e.getSource() == spieler6){
 			auswahlZahlSpieler(6);
 			ausgewaehlteSpielerText.setText("Es wurde 6 Spieler ausgewählt");
 			ausgewaehlteSpielerText.revalidate();
+			weiter.setEnabled(true);
+			weiter.revalidate();
 		}
 		
 	}
@@ -149,6 +162,8 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		spielerAnzahl=i;
 		return i;
 	}
+	
+
 	
 
 	public void setActionListener(ActionListener l){

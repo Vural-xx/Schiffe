@@ -40,6 +40,7 @@ public class SchiffSetzenGUI extends JPanel{
 	private JLabel fregatteAnzahl;
 	private JLabel korvetteAnzahl;
 	private JLabel ubootAnzahl;
+	public JLabel ausrichtungText;
 	private JButton zerstoerer;
 	private JButton fregatte;
 	private JButton korvette;
@@ -109,11 +110,15 @@ public class SchiffSetzenGUI extends JPanel{
 		spielerfeld[mainController.getCurrentSpielerIndex()] = new SpielerfeldGUI(375, 15,mainController,Spielfeldmodus.SETZEN);
 		container6.add(textLabel4);
 		container6.add(spielerfeld[mainController.getCurrentSpielerIndex()]);
-			
+		ausrichtungText= new JLabel("Ihr Schiff ist horizontal ausgerichtet.");
+		
+		ausrichtungText.setForeground(Color.blue);
+		container6.add(ausrichtungText);	
 		this.setLayout(new BorderLayout(5,5));
 		this.add(textLabel3, BorderLayout.NORTH);
 		this.add(container6, BorderLayout.CENTER);
 		this.add(container5, BorderLayout.EAST);
+
 		
 	}
 	

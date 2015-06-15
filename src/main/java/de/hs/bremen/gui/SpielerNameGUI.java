@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -14,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class SpielerNameGUI extends JPanel {
+public class SpielerNameGUI extends JPanel implements ActionListener {
 	
 	public JLabel spielerNametext;
 	
@@ -22,7 +23,10 @@ public class SpielerNameGUI extends JPanel {
 	private JPanel container1;
 	public JTextField[] spielerEingabe;
 	private JButton weiter;
+	private JButton pruefen;
 	private GridBagConstraints gbc= new GridBagConstraints();
+	
+	private int spieler;
 	
 
 
@@ -48,6 +52,11 @@ public class SpielerNameGUI extends JPanel {
 		gbc.insets=new Insets(10, 0, 0, 0);
 		
 		weiter= new JButton("weiter");
+		weiter.setEnabled(false);
+		
+		pruefen= new JButton("Eingabe prüfen!");
+		pruefen.addActionListener(this);
+		
 
 		
 		
@@ -62,15 +71,26 @@ public class SpielerNameGUI extends JPanel {
 			spielerEingabe[i].setPreferredSize( new Dimension( 150, 24 ) );
 			
 			spielerNametext= new JLabel("Spielername " + (i+1)+": ");
-		
+			spieler= spieleranzahl;
 			this.add(spielerNametext,gbc);
 			this.add(spielerEingabe[i],gbc);
 			
 			
 			
 		}
+		this.add(pruefen,gbc);
 		this.add(weiter,gbc);
 		
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		for(int i=0; i< spieler; i++){
+			if(spielerEingabe[i].getText().equals("")){
+				weiter.setEnabled(false);
+			} else {
+				weiter.setEnabled(true);
+			}
+		}
 	}
 	
 	public void setActionListener(ActionListener l){
