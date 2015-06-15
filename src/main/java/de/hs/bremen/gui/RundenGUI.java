@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -13,8 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-
 import de.hs.bremen.controller.MainController;
+import de.hs.bremen.enums.Spielfeldmodus;
 
 public class RundenGUI extends JPanel {
 
@@ -41,14 +42,14 @@ public class RundenGUI extends JPanel {
 		textLabel1 = new JLabel("Wähle das Schiff zum feuern");
 		textLabel2 = new JLabel(mainController.getSpieler()[0].getName());
 		button1 = new JButton("Fertig");
-		spielerfeld = new SpielerfeldGUI(375, 15,mainController);
+		spielerfeld = new SpielerfeldGUI(375, 15,mainController, Spielfeldmodus.SPIELER);
 		spielerfeld.drawSpielfeld();
 		
 		tab = new JTabbedPane();
 		SpielerfeldGUI spielerfeld2[] = new SpielerfeldGUI[mainController.getSpieler().length];
 		for(int i = 0; i< mainController.getSpieler().length; i++){
 			if(!mainController.getSpieler()[i].isIstDran()){
-				spielerfeld2[i] = new SpielerfeldGUI(375, 15,mainController);
+				spielerfeld2[i] = new SpielerfeldGUI(375, 15,mainController,Spielfeldmodus.GEGNER);
 				spielerfeld2[i].drawGegnerSpielfeld();
 				tab.addTab(mainController.getSpieler()[i].getName(), spielerfeld2[i]);
 				

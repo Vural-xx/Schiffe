@@ -50,10 +50,11 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		setVisible(true);
 	}
 	
-	public SpielerfeldGUI(int spielfeldGroesse, int feldgroesse, MainController mainController) {
+	public SpielerfeldGUI(int spielfeldGroesse, int feldgroesse, MainController mainController, Spielfeldmodus spielfeldmodus) {
 		this.spielfeldGroesse = spielfeldGroesse;
 		this.feldgroesse = feldgroesse;
 		this.mainController = mainController;
+		this.spielfeldmodus =spielfeldmodus;
 		addMouseListener(this);
 		for(int i = 0; i <spielfeldGroesse/feldgroesse; i++){
 			addSquare(0, i*feldgroesse, feldgroesse, feldgroesse);
@@ -138,20 +139,13 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		repaint();
 	}
 	
-	@Override
-	public void mouseClicked(MouseEvent ev) {
-		// TODO Auto-generated method stub
-		int xPosition =ev.getX()/getFeldgroesse();
-		int yPosition  = ev.getY()/getFeldgroesse();
-		System.out.println("X-Position " + xPosition);
-		System.out.println("Y-Position " + yPosition);
-		System.out.println("Bin drin");
+	public void schiffeSetzen(int xPosition, int yPosition, int mouseButton){
 		if(mainController.getAusgewähltesSchiff() == null){
 			JOptionPane.showMessageDialog(null, "Bitte wählen Sie ein Schiff welches Sie setzen wollen.");
 		}else if(mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe(mainController.getAusgewähltesSchiff().getClass().getCanonicalName()) == 0){
 			JOptionPane.showMessageDialog(null, "Bitte wählen Sie ein anderes Schiff.");
 		}else{
-			if(ev.getButton() == 1 && innerhalbSpielfeld(xPosition,yPosition)){
+			if(mouseButton == 1 && innerhalbSpielfeld(xPosition,yPosition)){
 				this.laenge = mainController.getAusgewähltesSchiff().getLaenge();
 				for (int i = 0; i < laenge; i++){
 					mainController.getCurrentSpieler().getSpielfeld().platziereSchiff(mainController.getAusgewähltesSchiff(), new Position(xPosition+1, yPosition+1), horizontal);
@@ -165,9 +159,16 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 				repaint();	
 			}
 		}
-		
-		
-		
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent ev) {
+		// TODO Auto-generated method stub
+		int xPosition =ev.getX()/getFeldgroesse();
+		int yPosition  = ev.getY()/getFeldgroesse();
+		if(spielfeldmodus == Spielfeldmodus.SETZEN){
+			schiffeSetzen(xPosition,yPosition,  ev.getButton());
+		}	
 	}
 
 	@Override
