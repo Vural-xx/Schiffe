@@ -131,7 +131,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	public void drawSpielfeld(){
 		for(Schiff s: mainController.getCurrentSpieler().getSpielfeld().getSchiffe()){
 			for(Feld f: s.getFelder()){
-				fillSquare((f.getPosition().getPositonX()*getFeldgroesse())+1, (f.getPosition().getPositionY()*getFeldgroesse())+1, getFeldgroesse()-2, getFeldgroesse()-2, s.getFarbe());
+				fillSquare(((f.getPosition().getPositonX()-1)*getFeldgroesse())+1, ((f.getPosition().getPositionY()-1)*getFeldgroesse())+1, getFeldgroesse()-2, getFeldgroesse()-2, s.getFarbe());
 			}
 		}
 		repaint();
@@ -172,6 +172,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	}
 	
 	public void feuern(int xPosition, int yPosition, int mouseButton){
+		Schiff getroffen = null;
 		if(mainController.getAusgewähltesSchiff() == null){
 			JOptionPane.showMessageDialog(null, "Bitte wählen Sie ein Schiff welches Sie setzen wollen.");
 		}else{
@@ -179,8 +180,12 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 				this.laenge = mainController.getAusgewähltesSchiff().getFeuerstaerke();
 				for (int i = 0; i < laenge; i++){
 					mainController.getAusgewähltesSchiff().feuern(new Position(xPosition+i, yPosition), spieler.getSpielfeldPublic());
+					getroffen = spieler.getSpielfeld().getSchiffByPosition(new Position(xPosition+i, yPosition+1));
 					//spieler.getSpielfeldPublic().feuerPlatzieren(new Position(xPosition+i, yPosition));
 					fillSquare(((i+xPosition)*getFeldgroesse())+1,(yPosition*getFeldgroesse())+1,getFeldgroesse()-2,getFeldgroesse()-2,mainController.getAusgewähltesSchiff().getFarbe());
+				}
+				if(getroffen != null){
+					JOptionPane.showMessageDialog(null, "Sie haben " +getroffen.getName()+" von Spieler " + spieler.getName()+ " getroffen");
 				}
 				mainController.getRundenController().gefeuert();
 			}
