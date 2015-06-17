@@ -63,6 +63,17 @@ public class MainController extends AbstractController {
 		getSpieler()[nextSpieler].setIstDran(true);
 	}
 	
+	public boolean schiffOhneWartezeit(String name){
+		boolean ohneWartezeit = false;
+		for(Schiff s: getCurrentSpieler().getSpielfeld().getSchiffe()){
+			if(s.getName().equals(name) && s.getWartezeit() == 0){
+				ohneWartezeit = true;
+			}
+		}
+		return ohneWartezeit;
+	}
+	
+	
 	public Spieler getCurrentSpieler(){
 		Spieler spieler = null;
 		for(int i = 0 ; i < getSpieler().length; i++){
@@ -81,6 +92,33 @@ public class MainController extends AbstractController {
 			}
 		}
 		return spieler;
+	}
+	
+	public int getNextSpielerIndex(){
+		int nextSpieler = 0;
+		for (int i = 0 ; i< getSpieler().length;i++){
+			if (getSpieler()[i].isIstDran() ){
+				if(i+1 != getSpieler().length){
+					nextSpieler = i+1;
+				}
+			}
+		}
+		return nextSpieler;
+	}
+	
+	public void wartezeitVerringern(){
+		Schiff wartezeitResetSchiff = null;
+		for(int i=0; i< getSpieler().length;i++){
+			for(int j=0; j< getSpieler()[i].getSpielfeld().getSchiffe().size();j++){
+				wartezeitResetSchiff=getSpieler()[i].getSpielfeld().getSchiffe().get(j);
+				if(wartezeitResetSchiff != null){
+					if(wartezeitResetSchiff.getWartezeit()!= 0){
+						wartezeitResetSchiff.setWartezeit(wartezeitResetSchiff.getWartezeit()-1);
+					}
+				}
+				wartezeitResetSchiff = null;
+			}
+		}
 	}
 	
 	public ArrayList<Schiff> getCurrentSpielerSchiffe(){

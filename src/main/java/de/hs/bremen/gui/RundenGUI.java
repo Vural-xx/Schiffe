@@ -69,22 +69,31 @@ public class RundenGUI extends JPanel {
 		container1.setLayout(new BoxLayout(container1, BoxLayout.PAGE_AXIS));
 		container1.add(textLabel1);
 		
-		zerstoerer = new JButton("Zerstörer");
-		zerstoerer.setName("Zerstoerer");
-		container1.add(zerstoerer);
+		if(mainController.schiffOhneWartezeit("Zerstoerer")){
+			zerstoerer = new JButton("Zerstörer");
+			zerstoerer.setName("Zerstoerer");
+			container1.add(zerstoerer);
+		}
 		
-		fregatte = new JButton("Fregatte");
-		fregatte.setName("Fregatte");
-		container1.add(fregatte);
+		if(mainController.schiffOhneWartezeit("Fregatte")){
+			fregatte = new JButton("Fregatte");
+			fregatte.setName("Fregatte");
+			container1.add(fregatte);
+		}
 		
-		korvette = new JButton("Korvette");
-		korvette.setName("Korvette");
-		container1.add(korvette);
-
-		uboot = new JButton("UBoot");
-		uboot.setName("UBoot");
-		container1.add(uboot);
-
+		if(mainController.schiffOhneWartezeit("Korvette")){
+			korvette = new JButton("Korvette");
+			korvette.setName("Korvette");
+			container1.add(korvette);
+		}
+		
+		if(mainController.schiffOhneWartezeit("UBoot")){
+			uboot = new JButton("UBoot");
+			uboot.setName("UBoot");
+			container1.add(uboot);
+		}
+		
+		
 		container1.add(Box.createRigidArea(new Dimension(0, 0)));
 		container1.add(Box.createVerticalGlue());
 		container1.add(button1);
@@ -108,10 +117,18 @@ public class RundenGUI extends JPanel {
 	
 	public void setActionListener(ActionListener spielerwechselListener, ActionListener schiffButtonClickedListener){
 		button1.addActionListener(spielerwechselListener);
-		zerstoerer.addActionListener(schiffButtonClickedListener);
-		fregatte.addActionListener(schiffButtonClickedListener);
-		korvette.addActionListener(schiffButtonClickedListener);
-		uboot.addActionListener(schiffButtonClickedListener);
+		if(zerstoerer != null){
+			zerstoerer.addActionListener(schiffButtonClickedListener);
+		}
+		if(fregatte != null){
+			fregatte.addActionListener(schiffButtonClickedListener);
+		}
+		if(korvette != null){
+			korvette.addActionListener(schiffButtonClickedListener);
+		}
+		if(uboot != null){
+			uboot.addActionListener(schiffButtonClickedListener);
+		}		
 	}
 		
 }

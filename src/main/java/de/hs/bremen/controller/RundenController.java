@@ -24,14 +24,20 @@ public class RundenController {
 	
 	public void gefeuert(){
 		this.mainController.getMainFrame().remove(rundenGui);
+		if(mainController.getNextSpielerIndex() == 0){
+			mainController.wartezeitVerringern();
+		}
 		mainController.nextSpieler();
-		rundenGui = new RundenGUI(mainController);
-		rundenGui.setActionListener(new SpielerWechselListener(), new SchiffButtonClickedListener());
-		this.mainController.getMainFrame().add(rundenGui);
-		this.mainController.getMainFrame().revalidate();
+		if(mainController.getCurrentSpieler().schiffeOhneWartezeit()){
+			rundenGui = new RundenGUI(mainController);
+			rundenGui.setActionListener(new SpielerWechselListener(), new SchiffButtonClickedListener());
+			this.mainController.getMainFrame().add(rundenGui);
+			this.mainController.getMainFrame().revalidate();
+		}else{
+			JOptionPane.showMessageDialog(null,mainController.getCurrentSpieler().getName()+" hat keine Schiffe ohne Wartezeit und muss die Runde aussetzen. Spieler " + mainController.getSpieler()[mainController.getNextSpielerIndex()].getName()+" ist dran");
+			gefeuert();
+		}	
 	}
-	
-	
 	
 	class SpielerWechselListener implements ActionListener{
 		@Override

@@ -157,8 +157,8 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		}else{
 			if(mouseButton == 1 && innerhalbSpielfeld(xPosition,yPosition)){
 				this.laenge = mainController.getAusgewähltesSchiff().getLaenge();
+				mainController.getCurrentSpieler().getSpielfeld().platziereSchiff(mainController.getAusgewähltesSchiff(), new Position(xPosition+1, yPosition+1), horizontal);
 				for (int i = 0; i < laenge; i++){
-					mainController.getCurrentSpieler().getSpielfeld().platziereSchiff(mainController.getAusgewähltesSchiff(), new Position(xPosition+1, yPosition+1), horizontal);
 					if(horizontal){
 						fillSquare(((i+xPosition)*getFeldgroesse())+1,(yPosition*getFeldgroesse())+1,getFeldgroesse()-2,getFeldgroesse()-2,mainController.getAusgewähltesSchiff().getFarbe());
 					}else{
@@ -178,7 +178,8 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 			if(mouseButton == 1 && innerhalbSpielfeld(xPosition,yPosition)){
 				this.laenge = mainController.getAusgewähltesSchiff().getFeuerstaerke();
 				for (int i = 0; i < laenge; i++){
-					spieler.getSpielfeldPublic().feuerPlatzieren(new Position(xPosition+i, yPosition));
+					mainController.getAusgewähltesSchiff().feuern(new Position(xPosition+i, yPosition), spieler.getSpielfeldPublic());
+					//spieler.getSpielfeldPublic().feuerPlatzieren(new Position(xPosition+i, yPosition));
 					fillSquare(((i+xPosition)*getFeldgroesse())+1,(yPosition*getFeldgroesse())+1,getFeldgroesse()-2,getFeldgroesse()-2,mainController.getAusgewähltesSchiff().getFarbe());
 				}
 				mainController.getRundenController().gefeuert();
