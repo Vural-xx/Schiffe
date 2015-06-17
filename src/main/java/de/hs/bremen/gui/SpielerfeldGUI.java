@@ -179,18 +179,9 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 				this.laenge = mainController.getAusgewähltesSchiff().getFeuerstaerke();
 				for (int i = 0; i < laenge; i++){
 					spieler.getSpielfeldPublic().feuerPlatzieren(new Position(xPosition+i, yPosition));
-					mainController.getCurrentSpieler().getSpielfeld().platziereSchiff(mainController.getAusgewähltesSchiff(), new Position(xPosition+1, yPosition+1), horizontal);
-					if(horizontal){
-						fillSquare(((i+xPosition)*getFeldgroesse())+1,(yPosition*getFeldgroesse())+1,getFeldgroesse()-2,getFeldgroesse()-2,mainController.getAusgewähltesSchiff().getFarbe());
-					}else{
-						fillSquare((xPosition*getFeldgroesse())+1,((i+yPosition)*getFeldgroesse())+1,getFeldgroesse()-2,getFeldgroesse()-2,mainController.getAusgewähltesSchiff().getFarbe());
-					}
+					fillSquare(((i+xPosition)*getFeldgroesse())+1,(yPosition*getFeldgroesse())+1,getFeldgroesse()-2,getFeldgroesse()-2,mainController.getAusgewähltesSchiff().getFarbe());
 				}
 				mainController.getRundenController().gefeuert();
-				//mainController.nextSpieler();
-				//mainController.startRunden();
-			//	mainController.getSchiffeSetzenController().getSchiffSetzenGui().schiffGesetzt();
-				//repaint();	
 			}
 		}
 	}
