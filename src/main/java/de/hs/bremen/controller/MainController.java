@@ -109,6 +109,14 @@ public class MainController extends AbstractController {
 		this.schiffeSetzenController = schiffeSetzenController;
 	}
 
+	public RundenController getRundenController() {
+		return rundenController;
+	}
+
+	public void setRundenController(RundenController rundenController) {
+		this.rundenController = rundenController;
+	}
+	
 	public class ZuRundeWechseln implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {

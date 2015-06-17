@@ -19,6 +19,7 @@ import de.hs.bremen.gui.shapes.Squares;
 import de.hs.bremen.model.Feld;
 import de.hs.bremen.model.Position;
 import de.hs.bremen.model.Schiff;
+import de.hs.bremen.model.Spieler;
 
 public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListener{
 
@@ -33,6 +34,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	private int feldgroesse;
 	private boolean horizontal = true;
 	private int laenge = 3;
+	private Spieler spieler;
 
 	public SpielerfeldGUI(int spielfeldGroesse, int feldgroesse) {
 		this.spielfeldGroesse = spielfeldGroesse;
@@ -93,6 +95,14 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		FeldShape rect = new FeldShape(x, y, width, height, c);
 		squares.add(rect);
 	}
+	
+	public Spieler getSpieler() {
+		return spieler;
+	}
+
+	public void setSpieler(Spieler spieler) {
+		this.spieler = spieler;
+	}
 
 
 	@Override
@@ -128,7 +138,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	}
 	
 	public void drawGegnerSpielfeld(){
-		Feld[][] felder = mainController.getCurrentSpieler().getSpielfeldPublic().getFelder();
+		Feld[][] felder = spieler.getSpielfeldPublic().getFelder();
 		for(int i = 0 ; i < felder.length; i++){
 			for (int j = 0 ; j < felder[i].length; j++){
 				if(felder[i][j].getFeldstatus() != Feldstatus.WASSER){
@@ -161,6 +171,30 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		}
 	}
 	
+	public void feuern(int xPosition, int yPosition, int mouseButton){
+		if(mainController.getAusgewähltesSchiff() == null){
+			JOptionPane.showMessageDialog(null, "Bitte wählen Sie ein Schiff welches Sie setzen wollen.");
+		}else{
+			if(mouseButton == 1 && innerhalbSpielfeld(xPosition,yPosition)){
+				this.laenge = mainController.getAusgewähltesSchiff().getFeuerstaerke();
+				for (int i = 0; i < laenge; i++){
+					spieler.getSpielfeldPublic().feuerPlatzieren(new Position(xPosition+i, yPosition));
+					mainController.getCurrentSpieler().getSpielfeld().platziereSchiff(mainController.getAusgewähltesSchiff(), new Position(xPosition+1, yPosition+1), horizontal);
+					if(horizontal){
+						fillSquare(((i+xPosition)*getFeldgroesse())+1,(yPosition*getFeldgroesse())+1,getFeldgroesse()-2,getFeldgroesse()-2,mainController.getAusgewähltesSchiff().getFarbe());
+					}else{
+						fillSquare((xPosition*getFeldgroesse())+1,((i+yPosition)*getFeldgroesse())+1,getFeldgroesse()-2,getFeldgroesse()-2,mainController.getAusgewähltesSchiff().getFarbe());
+					}
+				}
+				mainController.getRundenController().gefeuert();
+				//mainController.nextSpieler();
+				//mainController.startRunden();
+			//	mainController.getSchiffeSetzenController().getSchiffSetzenGui().schiffGesetzt();
+				//repaint();	
+			}
+		}
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent ev) {
 		// TODO Auto-generated method stub
@@ -168,6 +202,8 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		int yPosition  = ev.getY()/getFeldgroesse();
 		if(spielfeldmodus == Spielfeldmodus.SETZEN){
 			schiffeSetzen(xPosition,yPosition,  ev.getButton());
+		}else if(spielfeldmodus == Spielfeldmodus.GEGNER){
+			feuern(xPosition,yPosition,ev.getButton());
 		}	
 	}
 

@@ -3,9 +3,11 @@ package de.hs.bremen.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import de.hs.bremen.gui.RundenGUI;
+import de.hs.bremen.model.Schiff;
 
 
 public class RundenController {
@@ -14,11 +16,23 @@ public class RundenController {
 	
 	public RundenController(MainController mainController){
 		rundenGui = new RundenGUI(mainController);
-		rundenGui.setActionListener(new SpielerWechselListener());
-		mainController.getMainFrame().add(rundenGui);
-		mainController.getMainFrame().revalidate();
+		rundenGui.setActionListener(new SpielerWechselListener(), new SchiffButtonClickedListener());
+		this.mainController = mainController;
+		this.mainController.getMainFrame().add(rundenGui);
+		this.mainController.getMainFrame().revalidate();
 	}
-
+	
+	public void gefeuert(){
+		this.mainController.getMainFrame().remove(rundenGui);
+		mainController.nextSpieler();
+		rundenGui = new RundenGUI(mainController);
+		rundenGui.setActionListener(new SpielerWechselListener(), new SchiffButtonClickedListener());
+		this.mainController.getMainFrame().add(rundenGui);
+		this.mainController.getMainFrame().revalidate();
+	}
+	
+	
+	
 	class SpielerWechselListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -30,6 +44,27 @@ public class RundenController {
 				mainController.getMainFrame().remove(rundenGui);
 				mainController.startRunden();
 			}
+		}
+	}
+	
+	public Schiff getFeuerndesSchiff(String name){
+		Schiff schiff = null;
+		for(Schiff s: mainController.getCurrentSpielerSchiffe()){
+			if(s.getClass().getCanonicalName().equals("de.hs.bremen.model."+name) && s.getWartezeit() == 0){
+				schiff = s;
+			}
+		}
+		return schiff;
+	}
+	
+	
+	class SchiffButtonClickedListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			JButton schiff = (JButton) e.getSource();
+			System.out.println(schiff.getName());
+			mainController.setAusgewähltesSchiff(getFeuerndesSchiff(schiff.getName()));
 		}
 		
 	}
