@@ -119,6 +119,11 @@ public class Spielfeld implements Serializable{
 		}
 		schiff.setFelder(f);
 		schiff.setPlatziert(true);
+		
+		// TODO: anders lösen
+		if(schiffe.contains(schiff)){
+			schiffe.remove(schiff);
+		}
 		schiffe.add(schiff);
 	}
 	
