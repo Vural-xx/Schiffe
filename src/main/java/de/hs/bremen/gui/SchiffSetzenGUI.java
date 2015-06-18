@@ -13,6 +13,7 @@ import java.awt.Rectangle;
 import java.awt.TextArea;
 import java.awt.Toolkit;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -57,16 +58,18 @@ public class SchiffSetzenGUI extends JPanel{
 		
 		textLabel3 = new JLabel("Herzlich Willkommen bei Schiffe versenken!");
 		textLabel4 = new JLabel(mainController.getCurrentSpieler().getName() +" ist dran. Bitte setze deine Schiffe");
-		button1 = new JButton("Nächster Spieler");
+		button1 = new JButton("Weiter");
 		button1.setEnabled(false);
-		button2 = new JButton("Spiel beginnen");
+		button2 = new JButton("Weiter");
 		button2.setEnabled(false);
 		textField = new JTextField();	
 		textField.setColumns(2);
 		
 		//Schiffe zum hinzufügen
 		container5 = new JPanel();
-		container5.setLayout(new BoxLayout(container5, BoxLayout.PAGE_AXIS));
+		//container5.setLayout(new BoxLayout(container5, BoxLayout.PAGE_AXIS));
+		container5.setLayout(new GridLayout(14,2,10,10));
+		container5.setPreferredSize(new Dimension(200, 15));
 		zerstoerer = new JButton("Zerstörer ");
 		zerstoerer.setName("Zerstoerer");
 		zerstoerAnzahl = new JLabel(mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe("de.hs.bremen.model.Zerstoerer")+"X");
@@ -90,9 +93,22 @@ public class SchiffSetzenGUI extends JPanel{
 		ubootAnzahl = new JLabel(mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe("de.hs.bremen.UBoot")+"X");
 		container5.add(ubootAnzahl);
 		container5.add(uboot);
-	
-		//container5.add(bildLabel);
-		container5.add(Box.createRigidArea(new Dimension(0, 0)));
+
+		//Abstand zum nächsten Button erzeugen
+		container5.add(Box.createVerticalGlue());
+		container5.add(Box.createVerticalGlue());
+		container5.add(Box.createVerticalGlue());
+		container5.add(Box.createVerticalGlue());
+		container5.add(Box.createVerticalGlue());
+		container5.add(Box.createVerticalGlue());
+		container5.add(Box.createVerticalGlue());
+		container5.add(Box.createVerticalGlue());
+		container5.add(Box.createVerticalGlue());
+		container5.add(Box.createVerticalGlue());
+		container5.add(Box.createVerticalGlue());
+		container5.add(Box.createVerticalGlue());
+		container5.add(Box.createVerticalGlue());
+		container5.add(Box.createVerticalGlue());
 		container5.add(Box.createVerticalGlue());
 		if(!mainController.lastRundenSpieler()){
 			container5.add(button1);	
@@ -100,7 +116,6 @@ public class SchiffSetzenGUI extends JPanel{
 		if(mainController.lastRundenSpieler()){
 			container5.add(button2);	
 		}
-		//container5.add(button2);
 		
 		//spielfeld für einzelnen spieler erzeugen
 		container6 = new JPanel();
@@ -110,10 +125,14 @@ public class SchiffSetzenGUI extends JPanel{
 		spielerfeld[mainController.getCurrentSpielerIndex()] = new SpielerfeldGUI(375, 15,mainController,Spielfeldmodus.SETZEN);
 		container6.add(textLabel4);
 		container6.add(spielerfeld[mainController.getCurrentSpielerIndex()]);
+		container6.setBorder(BorderFactory.createEmptyBorder(30, 250, 30, 30));//(top, left, bottom, right)
+		JLabel infoText = new JLabel ("Änderung der Schiffausrichtung, durch drücken der rechten Maustaste");
+		container6.add(infoText);
 		ausrichtungText= new JLabel("Ihr Schiff ist horizontal ausgerichtet.");
-		
 		ausrichtungText.setForeground(Color.blue);
 		container6.add(ausrichtungText);	
+		
+		this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));//(top, left, bottom, right)
 		this.setLayout(new BorderLayout(5,5));
 		this.add(textLabel3, BorderLayout.NORTH);
 		this.add(container6, BorderLayout.CENTER);

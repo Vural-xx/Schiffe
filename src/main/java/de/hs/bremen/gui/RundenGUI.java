@@ -6,14 +6,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-
 import de.hs.bremen.controller.MainController;
 import de.hs.bremen.enums.Spielfeldmodus;
 
@@ -52,17 +51,15 @@ public class RundenGUI extends JPanel {
 				spielerfeld2[i] = new SpielerfeldGUI(375, 15,mainController,Spielfeldmodus.GEGNER);
 				spielerfeld2[i].drawGegnerSpielfeld();
 				tab.addTab(mainController.getSpieler()[i].getName(), spielerfeld2[i]);
-				
 			}
-		}
-		
+		}	
 		container = new JPanel();
 		container.add(textLabel1);	
 
 		//Schiffeauswahl
 		container1 = new JPanel();
-		container1.setLayout(new BoxLayout(container1, BoxLayout.PAGE_AXIS));
-		container1.add(textLabel1);
+		container1.setLayout(new GridLayout(14,1,10,10));
+		container1.setPreferredSize(new Dimension(100, 15));
 		JButton zerstoerer[] = new JButton[1/*schiffeAuswahl().zerstoererEingabe.getText()*/];
 		for(int i = 0; i!=1 /*schiffeAuswahl().zerstoererEingabe.getText()*/; i++){
 			zerstoerer[i] = new JButton("Zerstörer");
@@ -83,15 +80,24 @@ public class RundenGUI extends JPanel {
 			uboot[i] = new JButton("UBoot");
 			container1.add(uboot[i]);
 		}
-		container1.add(Box.createRigidArea(new Dimension(0, 0)));
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
 		container1.add(Box.createVerticalGlue());
 		container1.add(button1);
 		
 		//Spielfelder Spieler & Gegner
 		container2 = new JPanel();
 		container2.setLayout(new BoxLayout(container2, BoxLayout.PAGE_AXIS));
+		container2.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));//(top, left, bottom, right)
 		container2.add(textLabel2);
 		container2.add(spielerfeld);
+
 		
 		container3 = new JPanel();
 		container3.setLayout(new GridLayout(1,2));
@@ -99,6 +105,7 @@ public class RundenGUI extends JPanel {
 		container3.add(tab);
 		
 		this.setLayout(new BorderLayout(5,5));
+		this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));//(top, left, bottom, right)
 		this.add(container,BorderLayout.PAGE_START);
 		this.add(container1, BorderLayout.WEST);
 		this.add(container3, BorderLayout.CENTER);
