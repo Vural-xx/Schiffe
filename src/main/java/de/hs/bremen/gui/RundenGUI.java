@@ -30,6 +30,10 @@ public class RundenGUI extends JPanel {
 	private JTabbedPane tab;
 	private SpielerfeldGUI spielerfeld;
 	private MainController mainController;
+	private JButton zerstoerer;
+	private JButton fregatte;
+	private JButton korvette;
+	private JButton uboot;
 	
 	public RundenGUI(MainController mainController){
 		this.mainController = mainController;
@@ -39,7 +43,7 @@ public class RundenGUI extends JPanel {
 
 	private void initComponents(){
 		textLabel1 = new JLabel("Wähle das Schiff zum feuern");
-		textLabel2 = new JLabel(mainController.getSpieler()[0].getName());
+		textLabel2 = new JLabel(mainController.getCurrentSpieler().getName());
 		button1 = new JButton("Fertig");
 		spielerfeld = new SpielerfeldGUI(375, 15,mainController, Spielfeldmodus.SPIELER);
 		spielerfeld.drawSpielfeld();
@@ -49,6 +53,7 @@ public class RundenGUI extends JPanel {
 		for(int i = 0; i< mainController.getSpieler().length; i++){
 			if(!mainController.getSpieler()[i].isIstDran()){
 				spielerfeld2[i] = new SpielerfeldGUI(375, 15,mainController,Spielfeldmodus.GEGNER);
+				spielerfeld2[i].setSpieler(mainController.getSpieler()[i]);
 				spielerfeld2[i].drawGegnerSpielfeld();
 				tab.addTab(mainController.getSpieler()[i].getName(), spielerfeld2[i]);
 			}
@@ -60,25 +65,35 @@ public class RundenGUI extends JPanel {
 		container1 = new JPanel();
 		container1.setLayout(new GridLayout(14,1,10,10));
 		container1.setPreferredSize(new Dimension(100, 15));
-		JButton zerstoerer[] = new JButton[1/*schiffeAuswahl().zerstoererEingabe.getText()*/];
-		for(int i = 0; i!=1 /*schiffeAuswahl().zerstoererEingabe.getText()*/; i++){
-			zerstoerer[i] = new JButton("Zerstörer");
-			container1.add(zerstoerer[i]);
+		//JButton zerstoerer[] = new JButton[1/*schiffeAuswahl().zerstoererEingabe.getText()*/];
+		//for(int i = 0; i!=1 /*schiffeAuswahl().zerstoererEingabe.getText()*/; i++){
+			//zerstoerer[i] = new JButton("Zerstörer");
+			//container1.add(zerstoerer[i]);
+		//container1.setLayout(new BoxLayout(container1, BoxLayout.PAGE_AXIS));
+		//container1.add(textLabel1);
+		
+		if(mainController.schiffOhneWartezeit("Zerstoerer")){
+			zerstoerer = new JButton("Zerstörer");
+			zerstoerer.setName("Zerstoerer");
+			container1.add(zerstoerer);
 		}
-		JButton fregatte[] = new JButton[1/*schiffeAuswahl().fregatteEingabe.getText()*/];
-		for(int i = 0; i!=1 /*schiffeAuswahl().fregatteEingabe.getText()*/; i++){
-			fregatte[i] = new JButton("Fregatte ");
-			container1.add(fregatte[i]);
+		
+		if(mainController.schiffOhneWartezeit("Fregatte")){
+			fregatte = new JButton("Fregatte");
+			fregatte.setName("Fregatte");
+			container1.add(fregatte);
 		}
-		JButton korvette[] = new JButton[1/*schiffeAuswahl().korvetteEingabe.getText()*/];
-		for(int i = 0; i!=1 /*schiffeAuswahl().korvetteEingabe.getText()*/; i++){
-			korvette[i] = new JButton("Korvette");
-			container1.add(korvette[i]);
+		
+		if(mainController.schiffOhneWartezeit("Korvette")){
+			korvette = new JButton("Korvette");
+			korvette.setName("Korvette");
+			container1.add(korvette);
 		}
-		JButton uboot[] = new JButton[1/*schiffeAuswahl().ubootEingabe.getText()*/];
-		for(int i = 0; i!=1 /*schiffeAuswahl().ubootEingabe.getText()*/; i++){
-			uboot[i] = new JButton("UBoot");
-			container1.add(uboot[i]);
+		
+		if(mainController.schiffOhneWartezeit("UBoot")){
+			uboot = new JButton("UBoot");
+			uboot.setName("UBoot");
+			container1.add(uboot);
 		}
 		container1.add(Box.createVerticalGlue());
 		container1.add(Box.createVerticalGlue());
@@ -111,9 +126,20 @@ public class RundenGUI extends JPanel {
 		this.add(container3, BorderLayout.CENTER);
 	}
 	
-	public void setActionListener(ActionListener l){
-		button1.addActionListener(l);
-		
+	public void setActionListener(ActionListener spielerwechselListener, ActionListener schiffButtonClickedListener){
+		button1.addActionListener(spielerwechselListener);
+		if(zerstoerer != null){
+			zerstoerer.addActionListener(schiffButtonClickedListener);
+		}
+		if(fregatte != null){
+			fregatte.addActionListener(schiffButtonClickedListener);
+		}
+		if(korvette != null){
+			korvette.addActionListener(schiffButtonClickedListener);
+		}
+		if(uboot != null){
+			uboot.addActionListener(schiffButtonClickedListener);
+		}		
 	}
 		
 }
