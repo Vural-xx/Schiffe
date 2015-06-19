@@ -23,8 +23,6 @@ public class RundenGUI extends JPanel {
 	private JPanel container2;
 	private JPanel container3;
 	
-	private JButton button1;
-	
 	private JLabel textLabel2;
 	private JLabel textLabel1;
 	private JTabbedPane tab;
@@ -44,7 +42,6 @@ public class RundenGUI extends JPanel {
 	private void initComponents(){
 		textLabel1 = new JLabel("Wähle das Schiff zum feuern");
 		textLabel2 = new JLabel(mainController.getCurrentSpieler().getName());
-		button1 = new JButton("Fertig");
 		spielerfeld = new SpielerfeldGUI(375, 15,mainController, Spielfeldmodus.SPIELER);
 		spielerfeld.drawSpielfeld();
 		
@@ -65,12 +62,6 @@ public class RundenGUI extends JPanel {
 		container1 = new JPanel();
 		container1.setLayout(new GridLayout(14,1,10,10));
 		container1.setPreferredSize(new Dimension(100, 15));
-		//JButton zerstoerer[] = new JButton[1/*schiffeAuswahl().zerstoererEingabe.getText()*/];
-		//for(int i = 0; i!=1 /*schiffeAuswahl().zerstoererEingabe.getText()*/; i++){
-			//zerstoerer[i] = new JButton("Zerstörer");
-			//container1.add(zerstoerer[i]);
-		//container1.setLayout(new BoxLayout(container1, BoxLayout.PAGE_AXIS));
-		//container1.add(textLabel1);
 		
 		if(mainController.schiffOhneWartezeit("Zerstoerer")){
 			zerstoerer = new JButton("Zerstörer");
@@ -95,16 +86,6 @@ public class RundenGUI extends JPanel {
 			uboot.setName("UBoot");
 			container1.add(uboot);
 		}
-		container1.add(Box.createVerticalGlue());
-		container1.add(Box.createVerticalGlue());
-		container1.add(Box.createVerticalGlue());
-		container1.add(Box.createVerticalGlue());
-		container1.add(Box.createVerticalGlue());
-		container1.add(Box.createVerticalGlue());
-		container1.add(Box.createVerticalGlue());
-		container1.add(Box.createVerticalGlue());
-		container1.add(Box.createVerticalGlue());
-		container1.add(button1);
 		
 		//Spielfelder Spieler & Gegner
 		container2 = new JPanel();
@@ -126,8 +107,7 @@ public class RundenGUI extends JPanel {
 		this.add(container3, BorderLayout.CENTER);
 	}
 	
-	public void setActionListener(ActionListener spielerwechselListener, ActionListener schiffButtonClickedListener){
-		button1.addActionListener(spielerwechselListener);
+	public void setActionListener(ActionListener schiffButtonClickedListener){
 		if(zerstoerer != null){
 			zerstoerer.addActionListener(schiffButtonClickedListener);
 		}

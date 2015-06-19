@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import de.hs.bremen.gui.LeeresFrame;
 import de.hs.bremen.gui.RundenGUI;
 import de.hs.bremen.model.Schiff;
 
@@ -13,10 +14,11 @@ import de.hs.bremen.model.Schiff;
 public class RundenController {
 	private RundenGUI rundenGui;
 	private MainController mainController;
+	private LeeresFrame leeresFrame;
 	
 	public RundenController(MainController mainController){
 		rundenGui = new RundenGUI(mainController);
-		rundenGui.setActionListener(new SpielerWechselListener(), new SchiffButtonClickedListener());
+		rundenGui.setActionListener(new SchiffButtonClickedListener());
 		this.mainController = mainController;
 		this.mainController.getMainFrame().add(rundenGui);
 		this.mainController.getMainFrame().revalidate();
@@ -29,8 +31,12 @@ public class RundenController {
 		}
 		mainController.nextSpieler();
 		if(mainController.getCurrentSpieler().schiffeOhneWartezeit()){
+			leeresFrame = new LeeresFrame(mainController);
+			this.mainController.getMainFrame().add(leeresFrame);
+			this.mainController.getMainFrame().revalidate();
+			JOptionPane.showMessageDialog(mainController.getMainFrame(), mainController.getCurrentSpieler().getName() + " ist an der Reihe");
 			rundenGui = new RundenGUI(mainController);
-			rundenGui.setActionListener(new SpielerWechselListener(), new SchiffButtonClickedListener());
+			rundenGui.setActionListener( new SchiffButtonClickedListener());
 			this.mainController.getMainFrame().add(rundenGui);
 			this.mainController.getMainFrame().revalidate();
 		}else{
@@ -39,19 +45,6 @@ public class RundenController {
 		}	
 	}
 	
-	class SpielerWechselListener implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
-			for(int i = 0; i<mainController.getSpieler().length; i++){
-				JOptionPane.showMessageDialog(null, "Der nächste Spieler ist an der Reihe"/* + MainController.getSpieler[i]().getName() + "ist an der Reihe"*/);
-				//Hier muss irgendwie der spieler eingebunden werden, nur wie?? 
-				mainController.getMainFrame().remove(rundenGui);
-				mainController.startRunden();
-			}
-		}
-	}
 	
 	public Schiff getFeuerndesSchiff(String name){
 		Schiff schiff = null;
@@ -68,6 +61,7 @@ public class RundenController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			//JOptionPane.showMessageDialog(null, "Der nächste Spieler ist an der Reihe" + mainController.getCurrentSpieler().getName() + "ist an der Reihe");
 			JButton schiff = (JButton) e.getSource();
 			System.out.println(schiff.getName());
 			mainController.setAusgewähltesSchiff(getFeuerndesSchiff(schiff.getName()));
