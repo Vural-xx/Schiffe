@@ -139,12 +139,9 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	
 	public void drawGegnerSpielfeld(){
 		Feld[][] felder = spieler.getSpielfeldPublic().getFelder();
-		Feld feld = null;
 		for(int i = 0 ; i < felder.length; i++){
 			for (int j = 0 ; j < felder[i].length; j++){
 				if(felder[i][j].getFeldstatus() != Feldstatus.WASSER){
-					feld = felder[i][j];
-					feld = null;
 					fillSquare((felder[i][j].getPosition().getPositonX()*getFeldgroesse())+1, (felder[i][j].getPosition().getPositionY()*getFeldgroesse())+1, getFeldgroesse()-2, getFeldgroesse()-2, felder[i][j].getGuiInhalt());
 				}	
 		    }
