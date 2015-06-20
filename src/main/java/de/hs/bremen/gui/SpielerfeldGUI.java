@@ -120,7 +120,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	}
 	
 
-	public boolean innerhalbSpielfeld(int x ,int y){
+	public boolean innerhalbSpielfeld(int x ,int y, int laenge){
 		if(horizontal){
 			return x +laenge  <=spielfeldGroesse/getFeldgroesse()  && y < spielfeldGroesse/getFeldgroesse();
 		}else{
@@ -155,7 +155,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		}else if(mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe(mainController.getAusgewähltesSchiff().getClass().getCanonicalName()) == 0){
 			JOptionPane.showMessageDialog(null, "Bitte wählen Sie ein anderes Schiff.");
 		}else{
-			if(mouseButton == 1 && innerhalbSpielfeld(xPosition,yPosition)){
+			if(mouseButton == 1 && innerhalbSpielfeld(xPosition,yPosition, mainController.getAusgewähltesSchiff().getLaenge())){
 				this.laenge = mainController.getAusgewähltesSchiff().getLaenge();
 				mainController.getCurrentSpieler().getSpielfeld().platziereSchiff(mainController.getAusgewähltesSchiff(), new Position(xPosition+1, yPosition+1), horizontal);
 				for (int i = 0; i < laenge; i++){
@@ -178,7 +178,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		if(mainController.getAusgewähltesSchiff() == null){
 			JOptionPane.showMessageDialog(null, "Bitte wählen Sie ein Schiff welches Sie setzen wollen.");
 		}else{
-			if(mouseButton == 1 && innerhalbSpielfeld(xPosition+1,yPosition+1)){
+			if(mouseButton == 1 && innerhalbSpielfeld(xPosition,yPosition,mainController.getAusgewähltesSchiff().getFeuerstaerke())){
 				for (int i = 0; i < feuerstaerke; i++){
 					positionen[i] = new Position((xPosition+i)+1, yPosition+1);
 					getroffen = spieler.getSpielfeld().getSchiffByPosition(new Position(xPosition+i, yPosition+1));
