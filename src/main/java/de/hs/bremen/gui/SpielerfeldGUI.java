@@ -139,9 +139,12 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	
 	public void drawGegnerSpielfeld(){
 		Feld[][] felder = spieler.getSpielfeldPublic().getFelder();
+		Feld feld = null;
 		for(int i = 0 ; i < felder.length; i++){
 			for (int j = 0 ; j < felder[i].length; j++){
 				if(felder[i][j].getFeldstatus() != Feldstatus.WASSER){
+					feld = felder[i][j];
+					feld = null;
 					fillSquare((felder[i][j].getPosition().getPositonX()*getFeldgroesse())+1, (felder[i][j].getPosition().getPositionY()*getFeldgroesse())+1, getFeldgroesse()-2, getFeldgroesse()-2, felder[i][j].getGuiInhalt());
 				}	
 		    }
@@ -173,20 +176,21 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	
 	public void feuern(int xPosition, int yPosition, int mouseButton){
 		Schiff getroffen = null;
+		int feuerstaerke = mainController.getAusgewähltesSchiff().getFeuerstaerke();
+		Position[] positionen = new Position[feuerstaerke];
 		if(mainController.getAusgewähltesSchiff() == null){
 			JOptionPane.showMessageDialog(null, "Bitte wählen Sie ein Schiff welches Sie setzen wollen.");
 		}else{
 			if(mouseButton == 1 && innerhalbSpielfeld(xPosition,yPosition)){
-				this.laenge = mainController.getAusgewähltesSchiff().getFeuerstaerke();
-				for (int i = 0; i < laenge; i++){
-					mainController.getAusgewähltesSchiff().feuern(new Position(xPosition+i, yPosition), spieler.getSpielfeldPublic());
+				for (int i = 0; i < feuerstaerke; i++){
+					positionen[i] = new Position(xPosition+i, yPosition);
 					getroffen = spieler.getSpielfeld().getSchiffByPosition(new Position(xPosition+i, yPosition+1));
-					//spieler.getSpielfeldPublic().feuerPlatzieren(new Position(xPosition+i, yPosition));
 					fillSquare(((i+xPosition)*getFeldgroesse())+1,(yPosition*getFeldgroesse())+1,getFeldgroesse()-2,getFeldgroesse()-2,mainController.getAusgewähltesSchiff().getFarbe());
 				}
 				if(getroffen != null){
 					JOptionPane.showMessageDialog(null, "Sie haben " +getroffen.getName()+" von Spieler " + spieler.getName()+ " getroffen");
 				}
+				mainController.getAusgewähltesSchiff().feuern(positionen, spieler.getSpielfeldPublic());
 				mainController.getRundenController().gefeuert();
 			}
 		}
