@@ -142,7 +142,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		for(int i = 0 ; i < felder.length; i++){
 			for (int j = 0 ; j < felder[i].length; j++){
 				if(felder[i][j].getFeldstatus() != Feldstatus.WASSER){
-					fillSquare((felder[i][j].getPosition().getPositonX()*getFeldgroesse())+1, (felder[i][j].getPosition().getPositionY()*getFeldgroesse())+1, getFeldgroesse()-2, getFeldgroesse()-2, felder[i][j].getGuiInhalt());
+					fillSquare(((felder[i][j].getPosition().getPositonX()-1)*getFeldgroesse())+1, ((felder[i][j].getPosition().getPositionY()-1)*getFeldgroesse())+1, getFeldgroesse()-2, getFeldgroesse()-2, felder[i][j].getGuiInhalt());
 				}	
 		    }
 		}
@@ -178,9 +178,9 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		if(mainController.getAusgewähltesSchiff() == null){
 			JOptionPane.showMessageDialog(null, "Bitte wählen Sie ein Schiff welches Sie setzen wollen.");
 		}else{
-			if(mouseButton == 1 && innerhalbSpielfeld(xPosition,yPosition)){
+			if(mouseButton == 1 && innerhalbSpielfeld(xPosition+1,yPosition+1)){
 				for (int i = 0; i < feuerstaerke; i++){
-					positionen[i] = new Position(xPosition+i, yPosition);
+					positionen[i] = new Position((xPosition+i)+1, yPosition+1);
 					getroffen = spieler.getSpielfeld().getSchiffByPosition(new Position(xPosition+i, yPosition+1));
 					fillSquare(((i+xPosition)*getFeldgroesse())+1,(yPosition*getFeldgroesse())+1,getFeldgroesse()-2,getFeldgroesse()-2,mainController.getAusgewähltesSchiff().getFarbe());
 				}
