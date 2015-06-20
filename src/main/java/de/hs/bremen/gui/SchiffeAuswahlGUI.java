@@ -142,10 +142,10 @@ public class SchiffeAuswahlGUI extends JPanel implements DocumentListener  {
 	public void pruefen() {
 		
 		int anzahl=0;
-		int anzahlzerstoerer;
-		int anzahlfregatte;
-		int anzahlkorvette;
-		int anzahluboot;
+		int anzahlzerstoerer=0;
+		int anzahlfregatte=0;
+		int anzahlkorvette=0;
+		int anzahluboot=0;
 		String zerstorer;
 		String fregatte;
 		String korvette;
@@ -168,17 +168,22 @@ public class SchiffeAuswahlGUI extends JPanel implements DocumentListener  {
 					warnung.revalidate();
 					}
 				} catch (Exception e){
-					warnung.setForeground(Color.RED);
-					warnung.setText("Ihre Eingabe ist falsch oder ihre Schiffeanzahl ist nicht größer als 1");
-					warnung.revalidate();
+						System.out.println("parse falsche eingaben");
 					}
 				
 				
 	
-			if(anzahl>=1){
-			weiter.setEnabled(true);
-			} else if(anzahl<1)
-			weiter.setEnabled(false);
-	}
+			if(anzahlzerstoerer >=0 && anzahlfregatte >=0 &&anzahlkorvette >=0 &&anzahluboot >=0 && anzahl>=1){
+				warnung.setForeground(Color.BLACK);
+				warnung.setText("Ihre Eingabe ist Korrekt");
+				warnung.revalidate();
+				weiter.setEnabled(true);
+			} else if(anzahlzerstoerer <0 || anzahlfregatte <0 || anzahlkorvette <0 || anzahluboot <0  || anzahl<1){
+				weiter.setEnabled(false);
+				warnung.setForeground(Color.RED);
+				warnung.setText("Eingabe Falsch. Es muss mindestens 1 Schiff gesetzt werden.");
+				warnung.revalidate();
+
+	}}
 	
 }
