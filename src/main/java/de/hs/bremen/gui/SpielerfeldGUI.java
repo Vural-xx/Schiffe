@@ -33,7 +33,6 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	private int spielfeldGroesse;
 	private int feldgroesse;
 	private boolean horizontal = true;
-	private int laenge = 3;
 	private Spieler spieler;
 
 	public SpielerfeldGUI(int spielfeldGroesse, int feldgroesse) {
@@ -150,13 +149,13 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	}
 	
 	public void schiffeSetzen(int xPosition, int yPosition, int mouseButton){
+		int laenge = mainController.getAusgewähltesSchiff().getLaenge();
 		if(mainController.getAusgewähltesSchiff() == null){
 			JOptionPane.showMessageDialog(null, "Bitte wählen Sie ein Schiff welches Sie setzen wollen.");
 		}else if(mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe(mainController.getAusgewähltesSchiff().getClass().getCanonicalName()) == 0){
 			JOptionPane.showMessageDialog(null, "Bitte wählen Sie ein anderes Schiff.");
 		}else{
-			if(mouseButton == 1 && innerhalbSpielfeld(xPosition,yPosition, mainController.getAusgewähltesSchiff().getLaenge())){
-				this.laenge = mainController.getAusgewähltesSchiff().getLaenge();
+			if(mouseButton == 1 && innerhalbSpielfeld(xPosition,yPosition, laenge)){
 				mainController.getCurrentSpieler().getSpielfeld().platziereSchiff(mainController.getAusgewähltesSchiff(), new Position(xPosition+1, yPosition+1), horizontal);
 				for (int i = 0; i < laenge; i++){
 					if(horizontal){
