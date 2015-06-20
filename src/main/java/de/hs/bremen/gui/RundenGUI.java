@@ -25,6 +25,8 @@ public class RundenGUI extends JPanel {
 	
 	private JLabel textLabel2;
 	private JLabel textLabel1;
+	private JLabel textVerfehlt;
+	private JLabel textGetroffen;
 	private JTabbedPane tab;
 	private SpielerfeldGUI spielerfeld;
 	private MainController mainController;
@@ -86,6 +88,22 @@ public class RundenGUI extends JPanel {
 			uboot.setName("UBoot");
 			container1.add(uboot);
 		}
+		
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
+		textGetroffen = new JLabel("Rot für getroffen!");
+		textGetroffen.setForeground(Color.RED);
+		container1.add(textGetroffen);
+		textVerfehlt = new JLabel ("Blau für verfehlt!");
+		textVerfehlt.setForeground(Color.BLUE);
+		container1.add(textVerfehlt);
 		
 		//Spielfelder Spieler & Gegner
 		container2 = new JPanel();

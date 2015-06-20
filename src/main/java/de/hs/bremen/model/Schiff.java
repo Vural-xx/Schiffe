@@ -265,13 +265,13 @@ public abstract class Schiff implements Serializable {
 	
 	public Color getFarbe(){
 		if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.Fregatte")){
-			return Color.GREEN;
+			return Color.BLACK;
 		}else if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.Korvette")){
-			return Color.YELLOW;
+			return Color.BLACK;
 		}else if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.UBoot")){
-			return Color.ORANGE;
+			return Color.BLACK;
 		}else{
-			return Color.RED;
+			return Color.BLACK;
 		}
 	}
 

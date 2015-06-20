@@ -126,7 +126,7 @@ public class SchiffSetzenGUI extends JPanel{
 		container6.add(textLabel4);
 		container6.add(spielerfeld[mainController.getCurrentSpielerIndex()]);
 		container6.setBorder(BorderFactory.createEmptyBorder(30, 250, 30, 30));//(top, left, bottom, right)
-		JLabel infoText = new JLabel ("Änderung der Schiffausrichtung, durch drücken der rechten Maustaste");
+		JLabel infoText = new JLabel ("Änderung der Schiffausrichtung: Drücke die rechte Maustaste");
 		container6.add(infoText);
 		ausrichtungText= new JLabel("Ihr Schiff ist horizontal ausgerichtet.");
 		ausrichtungText.setForeground(Color.blue);

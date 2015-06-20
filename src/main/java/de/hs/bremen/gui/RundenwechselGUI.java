@@ -8,12 +8,12 @@ import javax.swing.JPanel;
 import de.hs.bremen.controller.MainController;
 
 
-public class LeeresFrame extends JPanel {
+public class RundenwechselGUI extends JPanel {
 
 	private JLabel textLabel1;
 	public MainController mainController;
 	
-	public LeeresFrame(MainController mainController){
+	public RundenwechselGUI(MainController mainController){
 		this.mainController = mainController;
 		initComponents();
 		setVisible(true);

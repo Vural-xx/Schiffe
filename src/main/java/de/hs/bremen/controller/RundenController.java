@@ -5,16 +5,15 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-
-import de.hs.bremen.gui.LeeresFrame;
 import de.hs.bremen.gui.RundenGUI;
+import de.hs.bremen.gui.RundenwechselGUI;
 import de.hs.bremen.model.Schiff;
 
 
 public class RundenController {
 	private RundenGUI rundenGui;
 	private MainController mainController;
-	private LeeresFrame leeresFrame;
+	private RundenwechselGUI rundenwechselGUI;
 	
 	public RundenController(MainController mainController){
 		rundenGui = new RundenGUI(mainController);
@@ -31,8 +30,8 @@ public class RundenController {
 		}
 		mainController.nextSpieler();
 		if(mainController.getCurrentSpieler().schiffeOhneWartezeit()){
-			leeresFrame = new LeeresFrame(mainController);
-			this.mainController.getMainFrame().add(leeresFrame);
+			rundenwechselGUI = new RundenwechselGUI(mainController);
+			this.mainController.getMainFrame().add(rundenwechselGUI);
 			this.mainController.getMainFrame().revalidate();
 			JOptionPane.showMessageDialog(mainController.getMainFrame(), mainController.getCurrentSpieler().getName() + " ist an der Reihe");
 			rundenGui = new RundenGUI(mainController);

@@ -185,7 +185,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 					fillSquare(((i+xPosition)*getFeldgroesse())+1,(yPosition*getFeldgroesse())+1,getFeldgroesse()-2,getFeldgroesse()-2,mainController.getAusgewähltesSchiff().getFarbe());
 				}
 				if(getroffen != null){
-					JOptionPane.showMessageDialog(null, "Sie haben " +getroffen.getName()+" von Spieler " + spieler.getName()+ " getroffen");
+					JOptionPane.showMessageDialog(null, "Sie haben ein Schiff von Spieler " + spieler.getName()+ " getroffen");
 				}
 				mainController.getAusgewähltesSchiff().feuern(positionen, spieler.getSpielfeldPublic());
 				mainController.getRundenController().gefeuert();
