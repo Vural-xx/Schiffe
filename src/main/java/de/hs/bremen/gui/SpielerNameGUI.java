@@ -14,8 +14,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
-public class SpielerNameGUI extends JPanel implements ActionListener {
+public class SpielerNameGUI extends JPanel implements DocumentListener  {
 	
 	public JLabel spielerNametext;
 	
@@ -23,7 +25,6 @@ public class SpielerNameGUI extends JPanel implements ActionListener {
 	private JPanel container1;
 	public JTextField[] spielerEingabe;
 	private JButton weiter;
-	private JButton pruefen;
 	private GridBagConstraints gbc= new GridBagConstraints();
 	
 	private int spieler;
@@ -54,8 +55,6 @@ public class SpielerNameGUI extends JPanel implements ActionListener {
 		weiter= new JButton("weiter");
 		weiter.setEnabled(false);
 		
-		pruefen= new JButton("Eingabe prüfen!");
-		pruefen.addActionListener(this);
 		
 
 		
@@ -67,6 +66,7 @@ public class SpielerNameGUI extends JPanel implements ActionListener {
 		spielerEingabe = new JTextField[spieleranzahl];
 		for(int i= 0; i <spieleranzahl; i++){
 			spielerEingabe[i]= new JTextField();
+			spielerEingabe[i].getDocument().addDocumentListener(this);
 			spielerEingabe[i].setName("spieler"+ (i+1));
 			spielerEingabe[i].setPreferredSize( new Dimension( 150, 24 ) );
 			
@@ -78,26 +78,53 @@ public class SpielerNameGUI extends JPanel implements ActionListener {
 			
 			
 		}
-		this.add(pruefen,gbc);
 		this.add(weiter,gbc);
 		
 	}
-	
-	public void actionPerformed(ActionEvent e) {
-		for(int i=0; i< spieler; i++){
-			if(spielerEingabe[i].getText().equals("")){
-				weiter.setEnabled(false);
-			} else {
-				weiter.setEnabled(true);
-			}
-		}
-	}
+
 	
 	public void setActionListener(ActionListener l){
 		weiter.addActionListener(l);
 		
 	}
 
+
+
+	@Override
+	public void insertUpdate(DocumentEvent e) {
+		pruefen();
+	}
+
+
+
+	@Override
+	public void removeUpdate(DocumentEvent e) {
+		pruefen();
+		
+	}
+
+
+
+	@Override
+	public void changedUpdate(DocumentEvent e) {
+		pruefen();
+		
+	}
+
+	
+	public void pruefen() {
+		int counter=0;
+		for(int i=0; i< spieler; i++){
+			if(!spielerEingabe[i].getText().equals("")){
+				counter=counter+1;
+			} else if(spielerEingabe[i].getText().equals("")){
+				weiter.setEnabled(false);
+			}
+		}
+			if(counter==spieler){
+			weiter.setEnabled(true);
+			}
+	}
 
 
 	

@@ -52,6 +52,10 @@ public class EinstellungController {
 			mainController.getMainFrame().remove(spielerAuswahlGUI);
 			kiAuswahlGUI.setActionListener(new KiAnzahlListener());
 			mainController.getMainFrame().add(kiAuswahlGUI);
+			if(spielerAuswahlGUI.getSpielerAnzahl()==1){
+				kiAuswahlGUI.buttonBeiEinemSpieler();
+				kiAuswahlGUI.revalidate();
+			}
 			mainController.getMainFrame().revalidate();
 		}
 		

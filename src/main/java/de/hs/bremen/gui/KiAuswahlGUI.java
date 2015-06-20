@@ -172,7 +172,9 @@ public class KiAuswahlGUI extends JPanel implements ActionListener {
 		
 	}
 	
-	
+	public void buttonBeiEinemSpieler(){
+		computer1.setEnabled(false);
+	}
 	
 	
 

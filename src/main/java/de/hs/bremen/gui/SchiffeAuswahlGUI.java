@@ -1,6 +1,7 @@
 package de.hs.bremen.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,8 +15,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.xml.bind.ParseConversionEvent;
 
-public class SchiffeAuswahlGUI extends JPanel implements ActionListener {
+public class SchiffeAuswahlGUI extends JPanel implements DocumentListener  {
 	
 	private JLabel schiffeAnzahlText;
 	private JLabel zerstoererText;
@@ -34,7 +38,6 @@ public class SchiffeAuswahlGUI extends JPanel implements ActionListener {
 	public JTextField ubootEingabe;
 	
 	private JButton weiter;
-	private JButton pruefen;
 	private GridBagConstraints gbc;
 	
 
@@ -61,8 +64,7 @@ public class SchiffeAuswahlGUI extends JPanel implements ActionListener {
 
 		weiter = new JButton("weiter");
 		weiter.setEnabled(false);
-		pruefen= new JButton("Eingabe prüfen!");
-		pruefen.addActionListener(this);
+
 		schiffeAnzahlText= new JLabel("Bitte geben Sie Anzahl der Schiffe ein:");
 		
 		
@@ -77,11 +79,10 @@ public class SchiffeAuswahlGUI extends JPanel implements ActionListener {
 		korvetteEingabe= new JTextField();
 		ubootEingabe= new JTextField();
 		
-		zerstoererEingabe.setText("0");
-		fregatteEingabe.setText("0");
-		korvetteEingabe.setText("0");
-		ubootEingabe.setText("0");
-		
+		zerstoererEingabe.getDocument().addDocumentListener(this);
+		fregatteEingabe.getDocument().addDocumentListener(this);
+		korvetteEingabe.getDocument().addDocumentListener(this);
+		ubootEingabe.getDocument().addDocumentListener(this);
 		
 		zerstoererEingabe.setPreferredSize(new Dimension(50, 24));
 		fregatteEingabe.setPreferredSize(new Dimension(50, 24));
@@ -99,7 +100,6 @@ public class SchiffeAuswahlGUI extends JPanel implements ActionListener {
 		
 		this.add(schiffeAnzahlText,gbc);
 		this.add(container1,gbc);
-		this.add(pruefen,gbc);
 		this.add(weiter,gbc);
 		this.add(warnung,gbc);
 		this.add(fuellcontainer,gbc);
@@ -108,37 +108,77 @@ public class SchiffeAuswahlGUI extends JPanel implements ActionListener {
 		
 	}
 	
-	public void actionPerformed(ActionEvent e) {
-		int anzahl=0;
-		int anzahlzerstoerer;
-		int anzahlfregatte;
-		int anzahlkorvette;
-		int anzahluboot;
-				weiter.setEnabled(false);
-				if(zerstoererEingabe.getText().equals(""))zerstoererEingabe.setText("0");
-				if(fregatteEingabe.getText().equals(""))fregatteEingabe.setText("0");
-				if(korvetteEingabe.getText().equals(""))korvetteEingabe.setText("0");
-				if(ubootEingabe.getText().equals(""))ubootEingabe.setText("0");
-				
-				anzahlzerstoerer = Integer.parseInt(zerstoererEingabe.getText());
-				anzahlfregatte= Integer.parseInt(fregatteEingabe.getText());
-				anzahlkorvette= Integer.parseInt(korvetteEingabe.getText());
-				anzahluboot=Integer.parseInt(ubootEingabe.getText());
-				anzahl= anzahlzerstoerer+anzahlfregatte+anzahluboot+anzahlkorvette;
-				System.out.println(anzahl);
-				warnung.setText("");
-				warnung.revalidate();
-				if(anzahl < 1){
-					warnung.setText("Ihre Schiffe Anzahl ist zu gering oder ihre Eingabe ist fehlerhaft.");
-				} else {
-				weiter.setEnabled(true);
-					warnung.setText("");
-					warnung.revalidate();
-				}
-		}
+
 
 	public void setActionListener(ActionListener l){
 		weiter.addActionListener(l);
 		
 	}
+
+
+
+	@Override
+	public void insertUpdate(DocumentEvent e) {
+		pruefen();
+		
+	}
+
+
+
+	@Override
+	public void removeUpdate(DocumentEvent e) {
+		pruefen();
+		
+	}
+
+
+
+	@Override
+	public void changedUpdate(DocumentEvent e) {
+		pruefen();
+		
+	}
+	
+	public void pruefen() {
+		
+		int anzahl=0;
+		int anzahlzerstoerer;
+		int anzahlfregatte;
+		int anzahlkorvette;
+		int anzahluboot;
+		String zerstorer;
+		String fregatte;
+		String korvette;
+		String uboot;
+		
+				zerstorer = zerstoererEingabe.getText();
+				fregatte = fregatteEingabe.getText();
+				korvette =korvetteEingabe.getText();
+				uboot = ubootEingabe.getText();
+				
+				try{
+					if(!zerstorer.equals("") && !fregatte.equals("") && !korvette.equals("") && !uboot.equals("")){
+					anzahlzerstoerer= Integer.parseInt(zerstorer);
+					anzahlfregatte= Integer.parseInt(fregatte);
+					anzahlkorvette= Integer.parseInt(korvette);
+					anzahluboot= Integer.parseInt(uboot);
+					anzahl=anzahlzerstoerer+anzahlkorvette+anzahlfregatte+anzahluboot;
+					warnung.setForeground(Color.BLACK);
+					warnung.setText("Ihre Eingabe ist Korrekt");
+					warnung.revalidate();
+					}
+				} catch (Exception e){
+					warnung.setForeground(Color.RED);
+					warnung.setText("Ihre Eingabe ist falsch oder ihre Schiffeanzahl ist nicht größer als 1");
+					warnung.revalidate();
+					}
+				
+				
+	
+			if(anzahl>=1){
+			weiter.setEnabled(true);
+			} else if(anzahl<1)
+			weiter.setEnabled(false);
+	}
+	
 }
