@@ -292,9 +292,10 @@ public class Spielfeld implements Serializable{
 	 * @return: Schiff welches sich an der Position befindet, oder null wenn kein Schiff vorhanden.
 	 */
 	public Schiff getSchiffByPosition(Position position){
+		// ToDo: Warum sind die Felder = null ?
 		for(int i = 0; i<schiffe.size(); i++){
 			for(int j = 0; j<schiffe.get(i).getFelder().length; j++)
-			if(schiffe.get(i).getFelder()[j].getPosition().equals(position)){
+			if(schiffe.get(i).getFelder()[j] != null && schiffe.get(i).getFelder()[j].getPosition() != null && schiffe.get(i).getFelder()[j].getPosition().equals(position)){
 				return schiffe.get(i);
 			}
 		}

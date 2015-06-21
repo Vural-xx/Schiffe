@@ -149,13 +149,20 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	}
 	
 	public void schiffeSetzen(int xPosition, int yPosition, int mouseButton){
-		int laenge = mainController.getAusgewähltesSchiff().getLaenge();
+		int ausrichtung;
+		if(horizontal){
+			ausrichtung = 1;
+		}else{
+			ausrichtung = 2;
+		}
 		if(mainController.getAusgewähltesSchiff() == null){
 			JOptionPane.showMessageDialog(null, "Bitte wählen Sie ein Schiff welches Sie setzen wollen.");
 		}else if(mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe(mainController.getAusgewähltesSchiff().getClass().getCanonicalName()) == 0){
 			JOptionPane.showMessageDialog(null, "Bitte wählen Sie ein anderes Schiff.");
 		}else{
-			if(mouseButton == 1 && innerhalbSpielfeld(xPosition,yPosition, laenge)){
+			int laenge = mainController.getAusgewähltesSchiff().getLaenge();
+			boolean schiffPlatzierbar = innerhalbSpielfeld(xPosition,yPosition, laenge) && mainController.getCurrentSpieler().getSpielfeld().schiffPlazierbar(mainController.getAusgewähltesSchiff(), new Position(xPosition+1, yPosition+1), ausrichtung);
+			if(mouseButton == 1 && schiffPlatzierbar){
 				mainController.getCurrentSpieler().getSpielfeld().platziereSchiff(mainController.getAusgewähltesSchiff(), new Position(xPosition+1, yPosition+1), horizontal);
 				for (int i = 0; i < laenge; i++){
 					if(horizontal){
@@ -166,6 +173,8 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 				}
 				mainController.getSchiffeSetzenController().getSchiffSetzenGui().schiffGesetzt();
 				repaint();	
+			}else if(!schiffPlatzierbar){
+				JOptionPane.showMessageDialog(null, "Bitte beachten Sie dass ihr schiff mit der vorgegebenen Länge auf das Spielfeld passen muss und jedes Schiff ein Abstand von mindestens einem Feld zu einem anderen Schiff haben muss");
 			}
 		}
 	}
