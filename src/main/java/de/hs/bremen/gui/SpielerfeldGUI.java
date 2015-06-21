@@ -184,7 +184,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		int feuerstaerke = mainController.getAusgewähltesSchiff().getFeuerstaerke();
 		Position[] positionen = new Position[feuerstaerke];
 		if(mainController.getAusgewähltesSchiff() == null){
-			JOptionPane.showMessageDialog(null, "Bitte wählen Sie ein Schiff welches Sie setzen wollen.");
+			JOptionPane.showMessageDialog(null, "Bitte wählen Sie ein Schiff mit dem Sie feuern möchten.");
 		}else{
 			if(mouseButton == 1 && innerhalbSpielfeld(xPosition,yPosition,mainController.getAusgewähltesSchiff().getFeuerstaerke())){
 				for (int i = 0; i < feuerstaerke; i++){
