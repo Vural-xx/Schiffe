@@ -26,7 +26,7 @@ public class MainController extends AbstractController {
 	}
 	
 	public void startSchiffeSetzen(){
-		schiffeSetzenController = new SchiffeSetzenController(this);
+		schiffeSetzenController = new SchiffeSetzenController(this, einstellungController.getSchiffe());
 	}
 	
 	public void startRunden(){
@@ -40,8 +40,6 @@ public class MainController extends AbstractController {
 	public void startEinstellungController(){
 		einstellungController= new EinstellungController(this);
 	}
-	
-	
 	
 	public ActionListener getZuRundeWechselnListener(){
 		return new ZuRundeWechseln();
@@ -140,11 +138,6 @@ public class MainController extends AbstractController {
 	
 	public SchiffeSetzenController getSchiffeSetzenController() {
 		return schiffeSetzenController;
-	}
-
-	public void setSchiffeSetzenController(
-			SchiffeSetzenController schiffeSetzenController) {
-		this.schiffeSetzenController = schiffeSetzenController;
 	}
 
 	public RundenController getRundenController() {

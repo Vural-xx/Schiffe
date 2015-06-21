@@ -24,6 +24,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import de.hs.bremen.controller.MainController;
+import de.hs.bremen.controller.SchiffeSetzenController;
 import de.hs.bremen.enums.Spielfeldmodus;
 
 public class SchiffSetzenGUI extends JPanel{
@@ -47,14 +48,14 @@ public class SchiffSetzenGUI extends JPanel{
 	private JButton korvette;
 	private JButton uboot;
 	
-	public SchiffSetzenGUI(MainController mainController){
+	public SchiffSetzenGUI(MainController mainController, SchiffeSetzenController schiffeSetzenController){
 		this.mainController = mainController;
-		initComponents();
+		initComponents(schiffeSetzenController);
 
 		setVisible(true);
 		
 	}
-	public void initComponents(){
+	public void initComponents(SchiffeSetzenController schiffeSetzenController){
 		
 		textLabel3 = new JLabel("Herzlich Willkommen bei Schiffe versenken!");
 		textLabel4 = new JLabel(mainController.getCurrentSpieler().getName() +" ist dran. Bitte setze deine Schiffe");
@@ -72,25 +73,25 @@ public class SchiffSetzenGUI extends JPanel{
 		container5.setPreferredSize(new Dimension(200, 15));
 		zerstoerer = new JButton("Zerstörer ");
 		zerstoerer.setName("Zerstoerer");
-		zerstoerAnzahl = new JLabel(mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe("de.hs.bremen.model.Zerstoerer")+"X");
+		zerstoerAnzahl = new JLabel(schiffeSetzenController.getAnzahlUngesetzteSchiffe("Zerstoerer")+"X");
 		container5.add(zerstoerAnzahl);
 		container5.add(zerstoerer);
 		
 		fregatte = new JButton("Fregatte ");
 		fregatte.setName("Fregatte");
-		fregatteAnzahl = new JLabel(mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe("de.hs.bremen.model.Fregatte")+"X");
+		fregatteAnzahl = new JLabel(schiffeSetzenController.getAnzahlUngesetzteSchiffe("Fregatte")+"X");
 		container5.add(fregatteAnzahl);
 		container5.add(fregatte);
 		
 		korvette = new JButton("Korvette");
 		korvette.setName("Korvette");
-		korvetteAnzahl = new JLabel(mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe("de.hs.bremen.model.Korvette")+"X");
+		korvetteAnzahl = new JLabel(schiffeSetzenController.getAnzahlUngesetzteSchiffe("Korvette")+"X");
 		container5.add(korvetteAnzahl);
 		container5.add(korvette);
 		
 		uboot = new JButton("UBoot");
 		uboot.setName("UBoot");
-		ubootAnzahl = new JLabel(mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe("de.hs.bremen.UBoot")+"X");
+		ubootAnzahl = new JLabel(schiffeSetzenController.getAnzahlUngesetzteSchiffe("UBoot")+"X");
 		container5.add(ubootAnzahl);
 		container5.add(uboot);
 
@@ -142,10 +143,10 @@ public class SchiffSetzenGUI extends JPanel{
 	}
 	
 	public void schiffGesetzt(){
-		int zerstoererZahl = mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe("de.hs.bremen.model.Zerstoerer");
-		int fregatteZahl = mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe("de.hs.bremen.model.Fregatte");
-		int korvetteZahl = mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe("de.hs.bremen.model.Korvette");
-		int ubootZahl =  mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe("de.hs.bremen.model.UBoot");
+		int zerstoererZahl = mainController.getSchiffeSetzenController().getAnzahlUngesetzteSchiffe("Zerstoerer");    
+		int fregatteZahl = mainController.getSchiffeSetzenController().getAnzahlUngesetzteSchiffe("Fregatte");  
+		int korvetteZahl = mainController.getSchiffeSetzenController().getAnzahlUngesetzteSchiffe("Korvette");   
+		int ubootZahl = mainController.getSchiffeSetzenController().getAnzahlUngesetzteSchiffe("UBoot"); 
 		if(zerstoererZahl == 0){
 			zerstoerAnzahl.setEnabled(false);
 			zerstoerer.setEnabled(false);

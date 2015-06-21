@@ -3,6 +3,7 @@ package de.hs.bremen.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import de.hs.bremen.gui.KiAuswahlGUI;
 import de.hs.bremen.gui.SchiffSetzenGUI;
@@ -26,7 +27,7 @@ public class EinstellungController {
 	private KiAuswahlGUI kiAuswahlGUI;
 	private Spieler[] spieler;
 	private int spielfeldGroesse;
-	private ArrayList<String> schiffe;
+	private HashMap<String, ArrayList<Schiff>> schiffe;
 	
 	public EinstellungController(MainController mainController){
 		this.mainController= mainController;
@@ -38,16 +39,15 @@ public class EinstellungController {
 		spielerAuswahlGUI.setActionListener(new SpielerAnzahlListener());
 		this.mainController.getMainFrame().add(spielerAuswahlGUI);
 		this.mainController.getMainFrame().revalidate();
-		
-		
-		
 	}
 	
+	public HashMap<String, ArrayList<Schiff>> getSchiffe() {
+		return schiffe;
+	}
 	
 	class SpielerAnzahlListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-
 			spielerNameGUI.createNameFenster(spielerAuswahlGUI.getSpielerAnzahl());
 			mainController.getMainFrame().remove(spielerAuswahlGUI);
 			kiAuswahlGUI.setActionListener(new KiAnzahlListener());
@@ -69,21 +69,17 @@ public class EinstellungController {
 			mainController.getMainFrame().add(spielerNameGUI);
 			mainController.getMainFrame().revalidate();
 		}
-		
 	}
 	
 	class SpielerNameListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			tempSpieler();
-			
 			mainController.setSpieler(spieler);
 			//Probe 
 			for (int j=0; j< spieler.length;j++){
 				System.out.println(mainController.getSpieler()[j].getName());
 			}
-				
 			mainController.getMainFrame().remove(spielerNameGUI);
 			schiffeAuswahlGUI.setActionListener(new SchiffAnzahlListener());
 			mainController.getMainFrame().add(schiffeAuswahlGUI);
@@ -95,9 +91,6 @@ public class EinstellungController {
 	class SchiffAnzahlListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			//tempSpielfeldgroesse();
-			//System.out.println(spielfeldGroesse);
 			tempArraySchiff();
 			System.out.println(schiffe);
 			mainController.getMainFrame().remove(schiffeAuswahlGUI);
@@ -111,12 +104,8 @@ public class EinstellungController {
 	class SpielfeldGroeßeListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			//tempSpielfeldgroesse();
-			//System.out.println(spielfeldGroesse);
 			mainController.getMainFrame().remove(spielfeldGroeßeGUI);
 			mainController.startSchiffeSetzen();
-			mainController.getMainFrame().revalidate();
 		}
 		
 	}
@@ -137,40 +126,36 @@ public class EinstellungController {
 	}
 	
 	public void tempArraySchiff(){
-			int anzahlZerstoerer= Integer.parseInt(schiffeAuswahlGUI.zerstoererEingabe.getText());
-			int anzahlFregatte= Integer.parseInt(schiffeAuswahlGUI.fregatteEingabe.getText());
-			int anzahlKorvette= Integer.parseInt(schiffeAuswahlGUI.korvetteEingabe.getText());
-			int anzahlUboot= Integer.parseInt(schiffeAuswahlGUI.ubootEingabe.getText());
-			
-			System.out.println("Zerstörer = " + anzahlZerstoerer);
-			System.out.println("Fregatte = " + anzahlFregatte);
-			System.out.println("Korvete = " + anzahlKorvette);
-			System.out.println("UBoot = " + anzahlUboot);
-			
-			for(int i =0; i<mainController.getSpieler().length;i++){
-				mainController.getSpieler()[i].createSpielfeld(40);
+		int anzahlZerstoerer= Integer.parseInt(schiffeAuswahlGUI.zerstoererEingabe.getText());
+		int anzahlFregatte= Integer.parseInt(schiffeAuswahlGUI.fregatteEingabe.getText());
+		int anzahlKorvette= Integer.parseInt(schiffeAuswahlGUI.korvetteEingabe.getText());
+		int anzahlUboot= Integer.parseInt(schiffeAuswahlGUI.ubootEingabe.getText());
+
+		System.out.println("Zerstörer = " + anzahlZerstoerer);
+		System.out.println("Fregatte = " + anzahlFregatte);
+		System.out.println("Korvete = " + anzahlKorvette);
+		System.out.println("UBoot = " + anzahlUboot);
+
+		ArrayList<Schiff> tempSchiffe;
+		schiffe = new HashMap<String, ArrayList<Schiff>>();
+		for(int i =0; i<mainController.getSpieler().length;i++){
+			mainController.getSpieler()[i].createSpielfeld(40);
+			tempSchiffe = new ArrayList<Schiff>();
+			for(int j=0;j<anzahlZerstoerer;j++){
+				tempSchiffe.add(new Zerstoerer());
 			}
-			
-			schiffe = new ArrayList<String>();
-			
-			ArrayList<Schiff> tempSchiffe;
-			for (int j = 0; j < mainController.getSpieler().length; j++){
-				tempSchiffe = new ArrayList<Schiff>();
-				for(int i=0;i<anzahlZerstoerer;i++){
-					tempSchiffe.add(new Zerstoerer());
-				}
-				for(int i=0;i<anzahlFregatte;i++){
-					tempSchiffe.add(new Fregatte());
-				}
-				for(int i=0;i<anzahlKorvette;i++){
-					tempSchiffe.add(new Korvette());
-				}
-				for(int i=0;i<anzahlUboot;i++){
-					tempSchiffe.add(new UBoot());
-				}
-				mainController.getSpieler()[j].getSpielfeld().setSchiffe(tempSchiffe);
-				tempSchiffe = null;
+			for(int j=0;j<anzahlFregatte;j++){
+				tempSchiffe.add(new Fregatte());
 			}
+			for(int j=0;j<anzahlKorvette;j++){
+				tempSchiffe.add(new Korvette());
+			}
+			for(int j=0;j<anzahlUboot;j++){
+				tempSchiffe.add(new UBoot());
+			}
+			schiffe.put(mainController.getSpieler()[i].getName(), tempSchiffe);
+			tempSchiffe = null;
+		}
 	}
 	
 }

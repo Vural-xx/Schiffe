@@ -157,7 +157,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		}
 		if(mainController.getAusgewähltesSchiff() == null){
 			JOptionPane.showMessageDialog(null, "Bitte wählen Sie ein Schiff welches Sie setzen wollen.");
-		}else if(mainController.getCurrentSpieler().getSpielfeld().getAnzahlUngesetzteSchiffe(mainController.getAusgewähltesSchiff().getClass().getCanonicalName()) == 0){
+		}else if(mainController.getSchiffeSetzenController().getAnzahlUngesetzteSchiffe(mainController.getAusgewähltesSchiff().getName()) == 0){
 			JOptionPane.showMessageDialog(null, "Bitte wählen Sie ein anderes Schiff.");
 		}else{
 			int laenge = mainController.getAusgewähltesSchiff().getLaenge();
