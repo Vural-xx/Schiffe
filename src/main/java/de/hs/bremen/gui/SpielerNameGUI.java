@@ -121,12 +121,15 @@ public class SpielerNameGUI extends JPanel implements DocumentListener  {
 				weiter.setEnabled(false);
 			}
 		}
-			if(counter==spieler){
+		
+		if(counter==spieler){
 			weiter.setEnabled(true);
-			}
+		}
 	}
 
 
-	
+/*	public boolean spielerNameVergeben(String name){
+		for(int i =0; i< spieler.length; i++){
+			if(spieler[i] != null && spieler[i].getName().equals(name)){*/
 
 }
