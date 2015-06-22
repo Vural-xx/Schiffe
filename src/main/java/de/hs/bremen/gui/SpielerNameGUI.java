@@ -114,13 +114,14 @@ public class SpielerNameGUI extends JPanel implements DocumentListener  {
 	
 	public void pruefen() {
 		int counter=0;
+		weiter.setEnabled(false);
 		for(int i=0; i< spieler; i++){
-			if(!spielerEingabe[i].getText().equals("")){
+			for(int j=0; j< spieler; j++){
+			if(i!=j && !spielerEingabe[i].getText().equals("") && !spielerEingabe[i].getText().equals(spielerEingabe[j].getText())){
 				counter=counter+1;
-			} else if(spielerEingabe[i].getText().equals("")){
-				weiter.setEnabled(false);
+				
 			}
-		}
+		}}
 		
 		if(counter==spieler){
 			weiter.setEnabled(true);
