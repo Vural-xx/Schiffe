@@ -96,8 +96,6 @@ public class RundenGUI extends JPanel {
 		container1.add(Box.createVerticalGlue());
 		container1.add(Box.createVerticalGlue());
 		container1.add(Box.createVerticalGlue());
-		container1.add(Box.createVerticalGlue());
-		container1.add(Box.createVerticalGlue());
 		textGetroffen = new JLabel("Rot für getroffen!");
 		textGetroffen.setForeground(Color.RED);
 		container1.add(textGetroffen);
