@@ -11,6 +11,7 @@ import de.hs.bremen.gui.SchiffeAuswahlGUI;
 import de.hs.bremen.gui.SpielerAuswahlGUI;
 import de.hs.bremen.gui.SpielerNameGUI;
 import de.hs.bremen.gui.SpielfeldGroeßeGUI;
+import de.hs.bremen.model.ComputerGegner;
 import de.hs.bremen.model.Fregatte;
 import de.hs.bremen.model.Korvette;
 import de.hs.bremen.model.Schiff;
@@ -26,6 +27,7 @@ public class EinstellungController {
 	private SchiffeAuswahlGUI schiffeAuswahlGUI;
 	private KiAuswahlGUI kiAuswahlGUI;
 	private Spieler[] spieler;
+	private ComputerGegner[] computerGegner;
 	private int spielfeldGroesse;
 	private HashMap<String, ArrayList<Schiff>> schiffe;
 	
@@ -64,6 +66,11 @@ public class EinstellungController {
 	class KiAnzahlListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			tempComputerGegner();
+			mainController.setKiGegner(computerGegner);
+			for (int j=0; j< computerGegner.length;j++){
+				System.out.println(mainController.getKiGegner()[j].getName());
+			}
 			mainController.getMainFrame().remove(kiAuswahlGUI);
 			spielerNameGUI.setActionListener(new SpielerNameListener());
 			mainController.getMainFrame().add(spielerNameGUI);
@@ -118,6 +125,15 @@ public class EinstellungController {
 		spieler[0].setIstDran(true);
 		return spieler;
 		
+	}
+	
+	private ComputerGegner[] tempComputerGegner(){
+		computerGegner= new ComputerGegner[kiAuswahlGUI.getSpielerAnzahl()];
+		for(int i=0; i< computerGegner.length; i++){
+			computerGegner[i]= new ComputerGegner("Computer"+(i+1));
+		}
+		
+		return computerGegner;
 	}
 	
 	public int tempSpielfeldgroesse(){

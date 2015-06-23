@@ -1,40 +1,11 @@
 package de.hs.bremen.model;
 
-public class ComputerGegner {
-
-	
-	private String ComputerName= "KIGegner";
-	
-	private Spielfeld ComputerSpielfeld;
-	private Spielfeld ComputerSpielfeldPublic;
+public class ComputerGegner extends actor {
 	
 	
-	public Spielfeld getComputerSpielfeld() {
-		return ComputerSpielfeld;
+	public ComputerGegner(String name){
+		super(name);
 	}
-	public void setComputerSpielfeld(Spielfeld computerSpielfeld) {
-		ComputerSpielfeld = computerSpielfeld;
-	}
-
-
-	
-	public Spielfeld getComputerSpielfeldPublic() {
-		return ComputerSpielfeldPublic;
-	}
-	public void setComputerSpielfeldPublic(Spielfeld computerSpielfeldPublic) {
-		ComputerSpielfeldPublic = computerSpielfeldPublic;
-	}
-	
-	
-	public ComputerGegner(String ComputerName){
-		this.ComputerName= ComputerName;
-	}
-	
-	public String getName() {
-		return ComputerName;
-	}
-	
-	
 	
 	
 	

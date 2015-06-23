@@ -20,7 +20,7 @@ public class KiAuswahlGUI extends JPanel implements ActionListener {
 	private JButton computer6;
 	
 	private JButton weiter;
-	private int spielerAnzahl;
+	private int kiAnzahl;
 	
 	private JPanel fuellcontainer1;
 	private JPanel container1_inhalt1;
@@ -34,10 +34,10 @@ public class KiAuswahlGUI extends JPanel implements ActionListener {
 	FlowLayout flowlayout= new FlowLayout();
 	
 	public int getSpielerAnzahl() {
-		return spielerAnzahl;
+		return kiAnzahl;
 	}
 	public void setSpielerAnzahl(int spielerAnzahl) {
-		this.spielerAnzahl = spielerAnzahl;
+		this.kiAnzahl = spielerAnzahl;
 	}
 	
 	
@@ -162,7 +162,7 @@ public class KiAuswahlGUI extends JPanel implements ActionListener {
 	}
 	
 	public int auswahlZahlSpieler(int i){
-		spielerAnzahl=i;
+		kiAnzahl=i;
 		return i;
 	}
 	
