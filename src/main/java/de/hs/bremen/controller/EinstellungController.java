@@ -27,7 +27,6 @@ public class EinstellungController {
 	private SchiffeAuswahlGUI schiffeAuswahlGUI;
 	private KiAuswahlGUI kiAuswahlGUI;
 	private Spieler[] spieler;
-	private ComputerGegner[] computerGegner;
 	private int spielfeldGroesse;
 	private HashMap<String, ArrayList<Schiff>> schiffe;
 	
