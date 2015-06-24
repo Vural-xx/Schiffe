@@ -52,7 +52,7 @@ public class RundenGUI extends JPanel {
 		for(int i = 0; i< mainController.getSpieler().length; i++){
 			if(!mainController.getSpieler()[i].isIstDran()){
 				spielerfeld2[i] = new SpielerfeldGUI(375, 15,mainController,Spielfeldmodus.GEGNER);
-				spielerfeld2[i].setSpieler(mainController.getSpieler()[i]);
+				spielerfeld2[i].setGegner(mainController.getSpieler()[i]);
 				spielerfeld2[i].drawGegnerSpielfeld();
 				tab.addTab(mainController.getSpieler()[i].getName(), spielerfeld2[i]);
 			}

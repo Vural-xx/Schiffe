@@ -33,7 +33,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	private int spielfeldGroesse;
 	private int feldgroesse;
 	private boolean horizontal = true;
-	private Spieler spieler;
+	private Spieler gegner;
 
 	public SpielerfeldGUI(int spielfeldGroesse, int feldgroesse) {
 		this.spielfeldGroesse = spielfeldGroesse;
@@ -95,12 +95,12 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		squares.add(rect);
 	}
 	
-	public Spieler getSpieler() {
-		return spieler;
+	public Spieler getGegner() {
+		return gegner;
 	}
 
-	public void setSpieler(Spieler spieler) {
-		this.spieler = spieler;
+	public void setGegner(Spieler gegner) {
+		this.gegner = gegner;
 	}
 
 
@@ -137,12 +137,15 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	}
 	
 	public void drawGegnerSpielfeld(){
-		Feld[][] felder = spieler.getSpielfeldPublic().getFelder();
+		Feld[][] felder = gegner.getSpielfeldPublic().getFelder();
 		for(int i = 0 ; i < felder.length; i++){
 			for (int j = 0 ; j < felder[i].length; j++){
+				if(i==0 && j ==0 || i==1 && j==1){
+					System.out.println(felder[i][j].getFeldstatus());
+				}
 				if(felder[i][j].getFeldstatus() != Feldstatus.WASSER){
-					fillSquare(((felder[i][j].getPosition().getPositonX()-1)*getFeldgroesse())+1, ((felder[i][j].getPosition().getPositionY()-1)*getFeldgroesse())+1, getFeldgroesse()-2, getFeldgroesse()-2, felder[i][j].getGuiInhalt());
-				}	
+					fillSquare(((felder[i][j].getPosition().getPositonX()-1)*getFeldgroesse())+1, ((felder[i][j].getPosition().getPositionY()-1)*getFeldgroesse())+1, getFeldgroesse()-2, getFeldgroesse()-2,felder[i][j].getGuiInhalt());
+				}
 		    }
 		}
 		repaint();
@@ -189,13 +192,15 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 			if(mouseButton == 1 && innerhalbSpielfeld(xPosition,yPosition,feuerstaerke)){
 				for (int i = 0; i < feuerstaerke; i++){
 					positionen[i] = new Position((xPosition+i)+1, yPosition+1);
-					getroffen = spieler.getSpielfeld().getSchiffByPosition(new Position(xPosition+i, yPosition+1));
+					getroffen = gegner.getSpielfeld().getSchiffByPosition(new Position(xPosition+i+1, yPosition+1));
+					System.out.println("X = " + xPosition+i + " " + yPosition+1);
 					fillSquare(((i+xPosition)*getFeldgroesse())+1,(yPosition*getFeldgroesse())+1,getFeldgroesse()-2,getFeldgroesse()-2,mainController.getAusgewähltesSchiff().getFarbe());
 				}
 				if(getroffen != null){
-					JOptionPane.showMessageDialog(null, "Sie haben ein Schiff von Spieler " + spieler.getName()+ " getroffen");
+					JOptionPane.showMessageDialog(null, "Sie haben ein Schiff von Spieler " + gegner.getName()+ " getroffen");
 				}
-				mainController.getAusgewähltesSchiff().feuern(positionen, spieler.getSpielfeldPublic());
+				mainController.getAusgewähltesSchiff().feuern(positionen, gegner.getSpielfeldPublic());
+				gegner.trefferUebertragung();
 				mainController.getRundenController().gefeuert();
 			}
 		}
