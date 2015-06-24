@@ -16,6 +16,7 @@ import de.hs.bremen.enums.Feldstatus;
 import de.hs.bremen.enums.Spielfeldmodus;
 import de.hs.bremen.gui.shapes.FeldShape;
 import de.hs.bremen.gui.shapes.Squares;
+import de.hs.bremen.model.Actor;
 import de.hs.bremen.model.Feld;
 import de.hs.bremen.model.Position;
 import de.hs.bremen.model.Schiff;
@@ -33,7 +34,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	private int spielfeldGroesse;
 	private int feldgroesse;
 	private boolean horizontal = true;
-	private Spieler gegner;
+	private Actor gegner;
 
 	public SpielerfeldGUI(int spielfeldGroesse, int feldgroesse) {
 		this.spielfeldGroesse = spielfeldGroesse;
@@ -95,11 +96,11 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		squares.add(rect);
 	}
 	
-	public Spieler getGegner() {
+	public Actor getGegner() {
 		return gegner;
 	}
 
-	public void setGegner(Spieler gegner) {
+	public void setGegner(Actor gegner) {
 		this.gegner = gegner;
 	}
 

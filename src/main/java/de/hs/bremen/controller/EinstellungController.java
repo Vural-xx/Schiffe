@@ -11,6 +11,7 @@ import de.hs.bremen.gui.SchiffeAuswahlGUI;
 import de.hs.bremen.gui.SpielerAuswahlGUI;
 import de.hs.bremen.gui.SpielerNameGUI;
 import de.hs.bremen.gui.SpielfeldGroeßeGUI;
+import de.hs.bremen.model.Actor;
 import de.hs.bremen.model.ComputerGegner;
 import de.hs.bremen.model.Fregatte;
 import de.hs.bremen.model.Korvette;
@@ -26,7 +27,7 @@ public class EinstellungController {
 	private SpielfeldGroeßeGUI spielfeldGroeßeGUI;
 	private SchiffeAuswahlGUI schiffeAuswahlGUI;
 	private KiAuswahlGUI kiAuswahlGUI;
-	private Spieler[] spieler;
+	private Actor[] spieler;
 	private int spielfeldGroesse;
 	private HashMap<String, ArrayList<Schiff>> schiffe;
 	
@@ -112,21 +113,20 @@ public class EinstellungController {
 		
 	}
 	
-	private Spieler[] tempSpieler(){
-		spieler = new Spieler[spielerAuswahlGUI.getSpielerAnzahl()+kiAuswahlGUI.getSpielerAnzahl()];
+	private void tempSpieler(){
+		spieler = new Actor[spielerAuswahlGUI.getSpielerAnzahl()+kiAuswahlGUI.getSpielerAnzahl()];
 		for(int k=0; k< spieler.length; k++){
 			for (int i=0; i< spielerAuswahlGUI.getSpielerAnzahl(); i++){	
 				spieler[i]= new Spieler(spielerNameGUI.spielerEingabe[i].getText());
 				spieler[i].setSpielerart(Spielerart.MENSCH);
 			}
 			for(int j=0; j <kiAuswahlGUI.getSpielerAnzahl(); j++ ){
-				spieler[j+spielerAuswahlGUI.getSpielerAnzahl()]= new Spieler("Computer"+(j+1));
+				spieler[j+spielerAuswahlGUI.getSpielerAnzahl()]= new ComputerGegner("Computer"+(j+1));
 				spieler[j+spielerAuswahlGUI.getSpielerAnzahl()].setSpielerart(Spielerart.KI);
 			}
 		}
 		
 		spieler[0].setIstDran(true);
-		return spieler;
 		
 	}
 	
@@ -149,7 +149,7 @@ public class EinstellungController {
 		ArrayList<Schiff> tempSchiffe;
 		schiffe = new HashMap<String, ArrayList<Schiff>>();
 		for(int i =0; i<mainController.getSpieler().length;i++){
-			mainController.getSpieler()[i].createSpielfeld(40);
+			mainController.getSpieler()[i].createSpielfeld(20);
 			tempSchiffe = new ArrayList<Schiff>();
 			for(int j=0;j<anzahlZerstoerer;j++){
 				tempSchiffe.add(new Zerstoerer());

@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import de.hs.bremen.enums.Spielerart;
 import de.hs.bremen.gui.MainFrame;
 import de.hs.bremen.gui.SchiffSetzenGUI;
+import de.hs.bremen.model.ComputerGegner;
 import de.hs.bremen.model.Schiff;
 
 public class SchiffeSetzenController {
@@ -72,7 +73,14 @@ public class SchiffeSetzenController {
 				if(mainController.getCurrentSpieler().getSpielerart() == Spielerart.MENSCH){
 					mainController.startSchiffeSetzen();
 				}else{
-					
+					ComputerGegner c = (ComputerGegner) mainController.getCurrentSpieler();
+					c.schiffeSetzen(mainController.getEinstellungController().getSchiffe().get(c.getName()));
+					if(mainController.lastRundenSpieler()){
+						mainController.nextSpieler();
+						JOptionPane.showMessageDialog(null, "Alle Spieler waren an der Reihe, nun gehts los! " + mainController.getCurrentSpieler().getName() + " beginnt!");
+						mainController.getMainFrame().remove(schiffSetzenGui);
+						mainController.startRunden();
+					}
 				}
 				
 				

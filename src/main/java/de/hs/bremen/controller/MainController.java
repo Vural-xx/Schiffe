@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 
 import de.hs.bremen.abstracts.AbstractController;
 import de.hs.bremen.gui.MainFrame;
+import de.hs.bremen.model.Actor;
 import de.hs.bremen.model.Schiff;
 import de.hs.bremen.model.Spieler;
 
@@ -81,8 +82,8 @@ public class MainController extends AbstractController {
 	}
 	
 	
-	public Spieler getCurrentSpieler(){
-		Spieler spieler = null;
+	public Actor getCurrentSpieler(){
+		Actor spieler = null;
 		for(int i = 0 ; i < getSpieler().length; i++){
 			if(getSpieler()[i].isIstDran()){
 				spieler = getSpieler()[i];
@@ -91,6 +92,19 @@ public class MainController extends AbstractController {
 		return spieler;
 	}
 	
+	public EinstellungController getEinstellungController() {
+		return einstellungController;
+	}
+
+	public void setEinstellungController(EinstellungController einstellungController) {
+		this.einstellungController = einstellungController;
+	}
+
+	public void setSchiffeSetzenController(
+			SchiffeSetzenController schiffeSetzenController) {
+		this.schiffeSetzenController = schiffeSetzenController;
+	}
+
 	public int getCurrentSpielerIndex(){
 		int spieler = 0;
 		for(int i = 0 ; i < getSpieler().length; i++){
