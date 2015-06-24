@@ -9,6 +9,7 @@ import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import de.hs.bremen.enums.Spielerart;
 import de.hs.bremen.gui.MainFrame;
 import de.hs.bremen.gui.SchiffSetzenGUI;
 import de.hs.bremen.model.Schiff;
@@ -68,7 +69,13 @@ public class SchiffeSetzenController {
 				mainController.nextSpieler();
 				mainController.setAusgewähltesSchiff(null);
 				JOptionPane.showMessageDialog(null, mainController.getCurrentSpieler().getName() + " ist an der Reihe");
-				mainController.startSchiffeSetzen();
+				if(mainController.getCurrentSpieler().getSpielerart() == Spielerart.MENSCH){
+					mainController.startSchiffeSetzen();
+				}else{
+					
+				}
+				
+				
 			}
 		}
 		
