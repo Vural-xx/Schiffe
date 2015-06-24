@@ -7,7 +7,6 @@ import java.util.HashMap;
 
 import de.hs.bremen.enums.Spielerart;
 import de.hs.bremen.gui.KiAuswahlGUI;
-import de.hs.bremen.gui.SchiffSetzenGUI;
 import de.hs.bremen.gui.SchiffeAuswahlGUI;
 import de.hs.bremen.gui.SpielerAuswahlGUI;
 import de.hs.bremen.gui.SpielerNameGUI;
@@ -67,11 +66,6 @@ public class EinstellungController {
 	class KiAnzahlListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			tempComputerGegner();
-			mainController.setKiGegner(computerGegner);
-			for (int j=0; j< computerGegner.length;j++){
-				System.out.println(mainController.getKiGegner()[j].getName());
-			}
 			mainController.getMainFrame().remove(kiAuswahlGUI);
 			spielerNameGUI.setActionListener(new SpielerNameListener());
 			mainController.getMainFrame().add(spielerNameGUI);
@@ -119,24 +113,21 @@ public class EinstellungController {
 	}
 	
 	private Spieler[] tempSpieler(){
-		spieler = new Spieler[spielerAuswahlGUI.getSpielerAnzahl()];
-		for (int i=0; i< spieler.length; i++){	
-			spieler[i]= new Spieler(spielerNameGUI.spielerEingabe[i].getText());
-			spieler[i].setSpielerart(Spielerart.MENSCH);
+		spieler = new Spieler[spielerAuswahlGUI.getSpielerAnzahl()+kiAuswahlGUI.getSpielerAnzahl()];
+		for(int k=0; k< spieler.length; k++){
+			for (int i=0; i< spielerAuswahlGUI.getSpielerAnzahl(); i++){	
+				spieler[i]= new Spieler(spielerNameGUI.spielerEingabe[i].getText());
+				spieler[i].setSpielerart(Spielerart.MENSCH);
+			}
+			for(int j=0; j <kiAuswahlGUI.getSpielerAnzahl(); j++ ){
+				spieler[j+spielerAuswahlGUI.getSpielerAnzahl()]= new Spieler("Computer"+(j+1));
+				spieler[j+spielerAuswahlGUI.getSpielerAnzahl()].setSpielerart(Spielerart.KI);
+			}
 		}
+		
 		spieler[0].setIstDran(true);
 		return spieler;
 		
-	}
-	
-	private ComputerGegner[] tempComputerGegner(){
-		computerGegner= new ComputerGegner[kiAuswahlGUI.getSpielerAnzahl()];
-		for(int i=0; i< computerGegner.length; i++){
-			computerGegner[i]= new ComputerGegner("Computer"+(i+1));
-			computerGegner[i].setSpielerart(Spielerart.KI);
-		}
-		
-		return computerGegner;
 	}
 	
 	public int tempSpielfeldgroesse(){

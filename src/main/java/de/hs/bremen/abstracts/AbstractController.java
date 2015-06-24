@@ -8,15 +8,8 @@ import de.hs.bremen.model.Spieler;
 
 public class AbstractController {
 	private Spieler[] spieler;
-	private ComputerGegner[] kiGegner;
 	private MainFrame mainFrame;
 	
-	public ComputerGegner[] getKiGegner() {
-		return kiGegner;
-	}
-	public void setKiGegner(ComputerGegner[] kiGegner) {
-		this.kiGegner = kiGegner;
-	}
 	public Spieler[] getSpieler() {
 		return spieler;
 	}
