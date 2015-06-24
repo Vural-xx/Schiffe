@@ -12,7 +12,7 @@ import de.hs.bremen.helper.ConsoleColor;
  * @author vural
  *
  */
-public class Spieler extends actor {
+public class Spieler extends Actor {
 	
 	
 	public Spieler(String name){

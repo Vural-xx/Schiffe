@@ -4,7 +4,7 @@ import de.hs.bremen.enums.Feldstatus;
 import de.hs.bremen.enums.Spielerart;
 import de.hs.bremen.helper.ConsoleColor;
 
-public abstract class actor {
+public abstract class Actor {
 	/**
 	 * Name des Spielers.
 	 */
@@ -44,9 +44,9 @@ public abstract class actor {
 	 * Konstruktor
 	 * @param name: Name des Spielers.
 	 */
-	public actor(){
+	public Actor(){
 	}
-	public actor(String name){
+	public Actor(String name){
 		this.name = name;
 	}
 	

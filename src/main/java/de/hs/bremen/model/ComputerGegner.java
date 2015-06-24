@@ -1,6 +1,6 @@
 package de.hs.bremen.model;
 
-public class ComputerGegner extends actor {
+public class ComputerGegner extends Actor {
 	
 	
 	public ComputerGegner(String name){
