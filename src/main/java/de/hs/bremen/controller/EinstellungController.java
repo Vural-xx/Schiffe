@@ -83,8 +83,8 @@ public class EinstellungController {
 				System.out.println(mainController.getSpieler()[j].getName());
 			}
 			mainController.getMainFrame().remove(spielerNameGUI);
-			schiffeAuswahlGUI.setActionListener(new SchiffAnzahlListener());
-			mainController.getMainFrame().add(schiffeAuswahlGUI);
+			spielfeldGroeßeGUI.setActionListener(new SpielfeldGroeßeListener());
+			mainController.getMainFrame().add(spielfeldGroeßeGUI);
 			mainController.getMainFrame().revalidate();
 			
 		}
@@ -96,9 +96,7 @@ public class EinstellungController {
 			tempArraySchiff();
 			System.out.println(schiffe);
 			mainController.getMainFrame().remove(schiffeAuswahlGUI);
-			spielfeldGroeßeGUI.setActionListener(new SpielfeldGroeßeListener());
-			mainController.getMainFrame().add(spielfeldGroeßeGUI);
-			mainController.getMainFrame().revalidate();
+			mainController.startSchiffeSetzen();
 		}
 		
 	}
@@ -108,7 +106,9 @@ public class EinstellungController {
 		public void actionPerformed(ActionEvent e) {
 			mainController.getMainFrame().remove(spielfeldGroeßeGUI);
 			mainController.setSpielfeldgroesse(tempSpielfeldgroesse());
-			mainController.startSchiffeSetzen();
+			schiffeAuswahlGUI.setActionListener(new SchiffAnzahlListener());
+			mainController.getMainFrame().add(schiffeAuswahlGUI);
+			mainController.getMainFrame().revalidate();
 		}
 		
 	}
@@ -149,7 +149,7 @@ public class EinstellungController {
 		ArrayList<Schiff> tempSchiffe;
 		schiffe = new HashMap<String, ArrayList<Schiff>>();
 		for(int i =0; i<mainController.getSpieler().length;i++){
-			mainController.getSpieler()[i].createSpielfeld(20);
+			mainController.getSpieler()[i].createSpielfeld(mainController.getSpielfeldgroesse());
 			tempSchiffe = new ArrayList<Schiff>();
 			for(int j=0;j<anzahlZerstoerer;j++){
 				tempSchiffe.add(new Zerstoerer());
