@@ -123,7 +123,7 @@ public class SchiffSetzenGUI extends JPanel{
 		container6.setLayout(new BoxLayout(container6, BoxLayout.PAGE_AXIS));
 		spielerfeld = new SpielerfeldGUI[mainController.getSpieler().length];
 		textLabel4 = new JLabel(mainController.getCurrentSpieler().getName() +" ist dran. Bitte setze deine Schiffe");
-		spielerfeld[mainController.getCurrentSpielerIndex()] = new SpielerfeldGUI(375, 15,mainController,Spielfeldmodus.SETZEN);
+		spielerfeld[mainController.getCurrentSpielerIndex()] = new SpielerfeldGUI(mainController.getSpielfeldgroesse()*15, 15,mainController,Spielfeldmodus.SETZEN);
 		container6.add(textLabel4);
 		container6.add(spielerfeld[mainController.getCurrentSpielerIndex()]);
 		container6.setBorder(BorderFactory.createEmptyBorder(30, 250, 30, 30));//(top, left, bottom, right)

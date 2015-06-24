@@ -16,7 +16,16 @@ public class MainController extends AbstractController {
 	private RundenController rundenController;
 	private SchiffeSetzenController schiffeSetzenController;
 	private Schiff ausgewähltesSchiff;
+	private int spielfeldgroesse;
 	
+	public int getSpielfeldgroesse() {
+		return spielfeldgroesse;
+	}
+
+	public void setSpielfeldgroesse(int spielfeldgroesse) {
+		this.spielfeldgroesse = spielfeldgroesse;
+	}
+
 	public MainController() {
 		super();
 		// TODO Auto-generated constructor stub

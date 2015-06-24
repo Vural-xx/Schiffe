@@ -106,6 +106,7 @@ public class EinstellungController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mainController.getMainFrame().remove(spielfeldGroeßeGUI);
+			mainController.setSpielfeldgroesse(tempSpielfeldgroesse());
 			mainController.startSchiffeSetzen();
 		}
 		

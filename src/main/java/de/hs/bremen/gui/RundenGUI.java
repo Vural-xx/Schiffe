@@ -44,14 +44,14 @@ public class RundenGUI extends JPanel {
 	private void initComponents(){
 		textLabel1 = new JLabel("Wähle das Schiff zum feuern");
 		textLabel2 = new JLabel(mainController.getCurrentSpieler().getName());
-		spielerfeld = new SpielerfeldGUI(375, 15,mainController, Spielfeldmodus.SPIELER);
+		spielerfeld = new SpielerfeldGUI(mainController.getSpielfeldgroesse()*15, 15,mainController, Spielfeldmodus.SPIELER);
 		spielerfeld.drawSpielfeld();
 		
 		tab = new JTabbedPane();
 		SpielerfeldGUI spielerfeld2[] = new SpielerfeldGUI[mainController.getSpieler().length];
 		for(int i = 0; i< mainController.getSpieler().length; i++){
 			if(!mainController.getSpieler()[i].isIstDran()){
-				spielerfeld2[i] = new SpielerfeldGUI(375, 15,mainController,Spielfeldmodus.GEGNER);
+				spielerfeld2[i] = new SpielerfeldGUI(mainController.getSpielfeldgroesse()*15, 15,mainController,Spielfeldmodus.GEGNER);
 				spielerfeld2[i].setGegner(mainController.getSpieler()[i]);
 				spielerfeld2[i].drawGegnerSpielfeld();
 				tab.addTab(mainController.getSpieler()[i].getName(), spielerfeld2[i]);
