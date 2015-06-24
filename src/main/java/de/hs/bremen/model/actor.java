@@ -1,6 +1,7 @@
 package de.hs.bremen.model;
 
 import de.hs.bremen.enums.Feldstatus;
+import de.hs.bremen.enums.Spielerart;
 import de.hs.bremen.helper.ConsoleColor;
 
 public abstract class actor {
@@ -16,6 +17,8 @@ public abstract class actor {
 	 */
 	private Spielfeld spielfeld;
 	
+	private Spielerart spielerart;
+	
 	/**
 	 * Öffentliches Spielfeld jedes Spielers
 	 */
@@ -29,6 +32,13 @@ public abstract class actor {
 		this.spielfeldPublic = spielfeldPublic;
 	}
 
+	public Spielerart getSpielerart() {
+		return spielerart;
+	}
+
+	public void setSpielerart(Spielerart spielerart) {
+		this.spielerart = spielerart;
+	}
 	
 	/**
 	 * Konstruktor

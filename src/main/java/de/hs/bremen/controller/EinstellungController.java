@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import de.hs.bremen.enums.Spielerart;
 import de.hs.bremen.gui.KiAuswahlGUI;
 import de.hs.bremen.gui.SchiffSetzenGUI;
 import de.hs.bremen.gui.SchiffeAuswahlGUI;
@@ -121,6 +122,7 @@ public class EinstellungController {
 		spieler = new Spieler[spielerAuswahlGUI.getSpielerAnzahl()];
 		for (int i=0; i< spieler.length; i++){	
 			spieler[i]= new Spieler(spielerNameGUI.spielerEingabe[i].getText());
+			spieler[i].setSpielerart(Spielerart.MENSCH);
 		}
 		spieler[0].setIstDran(true);
 		return spieler;
@@ -131,6 +133,7 @@ public class EinstellungController {
 		computerGegner= new ComputerGegner[kiAuswahlGUI.getSpielerAnzahl()];
 		for(int i=0; i< computerGegner.length; i++){
 			computerGegner[i]= new ComputerGegner("Computer"+(i+1));
+			computerGegner[i].setSpielerart(Spielerart.KI);
 		}
 		
 		return computerGegner;
