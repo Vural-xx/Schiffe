@@ -32,38 +32,49 @@ public class RundenController {
 	
 	public void gefeuert(){
 		this.mainController.getMainFrame().remove(rundenGui);
-		if(mainController.getNextSpielerIndex() == 0){
-			mainController.wartezeitVerringern();
+		if(ausgeschieden()){
+			rausschmeissen();
 		}
-		mainController.nextSpieler();
-		
-		if(mainController.getCurrentSpieler().schiffeOhneWartezeit()){
-			rundenwechselGUI = new RundenwechselGUI(mainController);
-			this.mainController.getMainFrame().add(rundenwechselGUI);
-			this.mainController.getMainFrame().revalidate();
-			JOptionPane.showMessageDialog(mainController.getMainFrame(), mainController.getCurrentSpieler().getName() + " ist an der Reihe");
-			rundenGui = new RundenGUI(mainController);
-			rundenGui.setActionListener( new SchiffButtonClickedListener());
-			this.mainController.getMainFrame().add(rundenGui);
-			this.mainController.getMainFrame().revalidate();
+		if(mainController.getSpieler().length>1){
+			if(mainController.getNextSpielerIndex() == 0){
+				mainController.wartezeitVerringern();
+			}
+			mainController.nextSpieler();
+			
+			if(mainController.getCurrentSpieler().schiffeOhneWartezeit()){
+				rundenwechselGUI = new RundenwechselGUI(mainController);
+				this.mainController.getMainFrame().add(rundenwechselGUI);
+				this.mainController.getMainFrame().revalidate();
+				JOptionPane.showMessageDialog(mainController.getMainFrame(), mainController.getCurrentSpieler().getName() + " ist an der Reihe");
+				rundenGui = new RundenGUI(mainController);
+				rundenGui.setActionListener( new SchiffButtonClickedListener());
+				this.mainController.getMainFrame().add(rundenGui);
+				this.mainController.getMainFrame().revalidate();
+			}else{
+				JOptionPane.showMessageDialog(null,mainController.getCurrentSpieler().getName()+" hat keine Schiffe ohne Wartezeit und muss die Runde aussetzen. Spieler " + mainController.getSpieler()[mainController.getNextSpielerIndex()].getName()+" ist dran");
+				gefeuert();
+			}
 		}else{
-			JOptionPane.showMessageDialog(null,mainController.getCurrentSpieler().getName()+" hat keine Schiffe ohne Wartezeit und muss die Runde aussetzen. Spieler " + mainController.getSpieler()[mainController.getNextSpielerIndex()].getName()+" ist dran");
-			gefeuert();
-		}	
+			endeGui = new EndeGUI();
+			this.mainController.getMainFrame().add(endeGui);
+			this.mainController.getMainFrame().revalidate();
+		}
 	}
 	
 	public void rausschmeissen(){
 		ArrayList<Actor> tempSpieler;
+		Actor[] spieler;
 		tempSpieler=null;
 		tempSpieler = new ArrayList<Actor>();
 		for(int i = 0;i<mainController.getSpieler().length; i++){
 			if(!mainController.getSpieler()[i].ausgeschieden()){
 				tempSpieler.add(mainController.getSpieler()[i]);
 			}else{
-				JOptionPane.showMessageDialog(mainController.getMainFrame(), mainController.getCurrentSpieler().getName() + " ist ausgeschieden");
+				JOptionPane.showMessageDialog(mainController.getMainFrame(), mainController.getSpieler()[i].getName() + " ist ausgeschieden");
 			}	
 		}
-		mainController.setSpieler((Actor[]) tempSpieler.toArray());
+		spieler = new Actor[tempSpieler.size()];
+		mainController.setSpieler((Actor[]) tempSpieler.toArray(spieler));
 	}
 
 	
