@@ -18,6 +18,7 @@ public class MainController extends AbstractController {
 	private SchiffeSetzenController schiffeSetzenController;
 	private Schiff ausgewähltesSchiff;
 	private int spielfeldgroesse;
+
 	
 	public int getSpielfeldgroesse() {
 		return spielfeldgroesse;
