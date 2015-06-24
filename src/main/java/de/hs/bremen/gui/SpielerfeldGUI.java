@@ -128,9 +128,12 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	}
 	
 	public void drawSpielfeld(){
-		for(Schiff s: mainController.getCurrentSpieler().getSpielfeld().getSchiffe()){
-			for(Feld f: s.getFelder()){
-				fillSquare(((f.getPosition().getPositonX()-1)*getFeldgroesse())+1, ((f.getPosition().getPositionY()-1)*getFeldgroesse())+1, getFeldgroesse()-2, getFeldgroesse()-2, s.getFarbe());
+		Feld[][] felder = mainController.getCurrentSpieler().getSpielfeld().getFelder();
+		for(int i = 0 ; i < felder.length; i++){
+			for (int j = 0 ; j < felder[i].length; j++){
+				if(felder[i][j].getFeldstatus() !=Feldstatus.WASSER){
+				fillSquare(((felder[i][j].getPosition().getPositonX()-1)*getFeldgroesse())+1, ((felder[i][j].getPosition().getPositionY()-1)*getFeldgroesse())+1, getFeldgroesse()-2, getFeldgroesse()-2, felder[i][j].getGuiInhalt());
+				}
 			}
 		}
 		repaint();
@@ -141,7 +144,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		for(int i = 0 ; i < felder.length; i++){
 			for (int j = 0 ; j < felder[i].length; j++){
 				if(i==0 && j ==0 || i==1 && j==1){
-					System.out.println(felder[i][j].getFeldstatus());
+					//System.out.println(felder[i][j].getFeldstatus());
 				}
 				if(felder[i][j].getFeldstatus() != Feldstatus.WASSER){
 					fillSquare(((felder[i][j].getPosition().getPositonX()-1)*getFeldgroesse())+1, ((felder[i][j].getPosition().getPositionY()-1)*getFeldgroesse())+1, getFeldgroesse()-2, getFeldgroesse()-2,felder[i][j].getGuiInhalt());

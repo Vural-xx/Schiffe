@@ -75,15 +75,14 @@ public class Feld implements Serializable{
 	 * @return: Inhalt des Feldes
 	 */
 	public Color getGuiInhalt() {
-		if(getFeldstatus()==Feldstatus.WASSER){
-			return Color.BLUE;
-		} else if(getFeldstatus()== Feldstatus.GETROFFEN){
+		if(getFeldstatus()== Feldstatus.GETROFFEN){
 			return Color.RED;
 		} else if (getFeldstatus()==Feldstatus.BESETZT){
-			return Color.CYAN;
-		} else {
 			return Color.BLACK;
+		} else if(getFeldstatus()==Feldstatus.VERFEHLT){
+			return Color.BLUE;
 		}
+		return null;
 	}
 	
 	/**
