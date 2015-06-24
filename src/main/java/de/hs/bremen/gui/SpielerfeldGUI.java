@@ -168,7 +168,8 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		}else{
 			int laenge = mainController.getAusgewähltesSchiff().getLaenge();
 			boolean schiffPlatzierbar = innerhalbSpielfeld(xPosition,yPosition, laenge) && mainController.getCurrentSpieler().getSpielfeld().schiffPlazierbar(mainController.getAusgewähltesSchiff(), new Position(xPosition+1, yPosition+1), ausrichtung);
-			if(mouseButton == 1 && schiffPlatzierbar){
+			if(mouseButton == 1 && schiffPlatzierbar&& !mainController.getAusgewähltesSchiff().isPlatziert()){
+				mainController.getAusgewähltesSchiff().setPlatziert(true);
 				mainController.getCurrentSpieler().getSpielfeld().platziereSchiff(mainController.getAusgewähltesSchiff(), new Position(xPosition+1, yPosition+1), horizontal);
 				for (int i = 0; i < laenge; i++){
 					if(horizontal){
@@ -180,7 +181,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 				mainController.getSchiffeSetzenController().getSchiffSetzenGui().schiffGesetzt();
 				repaint();	
 			}else if(!schiffPlatzierbar){
-				JOptionPane.showMessageDialog(null, "Bitte beachten Sie dass ihr schiff mit der vorgegebenen Länge auf das Spielfeld passen muss und jedes Schiff ein Abstand von mindestens einem Feld zu einem anderen Schiff haben muss");
+				JOptionPane.showMessageDialog(null, "Das Schiff darf hier nicht gesetzt werden. Bitte wähle einen anderen Punkt");
 			}
 		}
 	}
