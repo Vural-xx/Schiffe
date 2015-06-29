@@ -115,7 +115,12 @@ public abstract class Actor {
 	public void schiffVersenkt(Position position){
 		Schiff schiff= getSpielfeld().getSchiffByPosition(position);
 		if(schiff != null && schiff.versenkt()){
+			for(int i=0; i < schiff.getFelder().length; i++){
+				schiff.getFelder()[i].setFeldstatus(Feldstatus.VERSENKT);
+				this.getSpielfeldPublic().getFeld(schiff.getFelder()[i].getPosition().getPositonX()-1, schiff.getFelder()[i].getPosition().getPositionY()-1).setFeldstatus(Feldstatus.VERSENKT);
+			}
 			getSpielfeld().getSchiffe().remove(schiff);
+			
 			System.out.println("");
 			System.out.println(ConsoleColor.ANSI_PURPLE +"=====================================================================");
 			System.out.println("||||   Sie haben das Schiff "+ schiff.getName().toUpperCase() + " vom Spieler " + getName() + " versenkt!!!!   ||||");

@@ -4,5 +4,6 @@ public enum Feldstatus {
 	WASSER,
 	BESETZT,
 	VERFEHLT,
-	GETROFFEN
+	GETROFFEN,
+	VERSENKT
 }

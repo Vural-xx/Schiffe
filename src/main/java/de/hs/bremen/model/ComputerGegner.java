@@ -3,9 +3,11 @@ package de.hs.bremen.model;
 import java.util.ArrayList;
 
 import de.hs.bremen.controller.MainController;
+import de.hs.bremen.enums.Feldstatus;
 
 public class ComputerGegner extends Actor {
 	private Actor[] gegner;
+	private ArrayList<Position> shots;
 	
 	public ComputerGegner(String name){
 		super(name);
@@ -65,14 +67,33 @@ public class ComputerGegner extends Actor {
 	
 	public void intelligent(){
 		Actor gegner= spielerAuswahl();
-		schiffZumSchießen().feuern(new Position(randomRechnerSpalte(),randomRechnerZeile()), gegner.getSpielfeldPublic());
+		int spalte=randomRechnerSpalte();
+		int zeile= randomRechnerZeile();
+		Position position= new Position(spalte, zeile);
+		Schiff schiff= schiffZumSchießen();
+		schiff.feuern(position, gegner.getSpielfeldPublic());
+		kiFeuern(position, schiff);
 		gegner.trefferUebertragung();
 		
 	}
 	
 	public void kiFeuern(Position position, Schiff schiff){
-		
-		
+		for(int i=0; i< schiff.getFeuerstaerke(); i++){
+			shots.add(new Position(position.getPositonX()+i, position.getPositionY()));
+			
+		}
+	}
+	
+	public void getGegnerTreffer(Actor gegner){
+		shots = null;
+		shots = new ArrayList<Position>();
+		for (Feld[] f: gegner.getSpielfeldPublic().getFelder()) {
+			for (Feld ff: f) {
+				if(ff.getFeldstatus() == Feldstatus.GETROFFEN){
+					shots.add(ff.getPosition());
+				}
+	         }    
+	    }
 	}
 	
 	public Actor spielerAuswahl(){
