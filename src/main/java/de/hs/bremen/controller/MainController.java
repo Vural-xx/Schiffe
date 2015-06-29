@@ -42,6 +42,7 @@ public class MainController extends AbstractController {
 	
 	public void startRunden(){
 		rundenController = new RundenController(this);	
+		
 	}
 	
 	public void startGame(){

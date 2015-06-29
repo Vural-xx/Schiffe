@@ -79,6 +79,8 @@ public class Feld implements Serializable{
 			return Color.RED;
 		} else if (getFeldstatus()==Feldstatus.BESETZT){
 			return Color.BLACK;
+		} else if(getFeldstatus()==Feldstatus.VERSENKT){
+			return Color.GREEN;
 		} else if(getFeldstatus()==Feldstatus.VERFEHLT){
 			return Color.BLUE;
 		}

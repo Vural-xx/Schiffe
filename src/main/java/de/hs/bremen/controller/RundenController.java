@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import de.hs.bremen.enums.Spielerart;
 import de.hs.bremen.gui.EndeGUI;
 import de.hs.bremen.gui.RundenGUI;
 import de.hs.bremen.gui.RundenwechselGUI;
 import de.hs.bremen.helper.ConsoleColor;
 import de.hs.bremen.model.Actor;
+import de.hs.bremen.model.ComputerGegner;
 import de.hs.bremen.model.Schiff;
 import de.hs.bremen.model.Spieler;
 
@@ -41,7 +43,7 @@ public class RundenController {
 			}
 			mainController.nextSpieler();
 			
-			if(mainController.getCurrentSpieler().schiffeOhneWartezeit()){
+			if(mainController.getCurrentSpieler().schiffeOhneWartezeit() && mainController.getCurrentSpieler().getSpielerart()==Spielerart.MENSCH){
 				rundenwechselGUI = new RundenwechselGUI(mainController);
 				this.mainController.getMainFrame().add(rundenwechselGUI);
 				this.mainController.getMainFrame().revalidate();
@@ -50,6 +52,10 @@ public class RundenController {
 				rundenGui.setActionListener( new SchiffButtonClickedListener());
 				this.mainController.getMainFrame().add(rundenGui);
 				this.mainController.getMainFrame().revalidate();
+			} else if(mainController.getCurrentSpieler().schiffeOhneWartezeit() && mainController.getCurrentSpieler().getSpielerart()== Spielerart.KI){
+				ComputerGegner computerGegner =(ComputerGegner) mainController.getCurrentSpieler();
+				computerGegner.intelligent();
+				gefeuert();
 			}else{
 				JOptionPane.showMessageDialog(null,mainController.getCurrentSpieler().getName()+" hat keine Schiffe ohne Wartezeit und muss die Runde aussetzen. Spieler " + mainController.getSpieler()[mainController.getNextSpielerIndex()].getName()+" ist dran");
 				gefeuert();
