@@ -24,6 +24,17 @@ public abstract class Actor {
 	 */
 	private Spielfeld spielfeldPublic;
 	
+	
+	/**
+	 * Konstruktor
+	 * @param name: Name des Spielers.
+	 */
+	public Actor(){
+	}
+	public Actor(String name){
+		this.name = name;
+	}
+	
 	public Spielfeld getSpielfeldPublic() {
 		return spielfeldPublic;
 	}
@@ -40,15 +51,7 @@ public abstract class Actor {
 		this.spielerart = spielerart;
 	}
 	
-	/**
-	 * Konstruktor
-	 * @param name: Name des Spielers.
-	 */
-	public Actor(){
-	}
-	public Actor(String name){
-		this.name = name;
-	}
+
 	
 	/**
 	 * Getter Name.

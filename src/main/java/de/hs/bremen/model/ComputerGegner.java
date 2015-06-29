@@ -2,13 +2,14 @@ package de.hs.bremen.model;
 
 import java.util.ArrayList;
 
+import de.hs.bremen.controller.MainController;
+
 public class ComputerGegner extends Actor {
-	
+	private Actor[] gegner;
 	
 	public ComputerGegner(String name){
 		super(name);
 	}
-	
 	
 	
 	public int randomRechnerZeile(){
@@ -63,20 +64,36 @@ public class ComputerGegner extends Actor {
 	
 	
 	public void intelligent(){
-		/* If getroffen x y Position +2 jeweils abschießen*/
+		Actor gegner= spielerAuswahl();
+		schiffZumSchießen().feuern(new Position(randomRechnerSpalte(),randomRechnerZeile()), gegner.getSpielfeldPublic());
+		gegner.trefferUebertragung();
 		
 	}
 	
-	public static void main(String[] args){
-		ComputerGegner test= new ComputerGegner("test");
-		ArrayList<Schiff> schiffe= new ArrayList<Schiff>();
-		schiffe.add(new Zerstoerer());
-		schiffe.add(new Fregatte());
-		schiffe.add(new UBoot());
-		test.createSpielfeld(20);
-		test.getSpielfeld().setSchiffe(schiffe);
-		test.schiffZumSchießen();
+	public void kiFeuern(Position position, Schiff schiff){
+		
+		
 	}
+	
+	public Actor spielerAuswahl(){
+		int anzahlSpieler = this.gegner.length;
+		Actor gegner;
+		do {
+		gegner= this.gegner[(int)(Math.random()*anzahlSpieler)];
+		}while (gegner.getName().equals(this.getName()));
+		return gegner;
+	}
+
+
+	public Actor[] getGegner() {
+		return gegner;
+	}
+
+
+	public void setGegner(Actor[] gegner) {
+		this.gegner = gegner;
+	}
+	
 	
 	
 	

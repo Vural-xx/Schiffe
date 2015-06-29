@@ -127,6 +127,18 @@ public class EinstellungController {
 		}
 		
 		spieler[0].setIstDran(true);
+		gibGegnerAnKi();
+		
+	}
+	
+	public void gibGegnerAnKi(){
+		for(int i=0; i< spieler.length; i++ ){
+		 if(spieler[i].getSpielerart()== Spielerart.KI) {
+			 ComputerGegner computerGegner = (ComputerGegner) spieler[i];
+			 computerGegner.setGegner(spieler);
+			 computerGegner.spielerAuswahl();
+		 }
+		}
 		
 	}
 	
