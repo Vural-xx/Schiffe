@@ -50,12 +50,33 @@ public class ComputerGegner extends Actor {
 
 	}
 	
+	public Schiff schiffZumSchießen(){
+		Schiff schiff=getSpielfeld().getSchiffe().get(0);
+		for(int i=0; i <getSpielfeld().getSchiffe().size();i++){
+				if(getSpielfeld().getSchiffe().get(i).getFeuerstaerke()>schiff.getFeuerstaerke()){
+					schiff=getSpielfeld().getSchiffe().get(i);
+			}
+		}
+		System.out.println(schiff);
+		return schiff;
+	}
+	
 	
 	public void intelligent(){
 		/* If getroffen x y Position +2 jeweils abschießen*/
 		
 	}
 	
+	public static void main(String[] args){
+		ComputerGegner test= new ComputerGegner("test");
+		ArrayList<Schiff> schiffe= new ArrayList<Schiff>();
+		schiffe.add(new Zerstoerer());
+		schiffe.add(new Fregatte());
+		schiffe.add(new UBoot());
+		test.createSpielfeld(20);
+		test.getSpielfeld().setSchiffe(schiffe);
+		test.schiffZumSchießen();
+	}
 	
 	
 	
