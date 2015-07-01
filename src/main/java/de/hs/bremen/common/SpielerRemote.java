@@ -2,15 +2,20 @@ package de.hs.bremen.common;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
+import de.hs.bremen.model.Actor;
+import de.hs.bremen.model.Spieler;
 import de.hs.bremen.model.Spielfeld;
+import de.hs.bremen.model.SpielfeldPublic;
 
 public interface SpielerRemote extends Remote {
 
-	public String getName() throws RemoteException;
-	public void setName(String name) throws RemoteException;
-	
-	public Spielfeld getSpielfeldPublic() throws RemoteException;
-	public void setSpielfeldPublic(Spielfeld spielfeld) throws RemoteException;
+	public void createGame(int anzahlSpieler, Spieler spieler) throws RemoteException;
+	public void joinGame(Spieler spieler) throws RemoteException;
+	public void feuern(String name) throws RemoteException;
+	public boolean nameVergeben(String name) throws RemoteException;
+	public ArrayList<Actor> getEnemys(String spieler) throws RemoteException;
+	public void updateEnemy(Spieler spieler) throws RemoteException;
 
 }

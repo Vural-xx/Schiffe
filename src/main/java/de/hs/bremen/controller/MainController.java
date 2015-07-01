@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import de.hs.bremen.abstracts.AbstractController;
+import de.hs.bremen.enums.Spielart;
 import de.hs.bremen.gui.MainFrame;
 import de.hs.bremen.model.Actor;
 import de.hs.bremen.model.Schiff;
@@ -18,6 +19,7 @@ public class MainController extends AbstractController {
 	private SchiffeSetzenController schiffeSetzenController;
 	private Schiff ausgewähltesSchiff;
 	private int spielfeldgroesse;
+	private Spielart spielart;
 
 	
 	public int getSpielfeldgroesse() {
@@ -173,6 +175,14 @@ public class MainController extends AbstractController {
 		this.rundenController = rundenController;
 	}
 	
+	public Spielart getSpielart() {
+		return spielart;
+	}
+
+	public void setSpielart(Spielart spielart) {
+		this.spielart = spielart;
+	}
+
 	public class ZuRundeWechseln implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
