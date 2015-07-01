@@ -61,7 +61,7 @@ public class RundenController {
 				gefeuert();
 			}
 		}else{
-			endeGui = new EndeGUI();
+			endeGui = new EndeGUI(mainController.getSpieler()[0].getName());
 			this.mainController.getMainFrame().add(endeGui);
 			this.mainController.getMainFrame().revalidate();
 		}
