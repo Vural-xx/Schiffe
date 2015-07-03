@@ -1,5 +1,6 @@
 package de.hs.bremen.controller;
 
+import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.acl.LastOwnerException;
@@ -75,15 +76,13 @@ public class SchiffeSetzenController {
 				}else{
 					ComputerGegner c = (ComputerGegner) mainController.getCurrentSpieler();
 					c.schiffeSetzen(mainController.getEinstellungController().getSchiffe().get(c.getName()));
-					if(mainController.lastRundenSpieler()){
-						mainController.nextSpieler();
-						JOptionPane.showMessageDialog(null, "Alle Spieler waren an der Reihe, nun gehts los! " + mainController.getCurrentSpieler().getName() + " beginnt!");
-						mainController.getMainFrame().remove(schiffSetzenGui);
-						mainController.startRunden();
-					}
+					this.actionPerformed(new ActionEvent(e.getSource(), e.getID(), e.getActionCommand()));
 				}
-				
-				
+			}else{
+				mainController.nextSpieler();
+				JOptionPane.showMessageDialog(null, "Alle Spieler waren an der Reihe, nun gehts los! " + mainController.getCurrentSpieler().getName() + " beginnt!");
+				mainController.getMainFrame().remove(schiffSetzenGui);
+				mainController.startRunden();
 			}
 		}
 		

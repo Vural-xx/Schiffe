@@ -129,8 +129,8 @@ public class SpielfeldPrivate extends AbstractSpielfeld {
 	public boolean schiffPlazierbar(Schiff schiff, Position position, int horizontal){		
 		// Schiff würde außerhalb Spielfeld liegen
 		if((position.getPositionY() <=0 || position.getPositonX() <=0)
-			|| (horizontal == 1 && (position.getPositonX()-1 + schiff.getLaenge() > getSpielfeldgroesse()))
-			|| (horizontal == 2 && (position.getPositionY()-1 + schiff.getLaenge() > getSpielfeldgroesse()))){
+			|| (horizontal == 1 && (position.getPositonX() + schiff.getLaenge() > getSpielfeldgroesse()))
+			|| (horizontal == 2 && (position.getPositionY() + schiff.getLaenge() > getSpielfeldgroesse()))){
 				return false;
 		}
 
