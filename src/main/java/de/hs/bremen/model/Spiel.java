@@ -217,10 +217,10 @@ public class Spiel implements Serializable {
 			System.out.println("===============================");
 			System.out.println("");
 			if(spieler[i].schiffeOhneWartezeit()){
-				moeglicheAuswahl = spieler[i].getSpielfeld().getMoeglicheAuswahlSchiffMenu();
+			/*	moeglicheAuswahl = spieler[i].getSpielfeld().getMoeglicheAuswahlSchiffMenu();*/
 				System.out.println("Spieler " +spieler[i].getName()+". Bitte wählen Sie ein Schiff mit dem Sie feuern wollen.");
 				System.out.println("--------------------------------------------------------------------------");
-				System.out.println(spieler[i].getSpielfeld().getSchiffeMenuAsString(moeglicheAuswahl));
+			/*	System.out.println(spieler[i].getSpielfeld().getSchiffeMenuAsString(moeglicheAuswahl));*/
 				System.out.println("--------------------------------------------------------------------------");
 				auswahl = IO.readInt();
 				while(!moeglicheAuswahl.contains(auswahl)){
@@ -237,7 +237,7 @@ public class Spiel implements Serializable {
 					spielstandManager.speicherMenu(this);
 					System.exit(0);
 				}
-				schiff = spieler[i].getSpielfeld().getZustaendigesSchiff(auswahl);
+			/*	schiff = spieler[i].getSpielfeld().getZustaendigesSchiff(auswahl); */
 				if(spieler.length > 2){
 					gegner = spielerAuswahlMenu(spieler[i]);
 				}else if (i == 0){

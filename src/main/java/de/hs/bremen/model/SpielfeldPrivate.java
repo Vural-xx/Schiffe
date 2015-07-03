@@ -23,6 +23,19 @@ public class SpielfeldPrivate extends AbstractSpielfeld {
 	}
 	
 	/**
+	 * Getter Schiffe.
+	 * @return schiffeArray
+	 */
+	public void setSchiffe(ArrayList<Schiff> schiffe) {
+		this.schiffe = schiffe;
+	}
+
+	
+	public ArrayList<Schiff> getSchiffe() {
+		return schiffe;
+	}
+	
+	/**
 	 * Schiff wird auf dem Spielfeld platziert und bekommt diese Felder auch noch sich selber zugewiesen.
 	 * @param schiff: Schiff welches platziert werden soll.
 	 * @param position: Position auf dem das Schiff platziert werden soll.
@@ -116,8 +129,8 @@ public class SpielfeldPrivate extends AbstractSpielfeld {
 	public boolean schiffPlazierbar(Schiff schiff, Position position, int horizontal){		
 		// Schiff würde außerhalb Spielfeld liegen
 		if((position.getPositionY() <=0 || position.getPositonX() <=0)
-			|| (horizontal == 1 && (position.getPositonX()-1 + schiff.getLaenge() > getSpielfeldgroesse()))
-			|| (horizontal == 2 && (position.getPositionY()-1 + schiff.getLaenge() > getSpielfeldgroesse()))){
+			|| (horizontal == 1 && (position.getPositonX() + schiff.getLaenge() > getSpielfeldgroesse()))
+			|| (horizontal == 2 && (position.getPositionY() + schiff.getLaenge() > getSpielfeldgroesse()))){
 				return false;
 		}
 

@@ -209,7 +209,7 @@ public abstract class Schiff implements Serializable {
 	 * 
 	 * @param position
 	 */
-	public void feuern(Position position, Spielfeld spielfeld){
+	public void feuern(Position position, SpielfeldPublic spielfeld){
 		setWartezeit(feuerstaerke);
 		if(feuerstaerke > 1){
 			spielfeld.feuerPlatzieren(feuerPositionenBerechnen(position, spielfeld.getSpielfeldgroesse()));
@@ -232,7 +232,7 @@ public abstract class Schiff implements Serializable {
 	 * 
 	 * @param position
 	 */
-	public void feuern(Position[] position, Spielfeld spielfeld){
+	public void feuern(Position[] position, SpielfeldPublic spielfeld){
 		setWartezeit(feuerstaerke);
 		spielfeld.feuerPlatzieren(position);
 	}
