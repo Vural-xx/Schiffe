@@ -32,34 +32,29 @@ public class ComputerGegner extends Actor {
 		return ausrichtung;
 	}
 	
-	public void rechner(){
 
-		zeile=randomRechnerZeile();
-		spalte=randomRechnerSpalte();
-		hori=ausrichtung();
-		System.out.println("X"+spalte);
-		System.out.println("Y"+zeile);
-		System.out.println("hori"+hori);
-	}
 	public void schiffeSetzen(ArrayList <Schiff> schiffe){
 		int zeile=0;
 		int spalte=0;
 		int hori=0;
 		boolean horizontal=false;
-			if(hori == 1){
-				horizontal = true;
-			}
+		if(hori == 1){
+			horizontal = true;
+		}
 		
 		for(int i=0; i< schiffe.size(); i++){
 			System.out.println(schiffe.get(i));
-			if (getSpielfeld().schiffPlazierbar(schiffe.get(i), new Position(spalte, zeile), hori)){
-				this.getSpielfeld().platziereSchiff(schiffe.get(i), new Position(spalte, zeile), horizontal);
+			do {
+				zeile= randomRechnerZeile();
+				spalte= randomRechnerSpalte();
+				hori=ausrichtung();
+			}while(getSpielfeld().schiffPlazierbar(schiffe.get(i), new Position(spalte, zeile), hori));
+			this.getSpielfeld().platziereSchiff(schiffe.get(i), new Position(spalte, zeile), horizontal);
 					
-			} else {
-				rechner();
-			}
 		}
-	}	
+	}
+		
+	
 	
 	public Schiff schiffZumSchießen(){
 		Schiff schiff=getSpielfeld().getSchiffe().get(0);
