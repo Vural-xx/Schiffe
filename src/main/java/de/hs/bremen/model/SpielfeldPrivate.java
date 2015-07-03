@@ -23,6 +23,19 @@ public class SpielfeldPrivate extends AbstractSpielfeld {
 	}
 	
 	/**
+	 * Getter Schiffe.
+	 * @return schiffeArray
+	 */
+	public void setSchiffe(ArrayList<Schiff> schiffe) {
+		this.schiffe = schiffe;
+	}
+
+	
+	public ArrayList<Schiff> getSchiffe() {
+		return schiffe;
+	}
+	
+	/**
 	 * Schiff wird auf dem Spielfeld platziert und bekommt diese Felder auch noch sich selber zugewiesen.
 	 * @param schiff: Schiff welches platziert werden soll.
 	 * @param position: Position auf dem das Schiff platziert werden soll.

@@ -15,14 +15,14 @@ public abstract class Actor {
 	/**
 	 * Jeder Spieler hat ein Spielfeld.
 	 */
-	private Spielfeld spielfeld;
+	private SpielfeldPrivate spielfeld;
 	
 	private Spielerart spielerart;
 	
 	/**
 	 * Öffentliches Spielfeld jedes Spielers
 	 */
-	private Spielfeld spielfeldPublic;
+	private SpielfeldPublic spielfeldPublic;
 	
 	
 	/**
@@ -35,11 +35,11 @@ public abstract class Actor {
 		this.name = name;
 	}
 	
-	public Spielfeld getSpielfeldPublic() {
+	public SpielfeldPublic getSpielfeldPublic() {
 		return spielfeldPublic;
 	}
 
-	public void setSpielfeldPublic(Spielfeld spielfeldPublic) {
+	public void setSpielfeldPublic(SpielfeldPublic spielfeldPublic) {
 		this.spielfeldPublic = spielfeldPublic;
 	}
 
@@ -81,7 +81,7 @@ public abstract class Actor {
 	 * Getter Spielfeld.
 	 * @return: Spielfeld des Spielers.
 	 */
-	public Spielfeld getSpielfeld() {
+	public SpielfeldPrivate getSpielfeld() {
 		return spielfeld;
 	}
 	
@@ -89,7 +89,7 @@ public abstract class Actor {
 	 * Setter Spielfeld.
 	 * @param spielfeld: Spielfeld des Spielers, welches gesetzt werden soll.
 	 */
-	public void setSpielfeld(Spielfeld spielfeld) {
+	public void setSpielfeld(SpielfeldPrivate spielfeld) {
 		this.spielfeld = spielfeld;
 	}
 		
@@ -107,8 +107,8 @@ public abstract class Actor {
 	 * @param groesse: Größe, die das quadratische Spielfeld sein soll.
 	 */
 	public void createSpielfeld(int groesse){
-		spielfeld = new Spielfeld(groesse);
-		spielfeldPublic = new Spielfeld(groesse);
+		spielfeld = new SpielfeldPrivate(groesse);
+		spielfeldPublic = new SpielfeldPublic(groesse);
 	}
 	
 	
