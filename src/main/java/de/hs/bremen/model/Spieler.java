@@ -12,9 +12,14 @@ import de.hs.bremen.helper.ConsoleColor;
  * @author vural
  *
  */
-public class Spieler extends Actor {
+public class Spieler extends Actor implements Serializable{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2678006261357557482L;
+
 	public Spieler(String name){
 	super(name);
 	
