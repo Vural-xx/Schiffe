@@ -6,11 +6,12 @@ import de.hs.bremen.controller.MainController;
 import de.hs.bremen.enums.Feldstatus;
 
 public class ComputerGegner extends Actor {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8717880889204496799L;
 	private Actor[] gegner;
 	private ArrayList<Position> shots;
-	private int zeile;
-	private int spalte;
-	private int hori;
 	
 	public ComputerGegner(String name){
 		super(name);
@@ -38,17 +39,24 @@ public class ComputerGegner extends Actor {
 		int spalte=0;
 		int hori=0;
 		boolean horizontal=false;
-		if(hori == 1){
-			horizontal = true;
-		}
+
 		
 		for(int i=0; i< schiffe.size(); i++){
-			System.out.println(schiffe.get(i));
+			System.out.println(schiffe.get(i).getName());
 			do {
 				zeile= randomRechnerZeile();
 				spalte= randomRechnerSpalte();
 				hori=ausrichtung();
-			}while(getSpielfeld().schiffPlazierbar(schiffe.get(i), new Position(spalte, zeile), hori));
+				System.out.println("zeile " +zeile);
+				System.out.println("spalte " +spalte);
+				System.out.println("Ausrichtung" +hori);
+				
+			}while(!getSpielfeld().schiffPlazierbar(schiffe.get(i), new Position(spalte, zeile), hori));
+			if(hori == 1){
+				horizontal = true;
+			}else{
+				horizontal = false;
+			}
 			this.getSpielfeld().platziereSchiff(schiffe.get(i), new Position(spalte, zeile), horizontal);
 					
 		}
