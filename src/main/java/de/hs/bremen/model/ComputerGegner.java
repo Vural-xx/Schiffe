@@ -15,6 +15,7 @@ public class ComputerGegner extends Actor {
 	
 	public ComputerGegner(String name){
 		super(name);
+		shots= new ArrayList<Position>();
 	}
 	
 	
@@ -65,35 +66,37 @@ public class ComputerGegner extends Actor {
 	
 	
 	public Schiff schiffZumSchießen(){
-		Schiff schiff=getSpielfeld().getSchiffe().get(0);
-		for(int i=0; i <getSpielfeld().getSchiffe().size();i++){
-				if(getSpielfeld().getSchiffe().get(i).getFeuerstaerke()>schiff.getFeuerstaerke()){
+		Schiff schiff= null;
+		if(getSpielfeld().schiffeOhneWarteZeit()){
+			schiff = getSpielfeld().getSchiffe().get(0);
+			for(int i=0; i <getSpielfeld().getSchiffe().size();i++){
+				if(getSpielfeld().getSchiffe().get(i).getFeuerstaerke()>schiff.getFeuerstaerke() && schiff.getWartezeit()==0){
 					schiff=getSpielfeld().getSchiffe().get(i);
+				}
 			}
 		}
-		System.out.println(schiff);
 		return schiff;
 	}
 	
 	
 	public void intelligent(){
-		Actor gegner= spielerAuswahl();
 		int spalte=randomRechnerSpalte();
 		int zeile= randomRechnerZeile();
 		Position position= new Position(spalte, zeile);
 		Schiff schiff= schiffZumSchießen();
-		schiff.feuern(position, gegner.getSpielfeldPublic());
-		kiFeuern(position, schiff);
-		gegner.trefferUebertragung();
-		
+		if(schiff != null){
+			kiFeuern(position, schiff);
+		}
 	}
 	
 	public void kiFeuern(Position position, Schiff schiff){
-		int spalte=randomRechnerSpalte();
-		int zeile=randomRechnerZeile();
-		Actor spieler=spielerAuswahl();
-		schiff.feuern(new Position(spalte,zeile), spieler.getSpielfeldPublic());
-		spieler.trefferUebertragung();
+		Actor gegner=spielerAuswahl();
+		Position[] positionsarray= new Position[schiff.getFeuerstaerke()];
+		for (int i=0; i< schiff.getFeuerstaerke(); i++ ){
+			positionsarray[i]= new Position(position.getPositonX()+i, position.getPositionY());
+		}
+		schiff.feuern(positionsarray, gegner.getSpielfeldPublic());
+		gegner.trefferUebertragung();
 		for(int i=0; i< schiff.getFeuerstaerke(); i++){
 			shots.add(new Position(position.getPositonX()+i, position.getPositionY()));
 			
