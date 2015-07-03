@@ -106,6 +106,7 @@ public class EinstellungController {
 		public void actionPerformed(ActionEvent e) {
 			mainController.getMainFrame().remove(spielfeldGroeßeGUI);
 			mainController.setSpielfeldgroesse(tempSpielfeldgroesse());
+			mainController.getSpiel().setSpielfeldGroesse(tempSpielfeldgroesse());
 			schiffeAuswahlGUI.setActionListener(new SchiffAnzahlListener());
 			mainController.getMainFrame().add(schiffeAuswahlGUI);
 			mainController.getMainFrame().revalidate();

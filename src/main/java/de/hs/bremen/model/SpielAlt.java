@@ -234,7 +234,7 @@ public class SpielAlt implements Serializable {
 					if(i !=0){
 						spieler[i].setIstDran(true);
 					}
-					spielstandManager.speicherMenu(this);
+					//spielstandManager.speicherMenu(this);
 					System.exit(0);
 				}
 			/*	schiff = spieler[i].getSpielfeld().getZustaendigesSchiff(auswahl); */
@@ -528,9 +528,9 @@ public class SpielAlt implements Serializable {
 			schiffePlatzieren();
 			spielen();
 		}else{
-			SpielAlt sp = spm.ladeMenu();
-			this.runde = sp.getRunde()-1;
-			setSpieler(sp.getSpieler());
+			//SpielAlt sp = spm.ladeMenu();
+			//this.runde = sp.getRunde()-1;
+			//setSpieler(sp.getSpieler());
 			spielen();
 		}
 		

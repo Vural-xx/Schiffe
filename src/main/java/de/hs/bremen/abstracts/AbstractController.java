@@ -9,6 +9,9 @@ public class AbstractController {
 	private Spiel spiel;
 	private MainFrame mainFrame;
 	
+	public AbstractController(){
+		spiel = new Spiel();
+	}
 	public Actor[] getSpieler() {
 		return spiel.getSpieler();
 	}
@@ -16,9 +19,13 @@ public class AbstractController {
 		this.spiel.setSpieler(spieler);
 	}
 
-	public AbstractController(){
-		mainFrame = new MainFrame();
+	public Spiel getSpiel() {
+		return spiel;
 	}
+	public void setSpiel(Spiel spiel) {
+		this.spiel = spiel;
+	}
+	
 	public MainFrame getMainFrame() {
 		return mainFrame;
 	}

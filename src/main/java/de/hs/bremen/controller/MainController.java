@@ -2,15 +2,21 @@ package de.hs.bremen.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 
 import de.hs.bremen.abstracts.AbstractController;
 import de.hs.bremen.gui.MainFrame;
+import de.hs.bremen.gui.utility.CustomOptionPane;
 import de.hs.bremen.model.Actor;
 import de.hs.bremen.model.Schiff;
+import de.hs.bremen.model.Spiel;
 import de.hs.bremen.model.Spieler;
+import de.hs.bremen.persistence.ObjectPersistenceManager;
+import de.hs.bremen.persistence.SpielstandManager;
 
 public class MainController extends AbstractController {
 	private EinstellungController einstellungController;
@@ -30,6 +36,8 @@ public class MainController extends AbstractController {
 
 	public MainController() {
 		super();
+		setMainFrame(new MainFrame(this));
+		getMainFrame().setActionListener(new SpeichernItemKlick(), new LadeItemKlick());
 		// TODO Auto-generated constructor stub
 		//startSchiffeSetzen();
 		//startRunden();
@@ -178,6 +186,42 @@ public class MainController extends AbstractController {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			System.out.println("Test");
+		}
+		
+	}
+	public MainController getMainController(){
+		return this;
+		
+	}
+	class LadeItemKlick implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			ObjectPersistenceManager objectPersistenceManager = new ObjectPersistenceManager();
+			JMenuItem jMenuItem = (JMenuItem) e.getSource();
+			Spiel spiel = objectPersistenceManager.spielstandLaden(jMenuItem.getName());
+			setSpiel(spiel);
+			getMainController().setSpielfeldgroesse(spiel.getSpielfeldGroesse());
+			getMainFrame().dispatchEvent(new WindowEvent(getMainFrame(), WindowEvent.WINDOW_CLOSING));
+			setMainFrame(new MainFrame(getMainController()));
+			getMainFrame().revalidate();
+			setRundenController(null);
+			startRunden();
+		}
+		
+	}
+	
+	class SpeichernItemKlick implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+			JMenuItem jMenuItem = (JMenuItem) e.getSource();
+			JFrame frame = new JFrame("Spiel speichern");
+		    String speicherName = CustomOptionPane.showInputDialog(frame, "Wie wollen Sie den Spielstand benennen?");
+		    SpielstandManager spielstandManager = new SpielstandManager();
+		    ObjectPersistenceManager opm = new ObjectPersistenceManager();
+		    opm.spielstandSpeichern(getSpiel(), speicherName);
 		}
 		
 	}

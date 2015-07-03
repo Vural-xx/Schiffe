@@ -15,7 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
+
 import de.hs.bremen.controller.MainController;
+import de.hs.bremen.controller.RundenController;
 import de.hs.bremen.gui.utility.CustomOptionPane;
 import de.hs.bremen.model.Spiel;
 import de.hs.bremen.persistence.*;
@@ -37,9 +39,11 @@ public class MainFrame extends javax.swing.JFrame{
 	public JPanel cards;
 	public SchiffeAuswahlGUI schiffeAuswahlGUI;
 	public SchiffSetzenGUI schiffSetzenGui;
+	private MainController mainController;
 	
 	
-	public MainFrame(){
+	public MainFrame(MainController mainController){
+		this.mainController = mainController;
 		setTitle("Schiffe versenken");
 		t=Toolkit.getDefaultToolkit();
 		Dimension d= t.getScreenSize();
@@ -74,31 +78,8 @@ public class MainFrame extends javax.swing.JFrame{
 		ladeItem = new JMenu("Spiel laden");
 		info = new JMenuItem("Anleitung");
 		version = new JMenuItem("Version");
-		JMenuItem[] ladeStand = new JMenuItem[4];
-		File folder = new File("src/temp");
-		File[] listOfFiles = folder.listFiles();
-		for (int i = 0; i< listOfFiles.length; i++){
-			ladeStand[i] = new JMenuItem(listOfFiles[i].getName());
-			ladeItem.add(ladeStand[i]);
-			ladeStand[i].addActionListener(new LadeItemKlick());
-			ladeStand[i].setName(listOfFiles[i].getName());
-		}
-		JMenuItem[] speicherStand = new JMenuItem[4];
-		for (int i = 0; i< listOfFiles.length; i++){
-			
-			speicherStand[i] = new JMenuItem(listOfFiles[i].getName());
-			speicherStand[i].addActionListener(new SpeichernItemKlick());
-			speicherStand[i].setName(listOfFiles[i].getName());
-			saveItem.add(speicherStand[i]);
-		}
-		if(listOfFiles.length< 4){
-			for(int i = listOfFiles.length; i < 4; i++){
-				speicherStand[i] = new JMenuItem("Leer");
-				speicherStand[i].addActionListener(new SpeichernItemKlick());
-				speicherStand[i].setName("Leer");
-				saveItem.add(speicherStand[i]);
-			}
-		}
+		
+		
 		
 		fileMenu.add(newGameItem);
 		fileMenu.add(ladeItem);
@@ -113,29 +94,9 @@ public class MainFrame extends javax.swing.JFrame{
 		
 	}
 	
-	class LadeItemKlick implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			JMenuItem jMenuItem = (JMenuItem) e.getSource();
-			System.out.println(jMenuItem.getName());
-		}
-		
-	}
 	
-	class SpeichernItemKlick implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			JMenuItem jMenuItem = (JMenuItem) e.getSource();
-			JFrame frame = new JFrame("Spiel speichern");
-		    String speicherName = CustomOptionPane.showInputDialog(frame, "Wie wollen Sie den Spielstand benennen?");
-		    //System.exit(0);
-			System.out.println(jMenuItem.getName());
-			System.out.println(speicherName);
-		}
-		
-	}
+	
+	
 	
 	private void initListeners(){
 		//Erstellt eine Aktion für Neues Spiel (action Dialog)
@@ -203,7 +164,33 @@ public class MainFrame extends javax.swing.JFrame{
 		});
 	}
 	
-
+	public void setActionListener(ActionListener speichern, ActionListener laden){
+		JMenuItem[] ladeStand = new JMenuItem[4];
+		File folder = new File("src/temp");
+		File[] listOfFiles = folder.listFiles();
+		for (int i = 0; i< listOfFiles.length; i++){
+			ladeStand[i] = new JMenuItem(listOfFiles[i].getName());
+			ladeItem.add(ladeStand[i]);
+			ladeStand[i].addActionListener(laden);
+			ladeStand[i].setName(listOfFiles[i].getName());
+		}
+		
+		JMenuItem[] speicherStand = new JMenuItem[4];
+		for (int i = 0; i< listOfFiles.length; i++){
+			speicherStand[i] = new JMenuItem(listOfFiles[i].getName());
+			speicherStand[i].addActionListener(speichern);
+			speicherStand[i].setName(listOfFiles[i].getName());
+			saveItem.add(speicherStand[i]);
+		}
+		if(listOfFiles.length< 4){
+			for(int i = listOfFiles.length; i < 4; i++){
+				speicherStand[i] = new JMenuItem("Leer");
+				speicherStand[i].addActionListener(speichern);
+				speicherStand[i].setName("Leer");
+				saveItem.add(speicherStand[i]);
+			}
+		}
+	}
 	
 	
 	
