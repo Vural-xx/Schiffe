@@ -1,10 +1,17 @@
 package de.hs.bremen.model;
 
+import java.io.Serializable;
+
 import de.hs.bremen.enums.Feldstatus;
 import de.hs.bremen.enums.Spielerart;
 import de.hs.bremen.helper.ConsoleColor;
 
-public abstract class Actor {
+public abstract class Actor implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 932678145597812910L;
+
 	/**
 	 * Name des Spielers.
 	 */

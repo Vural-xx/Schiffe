@@ -42,6 +42,7 @@ public class RundenController {
 				mainController.wartezeitVerringern();
 			}
 			mainController.nextSpieler();
+			Actor actor = mainController.getCurrentSpieler();
 			
 			if(mainController.getCurrentSpieler().schiffeOhneWartezeit() && mainController.getCurrentSpieler().getSpielerart()==Spielerart.MENSCH){
 				rundenwechselGUI = new RundenwechselGUI(mainController);

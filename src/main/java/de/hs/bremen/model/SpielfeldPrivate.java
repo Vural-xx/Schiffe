@@ -192,4 +192,11 @@ public class SpielfeldPrivate extends AbstractSpielfeld {
 		}
 	}
 
+	public boolean schiffeOhneWarteZeit(){
+		boolean ohneWartezeit = false;
+		for(int i = 0; i <getSchiffe().size(); i++){
+			ohneWartezeit = schiffe.get(i).getWartezeit() == 0;
+		}
+		return ohneWartezeit;
+	}
 }
