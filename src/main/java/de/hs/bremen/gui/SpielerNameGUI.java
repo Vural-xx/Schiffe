@@ -1,13 +1,10 @@
 package de.hs.bremen.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -20,22 +17,11 @@ import javax.swing.event.DocumentListener;
 public class SpielerNameGUI extends JPanel implements DocumentListener  {
 	
 	public JLabel spielerNametext;
-	
-	
-	private JPanel container1;
 	public JTextField[] spielerEingabe;
 	private JButton weiter;
 	private GridBagConstraints gbc= new GridBagConstraints();
-	
 	private int spieler;
-	
-
-
-
-	private JLabel spielernameAnfangsText;
-	
 	FlowLayout flowLayout;
-	
 	
 	public SpielerNameGUI(){
 		
@@ -43,8 +29,6 @@ public class SpielerNameGUI extends JPanel implements DocumentListener  {
 		setVisible(true);
 		
 	}
-	
-	
 	
 	public void initComponents(){
 		
@@ -54,10 +38,6 @@ public class SpielerNameGUI extends JPanel implements DocumentListener  {
 		
 		weiter= new JButton("weiter");
 		weiter.setEnabled(false);
-		
-		
-
-		
 		
 	}
 	
@@ -74,8 +54,6 @@ public class SpielerNameGUI extends JPanel implements DocumentListener  {
 			spieler= spieleranzahl;
 			this.add(spielerNametext,gbc);
 			this.add(spielerEingabe[i],gbc);
-			
-			
 			
 		}
 		this.add(weiter,gbc);
@@ -111,7 +89,6 @@ public class SpielerNameGUI extends JPanel implements DocumentListener  {
 		
 	}
 
-	
 	public void pruefen() {
 		int counter=0;
 		weiter.setEnabled(false);
@@ -128,9 +105,5 @@ public class SpielerNameGUI extends JPanel implements DocumentListener  {
 		}
 	}
 
-
-/*	public boolean spielerNameVergeben(String name){
-		for(int i =0; i< spieler.length; i++){
-			if(spieler[i] != null && spieler[i].getName().equals(name)){*/
 
 }

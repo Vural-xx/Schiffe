@@ -1,7 +1,6 @@
 package de.hs.bremen.gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
@@ -15,18 +14,13 @@ import de.hs.bremen.controller.MainController;
 import de.hs.bremen.enums.Feldstatus;
 import de.hs.bremen.enums.Spielfeldmodus;
 import de.hs.bremen.gui.shapes.FeldShape;
-import de.hs.bremen.gui.shapes.Squares;
 import de.hs.bremen.model.Actor;
 import de.hs.bremen.model.Feld;
 import de.hs.bremen.model.Position;
 import de.hs.bremen.model.Schiff;
-import de.hs.bremen.model.Spieler;
 
 public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListener{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -9206943112708931485L;
 	private MainController mainController;
 	private Spielfeldmodus spielfeldmodus;
@@ -145,7 +139,6 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 		for(int i = 0 ; i < felder.length; i++){
 			for (int j = 0 ; j < felder[i].length; j++){
 				if(i==0 && j ==0 || i==1 && j==1){
-					//System.out.println(felder[i][j].getFeldstatus());
 				}
 				if(felder[i][j].getFeldstatus() != Feldstatus.WASSER){
 					fillSquare(((felder[i][j].getPosition().getPositonX()-1)*getFeldgroesse())+1, ((felder[i][j].getPosition().getPositionY()-1)*getFeldgroesse())+1, getFeldgroesse()-2, getFeldgroesse()-2,felder[i][j].getGuiInhalt());
@@ -213,7 +206,6 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	
 	@Override
 	public void mouseClicked(MouseEvent ev) {
-		// TODO Auto-generated method stub
 		int xPosition =ev.getX()/getFeldgroesse();
 		int yPosition  = ev.getY()/getFeldgroesse();
 		if(spielfeldmodus == Spielfeldmodus.SETZEN){
@@ -235,25 +227,21 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 			}
 			horizontal = !horizontal;
 		}
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 	

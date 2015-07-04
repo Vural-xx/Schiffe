@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,19 +18,15 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	private JButton spieler4;
 	private JButton spieler5;
 	private JButton spieler6;
-	
 	private JButton weiter;
 	private int spielerAnzahl;
-	
 	private JPanel fuellcontainer1;
 	private JPanel container1_inhalt1;
 	private JPanel container1_inhalt2;
 	private JPanel container1_inhalt3;
 	private JPanel container1_inhalt4;
-	
 	private JLabel ausgewaehlteSpielerText;
 	private JLabel spielerAnzahltext;
-	
 	FlowLayout flowlayout= new FlowLayout();
 	
 	public int getSpielerAnzahl() {
@@ -40,30 +37,21 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	}
 	
 	
-	
 	// Konstruktor
 	public SpielerAuswahlGUI(){
 		initComponents();
 		setVisible(true);		
 	}
 	
-	
-	
-	
-	
-	
 	public void initComponents(){
 		
 		this.setLayout(new GridLayout(0,1,0,0));
-		
 		
 		container1_inhalt1 = new JPanel();
 		container1_inhalt2 = new JPanel();
 		container1_inhalt3 = new JPanel();
 		container1_inhalt4= new JPanel();
 		fuellcontainer1= new JPanel();
-		
-	
 		
 		spieler1 = new JButton("1");
 		spieler2 = new JButton("2");
@@ -87,7 +75,6 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		
 		container1_inhalt3.add(ausgewaehlteSpielerText);
 		
-		
 		spielerAnzahltext= new JLabel("Bitte wählen Sie die Spieleranzahl aus:");
 		container1_inhalt1.add(spielerAnzahltext);
 		
@@ -106,9 +93,7 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		this.add(container1_inhalt2);
 		this.add(container1_inhalt3);
 		this.add(container1_inhalt4);
-		
-		
-		
+
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -163,17 +148,10 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		return i;
 	}
 	
-
-	
-
 	public void setActionListener(ActionListener l){
 		weiter.addActionListener(l);
 		
 	}
-	
-	
-	
-	
 
 }
 

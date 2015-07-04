@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -22,7 +21,6 @@ public class SpielfeldGroeßeGUI extends JPanel implements DocumentListener {
 	private JButton weiter;
 	private JLabel spielfeldText;
 	private JLabel warnung;
-	
 	
 	public SpielfeldGroeßeGUI(){
 		initComponents();
@@ -51,13 +49,7 @@ public class SpielfeldGroeßeGUI extends JPanel implements DocumentListener {
 		this.add(spielfeldEingabe,gbc);
 		this.add(weiter,gbc);
 		this.add(warnung,gbc);
-
-		
-		
 	}
-	
-	
-	
 	
 	public void setActionListener(ActionListener l){
 		weiter.addActionListener(l);
@@ -111,8 +103,5 @@ public class SpielfeldGroeßeGUI extends JPanel implements DocumentListener {
 			warnung.setText("Die Spielfeldgröße muss mindestens 10 Felder und darf maximal 40 Felder betragen.");
 			warnung.revalidate();
 		}
-		
 	}
-	
-	
 }

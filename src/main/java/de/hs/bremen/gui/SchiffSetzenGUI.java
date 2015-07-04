@@ -1,26 +1,17 @@
 package de.hs.bremen.gui;
 
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Rectangle;
-import java.awt.TextArea;
-import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import de.hs.bremen.controller.MainController;
@@ -68,7 +59,6 @@ public class SchiffSetzenGUI extends JPanel{
 		
 		//Schiffe zum hinzufügen
 		container5 = new JPanel();
-		//container5.setLayout(new BoxLayout(container5, BoxLayout.PAGE_AXIS));
 		container5.setLayout(new GridLayout(14,2,10,10));
 		container5.setPreferredSize(new Dimension(200, 15));
 		zerstoerer = new JButton("Zerstörer ");
@@ -186,6 +176,4 @@ public class SchiffSetzenGUI extends JPanel{
 		fregatte.addActionListener(schiffButtonListener);
 		uboot.addActionListener(schiffButtonListener);
 	}
-	
-	
 }

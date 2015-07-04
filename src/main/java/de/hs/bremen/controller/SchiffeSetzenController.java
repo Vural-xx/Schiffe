@@ -1,9 +1,7 @@
 package de.hs.bremen.controller;
 
-import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import de.hs.bremen.enums.Spielerart;
-import de.hs.bremen.gui.MainFrame;
 import de.hs.bremen.gui.SchiffSetzenGUI;
 import de.hs.bremen.model.ComputerGegner;
 import de.hs.bremen.model.Schiff;
@@ -65,7 +62,6 @@ public class SchiffeSetzenController {
 	class SpielerWechselListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			mainController.getMainFrame().remove(schiffSetzenGui);
 			if(!mainController.lastRundenSpieler()){
 				mainController.nextSpieler();
@@ -90,7 +86,6 @@ public class SchiffeSetzenController {
 	class SchiffButtonClickedListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			JButton schiff = (JButton) e.getSource();
 			Schiff zusetzendesSchiff = getZuSetztendesSchiff(schiff.getName());
 			mainController.setAusgewähltesSchiff(zusetzendesSchiff);
@@ -100,15 +95,10 @@ public class SchiffeSetzenController {
 	public class FinishListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			mainController.nextSpieler();
 			JOptionPane.showMessageDialog(null, "Alle Spieler waren an der Reihe, nun gehts los! " + mainController.getCurrentSpieler().getName() + " beginnt!");
 			mainController.getMainFrame().remove(schiffSetzenGui);
 			mainController.startRunden();
 		}
-		
 	}
-	
-	
-	
 }

@@ -7,9 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.FeatureDescriptor;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -17,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.xml.bind.ParseConversionEvent;
 
 public class SchiffeAuswahlGUI extends JPanel implements DocumentListener  {
 	
@@ -27,29 +24,20 @@ public class SchiffeAuswahlGUI extends JPanel implements DocumentListener  {
 	private JLabel korvetteText;
 	private JLabel ubootText;
 	private JLabel warnung;
-	
 	private JPanel container1;
 	private JPanel fuellcontainer;
-
-	
 	public JTextField zerstoererEingabe;
 	public JTextField fregatteEingabe;
 	public JTextField korvetteEingabe;
 	public JTextField ubootEingabe;
-	
 	private JButton weiter;
 	private GridBagConstraints gbc;
-	
-
-	
 	
 	public SchiffeAuswahlGUI(){
 		
 	initComponents();	
 	setVisible(true);	
 	}
-	
-	
 	
 	public void initComponents(){
 		gbc= new GridBagConstraints();
@@ -66,7 +54,6 @@ public class SchiffeAuswahlGUI extends JPanel implements DocumentListener  {
 		weiter.setEnabled(false);
 
 		schiffeAnzahlText= new JLabel("Bitte geben Sie Anzahl der Schiffe ein:");
-		
 		
 		zerstoererText= new JLabel("Zerstörer:");
 		fregatteText= new JLabel("Fregatte:");
@@ -103,19 +90,12 @@ public class SchiffeAuswahlGUI extends JPanel implements DocumentListener  {
 		this.add(weiter,gbc);
 		this.add(warnung,gbc);
 		this.add(fuellcontainer,gbc);
-		
-
-		
 	}
 	
-
-
 	public void setActionListener(ActionListener l){
 		weiter.addActionListener(l);
 		
 	}
-
-
 
 	@Override
 	public void insertUpdate(DocumentEvent e) {
@@ -123,15 +103,11 @@ public class SchiffeAuswahlGUI extends JPanel implements DocumentListener  {
 		
 	}
 
-
-
 	@Override
 	public void removeUpdate(DocumentEvent e) {
 		pruefen();
 		
 	}
-
-
 
 	@Override
 	public void changedUpdate(DocumentEvent e) {
@@ -170,8 +146,6 @@ public class SchiffeAuswahlGUI extends JPanel implements DocumentListener  {
 				} catch (Exception e){
 						System.out.println("parse falsche eingaben");
 					}
-				
-				
 	
 			if(anzahlzerstoerer >=0 && anzahlfregatte >=0 &&anzahlkorvette >=0 &&anzahluboot >=0 && anzahl>=1){
 				warnung.setForeground(Color.BLACK);

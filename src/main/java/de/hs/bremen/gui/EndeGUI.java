@@ -4,6 +4,7 @@ package de.hs.bremen.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -16,8 +17,6 @@ import javax.swing.JPanel;
 public class EndeGUI extends JPanel {
 
 	private JPanel container;
-
-	
 	private JLabel textLabel2;
 	private JLabel textLabel1;
 	private JLabel bildLabel;
@@ -31,10 +30,6 @@ public class EndeGUI extends JPanel {
 		setVisible(true);
 	}
 
-	/*public static void main(String[] args){
-		
-		new EndeGUI();
-	}*/
 	private void initComponents(){
 		textLabel1 = new JLabel("Das Spiel ist zuende");
 		textLabel1.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));

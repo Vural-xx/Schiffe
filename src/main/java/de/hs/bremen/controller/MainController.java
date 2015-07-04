@@ -2,21 +2,18 @@ package de.hs.bremen.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
+import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import de.hs.bremen.abstracts.AbstractController;
 import de.hs.bremen.gui.MainFrame;
-import de.hs.bremen.gui.utility.CustomOptionPane;
 import de.hs.bremen.model.Actor;
 import de.hs.bremen.model.Schiff;
 import de.hs.bremen.model.Spiel;
-import de.hs.bremen.model.Spieler;
 import de.hs.bremen.persistence.ObjectPersistenceManager;
-import de.hs.bremen.persistence.SpielstandManager;
 
 public class MainController extends AbstractController {
 	private EinstellungController einstellungController;
@@ -24,6 +21,7 @@ public class MainController extends AbstractController {
 	private SchiffeSetzenController schiffeSetzenController;
 	private Schiff ausgewähltesSchiff;
 	private int spielfeldgroesse;
+	private boolean rundeSpielt;
 
 	
 	public int getSpielfeldgroesse() {
@@ -38,9 +36,6 @@ public class MainController extends AbstractController {
 		super();
 		setMainFrame(new MainFrame(this));
 		getMainFrame().setActionListener(new SpeichernItemKlick(), new LadeItemKlick());
-		// TODO Auto-generated constructor stub
-		//startSchiffeSetzen();
-		//startRunden();
 		startEinstellungController();
 	}
 	
@@ -50,20 +45,11 @@ public class MainController extends AbstractController {
 	
 	public void startRunden(){
 		rundenController = new RundenController(this);	
-		
-	}
-	
-	public void startGame(){
-		
+		rundeSpielt = true;
 	}
 	
 	public void startEinstellungController(){
 		einstellungController= new EinstellungController(this);
-	}
-	
-	public ActionListener getZuRundeWechselnListener(){
-		return new ZuRundeWechseln();
-		
 	}
 	
 	public void nextSpieler(){
@@ -181,14 +167,6 @@ public class MainController extends AbstractController {
 		this.rundenController = rundenController;
 	}
 	
-	public class ZuRundeWechseln implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			System.out.println("Test");
-		}
-		
-	}
 	public MainController getMainController(){
 		return this;
 		
@@ -196,13 +174,12 @@ public class MainController extends AbstractController {
 	class LadeItemKlick implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			ObjectPersistenceManager objectPersistenceManager = new ObjectPersistenceManager();
 			JMenuItem jMenuItem = (JMenuItem) e.getSource();
 			Spiel spiel = objectPersistenceManager.spielstandLaden(jMenuItem.getName());
 			setSpiel(spiel);
 			getMainController().setSpielfeldgroesse(spiel.getSpielfeldGroesse());
-			getMainFrame().dispatchEvent(new WindowEvent(getMainFrame(), WindowEvent.WINDOW_CLOSING));
+			getMainFrame().dispose();
 			setMainFrame(new MainFrame(getMainController()));
 			getMainFrame().revalidate();
 			setRundenController(null);
@@ -214,14 +191,27 @@ public class MainController extends AbstractController {
 	class SpeichernItemKlick implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+			if(rundeSpielt){
+				JMenuItem jMenuItem = (JMenuItem) e.getSource();
+			    ObjectPersistenceManager opm = new ObjectPersistenceManager();
+			    String speicherName = JOptionPane.showInputDialog(null, "Wie wollen Sie den Spielstand benennen?");
+			    File folder = new File("src/temp");
+				File[] listOfFiles = folder.listFiles();
+				boolean speicherExistiert = false;
+			    for (int i = 0; i< listOfFiles.length; i++){
+			    	if(listOfFiles[i].getName().equals(speicherName)){
+			    		JOptionPane.showMessageDialog(null, "Diese Speichername existiert bereits, bitte wählen Sie einen anderen!");
+			    		speicherExistiert = true;
+					}
+			    }
+			    if(!speicherExistiert){
+				    opm.spielstandSpeichern(getSpiel(), speicherName);
+				    JOptionPane.showMessageDialog(null, "Das Spiel wurde erfolgreich gespeichert");
+				}
+			}else {
+				JOptionPane.showMessageDialog(null, "Erst beim Runden spielen kann gespeichert werden!");
+			}
 			
-			JMenuItem jMenuItem = (JMenuItem) e.getSource();
-			JFrame frame = new JFrame("Spiel speichern");
-		    String speicherName = CustomOptionPane.showInputDialog(frame, "Wie wollen Sie den Spielstand benennen?");
-		    SpielstandManager spielstandManager = new SpielstandManager();
-		    ObjectPersistenceManager opm = new ObjectPersistenceManager();
-		    opm.spielstandSpeichern(getSpiel(), speicherName);
 		}
 		
 	}

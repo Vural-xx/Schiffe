@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import de.hs.bremen.controller.MainController;
 
 
@@ -27,6 +28,4 @@ public class RundenwechselGUI extends JPanel {
 		this.add(textLabel1,BorderLayout.PAGE_START);
 
 	}
-	
-	
 }

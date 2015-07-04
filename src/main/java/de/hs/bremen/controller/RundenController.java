@@ -11,12 +11,9 @@ import de.hs.bremen.enums.Spielerart;
 import de.hs.bremen.gui.EndeGUI;
 import de.hs.bremen.gui.RundenGUI;
 import de.hs.bremen.gui.RundenwechselGUI;
-import de.hs.bremen.helper.ConsoleColor;
 import de.hs.bremen.model.Actor;
 import de.hs.bremen.model.ComputerGegner;
 import de.hs.bremen.model.Schiff;
-import de.hs.bremen.model.Spieler;
-
 
 public class RundenController {
 	private RundenGUI rundenGui;
@@ -108,13 +105,9 @@ public class RundenController {
 	class SchiffButtonClickedListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			//JOptionPane.showMessageDialog(null, "Der nächste Spieler ist an der Reihe" + mainController.getCurrentSpieler().getName() + "ist an der Reihe");
 			JButton schiff = (JButton) e.getSource();
 			System.out.println(schiff.getName());
 			mainController.setAusgewähltesSchiff(getFeuerndesSchiff(schiff.getName()));
 		}
-		
 	}
-
 }

@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -13,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
 import de.hs.bremen.controller.MainController;
 import de.hs.bremen.enums.Spielfeldmodus;
 
@@ -46,7 +48,6 @@ public class RundenGUI extends JPanel {
 		textLabel2 = new JLabel(mainController.getCurrentSpieler().getName());
 		spielerfeld = new SpielerfeldGUI(mainController.getSpielfeldgroesse()*15, 15,mainController, Spielfeldmodus.SPIELER);
 		spielerfeld.drawSpielfeld();
-		
 		tab = new JTabbedPane();
 		SpielerfeldGUI spielerfeld2[] = new SpielerfeldGUI[mainController.getSpieler().length];
 		for(int i = 0; i< mainController.getSpieler().length; i++){
