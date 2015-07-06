@@ -55,7 +55,7 @@ public class ComputerGegner extends Actor {
 	 * @return spalte: Y Achse
 	 */
 	public int randomRechnerSpalte(){
-		int spalte= (int)(Math.random()*5)+1;
+		int spalte= (int)(Math.random()*getSpielfeld().getSpielfeldgroesse())+1;
 		return spalte;	
 	}
 	
@@ -186,7 +186,7 @@ public class ComputerGegner extends Actor {
 
 			System.out.println((zeile+schiff.getFeuerstaerke()));
 
-			if(((test< getSpielfeld().getSpielfeldgroesse()) && gegner[0].getSpielfeld().getFeld(((spalte-1)+i),(zeile-1)).getFeldstatus()==Feldstatus.BESETZT)){
+			if(((test< getSpielfeld().getSpielfeldgroesse()) && spielerAuswahl().getSpielfeld().getFeld(((spalte-1)+i),(zeile-1)).getFeldstatus()==Feldstatus.BESETZT)){
 	
 				
 				System.out.println("AHAHAHAHAHH");
