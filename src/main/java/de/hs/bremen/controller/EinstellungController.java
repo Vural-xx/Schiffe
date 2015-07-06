@@ -10,7 +10,7 @@ import de.hs.bremen.gui.KiAuswahlGUI;
 import de.hs.bremen.gui.SchiffeAuswahlGUI;
 import de.hs.bremen.gui.SpielerAuswahlGUI;
 import de.hs.bremen.gui.SpielerNameGUI;
-import de.hs.bremen.gui.SpielfeldGroeßeGUI;
+import de.hs.bremen.gui.SpielfeldGroesseGUI;
 import de.hs.bremen.model.Actor;
 import de.hs.bremen.model.ComputerGegner;
 import de.hs.bremen.model.Fregatte;
@@ -20,22 +20,68 @@ import de.hs.bremen.model.Spieler;
 import de.hs.bremen.model.UBoot;
 import de.hs.bremen.model.Zerstoerer;
 
+/**
+ * Klasse EinstellungsController zum Erstellen der Spielerauswahl, 
+ * KI-Gegnerauswahl, Spielername, Schiffauswahl,Spielfeldgröße
+ * @author Christin
+ *
+ */
 public class EinstellungController {
+	
+	/**
+	 * HauptController
+	 */
 	public MainController mainController;
+	
+	/**
+	 * GUI für die Auswahl der Spieler
+	 */
 	private SpielerAuswahlGUI spielerAuswahlGUI;
+	
+	/**
+	 * GUI für den Namen des Spielers
+	 */
 	private SpielerNameGUI spielerNameGUI;
-	private SpielfeldGroeßeGUI spielfeldGroeßeGUI;
+	
+	/**
+	 * GUI für die Auswahl die Spielfeldgröße
+	 */
+	private SpielfeldGroesseGUI spielfeldGroeßeGUI;
+	
+	/**
+	 * GUI für die Auswahl der Schiffe
+	 */
 	private SchiffeAuswahlGUI schiffeAuswahlGUI;
+	
+	/**
+	 * GUI für die Auswahl der KI Gegner
+	 */
 	private KiAuswahlGUI kiAuswahlGUI;
+	
+	/**
+	 * Anzahl der Spieler
+	 */
 	private Actor[] spieler;
+	
+	/**
+	 * Größe des Spielfelds
+	 */
 	private int spielfeldGroesse;
+	
+	/**
+	 * Schiffe für jeden Spieler der gesetzt werden muss
+	 */
 	private HashMap<String, ArrayList<Schiff>> schiffe;
 	
+	/**
+	 * Konstruktor
+	 * @param mainController: Hauptcontroller
+	 */
 	public EinstellungController(MainController mainController){
 		this.mainController= mainController;
 		spielerAuswahlGUI= new SpielerAuswahlGUI();
 		spielerNameGUI= new SpielerNameGUI();
-		spielfeldGroeßeGUI= new SpielfeldGroeßeGUI();
+		spielfeldGroeßeGUI= new SpielfeldGroesseGUI();
 		schiffeAuswahlGUI= new SchiffeAuswahlGUI();
 		kiAuswahlGUI = new KiAuswahlGUI();
 		spielerAuswahlGUI.setActionListener(new SpielerAnzahlListener());
@@ -43,10 +89,19 @@ public class EinstellungController {
 		this.mainController.getMainFrame().revalidate();
 	}
 	
+	/**
+	 * Übergibt die Schiffe für jeden Spieler der gesetzt werden muss
+	 * @return
+	 */
 	public HashMap<String, ArrayList<Schiff>> getSchiffe() {
 		return schiffe;
 	}
 	
+	/**
+	 * Klasse SpieleranzahlListener um die Anszahl der Spieler auszuwählen
+	 * @author Christin
+	 *
+	 */
 	class SpielerAnzahlListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -63,6 +118,11 @@ public class EinstellungController {
 		
 	}
 	
+	/**
+	 * Klasse KiAnzahlListener um die Anzahl der KI Gegner auszuwählen
+	 * @author Christin
+	 *
+	 */
 	class KiAnzahlListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -73,15 +133,16 @@ public class EinstellungController {
 		}
 	}
 	
+	/**
+	 * Klasse SpielerNameListener um die Namen der Spieler auszuwählen
+	 * @author Christin
+	 *
+	 */
 	class SpielerNameListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			tempSpieler();
 			mainController.setSpieler(spieler);
-			//Probe 
-			for (int j=0; j< spieler.length;j++){
-				System.out.println(mainController.getSpieler()[j].getName());
-			}
 			mainController.getMainFrame().remove(spielerNameGUI);
 			spielfeldGroeßeGUI.setActionListener(new SpielfeldGroeßeListener());
 			mainController.getMainFrame().add(spielfeldGroeßeGUI);
@@ -90,17 +151,26 @@ public class EinstellungController {
 		}
 		
 	}
+	/**
+	 * Klasse SchiffAnszahlListener um die Anzahl der Schiffe auszuwählen
+	 * @author Christin
+	 *
+	 */
 	class SchiffAnzahlListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			tempArraySchiff();
-			System.out.println(schiffe);
 			mainController.getMainFrame().remove(schiffeAuswahlGUI);
 			mainController.startSchiffeSetzen();
 		}
 		
 	}
 	
+	/**
+	 * Klasse SpielfeldGroeßeListener um die Größe des Spielfeldes auszuwählen
+	 * @author Christin
+	 *
+	 */
 	class SpielfeldGroeßeListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -114,6 +184,9 @@ public class EinstellungController {
 		
 	}
 	
+	/**
+	 * Temporäre Spieler erzeugen
+	 */
 	private void tempSpieler(){
 		spieler = new Actor[spielerAuswahlGUI.getSpielerAnzahl()+kiAuswahlGUI.getSpielerAnzahl()];
 		for(int k=0; k< spieler.length; k++){
@@ -132,6 +205,9 @@ public class EinstellungController {
 		
 	}
 	
+	/**
+	 * Setzt die KI Gegner 
+	 */
 	public void gibGegnerAnKi(){
 		for(int i=0; i< spieler.length; i++ ){
 		 if(spieler[i].getSpielerart()== Spielerart.KI) {
@@ -143,21 +219,23 @@ public class EinstellungController {
 		
 	}
 	
+	/**
+	 * Temporäre Spielfeldgröße erzeugen
+	 * @return die temporäre Spielfeldgröße
+	 */
 	public int tempSpielfeldgroesse(){
 		spielfeldGroesse=Integer.parseInt(spielfeldGroeßeGUI.spielfeldEingabe.getText());
 		return spielfeldGroesse;
 	}
 	
+	/**
+	 * Temporäre Schiffe
+	 */
 	public void tempArraySchiff(){
 		int anzahlZerstoerer= Integer.parseInt(schiffeAuswahlGUI.zerstoererEingabe.getText());
 		int anzahlFregatte= Integer.parseInt(schiffeAuswahlGUI.fregatteEingabe.getText());
 		int anzahlKorvette= Integer.parseInt(schiffeAuswahlGUI.korvetteEingabe.getText());
 		int anzahlUboot= Integer.parseInt(schiffeAuswahlGUI.ubootEingabe.getText());
-
-		System.out.println("Zerstörer = " + anzahlZerstoerer);
-		System.out.println("Fregatte = " + anzahlFregatte);
-		System.out.println("Korvete = " + anzahlKorvette);
-		System.out.println("UBoot = " + anzahlUboot);
 
 		ArrayList<Schiff> tempSchiffe;
 		schiffe = new HashMap<String, ArrayList<Schiff>>();

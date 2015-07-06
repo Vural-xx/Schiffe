@@ -18,6 +18,11 @@ import javax.swing.JTabbedPane;
 import de.hs.bremen.controller.MainController;
 import de.hs.bremen.enums.Spielfeldmodus;
 
+/**
+ * Bildschirm beim Spielen des Spiels
+ * @author Christin
+ *
+ */
 public class RundenGUI extends JPanel {
 
 	private JPanel container;
@@ -29,6 +34,7 @@ public class RundenGUI extends JPanel {
 	private JLabel textLabel1;
 	private JLabel textVerfehlt;
 	private JLabel textGetroffen;
+	private JLabel textVersenkt;
 	private JTabbedPane tab;
 	private SpielerfeldGUI spielerfeld;
 	private MainController mainController;
@@ -37,12 +43,19 @@ public class RundenGUI extends JPanel {
 	private JButton korvette;
 	private JButton uboot;
 	
+	/**
+	 * Konstruktor
+	 * @param mainController: HauptController
+	 */
 	public RundenGUI(MainController mainController){
 		this.mainController = mainController;
 		initComponents();
 		setVisible(true);
 	}
 
+	/**
+	 * Erzeugt die GUI beim Rundenspielen
+	 */
 	private void initComponents(){
 		textLabel1 = new JLabel("Wähle das Schiff zum feuern");
 		textLabel2 = new JLabel(mainController.getCurrentSpieler().getName());
@@ -61,10 +74,10 @@ public class RundenGUI extends JPanel {
 		container = new JPanel();
 		container.add(textLabel1);	
 
-		//Schiffeauswahl
+		//Schiffeauswahl setzen
 		container1 = new JPanel();
 		container1.setLayout(new GridLayout(14,1,10,10));
-		container1.setPreferredSize(new Dimension(100, 15));
+		container1.setPreferredSize(new Dimension(110, 17));
 		
 		if(mainController.schiffOhneWartezeit("Zerstoerer")){
 			zerstoerer = new JButton("Zerstörer");
@@ -89,28 +102,31 @@ public class RundenGUI extends JPanel {
 			uboot.setName("UBoot");
 			container1.add(uboot);
 		}
+		//Abstand erzeugen
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
+		container1.add(Box.createVerticalGlue());
 		
-		container1.add(Box.createVerticalGlue());
-		container1.add(Box.createVerticalGlue());
-		container1.add(Box.createVerticalGlue());
-		container1.add(Box.createVerticalGlue());
-		container1.add(Box.createVerticalGlue());
-		container1.add(Box.createVerticalGlue());
-		container1.add(Box.createVerticalGlue());
 		textGetroffen = new JLabel("Rot für getroffen!");
 		textGetroffen.setForeground(Color.RED);
 		container1.add(textGetroffen);
 		textVerfehlt = new JLabel ("Blau für verfehlt!");
 		textVerfehlt.setForeground(Color.BLUE);
 		container1.add(textVerfehlt);
+		textVersenkt = new JLabel ("Grün für versenkt!");
+		textVersenkt.setForeground(Color.GREEN);
+		container1.add(textVersenkt);
 		
-		//Spielfelder Spieler & Gegner
+		//Spielfelder Spieler & Gegner erzeugen
 		container2 = new JPanel();
 		container2.setLayout(new BoxLayout(container2, BoxLayout.PAGE_AXIS));
-		container2.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));//(top, left, bottom, right)
+		container2.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
 		container2.add(textLabel2);
 		container2.add(spielerfeld);
-
 		
 		container3 = new JPanel();
 		container3.setLayout(new GridLayout(1,2));
@@ -118,12 +134,16 @@ public class RundenGUI extends JPanel {
 		container3.add(tab);
 		
 		this.setLayout(new BorderLayout(5,5));
-		this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));//(top, left, bottom, right)
+		this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		this.add(container,BorderLayout.PAGE_START);
 		this.add(container1, BorderLayout.WEST);
 		this.add(container3, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * Aktion zum feuern mit den Schiffen
+	 * @param schiffButtonClickedListener: Schiffe mit denen gefeuert wird
+	 */
 	public void setActionListener(ActionListener schiffButtonClickedListener){
 		if(zerstoerer != null){
 			zerstoerer.addActionListener(schiffButtonClickedListener);

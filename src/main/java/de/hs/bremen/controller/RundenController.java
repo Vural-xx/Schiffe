@@ -15,12 +15,37 @@ import de.hs.bremen.model.Actor;
 import de.hs.bremen.model.ComputerGegner;
 import de.hs.bremen.model.Schiff;
 
+/**
+ * @author Christin
+ *
+ */
 public class RundenController {
+	
+	/**
+	 * GUI zum Spielen der Runden
+	 */
 	private RundenGUI rundenGui;
+	
+	/**
+	 * HauptController
+	 */
 	private MainController mainController;
+	
+	/**
+	 * GUI beim Runden spielen, zum Wechsel der Spieler
+	 */
 	private RundenwechselGUI rundenwechselGUI;
+	
+	/**
+	 * Abschluss GUI
+	 */
 	private EndeGUI endeGui;
 	
+	
+	/**
+	 * Konstruktor
+	 * @param mainController: HauptController
+	 */
 	public RundenController(MainController mainController){
 		rundenGui = new RundenGUI(mainController);
 		rundenGui.setActionListener(new SchiffButtonClickedListener());
@@ -29,6 +54,9 @@ public class RundenController {
 		this.mainController.getMainFrame().revalidate();
 	}
 	
+	/**
+	 * Feuern der Menschen oder KI-Gegner auf das Gegnerspielfeld
+	 */
 	public void gefeuert(){
 		this.mainController.getMainFrame().remove(rundenGui);
 		if(ausgeschieden()){
@@ -39,7 +67,6 @@ public class RundenController {
 				mainController.wartezeitVerringern();
 			}
 			mainController.nextSpieler();
-			Actor actor = mainController.getCurrentSpieler();
 			
 			if(mainController.getCurrentSpieler().schiffeOhneWartezeit() && mainController.getCurrentSpieler().getSpielerart()==Spielerart.MENSCH){
 				rundenwechselGUI = new RundenwechselGUI(mainController);
@@ -65,6 +92,9 @@ public class RundenController {
 		}
 	}
 	
+	/**
+	 * Entfernt den Spieler sobald er aus dem Spiel ausgeschieden ist
+	 */
 	public void rausschmeissen(){
 		ArrayList<Actor> tempSpieler;
 		Actor[] spieler;
@@ -82,6 +112,10 @@ public class RundenController {
 	}
 
 	
+	/**
+	 * Überprüft, ob ein Spieler ausgeschieden ist. 
+	 * @return true oder false
+	 */
 	public boolean ausgeschieden(){
 		for(int i = 0;i<mainController.getSpieler().length; i++){
 			if(mainController.getSpieler()[i].ausgeschieden()){
@@ -91,6 +125,11 @@ public class RundenController {
 		return false;
 	}
 	
+	/**
+	 * Übergibt das Schiff, mit dem gefeuert werden kann
+	 * @param name Name des Schiffs
+	 * @return
+	 */
 	public Schiff getFeuerndesSchiff(String name){
 		Schiff schiff = null;
 		for(Schiff s: mainController.getCurrentSpielerSchiffe()){
@@ -102,11 +141,15 @@ public class RundenController {
 	}
 	
 	
+	/**
+	 * Spielerwechsel nach Setzen des Schiffes
+	 * @author Christin
+	 *
+	 */
 	class SchiffButtonClickedListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton schiff = (JButton) e.getSource();
-			System.out.println(schiff.getName());
 			mainController.setAusgewähltesSchiff(getFeuerndesSchiff(schiff.getName()));
 		}
 	}

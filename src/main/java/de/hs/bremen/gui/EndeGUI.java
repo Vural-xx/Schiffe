@@ -14,6 +14,11 @@ import javax.swing.JPanel;
 
 
 
+/**
+ * Abschlussbildschirm
+ * @author Christin
+ *
+ */
 public class EndeGUI extends JPanel {
 
 	private JPanel container;
@@ -24,12 +29,19 @@ public class EndeGUI extends JPanel {
 
 
 	
+	/**
+	 * Konstruktor
+	 * @param gewinner: Übergibt den Namen des Gewinners
+	 */
 	public EndeGUI(String gewinner){
 		this.gewinner = gewinner;
 		initComponents();
 		setVisible(true);
 	}
 
+	/**
+	 * Erzeugt die GUI vom Abschluss Bildschirm
+	 */
 	private void initComponents(){
 		textLabel1 = new JLabel("Das Spiel ist zuende");
 		textLabel1.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));

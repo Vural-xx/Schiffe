@@ -4,26 +4,36 @@ import java.io.Serializable;
 
 import de.hs.bremen.enums.Feldstatus;
 import de.hs.bremen.enums.Spielerart;
-import de.hs.bremen.helper.ConsoleColor;
 
+/**
+ * Abstrakte Klasse für Spieler
+ * @author Christin
+ *
+ */
 public abstract class Actor implements Serializable{
 	/**
-	 * 
+	 * SerialVersionUID zum Speichern und Lesen
 	 */
 	private static final long serialVersionUID = 932678145597812910L;
 
 	/**
-	 * Name des Spielers.
+	 * Name des Spielers
 	 */
 	private String name;
 	
+	/**
+	 * Übergibt den Spieler, der an der Reihe ist
+	 */
 	private boolean istDran;
 	
 	/**
-	 * Jeder Spieler hat ein Spielfeld.
+	 * Privates Spielfeld jedes Spielers
 	 */
 	private SpielfeldPrivate spielfeld;
 	
+	/**
+	 * Spielerart: Computergegner oder Mensch
+	 */
 	private Spielerart spielerart;
 	
 	/**
@@ -42,23 +52,37 @@ public abstract class Actor implements Serializable{
 		this.name = name;
 	}
 	
+	/**
+	 * Getter SpielfeldPublic
+	 * @return spielfeldPublic: öffentliches Spielfeld
+	 */
 	public SpielfeldPublic getSpielfeldPublic() {
 		return spielfeldPublic;
 	}
 
+	/**
+	 * Setter SpielfeldPublic
+	 * @param spielfeldPublic: öffentliches Spielfeld
+	 */
 	public void setSpielfeldPublic(SpielfeldPublic spielfeldPublic) {
 		this.spielfeldPublic = spielfeldPublic;
 	}
 
+	/**
+	 * Getter Spielerart
+	 * @return spielerart: Mensch oder Computer
+	 */
 	public Spielerart getSpielerart() {
 		return spielerart;
 	}
 
+	/**
+	 * Setter Spielerart
+	 * @param spielerart: Mensch oder Computer
+	 */
 	public void setSpielerart(Spielerart spielerart) {
 		this.spielerart = spielerart;
 	}
-	
-
 	
 	/**
 	 * Getter Name.
@@ -68,10 +92,18 @@ public abstract class Actor implements Serializable{
 		return name;
 	}
 	
+	/**
+	 * Übergibt den aktuellen Spieler
+	 * @return boolean: Welcher Spieler an der Reihe ist
+	 */
 	public boolean isIstDran() {
 		return istDran;
 	}
 
+	/**
+	 * Setz den aktuellen Spieler
+	 * @param istDran: Welcher Spieler an der Reihe ist
+	 */
 	public void setIstDran(boolean istDran) {
 		this.istDran = istDran;
 	}
@@ -100,6 +132,10 @@ public abstract class Actor implements Serializable{
 		this.spielfeld = spielfeld;
 	}
 		
+	/**
+	 * Übergibt, welches Schiff keine Wartezeit hat
+	 * @return true oder false
+	 */
 	public boolean schiffeOhneWartezeit(){
 		for(int i=0; i< getSpielfeld().getSchiffe().size(); i++){
 			if(getSpielfeld().getSchiffe().get(i).getWartezeit() == 0){
@@ -110,8 +146,8 @@ public abstract class Actor implements Serializable{
 	}
 	
 	/**
-	 * Quadratisches Spielfeld, wird für diesen Spieler initiliasiert.
-	 * @param groesse: Größe, die das quadratische Spielfeld sein soll.
+	 * Quadratisches Spielfeld, wird für den Spieler initiliasiert.
+	 * @param groesse: Größe, die das quadratische Spielfeld haben soll.
 	 */
 	public void createSpielfeld(int groesse){
 		spielfeld = new SpielfeldPrivate(groesse);
@@ -119,6 +155,10 @@ public abstract class Actor implements Serializable{
 	}
 	
 	
+	/**
+	 * Entfernt das getroffene Schiff, setzt Feldstatus auf versenkt
+	 * @param position: Position, wo das schiff versenkt wurde
+	 */
 	public void schiffVersenkt(Position position){
 		Schiff schiff= getSpielfeld().getSchiffByPosition(position);
 		if(schiff != null && schiff.versenkt()){
@@ -127,34 +167,31 @@ public abstract class Actor implements Serializable{
 				this.getSpielfeldPublic().getFeld(schiff.getFelder()[i].getPosition().getPositonX()-1, schiff.getFelder()[i].getPosition().getPositionY()-1).setFeldstatus(Feldstatus.VERSENKT);
 			}
 			getSpielfeld().getSchiffe().remove(schiff);
-			
-			System.out.println("");
-			System.out.println(ConsoleColor.ANSI_PURPLE +"=====================================================================");
-			System.out.println("||||   Sie haben das Schiff "+ schiff.getName().toUpperCase() + " vom Spieler " + getName() + " versenkt!!!!   ||||");
-			System.out.println("====================================================================="+ConsoleColor.ANSI_RESET);
 		}	
 	}
 	
+	/**
+	 * Überprüft, ob ein schiff ausgeschieden ist
+	 * @return ausgeschiedenes Schiff
+	 */
 	public boolean ausgeschieden(){
 		return spielfeld.getSchiffe().size()==0;
 	}
 	
 	
+	/**
+	 * Übertragung der getroffenen Schiffe vom Spielfeld auf das SpielfeldPublic
+	 */
 	public void trefferUebertragung(){
 		for(int i = 0; i<spielfeld.getFelder().length; i++){
 			for(int j = 0; j<spielfeld.getFelder()[i].length; j++){
 				if(spielfeldPublic.getFelder()[i][j].getFeldstatus() == Feldstatus.VERFEHLT && spielfeld.getFelder()[i][j].getFeldstatus() == Feldstatus.BESETZT){
 					spielfeldPublic.getFelder()[i][j].setFeldstatus(Feldstatus.GETROFFEN);
 					spielfeld.getFelder()[i][j].setFeldstatus(Feldstatus.GETROFFEN);
-					System.out.println(ConsoleColor.ANSI_GREEN+"--------------------------");
-					System.out.println("DAS ZIEL WURDE GETROFFEN!!");
-					System.out.println("--------------------------"+ConsoleColor.ANSI_RESET);
+
 					schiffVersenkt(new Position(j+1, i+1));	
 				}else if (spielfeldPublic.getFelder()[i][j].getFeldstatus() == Feldstatus.VERFEHLT && spielfeld.getFelder()[i][j].getFeldstatus() == Feldstatus.WASSER){
 					spielfeld.getFelder()[i][j].setFeldstatus(Feldstatus.VERFEHLT);
-					System.out.println(ConsoleColor.ANSI_RED+"--------------------------"+ConsoleColor.ANSI_RESET);
-					System.out.println (ConsoleColor.ANSI_RED+"DAS ZIEL WURDE VERFEHLT!!"+ConsoleColor.ANSI_RESET);
-					System.out.println(ConsoleColor.ANSI_RED+"--------------------------"+ConsoleColor.ANSI_RESET);
 				}
 			}
 		}

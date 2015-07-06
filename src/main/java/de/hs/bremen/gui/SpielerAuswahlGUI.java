@@ -10,6 +10,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Bildschirm zur Auswahl der Spieler
+ * @author Christin
+ *
+ */
 public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	
 	private JButton spieler1;
@@ -19,7 +24,9 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	private JButton spieler5;
 	private JButton spieler6;
 	private JButton weiter;
+	
 	private int spielerAnzahl;
+	
 	private JPanel fuellcontainer1;
 	private JPanel container1_inhalt1;
 	private JPanel container1_inhalt2;
@@ -27,25 +34,38 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 	private JPanel container1_inhalt4;
 	private JLabel ausgewaehlteSpielerText;
 	private JLabel spielerAnzahltext;
-	FlowLayout flowlayout= new FlowLayout();
-	
-	public int getSpielerAnzahl() {
-		return spielerAnzahl;
-	}
-	public void setSpielerAnzahl(int spielerAnzahl) {
-		this.spielerAnzahl = spielerAnzahl;
-	}
 	
 	
-	// Konstruktor
+	/**
+	 * Konstruktor
+	 */
 	public SpielerAuswahlGUI(){
 		initComponents();
 		setVisible(true);		
 	}
 	
+	/**
+	 * Getter Anzahl der Spieler
+	 * @return
+	 */
+	public int getSpielerAnzahl() {
+		return spielerAnzahl;
+	}
+	/**
+	 * Setter Anzahl der Spieler
+	 * @param spielerAnzahl: Wie viele Spieler im Spiel vorhanden sind
+	 */
+	public void setSpielerAnzahl(int spielerAnzahl) {
+		this.spielerAnzahl = spielerAnzahl;
+	}
+	
+	/**
+	 * Erzeugt die GUI bei der Auswahl der Spieler
+	 */
 	public void initComponents(){
 		
 		this.setLayout(new GridLayout(0,1,0,0));
+		FlowLayout flowlayout= new FlowLayout();
 		
 		container1_inhalt1 = new JPanel();
 		container1_inhalt2 = new JPanel();
@@ -95,9 +115,11 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		this.add(container1_inhalt4);
 
 	}
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// Warum ich hier keine Klammern setzen muss kp.. geht auch so. vll ja mit klammer besser
 		if(e.getSource() == spieler1){
 			auswahlZahlSpieler(1);
 			ausgewaehlteSpielerText.setText("Es wurde 1 Spieler ausgewählt");
@@ -143,11 +165,20 @@ public class SpielerAuswahlGUI extends JPanel implements ActionListener {
 		
 	}
 	
+	/**
+	 * Übergibt die Auswahl der gewählten Spieler
+	 * @param i: Anzahl der Spieler
+	 * @return
+	 */
 	public int auswahlZahlSpieler(int i){
 		spielerAnzahl=i;
 		return i;
 	}
 	
+	/**
+	 * Aktion zum Wechsel zur Schiffsauswahl
+	 * @param l
+	 */
 	public void setActionListener(ActionListener l){
 		weiter.addActionListener(l);
 		

@@ -22,8 +22,8 @@ public class Fregatte extends Schiff {
 		
 	/**
 	 * Konstruktor.
-	 * @param position
-	 * @param horizontal
+	 * @param position: Position der Fregatte
+	 * @param horizontal: ob das Schiff horizontal ist
 	 */
 	public Fregatte(Position position, boolean horizontal){
 		super(position, horizontal);

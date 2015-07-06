@@ -5,52 +5,80 @@ import java.util.ArrayList;
 import de.hs.bremen.controller.MainController;
 import de.hs.bremen.enums.Feldstatus;
 
+/**
+ * Klasse des Computergegners
+ * @author Christin
+ *
+ */
 public class ComputerGegner extends Actor {
 	/**
-	 * 
+	 * SerialVersionUID zum Speichern und Lesen
 	 */
 	private static final long serialVersionUID = 8717880889204496799L;
+	
+	/**
+	 * Der Gegner Spieler
+	 */
 	private Actor[] gegner;
+
+	/**
+	 * Arraylist für die Schüsse
+	 */
 	private ArrayList<Position> shots;
 	
+	/**
+	 * Konstruktor
+	 * @param name des Computergegners
+	 */
 	public ComputerGegner(String name){
 		super(name);
 		shots= new ArrayList<Position>();
 	}
 	
 	
+	/**
+	 * Zufallsberechnung der Zeile
+	 * @return zeile: X Achse
+	 */
 	public int randomRechnerZeile(){
-		int spalte= (int)(Math.random()*getSpielfeld().getSpielfeldgroesse())+1;
-		return spalte;
+		int zeile= (int)(Math.random()*getSpielfeld().getSpielfeldgroesse())+1;
+		return zeile;
 	}
 	
+	/**
+	 * Zufallsberechnung der Spalte
+	 * @return spalte: Y Achse
+	 */
 	public int randomRechnerSpalte(){
 		int spalte= (int)(Math.random()*getSpielfeld().getSpielfeldgroesse())+1;
 		return spalte;	
 	}
 	
+	/**
+	 * Zufallsberechnung der Ausrichung
+	 * @return Ausrichtung: horizontal oder vertikal
+	 */
 	public int ausrichtung(){
 		int ausrichtung=(int)(Math.random()*2)+1;
 		return ausrichtung;
 	}
 	
 
+	/**
+	 * Setzt die Schiffe für den Computergegner
+	 * @param schiffe: Schiffe die gesetzt werden können
+	 */
 	public void schiffeSetzen(ArrayList <Schiff> schiffe){
 		int zeile=0;
 		int spalte=0;
 		int hori=0;
 		boolean horizontal=false;
 
-		
 		for(int i=0; i< schiffe.size(); i++){
-			System.out.println(schiffe.get(i).getName());
 			do {
 				zeile= randomRechnerZeile();
 				spalte= randomRechnerSpalte();
 				hori=ausrichtung();
-				System.out.println("zeile " +zeile);
-				System.out.println("spalte " +spalte);
-				System.out.println("Ausrichtung" +hori);
 				
 			}while(!getSpielfeld().schiffPlazierbar(schiffe.get(i), new Position(spalte, zeile), hori));
 			if(hori == 1){
@@ -65,6 +93,10 @@ public class ComputerGegner extends Actor {
 		
 	
 	
+	/**
+	 * Übergibt die Schiffe, mit denen geschossen werden kann
+	 * @return schiff: Schiffe ohne Wartezeit
+	 */
 	public Schiff schiffZumSchießen(){
 		Schiff schiff= null;
 		if(getSpielfeld().schiffeOhneWarteZeit()){
@@ -79,6 +111,9 @@ public class ComputerGegner extends Actor {
 	}
 	
 	
+	/**
+	 * Setzt die Position des Feuers an einer zufälligen Stelle
+	 */
 	public void intelligent(){
 		int spalte=randomRechnerSpalte();
 		int zeile= randomRechnerZeile();
@@ -89,6 +124,11 @@ public class ComputerGegner extends Actor {
 		}
 	}
 	
+	/**
+	 * Erzeugt das Feuer auf das gegnerische Spielfeld
+	 * @param position: dort wird das Feuer gesetzt
+	 * @param schiff: mit diesem Schiff wird geschossen
+	 */
 	public void kiFeuern(Position position, Schiff schiff){
 		Actor gegner=spielerAuswahl();
 		Position[] positionsarray= new Position[schiff.getFeuerstaerke()];
@@ -103,6 +143,10 @@ public class ComputerGegner extends Actor {
 		}
 	}
 	
+	/**
+	 * Übergibt die Treffer beim gegnerischen Spielfeld
+	 * @param gegner:Der ausgewählte Gegner
+	 */
 	public void getGegnerTreffer(Actor gegner){
 		shots = null;
 		shots = new ArrayList<Position>();
@@ -115,6 +159,10 @@ public class ComputerGegner extends Actor {
 	    }
 	}
 	
+	/**
+	 * Zufällige Auswahl auf welchen Spieler gefeuert werden soll
+	 * @return den zufällig ausgewählten Gegner
+	 */
 	public Actor spielerAuswahl(){
 		int anzahlSpieler = this.gegner.length;
 		Actor gegner;
@@ -125,11 +173,19 @@ public class ComputerGegner extends Actor {
 	}
 
 
+	/**
+	 * Getter vom Gegner
+	 * @return den Gegner
+	 */
 	public Actor[] getGegner() {
 		return gegner;
 	}
 
 
+	/**
+	 * Setter vom Gegner
+	 * @param gegner
+	 */
 	public void setGegner(Actor[] gegner) {
 		this.gegner = gegner;
 	}

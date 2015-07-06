@@ -6,7 +6,7 @@ import de.hs.bremen.enums.Feldstatus;
 public class SpielfeldPublic extends AbstractSpielfeld {
 
 	/**
-	 * 
+	 * SerialVersionUID zum Speichern und Lesen
 	 */
 	private static final long serialVersionUID = 7038045028562697796L;
 

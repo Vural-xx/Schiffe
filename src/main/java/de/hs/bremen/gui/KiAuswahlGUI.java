@@ -10,6 +10,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Bildschirm zur Auswahl der KI
+ * @author Christin
+ *
+ */
 public class KiAuswahlGUI extends JPanel implements ActionListener {
 	
 	private JButton computer1;
@@ -33,26 +38,32 @@ public class KiAuswahlGUI extends JPanel implements ActionListener {
 	
 	FlowLayout flowlayout= new FlowLayout();
 	
+	/**
+	 * Getter der Anzahl der Spieler
+	 * @return
+	 */
 	public int getSpielerAnzahl() {
 		return kiAnzahl;
 	}
+	/**
+	 * Setter der Anzahl der Spieler
+	 * @param spielerAnzahl: Wie viele KI Gegner gesetzt werden
+	 */
 	public void setSpielerAnzahl(int spielerAnzahl) {
 		this.kiAnzahl = spielerAnzahl;
 	}
 	
-	
-	
-	// Konstruktor
+	/**
+	 * Konstruktor
+	 */
 	public KiAuswahlGUI(){
 		initComponents();
 		setVisible(true);		
 	}
 	
-	
-	
-	
-	
-	
+	/**
+	 * Erzeugt die GUI zur Auswahl der KI Gegner
+	 */
 	public void initComponents(){
 		
 		this.setLayout(new GridLayout(0,1,0,0));
@@ -63,8 +74,6 @@ public class KiAuswahlGUI extends JPanel implements ActionListener {
 		container1_inhalt3 = new JPanel();
 		container1_inhalt4= new JPanel();
 		container1_inhalt1= new JPanel();
-		
-	
 		
 		computer1 = new JButton("0");
 		computer2 = new JButton("1");
@@ -83,16 +92,13 @@ public class KiAuswahlGUI extends JPanel implements ActionListener {
 		computer5.addActionListener(this);
 		computer6.addActionListener(this);
 		
-		spielerAnzahltext= new JLabel("Bitte wählen Sie die bitte wählen Sie die Computergegneranzahl aus:");
+		spielerAnzahltext= new JLabel("Bitte wählen Sie die Computergegneranzahl aus:");
 		container1_inhalt1.add(spielerAnzahltext);
 		
 		ausgewaehlteGegnerText= new JLabel();
 		ausgewaehlteGegnerText.setForeground(Color.blue);
 		
 		container1_inhalt3.add(ausgewaehlteGegnerText);
-		
-		
-
 		
 		container1_inhalt2.setLayout(flowlayout);
 		container1_inhalt2.add(computer1);
@@ -113,9 +119,11 @@ public class KiAuswahlGUI extends JPanel implements ActionListener {
 		
 		
 	}
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// Warum ich hier keine Klammern setzen muss kp.. geht auch so. vll ja mit klammer besser
 		if(e.getSource() == computer1){
 			auswahlZahlSpieler(0);
 			ausgewaehlteGegnerText.setText("Es wurde 0 KI-Gegner ausgewählt");
@@ -158,25 +166,34 @@ public class KiAuswahlGUI extends JPanel implements ActionListener {
 			weiter.setEnabled(true);
 			weiter.revalidate();
 		}
-		
 	}
 	
+	/**
+	 * Anzahl der KI Gegner
+	 * @param i: Anzahl der KI Gegner
+	 * @return
+	 */
 	public int auswahlZahlSpieler(int i){
 		kiAnzahl=i;
 		return i;
 	}
 	
 
+	/**
+	 * Erzeugt den Wechsel, wenn Anzahl der KI Gegner gewählt wurde
+	 * @param l
+	 */
 	public void setActionListener(ActionListener l){
 		weiter.addActionListener(l);
 		
 	}
 	
+	/**
+	 * Setzt bei einem Menschspieler 0 KI Gegner auf unsichtbar, sodass nicht allein gespielt werden kann
+	 */
 	public void buttonBeiEinemSpieler(){
 		computer1.setEnabled(false);
-	}
-	
-	
+	}	
 
 }
 

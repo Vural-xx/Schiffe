@@ -15,23 +15,46 @@ import de.hs.bremen.model.Schiff;
 import de.hs.bremen.model.Spiel;
 import de.hs.bremen.persistence.ObjectPersistenceManager;
 
+/**
+ * HauptController zur Verknüpfung zwischen GUI und Model
+ * @author Christin
+ *
+ */
 public class MainController extends AbstractController {
-	private EinstellungController einstellungController;
-	private RundenController rundenController;
-	private SchiffeSetzenController schiffeSetzenController;
-	private Schiff ausgewähltesSchiff;
-	private int spielfeldgroesse;
-	private boolean rundeSpielt;
-
 	
-	public int getSpielfeldgroesse() {
-		return spielfeldgroesse;
-	}
-
-	public void setSpielfeldgroesse(int spielfeldgroesse) {
-		this.spielfeldgroesse = spielfeldgroesse;
-	}
-
+	/**
+	 * 
+	 */
+	private EinstellungController einstellungController;
+	
+	/**
+	 * 
+	 */
+	private RundenController rundenController;
+	
+	/**
+	 * 
+	 */
+	private SchiffeSetzenController schiffeSetzenController;
+	
+	/**
+	 * 
+	 */
+	private Schiff ausgewähltesSchiff;
+	
+	/**
+	 * 
+	 */
+	private int spielfeldgroesse;
+	
+	/**
+	 * 
+	 */
+	private boolean rundeSpielt;
+	
+	/**
+	 * Konstruktor
+	 */
 	public MainController() {
 		super();
 		setMainFrame(new MainFrame(this));
@@ -39,19 +62,130 @@ public class MainController extends AbstractController {
 		startEinstellungController();
 	}
 	
+	/**
+	 * Getter Spielfeldgröße
+	 * @return
+	 */
+	public int getSpielfeldgroesse() {
+		return spielfeldgroesse;
+	}
+
+	/**
+	 * Setter Spielfeldgröße
+	 * @param spielfeldgroesse: wie groß das Spielfeld ist
+	 */
+	public void setSpielfeldgroesse(int spielfeldgroesse) {
+		this.spielfeldgroesse = spielfeldgroesse;
+	}
+
+	/**
+	 * Getter für das ausgewählte Schiff
+	 * @return
+	 */
+	public Schiff getAusgewähltesSchiff() {
+		return ausgewähltesSchiff;
+	}
+
+	/**
+	 * Setter für das ausgewählte Schiff
+	 * @param ausgewähltesSchiff: welches Schiff gesetzt werden soll
+	 */
+	public void setAusgewähltesSchiff(Schiff ausgewähltesSchiff) {
+		this.ausgewähltesSchiff = ausgewähltesSchiff;
+	}
+	
+	/**
+	 * Getter SchiffSetzenController
+	 * @return
+	 */
+	public SchiffeSetzenController getSchiffeSetzenController() {
+		return schiffeSetzenController;
+	}
+	/**
+	 * Setter SchiffSetzenController
+	 * @param schiffeSetzenController: Controller für das Setzen der Schiffe
+	 */
+	public void setSchiffeSetzenController(
+			SchiffeSetzenController schiffeSetzenController) {
+		this.schiffeSetzenController = schiffeSetzenController;
+	}
+
+	/**
+	 * Getter RundenController
+	 * @return
+	 */
+	public RundenController getRundenController() {
+		return rundenController;
+	}
+
+	/**
+	 * Setter RundenController
+	 * @param rundenController: Controller für die Runde
+	 */
+	public void setRundenController(RundenController rundenController) {
+		this.rundenController = rundenController;
+	}
+	
+	/**
+	 * Getter MainController
+	 * @return
+	 */
+	public MainController getMainController(){
+		return this;
+		
+	}
+	
+	
+	/**
+	 * Getter EinstellungsController
+	 * @return
+	 */
+	public EinstellungController getEinstellungController() {
+		return einstellungController;
+	}
+
+	/**
+	 * Setter EinstellungController
+	 * @param einstellungController: Controller für die Voreinstellung des Spiels
+	 */
+	public void setEinstellungController(EinstellungController einstellungController) {
+		this.einstellungController = einstellungController;
+	}
+
+	
+	/**
+	 * Getter für die aktuellen Spieler
+	 * @return
+	 */
+	public ArrayList<Schiff> getCurrentSpielerSchiffe(){
+		return getCurrentSpieler().getSpielfeld().getSchiffe();
+	}
+	
+	/**
+	 * Startet das Spiel und die GUI
+	 */
+	public void startEinstellungController(){
+		einstellungController= new EinstellungController(this);
+	}
+	
+	/**
+	 * Entfernt den Einstellungskontroller und geht zum SchiffsetztenController über
+	 */
 	public void startSchiffeSetzen(){
 		schiffeSetzenController = new SchiffeSetzenController(this, einstellungController.getSchiffe());
 	}
-	
+
+	/**
+	 * Entfernt den SchiffSetzenController und geht zum RundenController
+	 */
 	public void startRunden(){
 		rundenController = new RundenController(this);	
 		rundeSpielt = true;
 	}
 	
-	public void startEinstellungController(){
-		einstellungController= new EinstellungController(this);
-	}
-	
+	/**
+	 * Spielerwechsel
+	 */
 	public void nextSpieler(){
 		int nextSpieler = 0;
 		for (int i = 0 ; i< getSpieler().length;i++){
@@ -67,6 +201,11 @@ public class MainController extends AbstractController {
 		getSpieler()[nextSpieler].setIstDran(true);
 	}
 	
+	/**
+	 * Übergibt, ob das Schiff eine Wartezeit hat
+	 * @param name: Name des Schiffs
+	 * @return
+	 */
 	public boolean schiffOhneWartezeit(String name){
 		boolean ohneWartezeit = false;
 		for(Schiff s: getCurrentSpieler().getSpielfeld().getSchiffe()){
@@ -78,6 +217,10 @@ public class MainController extends AbstractController {
 	}
 	
 	
+	/**
+	 * Übergibt den aktuellen Spieler
+	 * @return: der aktuelle Spieler
+	 */
 	public Actor getCurrentSpieler(){
 		Actor spieler = null;
 		for(int i = 0 ; i < getSpieler().length; i++){
@@ -88,19 +231,11 @@ public class MainController extends AbstractController {
 		return spieler;
 	}
 	
-	public EinstellungController getEinstellungController() {
-		return einstellungController;
-	}
-
-	public void setEinstellungController(EinstellungController einstellungController) {
-		this.einstellungController = einstellungController;
-	}
-
-	public void setSchiffeSetzenController(
-			SchiffeSetzenController schiffeSetzenController) {
-		this.schiffeSetzenController = schiffeSetzenController;
-	}
-
+	
+	/**
+	 * Übergibt den Index des aktuellen Spielers
+	 * @return Index des Spielers
+	 */
 	public int getCurrentSpielerIndex(){
 		int spieler = 0;
 		for(int i = 0 ; i < getSpieler().length; i++){
@@ -111,6 +246,10 @@ public class MainController extends AbstractController {
 		return spieler;
 	}
 	
+	/**
+	 * Übergibt den Index  des nächsten Spielers
+	 * @return nächster Spieler
+	 */
 	public int getNextSpielerIndex(){
 		int nextSpieler = 0;
 		for (int i = 0 ; i< getSpieler().length;i++){
@@ -123,6 +262,9 @@ public class MainController extends AbstractController {
 		return nextSpieler;
 	}
 	
+	/**
+	 * reduziert die Wartezeit, wenn das Schiff genutzt wurde
+	 */
 	public void wartezeitVerringern(){
 		Schiff wartezeitResetSchiff = null;
 		for(int i=0; i< getSpieler().length;i++){
@@ -138,39 +280,23 @@ public class MainController extends AbstractController {
 		}
 	}
 	
-	public ArrayList<Schiff> getCurrentSpielerSchiffe(){
-		return getCurrentSpieler().getSpielfeld().getSchiffe();
-	}
 	
+	
+	/**
+	 * Überprüft, ob es der letzte Spieler der Runde ist
+	 * @return
+	 */
 	public boolean lastRundenSpieler(){
 		return getCurrentSpielerIndex() +1== getSpieler().length;
 		
 	}
 	
-	public Schiff getAusgewähltesSchiff() {
-		return ausgewähltesSchiff;
-	}
-
-	public void setAusgewähltesSchiff(Schiff ausgewähltesSchiff) {
-		this.ausgewähltesSchiff = ausgewähltesSchiff;
-	}
 	
-	public SchiffeSetzenController getSchiffeSetzenController() {
-		return schiffeSetzenController;
-	}
-
-	public RundenController getRundenController() {
-		return rundenController;
-	}
-
-	public void setRundenController(RundenController rundenController) {
-		this.rundenController = rundenController;
-	}
-	
-	public MainController getMainController(){
-		return this;
-		
-	}
+	/**
+	 * Klasse zum Laden eine Spielstandes
+	 * @author Christin
+	 *
+	 */
 	class LadeItemKlick implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -188,11 +314,15 @@ public class MainController extends AbstractController {
 		
 	}
 	
+	/**
+	 * Klasse zum Speichern eines Spielstandes
+	 * @author Christin
+	 *
+	 */
 	class SpeichernItemKlick implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(rundeSpielt){
-				JMenuItem jMenuItem = (JMenuItem) e.getSource();
 			    ObjectPersistenceManager opm = new ObjectPersistenceManager();
 			    String speicherName = JOptionPane.showInputDialog(null, "Wie wollen Sie den Spielstand benennen?");
 			    File folder = new File("src/temp");

@@ -17,6 +17,11 @@ import javax.swing.JPanel;
 import de.hs.bremen.controller.MainController;
 import de.hs.bremen.persistence.*;
 
+/**
+ * HauptFenster, diese Komponenten sind immer vorhanden
+ * @author Christin
+ *
+ */
 public class MainFrame extends javax.swing.JFrame{
 	private Toolkit t;
 	private int x=0,y=0,width=1072, height=600;
@@ -36,6 +41,10 @@ public class MainFrame extends javax.swing.JFrame{
 	private MainController mainController;
 	
 	
+	/**
+	 * Konstruktor
+	 * @param mainController
+	 */
 	public MainFrame(MainController mainController){
 		this.mainController = mainController;
 		setTitle("Schiffe versenken");
@@ -48,7 +57,6 @@ public class MainFrame extends javax.swing.JFrame{
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		// Fixed JFrame
         setResizable(false);
         
         initMenu();
@@ -57,8 +65,10 @@ public class MainFrame extends javax.swing.JFrame{
 	}
 
 	
+	/**
+	 * Baut das Menü
+	 */
 	private void initMenu(){
-		// Menu bauen
 		menuBar = new JMenuBar();
 		fileMenu = new JMenu("Menü");
 		hilfe = new JMenu("Hilfe");
@@ -81,12 +91,16 @@ public class MainFrame extends javax.swing.JFrame{
 		
 	}
 	
+	/**
+	 * Erzeugt die Fenster beim neuen Spiel, der Anleitung und dem Infokasten
+	 */
 	private void initListeners(){
 		this.newGameItem.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Test");
+				mainController.setMainFrame(new MainFrame(mainController));
+				mainController.startEinstellungController();
 
 			}
 			
@@ -111,6 +125,11 @@ public class MainFrame extends javax.swing.JFrame{
 		});
 	}
 	
+	/**
+	 * Ermöglicht das Speichern und Laden
+	 * @param speichern: zum Speichern des Spielstandes
+	 * @param laden: zum Laden des Spielstandes
+	 */
 	public void setActionListener(ActionListener speichern, ActionListener laden){
 		File folder = new File("src/temp");
 		File[] listOfFiles = folder.listFiles();

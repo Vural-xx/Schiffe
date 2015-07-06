@@ -18,27 +18,42 @@ import de.hs.bremen.controller.MainController;
 import de.hs.bremen.controller.SchiffeSetzenController;
 import de.hs.bremen.enums.Spielfeldmodus;
 
+/**
+ * Bildschirm zum Setzen der Schiffe
+ * @author Christin
+ *
+ */
 public class SchiffSetzenGUI extends JPanel{
 
 	private JLabel textLabel3;
 	private JLabel textLabel4;
-	private JPanel container5;
-	private JPanel container6;
-	private JButton button1;
-	private JButton button2;
-	private JTextField textField;
-	private SpielerfeldGUI[] spielerfeld;
-	public MainController mainController;
 	private JLabel zerstoerAnzahl;
 	private JLabel fregatteAnzahl;
 	private JLabel korvetteAnzahl;
 	private JLabel ubootAnzahl;
 	public JLabel ausrichtungText;
+	
+	private JPanel container5;
+	private JPanel container6;
+	
+	private JButton button1;
+	private JButton button2;
 	private JButton zerstoerer;
 	private JButton fregatte;
 	private JButton korvette;
 	private JButton uboot;
 	
+	private JTextField textField;
+	private SpielerfeldGUI[] spielerfeld;
+	public MainController mainController;
+	
+
+	
+	/**
+	 * Kontruktor
+	 * @param mainController: HauptController
+	 * @param schiffeSetzenController: Controller zum Setzen der Schiffe
+	 */
 	public SchiffSetzenGUI(MainController mainController, SchiffeSetzenController schiffeSetzenController){
 		this.mainController = mainController;
 		initComponents(schiffeSetzenController);
@@ -46,6 +61,10 @@ public class SchiffSetzenGUI extends JPanel{
 		setVisible(true);
 		
 	}
+	/**
+	 * Erzeugt die GUI beim Setzen der Schiffe
+	 * @param schiffeSetzenController
+	 */
 	public void initComponents(SchiffeSetzenController schiffeSetzenController){
 		
 		textLabel3 = new JLabel("Herzlich Willkommen bei Schiffe versenken!");
@@ -101,6 +120,7 @@ public class SchiffSetzenGUI extends JPanel{
 		container5.add(Box.createVerticalGlue());
 		container5.add(Box.createVerticalGlue());
 		container5.add(Box.createVerticalGlue());
+		
 		if(!mainController.lastRundenSpieler()){
 			container5.add(button1);	
 		}
@@ -116,22 +136,23 @@ public class SchiffSetzenGUI extends JPanel{
 		spielerfeld[mainController.getCurrentSpielerIndex()] = new SpielerfeldGUI(mainController.getSpielfeldgroesse()*15, 15,mainController,Spielfeldmodus.SETZEN);
 		container6.add(textLabel4);
 		container6.add(spielerfeld[mainController.getCurrentSpielerIndex()]);
-		container6.setBorder(BorderFactory.createEmptyBorder(30, 250, 30, 30));//(top, left, bottom, right)
+		container6.setBorder(BorderFactory.createEmptyBorder(30, 250, 30, 30));
 		JLabel infoText = new JLabel ("Änderung der Schiffausrichtung: Drücke die rechte Maustaste");
 		container6.add(infoText);
 		ausrichtungText= new JLabel("Ihr Schiff ist horizontal ausgerichtet.");
 		ausrichtungText.setForeground(Color.blue);
 		container6.add(ausrichtungText);	
 		
-		this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));//(top, left, bottom, right)
+		this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		this.setLayout(new BorderLayout(5,5));
 		this.add(textLabel3, BorderLayout.NORTH);
 		this.add(container6, BorderLayout.CENTER);
 		this.add(container5, BorderLayout.EAST);
-
-		
 	}
 	
+	/**
+	 * Erzeugt die Button der zu setzenden Schiffe
+	 */
 	public void schiffGesetzt(){
 		int zerstoererZahl = mainController.getSchiffeSetzenController().getAnzahlUngesetzteSchiffe("Zerstoerer");    
 		int fregatteZahl = mainController.getSchiffeSetzenController().getAnzahlUngesetzteSchiffe("Fregatte");  
@@ -168,6 +189,12 @@ public class SchiffSetzenGUI extends JPanel{
 		revalidate();
 	}
 	
+	/**
+	 * Führt Aktionen zum Spielerwechsel, SchiffeSetzen und zu RundeWechsel durch
+	 * @param spielerWechselListener: Spielerwechsel
+	 * @param finishListener: Zu Runde Wechsel
+	 * @param schiffButtonListener: SchiffeSetzen der jeweiligen Button
+	 */
 	public void setActionListener(ActionListener spielerWechselListener, ActionListener finishListener, ActionListener schiffButtonListener){
 		button1.addActionListener(spielerWechselListener);
 		button2.addActionListener(finishListener);

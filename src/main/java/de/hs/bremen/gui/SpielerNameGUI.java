@@ -14,6 +14,11 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+/**
+ * Bildschirm zur Auswahl der Spielernamen
+ * @author Christin
+ *
+ */
 public class SpielerNameGUI extends JPanel implements DocumentListener  {
 	
 	public JLabel spielerNametext;
@@ -23,6 +28,9 @@ public class SpielerNameGUI extends JPanel implements DocumentListener  {
 	private int spieler;
 	FlowLayout flowLayout;
 	
+	/**
+	 * Konstruktor
+	 */
 	public SpielerNameGUI(){
 		
 		initComponents();
@@ -30,6 +38,9 @@ public class SpielerNameGUI extends JPanel implements DocumentListener  {
 		
 	}
 	
+	/**
+	 * Erzeugt die GUI zur Eingabe der Spielernamen
+	 */
 	public void initComponents(){
 		
 		this.setLayout(new GridBagLayout());
@@ -42,6 +53,10 @@ public class SpielerNameGUI extends JPanel implements DocumentListener  {
 	}
 	
 	
+	/**
+	 * Erstellt die Eingabefelder nach Auswahl der Spieleranzahl
+	 * @param spieleranzahl: Anzahl der Spieler die gewählt wurden
+	 */
 	public void createNameFenster(int spieleranzahl){
 		spielerEingabe = new JTextField[spieleranzahl];
 		for(int i= 0; i <spieleranzahl; i++){
@@ -61,6 +76,10 @@ public class SpielerNameGUI extends JPanel implements DocumentListener  {
 	}
 
 	
+	/**
+	 * Aktion zum Wechsel von der Namensauswahl zur Auswahl der Spielfeldgröße
+	 * @param l
+	 */
 	public void setActionListener(ActionListener l){
 		weiter.addActionListener(l);
 		
@@ -68,6 +87,9 @@ public class SpielerNameGUI extends JPanel implements DocumentListener  {
 
 
 
+	/* (non-Javadoc)
+	 * @see javax.swing.event.DocumentListener#insertUpdate(javax.swing.event.DocumentEvent)
+	 */
 	@Override
 	public void insertUpdate(DocumentEvent e) {
 		pruefen();
@@ -75,6 +97,9 @@ public class SpielerNameGUI extends JPanel implements DocumentListener  {
 
 
 
+	/* (non-Javadoc)
+	 * @see javax.swing.event.DocumentListener#removeUpdate(javax.swing.event.DocumentEvent)
+	 */
 	@Override
 	public void removeUpdate(DocumentEvent e) {
 		pruefen();
@@ -83,12 +108,18 @@ public class SpielerNameGUI extends JPanel implements DocumentListener  {
 
 
 
+	/* (non-Javadoc)
+	 * @see javax.swing.event.DocumentListener#changedUpdate(javax.swing.event.DocumentEvent)
+	 */
 	@Override
 	public void changedUpdate(DocumentEvent e) {
 		pruefen();
 		
 	}
 
+	/**
+	 * Prüft, ob die gewählten Eingaben korrekt sind
+	 */
 	public void pruefen() {
 		int counter=0;
 		weiter.setEnabled(false);

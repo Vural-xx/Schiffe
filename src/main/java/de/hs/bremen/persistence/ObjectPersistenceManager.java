@@ -9,7 +9,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import de.hs.bremen.model.Spiel;
-import de.hs.bremen.model.Spieler;
 
 public class ObjectPersistenceManager implements PersistenceManager {
 	
@@ -17,22 +16,34 @@ public class ObjectPersistenceManager implements PersistenceManager {
 	 * Stream zum Schreiben.
 	 */
 	ObjectOutputStream outputStream= null;
+	
 	/**
 	 * Stream zum Lesen.
 	 */
 	ObjectInputStream inputStream = null;
 
+	/* (non-Javadoc)
+	 * @see de.hs.bremen.persistence.PersistenceManager#openForReading(java.lang.String)
+	 */
 	@Override
 	public void openForReading(String datenquelle) throws IOException {
 		inputStream = new ObjectInputStream(new BufferedInputStream(new FileInputStream(datenquelle)));		
 	}
 
+	/* (non-Javadoc)
+	 * @see de.hs.bremen.persistence.PersistenceManager#openForWriting(java.lang.String)
+	 */
 	@Override
 	public void openForWriting(String datenquelle) throws IOException {
 		outputStream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(datenquelle)));
 		
 	}
 	
+	/**
+	 * Speichert den Spielstand
+	 * @param spiel: Welches Spiel gespeichert werden soll
+	 * @param datenquelle: Wie das Spiel heißt
+	 */
 	public void spielstandSpeichern(Spiel spiel,String datenquelle){
 		try {
 			openForWriting("src/temp/"+datenquelle);
@@ -50,6 +61,11 @@ public class ObjectPersistenceManager implements PersistenceManager {
 		}
 	}
 	
+	/**
+	 * Läd einen gespeicherten Spielstand
+	 * @param datenquelle: die Name des Spielstand
+	 * @return
+	 */
 	public Spiel spielstandLaden(String datenquelle){
 		Spiel spiel = null;
 		try {
