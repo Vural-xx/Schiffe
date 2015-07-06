@@ -40,4 +40,15 @@ public class SpielfeldPublic extends AbstractSpielfeld {
 		}
 	}
 
+	public boolean schussPlatzierbar(Schiff schiff, Position position){
+		if((position.getPositionY() <=0 || position.getPositonX() <=0)
+				|| (position.getPositonX() + schiff.getFeuerstaerke() > getSpielfeldgroesse())){
+			return false;
+		} else {
+			return true;
+		}
+	} 
+	
 }
+
+

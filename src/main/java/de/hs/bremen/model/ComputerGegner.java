@@ -1,5 +1,6 @@
 package de.hs.bremen.model;
 
+import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 
 import de.hs.bremen.controller.MainController;
@@ -12,6 +13,8 @@ public class ComputerGegner extends Actor {
 	private static final long serialVersionUID = 8717880889204496799L;
 	private Actor[] gegner;
 	private ArrayList<Position> shots;
+	private int tempZeile=0;
+	private int tempSpalte=0;
 	
 	public ComputerGegner(String name){
 		super(name);
@@ -20,12 +23,12 @@ public class ComputerGegner extends Actor {
 	
 	
 	public int randomRechnerZeile(){
-		int spalte= (int)(Math.random()*getSpielfeld().getSpielfeldgroesse())+1;
+		int spalte= (int)(Math.random()*5)+1;
 		return spalte;
 	}
 	
 	public int randomRechnerSpalte(){
-		int spalte= (int)(Math.random()*getSpielfeld().getSpielfeldgroesse())+1;
+		int spalte= (int)(Math.random()*5)+1;
 		return spalte;	
 	}
 	
@@ -43,14 +46,11 @@ public class ComputerGegner extends Actor {
 
 		
 		for(int i=0; i< schiffe.size(); i++){
-			System.out.println(schiffe.get(i).getName());
 			do {
 				zeile= randomRechnerZeile();
 				spalte= randomRechnerSpalte();
 				hori=ausrichtung();
-				System.out.println("zeile " +zeile);
-				System.out.println("spalte " +spalte);
-				System.out.println("Ausrichtung" +hori);
+
 				
 			}while(!getSpielfeld().schiffPlazierbar(schiffe.get(i), new Position(spalte, zeile), hori));
 			if(hori == 1){
@@ -66,11 +66,12 @@ public class ComputerGegner extends Actor {
 	
 	
 	public Schiff schiffZumSchießen(){
+		int feuerstaerke=0;
 		Schiff schiff= null;
 		if(getSpielfeld().schiffeOhneWarteZeit()){
-			schiff = getSpielfeld().getSchiffe().get(0);
 			for(int i=0; i <getSpielfeld().getSchiffe().size();i++){
-				if(getSpielfeld().getSchiffe().get(i).getFeuerstaerke()>schiff.getFeuerstaerke() && schiff.getWartezeit()==0){
+				if(getSpielfeld().getSchiffe().get(i).getFeuerstaerke()>feuerstaerke && getSpielfeld().getSchiffe().get(i).getWartezeit()==0){
+					feuerstaerke= getSpielfeld().getSchiffe().get(i).getFeuerstaerke();
 					schiff=getSpielfeld().getSchiffe().get(i);
 				}
 			}
@@ -80,14 +81,28 @@ public class ComputerGegner extends Actor {
 	
 	
 	public void intelligent(){
-		int spalte=randomRechnerSpalte();
-		int zeile= randomRechnerZeile();
-		Position position= new Position(spalte, zeile);
 		Schiff schiff= schiffZumSchießen();
+		Schiff tempschiff;
+		int spalte;
+		int zeile;
+
+		Position position;
+			do{
+				spalte=randomRechnerSpalte();
+				zeile=randomRechnerZeile();
+				position=new Position(spalte, zeile);
+			}while(!gegner[0].getSpielfeldPublic().schussPlatzierbar(schiff, position)&& gegner[0].getSpielfeld().getFeld(zeile-1, spalte-1).getFeldstatus()==Feldstatus.WASSER && gegner[0].getSpielfeld().getFeld(zeile-1, spalte-1).getFeldstatus()==Feldstatus.BESETZT &&gegner[0].getSpielfeld().getFeld(zeile-1, spalte-1).getFeldstatus()==Feldstatus.GETROFFEN);
 		if(schiff != null){
-			kiFeuern(position, schiff);
+			if(wennGetroffen(schiff, spalte, zeile)){
+				tempschiff=schiff;
+				tempSpalte=tempSpalte+tempschiff.getFeuerstaerke();
+				kiFeuern(new Position(tempSpalte, tempZeile), tempschiff);
+			} else {
+				kiFeuern(position, schiff);
+			}
 		}
 	}
+	
 	
 	public void kiFeuern(Position position, Schiff schiff){
 		Actor gegner=spielerAuswahl();
@@ -101,6 +116,33 @@ public class ComputerGegner extends Actor {
 			shots.add(new Position(position.getPositonX()+i, position.getPositionY()));
 			
 		}
+	}
+	
+	public boolean wennGetroffen(Schiff schiff, int spalte, int zeile){
+		System.out.println(spalte);
+		System.out.println(zeile);
+		int counter=0;
+		int test=zeile+schiff.getFeuerstaerke();
+		int feuerstaerke= schiff.getFeuerstaerke();
+		for(int i=0; i< schiff.getFeuerstaerke(); i++){
+			System.out.println(((zeile)+i) +"blabla");
+
+			System.out.println((zeile+schiff.getFeuerstaerke()));
+
+			if(((test< getSpielfeld().getSpielfeldgroesse()) && gegner[0].getSpielfeld().getFeld(((spalte-1)+i),(zeile-1)).getFeldstatus()==Feldstatus.BESETZT)){
+	
+				
+				System.out.println("AHAHAHAHAHH");
+				counter++;
+				tempSpalte=spalte;
+				tempZeile=zeile;
+				if(counter<= schiff.getFeuerstaerke()){
+					return true;
+
+				}
+			}	
+		}
+		return false;	
 	}
 	
 	public void getGegnerTreffer(Actor gegner){

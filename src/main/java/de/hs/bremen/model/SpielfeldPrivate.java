@@ -196,6 +196,9 @@ public class SpielfeldPrivate extends AbstractSpielfeld {
 		boolean ohneWartezeit = false;
 		for(int i = 0; i <getSchiffe().size(); i++){
 			ohneWartezeit = schiffe.get(i).getWartezeit() == 0;
+			if(schiffe.get(i).getWartezeit() == 0){
+				ohneWartezeit= true;
+			}
 		}
 		return ohneWartezeit;
 	}
