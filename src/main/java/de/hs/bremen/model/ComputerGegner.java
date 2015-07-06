@@ -131,6 +131,7 @@ public class ComputerGegner extends Actor {
 			position=new Position(spalte, zeile);
 		}while(!gegner[0].getSpielfeldPublic().schussPlatzierbar(schiff, position) && gegner[0].getSpielfeldPublic().getFeld(zeile-1, spalte-1).getFeldstatus()!=Feldstatus.GETROFFEN && gegner[0].getSpielfeldPublic().getFeld(zeile-1, spalte-1).getFeldstatus()!=Feldstatus.VERSENKT);
 		if(treffer(schiff, spalte, zeile)){
+			tempSpalte=tempSpalte+schiff.getFeuerstaerke();
 		}
 		kiFeuern(new Position(spalte-1, zeile-1), schiff);
 		
