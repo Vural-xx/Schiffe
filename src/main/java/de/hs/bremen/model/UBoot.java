@@ -23,8 +23,8 @@ public class UBoot extends Schiff {
 
 	/**
 	 * Konstruktor.
-	 * @param position
-	 * @param horizontal
+	 * @param position: Position des Uboots
+	 * @param horizontal: ob das Schiff horizontal ist
 	 */
 	public UBoot(Position position, boolean horizontal){
 		super(position, horizontal);

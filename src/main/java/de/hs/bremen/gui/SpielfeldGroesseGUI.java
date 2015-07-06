@@ -14,7 +14,12 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-public class SpielfeldGroeßeGUI extends JPanel implements DocumentListener {
+/**
+ * Bildschirm zum erzeugen des Spielfeldes in der vorgegebenen Größe
+ * @author Christin
+ *
+ */
+public class SpielfeldGroesseGUI extends JPanel implements DocumentListener {
 
 	private GridBagConstraints gbc= new GridBagConstraints();
 	public JTextField spielfeldEingabe;
@@ -22,7 +27,10 @@ public class SpielfeldGroeßeGUI extends JPanel implements DocumentListener {
 	private JLabel spielfeldText;
 	private JLabel warnung;
 	
-	public SpielfeldGroeßeGUI(){
+	/**
+	 * Konstruktor
+	 */
+	public SpielfeldGroesseGUI(){
 		initComponents();
 		setVisible(true);
 		
@@ -30,6 +38,9 @@ public class SpielfeldGroeßeGUI extends JPanel implements DocumentListener {
 	}
 	
 	
+	/**
+	 * Erzeugt die GUI zur Auswahl der Spielfeldgröße
+	 */
 	public void initComponents(){
 		
 		this.setLayout(new GridBagLayout());
@@ -51,12 +62,19 @@ public class SpielfeldGroeßeGUI extends JPanel implements DocumentListener {
 		this.add(warnung,gbc);
 	}
 	
+	/**
+	 * Aktion zum Wechseln vom Spielfeldgröße festlegen zum SchiffeSetzen
+	 * @param l
+	 */
 	public void setActionListener(ActionListener l){
 		weiter.addActionListener(l);
 		
 	}
 
 
+	/* (non-Javadoc)
+	 * @see javax.swing.event.DocumentListener#insertUpdate(javax.swing.event.DocumentEvent)
+	 */
 	@Override
 	public void insertUpdate(DocumentEvent e) {
 		pruefen();
@@ -64,6 +82,9 @@ public class SpielfeldGroeßeGUI extends JPanel implements DocumentListener {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see javax.swing.event.DocumentListener#removeUpdate(javax.swing.event.DocumentEvent)
+	 */
 	@Override
 	public void removeUpdate(DocumentEvent e) {
 		pruefen();
@@ -71,6 +92,9 @@ public class SpielfeldGroeßeGUI extends JPanel implements DocumentListener {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see javax.swing.event.DocumentListener#changedUpdate(javax.swing.event.DocumentEvent)
+	 */
 	@Override
 	public void changedUpdate(DocumentEvent e) {
 		pruefen();
@@ -78,6 +102,9 @@ public class SpielfeldGroeßeGUI extends JPanel implements DocumentListener {
 	}
 	
 	
+	/**
+	 * Prüft, ob die gewählten Eingaben korrekt sind
+	 */
 	public void pruefen(){
 		int spielfeldgroesse=0;
 		String spielfeldgroesseString;
@@ -88,8 +115,8 @@ public class SpielfeldGroeßeGUI extends JPanel implements DocumentListener {
 			if(!spielfeldgroesseString.equals("")){
 				spielfeldgroesse= Integer.parseInt(spielfeldgroesseString);
 			}
-		} catch(Exception e) {
-				System.out.println("Integer fehler");		
+		} catch(Exception e) {	
+			
 		}
 		
 		if(spielfeldgroesse >= 10 && spielfeldgroesse<= 40){

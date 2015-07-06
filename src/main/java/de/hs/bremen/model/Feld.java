@@ -2,10 +2,8 @@ package de.hs.bremen.model;
 
 import java.awt.Color;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import de.hs.bremen.enums.Feldstatus;
-import de.hs.bremen.helper.ConsoleColor;
 
 /**
  * Feldklasse.
@@ -31,7 +29,7 @@ public class Feld implements Serializable{
 	
 	/**
 	 * Konstruktor
-	 * @param position
+	 * @param position: Position des Feldes
 	 */
 	public Feld(Position position){
 		feldstatus = Feldstatus.WASSER;
@@ -48,30 +46,16 @@ public class Feld implements Serializable{
 
 	/**
 	 * Setter Position.
-	 * @param position: Position welche gesetzt werden soll.
+	 * @param position: Position, welche gesetzt werden soll.
 	 */
 	public void setPosition(Position position) {
 		this.position = position;
 	}
 
-	/**
-	 * Inhalt welches aus dem Spielfeld angezeigt werden soll, wird anhand des Feldstatus "berechnet"
-	 * @return: Inhalt des Feldes
-	 */
-	public String getInhalt() {
-		if(getFeldstatus()==Feldstatus.WASSER){
-			return ConsoleColor.ANSI_BLUE+"~" + ConsoleColor.ANSI_RESET;
-		} else if(getFeldstatus()== Feldstatus.GETROFFEN){
-			return ConsoleColor.ANSI_RED+"T" + ConsoleColor.ANSI_RESET;
-		} else if (getFeldstatus()==Feldstatus.BESETZT){
-			return ConsoleColor.ANSI_CYAN+"S" + ConsoleColor.ANSI_RESET;
-		} else {
-			return ConsoleColor.ANSI_BLACK+"X" + ConsoleColor.ANSI_RESET;
-		}
-	}
+	
 	
 	/**
-	 * Inhalt welches aus dem Spielfeld angezeigt werden soll, wird anhand des Feldstatus "berechnet"
+	 * Farbe die auf dem Spielfeld angezeigt werden soll, wird anhand des Feldstatus "berechnet"
 	 * @return: Inhalt des Feldes
 	 */
 	public Color getGuiInhalt() {

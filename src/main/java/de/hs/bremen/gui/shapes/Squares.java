@@ -11,28 +11,61 @@ import javax.swing.JPanel;
 
 public class Squares extends JPanel {
 	/**
-	 * 
+	 * SerialVersionUID zum Speichern und Lesen
 	 */
 	private static final long serialVersionUID = 3518123363196992970L;
+	
+	/**
+	 * bevorzugte Breite
+	 */
 	private static final int PREF_W = 300;
+	
+	/**
+	 * bevorzugte Höhe
+	 */
 	private static final int PREF_H = PREF_W;
+	
+	/**
+	 * Arraylist der Quadrate
+	 */
 	private List<FeldShape> squares = new ArrayList<FeldShape>();
 
+	/**
+	 * Fügt die Quadrate hinzu
+	 * @param x Zeile
+	 * @param y Spalte
+	 * @param width Breite
+	 * @param height Höhe
+	 */
 	public void addSquare(int x, int y, int width, int height) {
 		FeldShape rect = new FeldShape(x, y, width, height);
 		squares.add(rect);
 	}
 
+	/**
+	 * Füllt die Quadrate mit Farbe
+	 * @param x Zeile
+	 * @param y Spalte
+	 * @param width Breite
+	 * @param height Höhe
+	 * @param c Farbe
+	 */
 	public void fillSquare(int x, int y, int width, int height, Color c) {
 		FeldShape rect = new FeldShape(x, y, width, height, c);
 		squares.add(rect);
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#getPreferredSize()
+	 */
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(PREF_W, PREF_H);
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

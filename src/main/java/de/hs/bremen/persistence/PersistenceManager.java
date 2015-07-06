@@ -11,7 +11,7 @@ public interface PersistenceManager {
 
 	/**
 	 * Öffnet eine Datei zum Lesen.
-	 * @param datenquelle: Datenquelle die gelesen werden soll.
+	 * @param datenquelle: Datenquelle, die gelesen werden soll.
 	 * @throws IOException: Input/Output Exception
 	 */
 	public void openForReading(String datenquelle) throws IOException;

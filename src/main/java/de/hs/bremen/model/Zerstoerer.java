@@ -11,6 +11,11 @@ public class Zerstoerer extends Schiff {
 		super();
 	}
 		
+	/**
+	 * Konstruktor
+	 * @param position: Position des Zerstörers
+	 * @param horizontal: ob das Schiff horizontal ist
+	 */
 	public Zerstoerer(Position position, boolean horizontal){
 		super(position, horizontal);
 	}

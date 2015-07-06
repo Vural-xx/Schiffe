@@ -8,7 +8,7 @@ import de.hs.bremen.enums.Feldstatus;
 public class SpielfeldPrivate extends AbstractSpielfeld {
 	
 	/**
-	 * 
+	 * SerialVersionUID zum Speichern und Lesen
 	 */
 	private static final long serialVersionUID = 3801850117939689350L;
 	
@@ -17,28 +17,38 @@ public class SpielfeldPrivate extends AbstractSpielfeld {
 	 */
 	private ArrayList<Schiff> schiffe;
 
+	/**
+	 * Konstruktor
+	 * @param groesse
+	 */
 	public SpielfeldPrivate(int groesse) {
 		super(groesse);
 		schiffe = new ArrayList<Schiff>();
 	}
 	
 	/**
-	 * Getter Schiffe.
+	 * Getter Schiffe
 	 * @return schiffeArray
+	 */
+	public ArrayList<Schiff> getSchiffe() {
+		return schiffe;
+	}
+	
+	/**
+	 * Setter Schiffe
+	 * @param schiffe: Setzt das Schiff
 	 */
 	public void setSchiffe(ArrayList<Schiff> schiffe) {
 		this.schiffe = schiffe;
 	}
 
 	
-	public ArrayList<Schiff> getSchiffe() {
-		return schiffe;
-	}
+	
 	
 	/**
 	 * Schiff wird auf dem Spielfeld platziert und bekommt diese Felder auch noch sich selber zugewiesen.
 	 * @param schiff: Schiff welches platziert werden soll.
-	 * @param position: Position auf dem das Schiff platziert werden soll.
+	 * @param position: Position auf die das Schiff platziert werden soll.
 	 * @param horizontal: Angabe ob das Schiff horizontal platziert werden soll.
 	 */
 	public void platziereSchiff(Schiff schiff, Position position, boolean horizontal){
@@ -58,7 +68,7 @@ public class SpielfeldPrivate extends AbstractSpielfeld {
 	}
 	
 	/**
-	 * Gibt Anzahl der Plätze die auf dem Spielfeld von Schiffen belegt sind wieder.
+	 * Gibt Anzahl der Plätze wieder, die auf dem Spielfeld von Schiffen belegt sind
 	 * @return: Belegte Plätze auf dem Spielfeld
 	 */
 	public int getPlaetzeBelegt(){
@@ -73,25 +83,18 @@ public class SpielfeldPrivate extends AbstractSpielfeld {
 	
 	/**
 	 * Anzahl der maximalen Schiffe, die auf dem Spielfeld platziert werden können.
-	 * @return
+	 * @return: maximale Anzahl an Schiffe
 	 */
 	public int getMaximumAnzahlSchiffe(){
 		return (getSpielfeldgroesse() * getSpielfeldgroesse()) / 12;
 	}
 	
-	/**
-	 * Anzahl der maximalen Schiffe, die auf dem Spielfeld für das im Parameter übergebene
-	 * Schiff platziert werden können.
-	 * @return
-	 */
-	public int getMaximumAnzahlSchiffeForSchiff(Schiff schiff){
-		return (getSpielfeldgroesse() * getSpielfeldgroesse()) / schiff.getPlaetzeBelegung();
-	}
+	
 	
 	/**
 	 * Gibt Schiff anhand einer Position wieder
 	 * @param position: Position die auf ein Schiff überprüft werden soll.
-	 * @return: Schiff welches sich an der Position befindet, oder null wenn kein Schiff vorhanden.
+	 * @return: Welches Schiff sich an der Position befindet, oder null wenn kein Schiff vorhanden.
 	 */
 	public Schiff getSchiffByPosition(Position position){
 		for(int i = 0; i<schiffe.size(); i++){
@@ -106,7 +109,7 @@ public class SpielfeldPrivate extends AbstractSpielfeld {
 	/**
 	 * Gibt Schiff anhand mehrerer Positionen wieder
 	 * @param position: Positionen die auf ein Schiff überprüft werden sollen.
-	 * @return: Schiff welches sich an den Positionen befindet, oder null wenn kein Schiff vorhanden.
+	 * @return: Welches Schiff sich an den Positionen befindet, oder null wenn kein Schiff vorhanden.
 	 */
 	public Schiff getSchiffByPosition(ArrayList<Position>position){
 		Schiff schiff = null;
@@ -120,14 +123,13 @@ public class SpielfeldPrivate extends AbstractSpielfeld {
 	}
 	
 	/**
-	 * Gibt an ob ein schiff an einer Position auf dem Spielfeld platziert werden kann.
+	 * Gibt an, ob ein Schiff an einer Position auf dem Spielfeld platziert werden kann.
 	 * @param schiff: Schiff welches platziert soll.
 	 * @param position: Position auf dem das Schiff platziert werden soll.
 	 * @param horizontal: Angabe ob das Schiff horizontal oder vertikal platziert werden soll.
 	 * @return: Angabe ob Schiff platziert werden darf.
 	 */
 	public boolean schiffPlazierbar(Schiff schiff, Position position, int horizontal){		
-		// Schiff würde außerhalb Spielfeld liegen
 		if((position.getPositionY() <=0 || position.getPositonX() <=0)
 			|| (horizontal == 1 && (position.getPositonX() + schiff.getLaenge() > getSpielfeldgroesse()))
 			|| (horizontal == 2 && (position.getPositionY() + schiff.getLaenge() > getSpielfeldgroesse()))){
@@ -192,6 +194,10 @@ public class SpielfeldPrivate extends AbstractSpielfeld {
 		}
 	}
 
+	/**
+	 * Gibt an ob ein Schiff eine Wartezeit hat
+	 * @return
+	 */
 	public boolean schiffeOhneWarteZeit(){
 		boolean ohneWartezeit = false;
 		for(int i = 0; i <getSchiffe().size(); i++){

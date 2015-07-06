@@ -6,11 +6,16 @@ import de.hs.bremen.model.Feld;
 import de.hs.bremen.model.Position;
 
 
+/**
+ * Abstrakte Klasse des Spielfelds
+ * @author Christin
+ *
+ */
 public abstract class AbstractSpielfeld implements Serializable {
 	
 
 	/**
-	 * 
+	 * SerialVersionUID zum Speichern und Lesen
 	 */
 	private static final long serialVersionUID = -3004612619721063907L;
 
@@ -29,7 +34,7 @@ public abstract class AbstractSpielfeld implements Serializable {
 	}
 	
 	/**
-	 * Getter.
+	 * Getter der Felder
 	 * @return felder
 	 */
 	public Feld[][] getFelder() {
@@ -37,15 +42,15 @@ public abstract class AbstractSpielfeld implements Serializable {
 	}
 	
 	/**
-	 * Setter.
-	 * @param felder
+	 * Setter der Felder
+	 * @param felder: Setzt die Felder
 	 */
 	public void setFelder(Feld[][] felder) {
 		this.felder = felder;
 	}
 	
 	/**
-	 * Getter. 
+	 * Getter der Spielfelds
 	 * @return: Größe des Spielfelds
 	 */
 	public int getSpielfeldgroesse(){
@@ -69,7 +74,7 @@ public abstract class AbstractSpielfeld implements Serializable {
 	}
 	
 	/**
-	 * Spezielles Feld wird zurückgegeben.
+	 * Übergibt ein bestimmtes Feld
 	 * @param x : X-Koordinate des Felds, welches gesucht werden soll.
 	 * @param y : Y-Koordinate des Felds, welches gesucht werden soll.
 	 * @return : Feld, welches mit den Parametern übereinstimmt.
@@ -79,27 +84,5 @@ public abstract class AbstractSpielfeld implements Serializable {
 	}
 	
 	
-	/**
-	 * Spielfeld wird ausgedruckt.
-	 */
-	public void printSpielfeld(){
-		for (int g = 0; g <= getSpielfeldgroesse(); g++){
-			System.out.print(g + "\t");	
-			
-		}
-		System.out.println(" ");
-		int g = 0;
-		for (Feld[] f: felder) {
-			if(g <= getSpielfeldgroesse()){
-				g++;
-				System.out.print(g + "\t");
-				}
-			for (Feld ff: f) {
-				System.out.print(ff.getInhalt());
-	            System.out.print("\t");
-	         }
-	         System.out.println("");
-	         
-	    }
-	}	
+	
 }

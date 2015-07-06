@@ -13,17 +13,58 @@ import de.hs.bremen.gui.SchiffSetzenGUI;
 import de.hs.bremen.model.ComputerGegner;
 import de.hs.bremen.model.Schiff;
 
+/**
+ * @author Christin
+ *
+ */
 public class SchiffeSetzenController {
+	
+	/**
+	 * GUI zum Setzen der Schiffe
+	 */
 	private SchiffSetzenGUI schiffSetzenGui;
+	
+	/**
+	 * HauptController
+	 */
 	private MainController mainController;
+	
+	/**
+	 * Schiffe für jeden Spieler der gesetzt werden muss
+	 */
 	HashMap<String, ArrayList<Schiff>> zuSetzendeSchiffe;
+	
 	 
+	/**
+	 * Konstruktor
+	 * @param mainController: HauptController
+	 * @param zuSetzendeSchiffe: welches Schiff gesetzt werden muss
+	 */
 	public SchiffeSetzenController(MainController mainController, HashMap<String, ArrayList<Schiff>> zuSetzendeSchiffe){
 		this.mainController = mainController;
 		this.zuSetzendeSchiffe = zuSetzendeSchiffe;
 		startSchiffsetzenGui();
 	}
 	
+	/**
+	 * Getter SchiffSetzenGUI
+	 * @return
+	 */
+	public SchiffSetzenGUI getSchiffSetzenGui() {
+		return schiffSetzenGui;
+	}
+
+	/**
+	 * Setter SchiffSetzenGUI
+	 * @param schiffSetzenGui
+	 */
+	public void setSchiffSetzenGui(SchiffSetzenGUI schiffSetzenGui) {
+		this.schiffSetzenGui = schiffSetzenGui;
+	}
+	
+	/**
+	 * Spielerwechsel beim Setzen der Schiffe
+	 */
 	public void startSchiffsetzenGui(){
 		schiffSetzenGui = new SchiffSetzenGUI(mainController,this);
 		schiffSetzenGui.setActionListener(new SpielerWechselListener(), new FinishListener(), new SchiffButtonClickedListener());
@@ -31,6 +72,11 @@ public class SchiffeSetzenController {
 		this.mainController.getMainFrame().revalidate();
 	}
 	
+	/**
+	 * Übergibt die Anzahl der Schiffe, die noch zu setzen sind
+	 * @param name: Name des Schiffes
+	 * @return Anzahl der ungesetzten Schiffe
+	 */
 	public int getAnzahlUngesetzteSchiffe(String name){
 		int counter = 0;
 		for(Schiff s: zuSetzendeSchiffe.get(mainController.getCurrentSpieler().getName())){
@@ -41,6 +87,11 @@ public class SchiffeSetzenController {
 		return counter;
 	}
 	
+	/**
+	 * Übergibt die Schiffe die noch zu setzen sind
+	 * @param name: Name des Schiffs
+	 * @return
+	 */
 	public Schiff getZuSetztendesSchiff(String name){
 		Schiff schiff = null;
 		for(Schiff s: zuSetzendeSchiffe.get(mainController.getCurrentSpieler().getName())){
@@ -51,14 +102,13 @@ public class SchiffeSetzenController {
 		return schiff;
 	}
 
-	public SchiffSetzenGUI getSchiffSetzenGui() {
-		return schiffSetzenGui;
-	}
-
-	public void setSchiffSetzenGui(SchiffSetzenGUI schiffSetzenGui) {
-		this.schiffSetzenGui = schiffSetzenGui;
-	}
 	
+	
+	/**
+	 * Klasse SpielerWechselListener zum Wechsel der Spieler nach dem Setzen der Schiffe
+	 * @author Christin
+	 *
+	 */
 	class SpielerWechselListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -83,6 +133,11 @@ public class SchiffeSetzenController {
 		}
 		
 	}
+	/**
+	 * Klasse zum Setzen der Schiffe in der GUI
+	 * @author Christin
+	 *
+	 */
 	class SchiffButtonClickedListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -92,6 +147,12 @@ public class SchiffeSetzenController {
 		}
 		
 	}
+	
+	/**
+	 * Klasse zum Wechsel von der SchiffsetzenGUI zur RundenGUI
+	 * @author Christin
+	 *
+	 */
 	public class FinishListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {

@@ -21,8 +21,8 @@ public class Korvette extends Schiff {
 		
 	/**
 	 * Konstruktor.
-	 * @param position
-	 * @param horizontal
+	 * @param position: Position der Korvette
+	 * @param horizontal: ob das Schiff horizontal ist
 	 */
 	public Korvette(Position position, boolean horizontal){
 		super(position, horizontal);

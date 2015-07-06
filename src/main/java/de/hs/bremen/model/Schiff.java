@@ -2,7 +2,6 @@ package de.hs.bremen.model;
 
 import java.awt.Color;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import de.hs.bremen.enums.Feldstatus;
 
@@ -20,7 +19,7 @@ public abstract class Schiff implements Serializable {
 	private static final long serialVersionUID = 2764743705897860936L;
 
 	/**
-	 * Felder auf denen sich das Schiff befindet.
+	 * Felder auf denen sich das Schiff befindet
 	 */
 	private Feld[] felder;
 	
@@ -30,7 +29,7 @@ public abstract class Schiff implements Serializable {
 	private int laenge;
 	
 	/**
-	 * Wartezeit des Schiffes. 
+	 * Wartezeit des Schiffs. 
 	 */
 	private int wartezeit;
 	
@@ -40,29 +39,25 @@ public abstract class Schiff implements Serializable {
 	private int feuerstaerke;
 	
 	private boolean platziert;
-	
+
 	
 	/**
 	 * Leerer Konstruktor.
-	 * Je nach dem, welche Unterklasse gebaut wird, werden die eigenschaften gesetzt.
+	 * Je nach dem, welche Unterklasse gebaut wird, werden die Eigenschaften gesetzt.
 	 */
 	public Schiff(){
 		if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.Fregatte")){
 			this.laenge = 4;
 			this.feuerstaerke = 2;
-			//ladezeit 2 Runden
 		}else if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.Korvette")){
 			this.laenge = 3;
 			this.feuerstaerke = 1;
-			//ladezeit 1 Runde
 		}else if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.UBoot")){
 			this.laenge = 2;
 			this.feuerstaerke =1;
-			//ladezeit 1 Runde
 		}else{
 			this.laenge = 5;
 			this.feuerstaerke = 3;
-			//ladezeit 3 Runden
 		}
 		felder = new Feld[this.laenge];
 	}
@@ -71,7 +66,7 @@ public abstract class Schiff implements Serializable {
 	/**
 	 * Konstruktor.
 	 * @param position: Position auf dem das Schiff positioniert werden soll.
-	 * @param horizontal: Angabe ob das Schiff horizontal positioniert oder vertikal positioniert werden soll.
+	 * @param horizontal: Angabe, ob das Schiff horizontal oder vertikal positioniert werden soll.
 	 */
 	public Schiff(Position position, boolean horizontal){
 		if(this.getClass().getCanonicalName().equals("de.hs.bremen.model.Fregatte")){
@@ -96,6 +91,22 @@ public abstract class Schiff implements Serializable {
 	
 
 	/**
+	 * Übergibt, ob ein Feld mit einem Schiff platziert ist
+	 * @return
+	 */
+	public boolean isPlatziert() {
+		return platziert;
+	}
+
+
+	/**
+	 * Setzt ein Feld auf platziert
+	 * @param platziert: true oder false
+	 */
+	public void setPlatziert(boolean platziert) {
+		this.platziert = platziert;
+	}
+	/**
 	 * Methode, die wiedergibt, wieviele Felder von dieser Schiffunterklasse belegt werden,
 	 * @return: platzbelegung
 	 */
@@ -112,8 +123,8 @@ public abstract class Schiff implements Serializable {
 	}
 	
 	/**
-	 * Angbabe ob, das Schoff versenkt wurde.
-	 * @return: Schiff versenkt
+	 * Angbabe ob, das Schff versenkt wurde.
+	 * @return: Schiff versenkt: true oder false
 	 */
 	public boolean versenkt(){
 		int counter=0;
@@ -143,7 +154,7 @@ public abstract class Schiff implements Serializable {
 
 	/**
 	 * Setter felder.
-	 * @param felder
+	 * @param felder: Setzt die Felder
 	 */
 	public void setFelder(Feld[] felder) {
 		this.felder = felder;
@@ -159,7 +170,7 @@ public abstract class Schiff implements Serializable {
 
 	/**
 	 * Setter länge.
-	 * @param laenge
+	 * @param laenge: Setzt die Länge
 	 */
 	public void setLaenge(int laenge) {
 		this.laenge = laenge;
@@ -175,7 +186,7 @@ public abstract class Schiff implements Serializable {
 
 	/**
 	 * Setter Wartezeit.
-	 * @param wartezeit
+	 * @param wartezeit: Setzt die Wartezeit
 	 */
 	public void setWartezeit(int wartezeit) {
 		this.wartezeit = wartezeit;
@@ -191,23 +202,34 @@ public abstract class Schiff implements Serializable {
 
 	/**
 	 * Setter Feuerstärke.
-	 * @param feuerstaerke
+	 * @param feuerstaerke: Setzt die Feuerstärke
 	 */
 	public void setFeuerstaerke(int feuerstaerke) {
 		this.feuerstaerke = feuerstaerke;
 	}
+	
+	/**
+	 * Getter Farbe 
+	 * @return die Farbe
+	 */
+	public Color getFarbe(){
+		return Color.BLACK;
+		
+	}
 
 	/**
-	 * Zeigt an ob, das Schiff eine Runde aussetzten muss
+	 * Zeigt an, ob das Schiff eine Runde aussetzten muss
 	 * @return: rundeAussetzen
 	 */
 	public boolean rundeAussetzen(){
 		return wartezeit > 0;
 	}
 	
+	
 	/**
-	 * 
-	 * @param position
+	 * Feuert auf das SpielfeldPublic für ein Feld
+	 * @param position: Das Feld, wo drauf gefeuert wird
+	 * @param spielfeld: das Spielfeld worauf gefeuert wird
 	 */
 	public void feuern(Position position, SpielfeldPublic spielfeld){
 		setWartezeit(feuerstaerke);
@@ -217,6 +239,13 @@ public abstract class Schiff implements Serializable {
 		spielfeld.feuerPlatzieren(position);
 	}
 	
+	
+	/**
+	 * Berechnet die Positionen der Felder des Feuers anhand der unterschiedlichen Feuerstärke
+	 * @param position: die Positionen die mit der Feuerstärke belegt werden
+	 * @param groesseSpielfeld: wie groß das Spielfeld ist
+	 * @return
+	 */
 	public Position[] feuerPositionenBerechnen(Position position, int groesseSpielfeld){
 		Position[] positionen = new Position[feuerstaerke];
 		positionen[0] = position;
@@ -229,13 +258,15 @@ public abstract class Schiff implements Serializable {
 	}
 	
 	/**
-	 * 
-	 * @param position
+	 * Feuert auf das SpielfeldPublic für mehrere Felder
+	 * @param position: Die Felder, wo drauf gefeuert wird
+	 * @param spielfeld: das Spielfeld worauf gefeuert wird
 	 */
 	public void feuern(Position[] position, SpielfeldPublic spielfeld){
 		setWartezeit(feuerstaerke);
 		spielfeld.feuerPlatzieren(position);
 	}
+	
 	
 	/**
 	 * Name des  Schiffs
@@ -253,19 +284,6 @@ public abstract class Schiff implements Serializable {
 		}
 	}
 
-
-	public boolean isPlatziert() {
-		return platziert;
-	}
-
-
-	public void setPlatziert(boolean platziert) {
-		this.platziert = platziert;
-	}
 	
-	public Color getFarbe(){
-		return Color.BLACK;
-		
-	}
 
 }
