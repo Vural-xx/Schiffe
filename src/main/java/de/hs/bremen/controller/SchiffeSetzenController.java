@@ -8,10 +8,10 @@ import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import de.hs.bremen.abstracts.Schiff;
 import de.hs.bremen.enums.Spielerart;
 import de.hs.bremen.gui.SchiffSetzenGUI;
 import de.hs.bremen.model.ComputerGegner;
-import de.hs.bremen.model.Schiff;
 
 /**
  * @author Christin

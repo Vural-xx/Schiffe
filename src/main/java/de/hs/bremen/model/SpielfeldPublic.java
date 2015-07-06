@@ -1,6 +1,7 @@
 package de.hs.bremen.model;
 
 import de.hs.bremen.abstracts.AbstractSpielfeld;
+import de.hs.bremen.abstracts.Schiff;
 import de.hs.bremen.enums.Feldstatus;
 
 public class SpielfeldPublic extends AbstractSpielfeld {

@@ -1,7 +1,6 @@
 package de.hs.bremen.abstracts;
 
 import de.hs.bremen.gui.MainFrame;
-import de.hs.bremen.model.Actor;
 import de.hs.bremen.model.Spiel;
 
 

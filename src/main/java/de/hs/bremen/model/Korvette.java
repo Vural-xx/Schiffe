@@ -1,5 +1,7 @@
 package de.hs.bremen.model;
 
+import de.hs.bremen.abstracts.Schiff;
+
 /**
  * Klasse für den Schifftyp Korvette.
  * @author vural

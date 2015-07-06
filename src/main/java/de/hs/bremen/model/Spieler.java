@@ -2,6 +2,8 @@ package de.hs.bremen.model;
 
 import java.io.Serializable;
 
+import de.hs.bremen.abstracts.Actor;
+
 /**
  * 
  * Klasse für Spieler.

@@ -3,6 +3,7 @@ package de.hs.bremen.model;
 import java.util.ArrayList;
 
 import de.hs.bremen.abstracts.AbstractSpielfeld;
+import de.hs.bremen.abstracts.Schiff;
 import de.hs.bremen.enums.Feldstatus;
 
 public class SpielfeldPrivate extends AbstractSpielfeld {

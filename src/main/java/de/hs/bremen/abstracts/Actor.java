@@ -1,9 +1,12 @@
-package de.hs.bremen.model;
+package de.hs.bremen.abstracts;
 
 import java.io.Serializable;
 
 import de.hs.bremen.enums.Feldstatus;
 import de.hs.bremen.enums.Spielerart;
+import de.hs.bremen.model.Position;
+import de.hs.bremen.model.SpielfeldPrivate;
+import de.hs.bremen.model.SpielfeldPublic;
 
 /**
  * Abstrakte Klasse für Spieler

@@ -3,6 +3,8 @@ package de.hs.bremen.model;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 
+import de.hs.bremen.abstracts.Actor;
+import de.hs.bremen.abstracts.Schiff;
 import de.hs.bremen.controller.MainController;
 import de.hs.bremen.enums.Feldstatus;
 
@@ -122,7 +124,20 @@ public class ComputerGegner extends Actor {
 		Schiff tempschiff;
 		int spalte;
 		int zeile;
-
+		Position position;
+		do{
+			spalte=randomRechnerSpalte();
+			zeile=randomRechnerZeile();
+			position=new Position(spalte, zeile);
+		}while(!gegner[0].getSpielfeldPublic().schussPlatzierbar(schiff, position) && gegner[0].getSpielfeldPublic().getFeld(zeile-1, spalte-1).getFeldstatus()!=Feldstatus.GETROFFEN && gegner[0].getSpielfeldPublic().getFeld(zeile-1, spalte-1).getFeldstatus()!=Feldstatus.VERSENKT);
+		if(treffer(schiff, spalte, zeile)){
+		}
+		kiFeuern(new Position(spalte-1, zeile-1), schiff);
+		
+		
+		
+		
+		/*
 		Position position;
 			do{
 				spalte=randomRechnerSpalte();
@@ -137,7 +152,7 @@ public class ComputerGegner extends Actor {
 			} else {
 				kiFeuern(position, schiff);
 			}
-		}
+		}*/
 	}
 	
 	/**
@@ -159,7 +174,7 @@ public class ComputerGegner extends Actor {
 		}
 	}
 	
-	public boolean wennGetroffen(Schiff schiff, int spalte, int zeile){
+	public boolean treffer(Schiff schiff, int spalte, int zeile){
 		System.out.println(spalte);
 		System.out.println(zeile);
 		int counter=0;

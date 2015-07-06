@@ -9,9 +9,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import de.hs.bremen.abstracts.AbstractController;
+import de.hs.bremen.abstracts.Actor;
+import de.hs.bremen.abstracts.Schiff;
 import de.hs.bremen.gui.MainFrame;
-import de.hs.bremen.model.Actor;
-import de.hs.bremen.model.Schiff;
 import de.hs.bremen.model.Spiel;
 import de.hs.bremen.persistence.ObjectPersistenceManager;
 

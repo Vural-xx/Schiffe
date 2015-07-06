@@ -10,14 +10,14 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import de.hs.bremen.abstracts.Actor;
+import de.hs.bremen.abstracts.Schiff;
 import de.hs.bremen.controller.MainController;
 import de.hs.bremen.enums.Feldstatus;
 import de.hs.bremen.enums.Spielfeldmodus;
 import de.hs.bremen.gui.shapes.FeldShape;
-import de.hs.bremen.model.Actor;
 import de.hs.bremen.model.Feld;
 import de.hs.bremen.model.Position;
-import de.hs.bremen.model.Schiff;
 
 /**
  * Erzeugt die Spielfelder mit einzelnen Quadraten
