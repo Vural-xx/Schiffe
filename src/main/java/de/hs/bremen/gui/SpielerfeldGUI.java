@@ -163,9 +163,9 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 	 */
 	public boolean innerhalbSpielfeld(int x ,int y, int laenge){
 		if(horizontal){
-			return x +laenge  <=spielfeldGroesse/getFeldgroesse()  && y < spielfeldGroesse/getFeldgroesse();
+			return (x +laenge)  <=spielfeldGroesse/getFeldgroesse()  && y <= spielfeldGroesse/getFeldgroesse();
 		}else{
-			return x < spielfeldGroesse/getFeldgroesse() && y+laenge <= spielfeldGroesse/getFeldgroesse();
+			return x <= spielfeldGroesse/getFeldgroesse() && (y+laenge) <= spielfeldGroesse/getFeldgroesse();
 		}	
 	}
 	
@@ -220,7 +220,7 @@ public class SpielerfeldGUI extends JPanel implements java.awt.event.MouseListen
 			JOptionPane.showMessageDialog(null, "Bitte wählen Sie ein anderes Schiff.");
 		}else{
 			int laenge = mainController.getAusgewähltesSchiff().getLaenge();
-			boolean schiffPlatzierbar = innerhalbSpielfeld(xPosition,yPosition, laenge) && mainController.getCurrentSpieler().getSpielfeld().schiffPlazierbar(mainController.getAusgewähltesSchiff(), new Position(xPosition+1, yPosition+1), ausrichtung);
+			boolean schiffPlatzierbar = innerhalbSpielfeld(xPosition,yPosition, laenge) && mainController.getCurrentSpieler().getSpielfeld().schiffPlazierbar(mainController.getAusgewähltesSchiff(), new Position(xPosition, yPosition), ausrichtung);
 			if(mouseButton == 1 && schiffPlatzierbar&& !mainController.getAusgewähltesSchiff().isPlatziert()){
 				mainController.getAusgewähltesSchiff().setPlatziert(true);
 				mainController.getCurrentSpieler().getSpielfeld().platziereSchiff(mainController.getAusgewähltesSchiff(), new Position(xPosition+1, yPosition+1), horizontal);

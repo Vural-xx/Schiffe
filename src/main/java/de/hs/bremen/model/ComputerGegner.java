@@ -98,7 +98,7 @@ public class ComputerGegner extends Actor {
 	
 	
 	/**
-	 * Übergibt die Schiffe, mit denen geschossen werden kann
+	 * Übergibt die Schiffe, mit denen geschossen werden kann, wählt das stärkste Schiff.
 	 * @return schiff: Schiffe ohne Wartezeit
 	 */
 	public Schiff schiffZumSchießen(){
@@ -182,14 +182,10 @@ public class ComputerGegner extends Actor {
 		int test=zeile+schiff.getFeuerstaerke();
 		int feuerstaerke= schiff.getFeuerstaerke();
 		for(int i=0; i< schiff.getFeuerstaerke(); i++){
-			System.out.println(((zeile)+i) +"blabla");
 
 			System.out.println((zeile+schiff.getFeuerstaerke()));
 
 			if(((test< getSpielfeld().getSpielfeldgroesse()) && spielerAuswahl().getSpielfeld().getFeld(((spalte-1)+i),(zeile-1)).getFeldstatus()==Feldstatus.BESETZT)){
-	
-				
-				System.out.println("AHAHAHAHAHH");
 				counter++;
 				tempSpalte=spalte;
 				tempZeile=zeile;

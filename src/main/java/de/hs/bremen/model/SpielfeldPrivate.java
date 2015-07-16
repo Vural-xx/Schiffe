@@ -131,7 +131,7 @@ public class SpielfeldPrivate extends AbstractSpielfeld {
 	 * @return: Angabe ob Schiff platziert werden darf.
 	 */
 	public boolean schiffPlazierbar(Schiff schiff, Position position, int horizontal){		
-		if((position.getPositionY() <=0 || position.getPositonX() <=0)
+		if((position.getPositionY() <0 || position.getPositonX() <0)
 			|| (horizontal == 1 && (position.getPositonX() + schiff.getLaenge() > getSpielfeldgroesse()))
 			|| (horizontal == 2 && (position.getPositionY() + schiff.getLaenge() > getSpielfeldgroesse()))){
 				return false;
